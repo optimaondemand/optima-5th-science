@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5th Grade Science – Unit 3 Assessment: Forces, Plants, and Body Systems</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #F5F3EF;
+      color: #1A1A2E;
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: #1A5228;
+      color: #fff;
+      padding: 20px 24px 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .header-logo img { width: 52px; height: 52px; object-fit: contain; border-radius: 50%; background: rgba(255,255,255,0.15); padding: 3px; }
+    .header-text h1 { font-size: 22px; font-weight: 800; line-height: 1.2; }
+    .header-text p  { font-size: 14px; opacity: 0.85; margin-top: 2px; }
+    .capstone-ribbon {
+      display: inline-block;
+      background: #F5C518;
+      color: #3B2508;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 3px 12px;
+      border-radius: 20px;
+      margin-top: 6px;
+    }
+
+    /* ── Unit Banner ── */
+    .unit-banner {
+      background: linear-gradient(135deg, #1A5228dd 0%, #1A522899 100%);
+      color: #fff;
+      padding: 16px 24px;
+      font-size: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 24px;
+    }
+    .unit-banner span { display: flex; align-items: center; gap: 6px; font-weight: 600; }
+    .unit-banner strong { font-weight: 800; }
+
+    /* ── Main Layout ── */
+    .main { max-width: 860px; margin: 0 auto; padding: 24px 16px; }
+
+    /* ── Section Titles ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #1A5228;
+      margin: 28px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #1A522833;
+    }
+
+    /* ── Question Cards ── */
+    .question-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      border-left: 4px solid #1A5228;
+    }
+    .q-num { font-size: 11px; font-weight: 800; color: #1A5228; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .q-text { font-size: 16px; font-weight: 600; color: #1A1A2E; line-height: 1.6; margin-bottom: 14px; }
+
+    /* ── MC Options ── */
+    .mc-options { display: flex; flex-direction: column; gap: 8px; }
+    .mc-option {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 14px; border-radius: 10px;
+      border: 2px solid #E8DDD2; cursor: pointer;
+      transition: all 0.15s; font-size: 15px;
+    }
+    .mc-option:hover { border-color: #1A522888; background: #1A52280A; }
+    .mc-option.selected { border-color: #1A5228; background: #1A522815; font-weight: 600; }
+    .mc-letter { font-weight: 800; color: #1A5228; min-width: 20px; }
+
+    /* ── Short Response ── */
+    .response-box {
+      width: 100%; border: 2px solid #E8DDD2; border-radius: 10px;
+      padding: 12px; font-size: 15px; font-family: inherit;
+      resize: vertical; min-height: 90px; transition: border-color 0.2s;
+    }
+    .response-box:focus { outline: none; border-color: #1A5228; }
+
+    /* ── CER Block ── */
+    .cer-block {
+      background: #FAF7F3; border: 2px solid #8B6FC0;
+      border-radius: 18px; padding: 22px 24px; margin-bottom: 22px;
+    }
+    .cer-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1.5px solid #E8DDD2; }
+    .cer-icon { font-size: 28px; flex-shrink: 0; }
+    .cer-label { font-size: 11px; color: #8B6FC0; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 4px; }
+    .cer-question { font-size: 18px; color: #0E1C42; font-weight: 700; line-height: 1.5; }
+    .cer-section { display: flex; gap: 14px; margin-bottom: 18px; }
+    .cer-badge { width: 32px; height: 32px; border-radius: 50%; color: #fff; font-size: 16px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .cer-badge-claim    { background: #E8636B; }
+    .cer-badge-evidence { background: #D4772C; }
+    .cer-badge-reason   { background: #34B76F; }
+    .cer-section-body { flex: 1; }
+    .cer-section-title { font-size: 16px; color: #0E1C42; font-weight: 800; margin-bottom: 6px; }
+    .cer-section-hint  { font-size: 13px; color: #9A8E82; font-weight: 600; margin-bottom: 8px; }
+    .cer-starter { font-size: 14px; color: #C7922C; font-style: italic; margin: 0 0 8px; line-height: 1.5; }
+    .cer-starter.no-starter { font-style: normal; font-weight: 700; color: #9A6420; }
+    .cer-write-box { background: #fff; border: 2px dashed #E8DDD2; border-radius: 10px; padding: 12px; }
+    .cer-write-box textarea { width: 100%; border: none; background: transparent; font-size: 15px; font-family: inherit; resize: vertical; min-height: 70px; }
+    .cer-write-box textarea:focus { outline: none; }
+    .cer-scaffold-note {
+      font-size: 13px; color: #7A6A5A; font-style: italic;
+      margin-bottom: 14px; padding: 8px 12px;
+      background: #FFF8F0; border-radius: 8px;
+      border-left: 3px solid #D4772C;
+    }
+
+    /* ── Reflect ── */
+    .reflect-card {
+      background: #fff; border-radius: 14px; padding: 22px;
+      margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      border-top: 4px solid #1A5228;
+    }
+    .reflect-label { font-size: 11px; font-weight: 800; color: #1A5228; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+    .reflect-q { font-size: 16px; color: #1A1A2E; font-weight: 600; margin-bottom: 14px; line-height: 1.6; }
+
+    /* ── Gathered Answers ── */
+    .answers-card {
+      background: #fff; border-radius: 14px; padding: 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      border: 2px solid #1A522844;
+    }
+    .answers-title { font-size: 16px; font-weight: 800; color: #1A5228; margin-bottom: 14px; }
+    .answers-body { font-size: 14px; color: #2A2A3A; line-height: 1.8; white-space: pre-wrap; word-break: break-word; background: #F9F7F4; border-radius: 8px; padding: 14px; min-height: 60px; }
+    .btn-row { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+    .btn { padding: 9px 18px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px; font-weight: 700; transition: all 0.15s; }
+    .btn-copy { background: #1A5228; color: #fff; }
+    .btn-copy:hover { opacity: 0.88; }
+    .btn-print { background: #F0ECE6; color: #3A3A4A; }
+    .btn-print:hover { background: #E8DDD2; }
+    .copy-toast { font-size: 13px; color: #34B76F; font-weight: 700; margin-top: 8px; display: none; }
+
+    @media print {
+      .btn-row, .btn { display: none !important; }
+      .site-header { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-logo">
+    <img src="https://raw.githubusercontent.com/optimaondemand/optima-assets/eeb0b335630058906d52f478028361d352253a93/images/Optima%20Final%20Circle%20-%20Owl%20Only.png" alt="Optima Academy" />
+  </div>
+  <div class="header-text">
+    <h1>Unit 3 Assessment — Forces, Plants, and Body Systems</h1>
+    <p>5th Grade Science · Modules 16–19
+    </p>
+  </div>
+</header>
+
+<div class="unit-banner">
+  <span>📚 <strong>Modules:</strong> 16–19</span>
+  <span>✏️ <strong>Format:</strong> Multiple Choice + Short Response + CER</span>
+  <span>🧪 <strong>Science Practice:</strong> Evidence-Based Reasoning</span>
+</div>
+
+<main class="main">
+
+  <!-- Multiple Choice -->
+  <div class="section-label">Part A — Multiple Choice <span style="font-weight:400;opacity:0.7">(select the best answer)</span></div>
+  
+          <div class="question-card" id="qmc1">
+            <div class="q-num">Question 1</div>
+            <div class="q-text">A book sits still on a table. The table pushes up on the book with 3 newtons of force, and gravity pulls the book down with 3 newtons of force. What is true about the book's motion?</div>
+            <div class="mc-options">
+              <div class="mc-option" data-q="mc1" data-val="A" onclick="selectMC(this)">
+                <span class="mc-letter">A</span>
+                <span class="mc-text">The book will accelerate upward because the table force wins</span>
+              </div>
+              <div class="mc-option" data-q="mc1" data-val="B" onclick="selectMC(this)">
+                <span class="mc-letter">B</span>
+                <span class="mc-text">The book stays still because the forces are balanced and equal</span>
+              </div>
+              <div class="mc-option" data-q="mc1" data-val="C" onclick="selectMC(this)">
+                <span class="mc-letter">C</span>
+                <span class="mc-text">The book will slowly sink because gravity is always stronger</span>
+              </div>
+              <div class="mc-option" data-q="mc1" data-val="D" onclick="selectMC(this)">
+                <span class="mc-letter">D</span>
+                <span class="mc-text">The book will move sideways because the forces cancel out</span>
+              </div>
+            </div>
+          </div>
+          <div class="question-card" id="qmc2">
+            <div class="q-num">Question 2</div>
+            <div class="q-text">A willow tree started as a small seed and grew to weigh 164 pounds. The soil it grew in barely lost any mass. Where did most of the tree's mass come from?</div>
+            <div class="mc-options">
+              <div class="mc-option" data-q="mc2" data-val="A" onclick="selectMC(this)">
+                <span class="mc-letter">A</span>
+                <span class="mc-text">From the nutrients in the soil</span>
+              </div>
+              <div class="mc-option" data-q="mc2" data-val="B" onclick="selectMC(this)">
+                <span class="mc-letter">B</span>
+                <span class="mc-text">From the water and minerals the roots absorbed</span>
+              </div>
+              <div class="mc-option" data-q="mc2" data-val="C" onclick="selectMC(this)">
+                <span class="mc-letter">C</span>
+                <span class="mc-text">Mostly from carbon dioxide in the air and water</span>
+              </div>
+              <div class="mc-option" data-q="mc2" data-val="D" onclick="selectMC(this)">
+                <span class="mc-letter">D</span>
+                <span class="mc-text">From the sunlight that the leaves absorbed</span>
+              </div>
+            </div>
+          </div>
+          <div class="question-card" id="qmc3">
+            <div class="q-num">Question 3</div>
+            <div class="q-text">In a food web, a plant uses sunlight to make food. A caterpillar eats the plant. A bird eats the caterpillar. Where did the bird's energy originally come from?</div>
+            <div class="mc-options">
+              <div class="mc-option" data-q="mc3" data-val="A" onclick="selectMC(this)">
+                <span class="mc-letter">A</span>
+                <span class="mc-text">From the caterpillar's muscles</span>
+              </div>
+              <div class="mc-option" data-q="mc3" data-val="B" onclick="selectMC(this)">
+                <span class="mc-letter">B</span>
+                <span class="mc-text">From the plant's roots</span>
+              </div>
+              <div class="mc-option" data-q="mc3" data-val="C" onclick="selectMC(this)">
+                <span class="mc-letter">C</span>
+                <span class="mc-text">Originally from the Sun — it was transferred through the food web</span>
+              </div>
+              <div class="mc-option" data-q="mc3" data-val="D" onclick="selectMC(this)">
+                <span class="mc-letter">D</span>
+                <span class="mc-text">From the air that surrounded the plant</span>
+              </div>
+            </div>
+          </div>
+          <div class="question-card" id="qmc4">
+            <div class="q-num">Question 4</div>
+            <div class="q-text">Which body system is most responsible for moving oxygen from the air you breathe to your muscles?</div>
+            <div class="mc-options">
+              <div class="mc-option" data-q="mc4" data-val="A" onclick="selectMC(this)">
+                <span class="mc-letter">A</span>
+                <span class="mc-text">The digestive system, which breaks down food for energy</span>
+              </div>
+              <div class="mc-option" data-q="mc4" data-val="B" onclick="selectMC(this)">
+                <span class="mc-letter">B</span>
+                <span class="mc-text">The respiratory and circulatory systems working together</span>
+              </div>
+              <div class="mc-option" data-q="mc4" data-val="C" onclick="selectMC(this)">
+                <span class="mc-letter">C</span>
+                <span class="mc-text">The skeletal system, which supports the organs</span>
+              </div>
+              <div class="mc-option" data-q="mc4" data-val="D" onclick="selectMC(this)">
+                <span class="mc-letter">D</span>
+                <span class="mc-text">The nervous system, which sends signals to the lungs</span>
+              </div>
+            </div>
+          </div>
+
+  <!-- Short Response -->
+  <div class="section-label">Part B — Short Response <span style="font-weight:400;opacity:0.7">(write in complete sentences)</span></div>
+  
+          <div class="question-card" id="qsr1">
+            <div class="q-num">Question 5</div>
+            <div class="q-text">A student pushes two stacked books from opposite sides with equal force. The books don't move. Explain why using the words 'balanced forces.'</div>
+            <textarea id="sr1" class="response-box" oninput="gatherAnswers()" placeholder="The books don't move because the forces are…" rows="4"></textarea>
+          </div>
+          <div class="question-card" id="qsr2">
+            <div class="q-num">Question 6</div>
+            <div class="q-text">Plants need water and air (carbon dioxide) to grow. A classmate says, 'Plants get all their food from soil.' Is this correct? Use evidence from the lesson to explain.</div>
+            <textarea id="sr2" class="response-box" oninput="gatherAnswers()" placeholder="This is not fully correct because… The evidence shows…" rows="4"></textarea>
+          </div>
+          <div class="question-card" id="qsr3">
+            <div class="q-num">Question 7</div>
+            <div class="q-text">Trace the energy from the Sun to a student running a race. Name at least three steps in the energy pathway.</div>
+            <textarea id="sr3" class="response-box" oninput="gatherAnswers()" placeholder="Step 1: Sun → … Step 2: … → … Step 3: … → student running" rows="4"></textarea>
+          </div>
+          <div class="question-card" id="qsr4">
+            <div class="q-num">Question 8</div>
+            <div class="q-text">Describe one way your respiratory system and circulatory system work together. What would happen to your muscles if one of those systems stopped working?</div>
+            <textarea id="sr4" class="response-box" oninput="gatherAnswers()" placeholder="They work together by… If one stopped, the muscles would…" rows="4"></textarea>
+          </div>
+
+  <!-- CER -->
+  <div class="section-label">Part C — Claim · Evidence · Reasoning</div>
+  <div class="cer-block">
+    <div class="cer-header">
+      <div class="cer-icon">🔬</div>
+      <div>
+        <div class="cer-label">CER Question</div>
+        <div class="cer-question">Where does a plant get the materials it needs to grow? Use the Van Helmont/willow tree evidence and your lesson knowledge to build your argument.</div>
+      </div>
+    </div>
+    <p class="cer-scaffold-note">A guide is provided below. You may use it or write your own opening.</p>
+
+    <!-- Claim -->
+    <div class="cer-section">
+      <div class="cer-badge cer-badge-claim">C</div>
+      <div class="cer-section-body">
+        <div class="cer-section-title">Claim</div>
+        <div class="cer-section-hint">Your answer — one clear sentence that directly answers the question.</div>
+        <p class="cer-starter">💡 Start with: <em>"My claim is that plants get most of their mass from…"</em></p>
+        <div class="cer-write-box">
+          <textarea id="cer-claim" oninput="gatherAnswers()" placeholder="Write your claim here…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Evidence -->
+    <div class="cer-section">
+      <div class="cer-badge cer-badge-evidence">E</div>
+      <div class="cer-section-body">
+        <div class="cer-section-title">Evidence</div>
+        <div class="cer-section-hint">Specific data, observations, or examples from the unit that support your claim.</div>
+        <p class="cer-starter">💡 Start with: <em>"The evidence from the willow tree experiment showed that the tree gained ___ pounds but the soil only lost…"</em></p>
+        <div class="cer-write-box">
+          <textarea id="cer-evidence" oninput="gatherAnswers()" placeholder="Write your evidence here…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reasoning -->
+    <div class="cer-section" style="margin-bottom:0">
+      <div class="cer-badge cer-badge-reason">R</div>
+      <div class="cer-section-body">
+        <div class="cer-section-title">Reasoning</div>
+        <div class="cer-section-hint">Explain the science — why does your evidence support your claim?</div>
+        <p class="cer-starter">💡 Start with: <em>"This proves plants do not get most of their mass from soil because…"</em></p>
+        <div class="cer-write-box">
+          <textarea id="cer-reasoning" oninput="gatherAnswers()" placeholder="Write your reasoning here…"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reflect -->
+  <div class="section-label">Part D — Reflect</div>
+  <div class="reflect-card">
+    <div class="reflect-label">🌟 Scientist Reflection</div>
+    <div class="reflect-q">What evidence most changed or strengthened your thinking in this unit? Describe what you originally thought and what the science helped you understand differently.</div>
+    <textarea id="reflect" class="response-box" oninput="gatherAnswers()" placeholder="Write your reflection here…" rows="4"></textarea>
+  </div>
+
+  <!-- Gathered Answers -->
+  <div class="section-label">Your Answers</div>
+  <div class="answers-card">
+    <div class="answers-title">📋 Gathered Answers</div>
+    <div class="answers-body" id="answersDisplay">Your answers will appear here as you work.</div>
+    <div class="btn-row">
+      <button class="btn btn-copy" onclick="copyAnswers()">Copy All Answers</button>
+      <button class="btn btn-print" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+    <div class="copy-toast" id="copyToast">✓ Copied to clipboard!</div>
+  </div>
+
+</main>
+
+<script>
+  const mcAnswers = {};
+
+  function selectMC(el) {
+    const q = el.dataset.q;
+    document.querySelectorAll(`.mc-option[data-q="${q}"]`).forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    mcAnswers[q] = el.dataset.val + ' — ' + el.querySelector('.mc-text').textContent;
+    gatherAnswers();
+  }
+
+  function gatherAnswers() {
+    const lines = [];
+    lines.push('=== UNIT 3 ASSESSMENT — FORCES, PLANTS, AND BODY SYSTEMS ===\n');
+    lines.push('PART A — MULTIPLE CHOICE');
+        lines.push('Q1: ' + (mcAnswers['mc1'] || '(not answered yet)'));
+    lines.push('Q2: ' + (mcAnswers['mc2'] || '(not answered yet)'));
+    lines.push('Q3: ' + (mcAnswers['mc3'] || '(not answered yet)'));
+    lines.push('Q4: ' + (mcAnswers['mc4'] || '(not answered yet)'));
+    lines.push('');
+    lines.push('PART B — SHORT RESPONSE');
+        const sr1v = document.getElementById('sr1')?.value.trim(); lines.push('Q5: ' + (sr1v || '(not answered yet)'));
+    const sr2v = document.getElementById('sr2')?.value.trim(); lines.push('Q6: ' + (sr2v || '(not answered yet)'));
+    const sr3v = document.getElementById('sr3')?.value.trim(); lines.push('Q7: ' + (sr3v || '(not answered yet)'));
+    const sr4v = document.getElementById('sr4')?.value.trim(); lines.push('Q8: ' + (sr4v || '(not answered yet)'));
+    lines.push('');
+    lines.push('PART C — CER');
+    const claim = document.getElementById('cer-claim')?.value.trim();
+    const evid  = document.getElementById('cer-evidence')?.value.trim();
+    const reas  = document.getElementById('cer-reasoning')?.value.trim();
+    lines.push('CLAIM: '     + (claim || '(not answered yet)'));
+    lines.push('EVIDENCE: '  + (evid  || '(not answered yet)'));
+    lines.push('REASONING: ' + (reas  || '(not answered yet)'));
+    lines.push('');
+    lines.push('PART D — REFLECT');
+    const ref = document.getElementById('reflect')?.value.trim();
+    lines.push(ref || '(not answered yet)');
+    document.getElementById('answersDisplay').textContent = lines.join('\n');
+  }
+
+  function copyAnswers() {
+    const text = document.getElementById('answersDisplay').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const t = document.getElementById('copyToast');
+      t.style.display = 'block';
+      setTimeout(() => t.style.display = 'none', 2500);
+    });
+  }
+
+  gatherAnswers();
+</script>
+</body>
+</html>

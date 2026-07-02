@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Optima Academy Online – How Do Earth's Four Spheres Interact?</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', 'Century Gothic', 'Arial Rounded MT Bold', Verdana, sans-serif;
+  background: #F4F0EB url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  color: #2B1D12;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page-wrap { max-width: 920px; margin: 0 auto; background: #FAF7F3; box-shadow: 0 0 40px rgba(0,0,0,0.07); }
+
+/* ── Header ── */
+.header {
+  background: linear-gradient(135deg, #0E1C42 0%, #1A2D5A 60%, #243868 100%);
+  border-bottom: 6px solid #34B76F;
+  padding: 22px 28px 24px;
+  position: relative; overflow: hidden;
+}
+.header::after {
+  content: '';
+  position: absolute; bottom: 6px; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #34B76F, #55C8E8, #34B76F);
+}
+.header-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.header-logo {
+  width: 52px; height: 52px; border-radius: 50%; background: #fff;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.header-logo img { width: 48px; height: 38px; }
+.header-org { font-size: 22px; color: #fff; font-weight: 800; line-height: 1.15; }
+.header-sub { font-size: 11px; color: #55C8E8; letter-spacing: 0.5px; }
+.header-title {
+  font-size: 30px; color: #fff; font-weight: 900; line-height: 1.15; margin-bottom: 10px;
+  text-shadow: 0 2px 12px rgba(139,111,192,0.35);
+}
+.header-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(52,183,111,0.15); border: 1.5px solid rgba(52,183,111,0.35);
+  border-radius: 28px; padding: 6px 16px;
+}
+.header-badge span:first-child { font-size: 22px; }
+.header-badge span:last-child { font-size: 18px; color: #fff; font-weight: 800; }
+
+/* ── Hero Visual ── */
+.hero-visual {
+  background: linear-gradient(180deg, #070a12 0%, #0e1829 60%, #1a2540 100%);
+  padding: 0; position: relative; overflow: hidden;
+  border-bottom: 3px solid #34B76F;
+}
+.hero-visual svg { display: block; width: 100%; height: auto; }
+
+/* ── Info Strip ── */
+.info-strip { display: flex; flex-wrap: wrap; background: #fff; border-bottom: 2px solid #E8DDD2; }
+.info-item { flex: 1; min-width: 150px; padding: 12px 16px; border-right: 1px solid #E8DDD2; display: flex; align-items: center; gap: 10px; }
+.info-item:last-child { border-right: none; }
+.info-icon { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.info-label { font-size: 10px; color: #9A8E82; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+.info-value { font-size: 16px; color: #0E1C42; font-weight: 800; line-height: 1.2; }
+.info-detail { font-size: 11px; color: #5A4D3E; line-height: 1.3; }
+
+/* ── Card System ── */
+.card { background: #fff; border: 2px solid #E8DDD2; border-radius: 18px; margin-bottom: 22px; overflow: hidden; box-shadow: 0 2px 12px rgba(43,29,18,0.04); }
+.card-head { display: flex; align-items: center; gap: 10px; padding: 14px 20px; border-bottom: 2px solid; }
+.card-head-icon { width: 42px; height: 42px; border-radius: 50%; color: #fff; font-size: 22px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.card-head-label { font-size: 10px; color: #9A8E82; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; }
+.card-head-title { font-size: 20px; color: #0E1C42; font-weight: 800; line-height: 1.2; }
+.card-body { padding: 18px 22px; }
+.card-body p { font-size: 17px; color: #5A4D3E; line-height: 1.75; margin-bottom: 12px; }
+.card-body p:last-child { margin-bottom: 0; }
+
+.theme-earth .card-head { background: #FFF7EE; border-color: #F0DCC4; }
+.theme-earth .card-head-icon { background: #C7922C; }
+.theme-sky .card-head { background: #EAF8FD; border-color: #D6F2FB; }
+.theme-sky .card-head-icon { background: #55C8E8; }
+.theme-forest .card-head { background: #EEF8F0; border-color: #C4E5CC; }
+.theme-forest .card-head-icon { background: #34B76F; }
+.theme-rock .card-head { background: #F0EDF6; border-color: #D8D0E8; }
+.theme-rock .card-head-icon { background: #8B6FC0; }
+.theme-lava .card-head { background: #FFF0EC; border-color: #F5C4BA; }
+.theme-lava .card-head-icon { background: #E8636B; }
+.theme-magma .card-head { background: #FFF3DC; border-color: #F5E6C8; }
+.theme-magma .card-head-icon { background: #D4772C; }
+
+/* ── Activity Cards ── */
+.activity-card { background: #fff; border: 2px solid #E8DDD2; border-radius: 18px; margin-bottom: 18px; overflow: hidden; box-shadow: 0 2px 10px rgba(43,29,18,0.04); }
+.activity-card.act-warmup  { border-left: 6px solid #E8636B; }
+.activity-card.act-lesson  { border-left: 6px solid #D4772C; }
+.activity-card.act-explore { border-left: 6px solid #55C8E8; }
+.activity-card.act-practice{ border-left: 6px solid #34B76F; }
+.activity-card.act-check   { border-left: 6px solid #8B6FC0; }
+
+.act-head { display: flex; align-items: center; gap: 12px; padding: 14px 20px 14px 18px; border-bottom: 1.5px solid #E8DDD2; }
+.act-num { width: 38px; height: 38px; border-radius: 14px; color: #fff; font-size: 18px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.act-title { font-size: 19px; color: #0E1C42; font-weight: 800; line-height: 1.2; }
+.act-subtitle { font-size: 12px; color: #9A8E82; }
+.act-time { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 700; color: #fff; white-space: nowrap; margin-left: auto; flex-shrink: 0; }
+.act-body { padding: 18px 22px 18px 20px; }
+.act-body p { font-size: 17px; color: #5A4D3E; line-height: 1.75; margin-bottom: 12px; }
+
+/* ── Callout Boxes ── */
+.callout { border-radius: 14px; padding: 16px 18px; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+.callout-icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+.callout p { font-size: 16px; color: #2B1D12; line-height: 1.65; margin: 0; }
+.callout-sky    { background: #EAF8FD; border: 2px solid #D6F2FB; }
+.callout-think  { background: #FFF7EE; border: 2px solid #F0DCC4; }
+.callout-vocab  { background: #F0EDF6; border: 2px solid #D8D0E8; }
+.callout-tip    { background: #EEF8F0; border: 2px solid #C4E5CC; }
+.callout-earth  { background: #FFF7EE; border: 2px solid #F0DCC4; }
+
+/* ── Socratic Questions ── */
+.socratic-q { background: linear-gradient(135deg, #FFF7EE, #FFF3E0); border: 2px solid #E8C88A; border-radius: 16px; padding: 16px 20px; margin: 16px 0; display: flex; align-items: flex-start; gap: 12px; }
+.socratic-q .sq-icon { font-size: 26px; flex-shrink: 0; line-height: 1; }
+.socratic-q .label { font-size: 11px; color: #C7922C; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 4px; }
+.socratic-q .question { font-size: 17px; color: #2B1D12; font-weight: 700; line-height: 1.6; font-style: italic; }
+
+/* ── Key Concept Box ── */
+.key-concept { background: #EAF8FD; border: 2px solid #D6F2FB; border-radius: 14px; padding: 18px 20px; margin: 14px 0; }
+.key-concept .kc-label { font-size: 13px; color: #2A8DB5; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-bottom: 8px; }
+.key-concept p { font-size: 16px; color: #2B1D12; line-height: 1.7; margin-bottom: 8px; }
+.key-concept p:last-child { margin-bottom: 0; }
+
+/* ── Practice Questions ── */
+.pq { background: #FAFAF6; border: 2px solid #E8DDD2; border-radius: 14px; padding: 14px 18px; margin-bottom: 12px; }
+.pq-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; color: #fff; font-weight: 800; font-size: 14px; margin-right: 8px; vertical-align: middle; }
+.pq-text { font-size: 17px; color: #2B1D12; line-height: 1.65; margin-bottom: 8px; }
+
+/* ── Vocab Flashcards ── */
+.vocab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
+.flip-card { perspective: 800px; height: 160px; cursor: pointer; }
+.flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s ease; transform-style: preserve-3d; }
+.flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+.flip-card-front, .flip-card-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 16px; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px 20px; text-align: center; border: 2px solid #E8DDD2; box-shadow: 0 2px 10px rgba(43,29,18,0.06); }
+.flip-card-front { background: #FAFAF6; border-top: 5px solid; }
+.flip-card-front .fc-emoji { font-size: 32px; margin-bottom: 8px; }
+.flip-card-front .fc-word { font-size: 18px; font-weight: 800; color: #0E1C42; margin-bottom: 6px; }
+.flip-card-front .fc-tap { font-size: 11px; color: #B0A698; font-weight: 600; letter-spacing: 0.3px; }
+.flip-card-back { background: linear-gradient(145deg, #0E1C42, #1A2D5A); border-color: #0E1C42; transform: rotateY(180deg); }
+.flip-card-back .fc-def { font-size: 15px; color: #fff; line-height: 1.6; font-weight: 600; }
+.flip-card-back .fc-word-back { font-size: 11px; color: #55C8E8; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 8px; }
+.flip-card-back .fc-tap-back { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 10px; font-weight: 600; }
+.fc-color-1 .flip-card-front { border-top-color: #55C8E8; }
+.fc-color-2 .flip-card-front { border-top-color: #34B76F; }
+.fc-color-3 .flip-card-front { border-top-color: #C7922C; }
+.fc-color-4 .flip-card-front { border-top-color: #8B6FC0; }
+.fc-color-5 .flip-card-front { border-top-color: #E8636B; }
+.fc-color-6 .flip-card-front { border-top-color: #D4772C; }
+
+/* ── Vocab Tooltips ── */
+.vtip { position: relative; color: #8B6FC0; font-weight: 700; cursor: help; border-bottom: 2px dotted rgba(139,111,192,0.45); transition: color 0.15s; }
+.vtip:hover { color: #6B4FA0; }
+.vtip .vtip-box { position: fixed; background: #0E1C42; color: #fff; padding: 12px 16px; border-radius: 12px; font-size: 14px; font-weight: 600; font-style: normal; line-height: 1.55; width: 250px; text-align: center; opacity: 0; visibility: hidden; transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s; pointer-events: none; z-index: 9999; box-shadow: 0 6px 24px rgba(14,28,66,0.35); border: 1.5px solid rgba(85,200,232,0.3); transform: translateY(6px); }
+.vtip .vtip-box::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 7px solid transparent; border-top-color: #0E1C42; }
+.vtip .vtip-word { font-size: 11px; color: #55C8E8; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 4px; display: block; }
+.vtip:hover .vtip-box { opacity: 1; visibility: visible; transform: translateY(0); }
+
+/* ── Go Deeper ── */
+.go-deeper { background: linear-gradient(135deg, #F0EDF6, #E8E2F2); border: 2px solid #D8D0E8; border-radius: 16px; margin: 16px 0; overflow: hidden; }
+.go-deeper summary { padding: 14px 18px; font-size: 16px; font-weight: 800; color: #0E1C42; cursor: pointer; display: flex; align-items: center; gap: 10px; list-style: none; }
+.go-deeper summary::-webkit-details-marker { display: none; }
+.go-deeper summary::before { content: '🔭'; font-size: 22px; }
+.go-deeper summary::after { content: '▸'; margin-left: auto; font-size: 18px; color: #8B6FC0; transition: transform 0.3s; }
+.go-deeper[open] summary::after { transform: rotate(90deg); }
+.go-deeper .gd-body { padding: 4px 18px 16px; font-size: 15px; color: #5A4D3E; line-height: 1.7; border-top: 1.5px solid #D8D0E8; }
+.go-deeper .gd-body p { margin-bottom: 10px; }
+
+/* ── Mind-Blowing Fact ── */
+.mind-blow { background: linear-gradient(135deg, #0a0e1a, #0E1C42); border: 2px solid rgba(85,200,232,0.3); border-radius: 18px; padding: 18px 22px; margin: 18px 0; display: flex; align-items: flex-start; gap: 14px; position: relative; overflow: hidden; }
+.mind-blow::before { content: ''; position: absolute; top: -30px; right: -30px; width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(85,200,232,0.15), transparent); }
+.mind-blow-icon { font-size: 36px; flex-shrink: 0; animation: mind-blow-bounce 2s ease-in-out infinite; }
+@keyframes mind-blow-bounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12)} }
+.mind-blow-content { flex: 1; }
+.mind-blow-label { font-size: 11px; color: #FFD700; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; margin-bottom: 4px; }
+.mind-blow-text { font-size: 16px; color: #fff; line-height: 1.6; font-weight: 600; }
+.mind-blow-text strong { color: #55C8E8; }
+
+/* ── Clickable Diagram ── */
+.diagram-interactive { position: relative; }
+.diagram-interactive .hotspot { cursor: pointer; opacity: 0; transition: opacity 0.2s; }
+.diagram-interactive .hotspot:hover { opacity: 0.25; }
+.diagram-interactive .hotspot.active { opacity: 0.35; }
+.diagram-info-panel { background: #0E1C42; color: #fff; padding: 14px 20px; border-radius: 14px; font-size: 15px; line-height: 1.55; font-weight: 600; text-align: center; border: 1.5px solid rgba(85,200,232,0.3); box-shadow: 0 4px 16px rgba(0,0,0,0.2); margin: 10px 0 0; display: none; }
+.diagram-info-panel.visible { display: block; }
+.diagram-info-panel .dip-word { font-size: 11px; color: #FFD700; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; display: block; margin-bottom: 3px; }
+
+/* ── Data Table ── */
+.student-chart-wrap { background: #FAFAF6; border: 2px solid #E8DDD2; border-radius: 14px; padding: 16px 18px; margin: 16px 0; }
+.student-chart-label { font-size: 13px; color: #5A4D3E; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 12px; }
+.student-chart { width: 100%; border-collapse: collapse; font-size: 15px; }
+.student-chart th { background: #0E1C42; color: #fff; padding: 10px 12px; text-align: left; font-size: 13px; font-weight: 700; border: 1px solid #1A2D5A; }
+.student-chart td { padding: 10px 12px; border: 1.5px dashed #D0C8BE; color: #5A4D3E; font-size: 15px; vertical-align: middle; }
+.student-chart td.row-label { background: #F0EDE8; color: #0E1C42; font-weight: 700; border: 1px solid #E8DDD2; border-style: solid; }
+.student-chart tbody tr:nth-child(even) td:not(.row-label) { background: #F9F7F3; }
+
+/* ── CER Block ── */
+.cer-block { background: #FAF7F3; border: 2px solid #8B6FC0; border-radius: 18px; padding: 22px 24px; margin-bottom: 22px; }
+.cer-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1.5px solid #E8DDD2; }
+.cer-icon { font-size: 28px; flex-shrink: 0; line-height: 1; }
+.cer-label { font-size: 11px; color: #8B6FC0; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 4px; }
+.cer-question { font-size: 18px; color: #0E1C42; font-weight: 700; line-height: 1.5; }
+.cer-section { display: flex; gap: 14px; margin-bottom: 18px; }
+.cer-badge { width: 32px; height: 32px; border-radius: 50%; color: #fff; font-size: 16px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.cer-badge-claim    { background: #E8636B; }
+.cer-badge-evidence { background: #D4772C; }
+.cer-badge-reason   { background: #34B76F; }
+.cer-section-body { flex: 1; }
+.cer-section-title { font-size: 16px; color: #0E1C42; font-weight: 800; margin-bottom: 8px; }
+.cer-section-hint { font-size: 13px; color: #9A8E82; font-weight: 600; }
+.cer-write-box { background: #fff; border: 2px dashed #E8DDD2; border-radius: 10px; padding: 14px; }
+.cer-starter { font-size: 14px; color: #C7922C; font-style: italic; margin: 0 0 10px; line-height: 1.5; }
+.cer-line { border-bottom: 1.5px solid #E8DDD2; height: 36px; margin-top: 2px; }
+.cer-vocab-check { background: #EAF8FD; border-radius: 10px; padding: 12px 14px; border-left: 3px solid #55C8E8; margin-top: 6px; font-size: 14px; color: #0E1C42; line-height: 1.5; }
+
+/* ── Revise Your Thinking ── */
+.revise-block { background: #FFF7EE; border: 2px solid #F0DCC4; border-radius: 16px; padding: 20px 22px; margin-bottom: 20px; }
+.revise-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+.revise-icon { font-size: 28px; flex-shrink: 0; line-height: 1; }
+.revise-label { font-size: 11px; color: #C7922C; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 4px; }
+.revise-question { font-size: 17px; color: #0E1C42; font-weight: 700; line-height: 1.5; }
+.revise-prompts { font-size: 16px; color: #5A4D3E; line-height: 1.7; margin-bottom: 14px; }
+.revise-prompts ul { margin: 10px 0 0 20px; }
+.revise-prompts li { margin-bottom: 6px; }
+
+/* ── Response Textareas ── */
+.response-q { margin: 10px 0 0; }
+.response-save-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #D0C8BE; margin-left: 6px; vertical-align: middle; transition: background 0.3s; flex-shrink: 0; }
+.response-save-dot.saved { background: #34B76F; }
+.response-textarea { width: 100%; min-height: 80px; padding: 10px 12px; border: 1.5px solid #D0C8BE; border-radius: 10px; background: #FAFAF6; font-family: 'Nunito', sans-serif; font-size: 15px; color: #2B1D12; resize: vertical; line-height: 1.65; transition: border-color 0.2s, box-shadow 0.2s; }
+.response-textarea:focus { outline: none; border-color: #34B76F; box-shadow: 0 0 0 3px rgba(52,183,111,0.15); background: #fff; }
+.response-textarea.ta-sm { min-height: 64px; }
+.response-textarea.ta-lg { min-height: 110px; }
+
+/* ── Gathered Answers ── */
+.gathered-card { background: #fff; border: 2px solid #E8DDD2; border-radius: 18px; margin: 24px 0; overflow: hidden; box-shadow: 0 2px 12px rgba(43,29,18,0.06); }
+.gathered-header { background: linear-gradient(135deg, #0E1C42, #1A2D5A); padding: 14px 20px; display: flex; align-items: center; gap: 12px; }
+.gathered-header-icon { font-size: 24px; }
+.gathered-header-label { font-size: 10px; color: #55C8E8; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; margin-bottom: 2px; }
+.gathered-header-title { font-size: 18px; color: #fff; font-weight: 800; line-height: 1.2; }
+.gathered-body { padding: 16px 20px 18px; }
+.gathered-intro { font-size: 14px; color: #5A4D3E; line-height: 1.6; margin-bottom: 12px; font-style: italic; }
+.gathered-name-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1.5px solid #E8DDD2; }
+.gathered-name-label { font-size: 13px; color: #0E1C42; font-weight: 800; white-space: nowrap; }
+.gathered-name-input { flex: 1; padding: 8px 12px; border: 1.5px solid #D0C8BE; border-radius: 8px; font-family: 'Nunito', sans-serif; font-size: 14px; color: #2B1D12; background: #FAFAF6; }
+.gathered-name-input:focus { outline: none; border-color: #34B76F; background: #fff; }
+.gathered-output { width: 100%; min-height: 200px; padding: 12px 14px; border: 1.5px solid #D0C8BE; border-radius: 10px; background: #F4F0EB; font-family: 'Courier New', monospace; font-size: 13px; color: #2B1D12; resize: vertical; line-height: 1.6; white-space: pre-wrap; }
+.gathered-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.gathered-btn { background: #0E1C42; color: #fff; border: none; padding: 9px 18px; border-radius: 10px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 13px; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+.gathered-btn:hover { background: #34B76F; transform: translateY(-1px); }
+.gathered-btn-download { background: #34B76F; }
+.gathered-copied { display: none; margin-top: 8px; padding: 6px 12px; background: #EEF8F0; color: #1a6b35; border-radius: 8px; font-size: 13px; font-weight: 700; border: 1.5px solid #B8E8CF; }
+.gathered-copied.show { display: block; }
+
+/* ── Image Figures ── */
+.lesson-figure { background: #fff; border: 2px solid #E8DDD2; border-radius: 16px; padding: 14px 14px 18px; margin: 0 0 22px; box-shadow: 0 2px 10px rgba(43,29,18,0.04); }
+.lesson-figure-label { font-size: 11px; color: #34B76F; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 800; margin-bottom: 10px; }
+.lesson-figure img { display: block; max-width: 100%; height: auto; border-radius: 10px; margin: 0 auto; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.lesson-figure-caption { font-size: 14px; color: #5A4D3E; margin-top: 12px; line-height: 1.55; font-weight: 600; text-align: center; }
+.lesson-figure-caption strong { color: #0E1C42; }
+.image-suggestion { background: linear-gradient(135deg, #FFF3E0, #FFF8E1); border: 2.5px dashed #F9A825; border-radius: 16px; padding: 20px 22px; margin: 18px 0; text-align: center; }
+.image-suggestion-icon { font-size: 36px; margin-bottom: 8px; }
+.image-suggestion-label { font-size: 11px; color: #E65100; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+.image-suggestion-desc { font-size: 15px; color: #5A4D3E; line-height: 1.65; font-weight: 600; max-width: 680px; margin: 0 auto 12px; text-align: left; }
+.image-suggestion-file { font-size: 12px; color: #9A8E82; font-family: monospace; background: rgba(0,0,0,0.05); border-radius: 6px; padding: 4px 10px; display: inline-block; margin-top: 6px; }
+
+/* ── Video Embed ── */
+.video-wrap { border-radius: 18px; overflow: hidden; border: 2px solid #E8DDD2; box-shadow: 0 4px 20px rgba(43,29,18,0.08); background: #000; margin: 0 0 22px; }
+.video-wrap-header { display: flex; align-items: center; gap: 12px; padding: 12px 18px; background: linear-gradient(135deg, #0E1C42, #1A2D5A); border-bottom: 2px solid rgba(85,200,232,0.2); }
+.video-wrap-type { font-size: 10px; color: #55C8E8; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; margin-bottom: 2px; }
+.video-wrap-title { font-size: 16px; color: #fff; font-weight: 800; line-height: 1.2; }
+.video-ratio { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+.video-ratio iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+.video-placeholder { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #0e1829, #0E1C42); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px; }
+.video-placeholder-icon { font-size: 44px; margin-bottom: 10px; opacity: 0.55; }
+.video-placeholder-text { font-size: 14px; color: rgba(255,255,255,0.45); font-weight: 600; line-height: 1.5; font-family: 'Nunito', sans-serif; }
+.video-placeholder-id { font-size: 11px; color: rgba(85,200,232,0.4); font-family: monospace; margin-top: 6px; }
+
+/* ── Progress Bar ── */
+.progress-wrap { position: sticky; top: 0; z-index: 200; background: #0E1C42; padding: 8px 20px 10px; border-bottom: 2px solid rgba(52,183,111,0.3); display: flex; align-items: center; gap: 14px; }
+.progress-label { font-size: 12px; color: #34B76F; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; white-space: nowrap; }
+.progress-track { flex: 1; height: 10px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
+.progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #34B76F, #55C8E8, #FFD700); border-radius: 10px; transition: width 0.4s ease; }
+.progress-pct { font-size: 13px; color: #FFD700; font-weight: 800; min-width: 36px; text-align: right; }
+
+/* ── Tab Bar ── */
+.tab-bar { position: sticky; top: 44px; z-index: 100; background: #FAF7F3; border-bottom: 3px solid #E8DDD2; display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.tab-bar::-webkit-scrollbar { display: none; }
+.tab-btn { flex: 1; min-width: 130px; padding: 12px 8px 11px; background: transparent; border: none; border-bottom: 4px solid transparent; font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 700; color: #9A8E82; cursor: pointer; transition: all 0.2s; white-space: nowrap; line-height: 1.3; text-align: center; }
+.tab-btn:hover { color: #0E1C42; background: #F0EDE8; }
+.tab-btn.active { color: #0E1C42; border-bottom-color: #8B6FC0; background: #fff; }
+.tab-btn .tab-check { display: none; font-size: 12px; color: #8B6FC0; margin-left: 4px; font-weight: 800; }
+.tab-btn.visited .tab-check { display: inline; }
+
+/* ── Tab Panels ── */
+.tab-panel { display: none; padding: 24px 28px 36px; background: #ffffff; }
+.tab-panel.active { display: block; }
+.scroll-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+
+/* ── Intro 2-col ── */
+.intro-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px 28px 0; }
+.intro-2col .card { margin-bottom: 0; }
+.intro-2col .card .card-head { cursor: pointer; user-select: none; position: relative; }
+.intro-2col .card .card-head::after { content: '▾'; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 16px; color: #9A8E82; transition: transform 0.25s ease; }
+.intro-2col .card.collapsed .card-head::after { transform: translateY(-50%) rotate(-90deg); }
+.intro-2col .card.collapsed .card-body { display: none; }
+
+/* ── Need Strip ── */
+.need-strip { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; padding: 12px 28px 16px; }
+.need-strip-label { font-size: 13px; color: #5A4D3E; font-weight: 700; white-space: nowrap; }
+.need-chip { display: inline-flex; align-items: center; gap: 5px; background: #EEF8F0; border: 1.5px solid #C4E5CC; border-radius: 20px; padding: 5px 12px; font-size: 13px; color: #0E1C42; font-weight: 700; }
+
+/* ── Tab Next Button ── */
+.tab-next-wrap { text-align: center; padding: 24px 0 8px; }
+.tab-next-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 30px; background: linear-gradient(135deg, #8B6FC0, #55C8E8); color: #fff; border: none; border-radius: 28px; font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 16px rgba(139,111,192,0.35); transition: transform 0.2s, box-shadow 0.2s; }
+.tab-next-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(139,111,192,0.5); }
+
+/* ── Turn-In Checklist ── */
+.turn-in-item { transition: background .2s, border-color .2s; }
+.turn-in-item:hover { background: #F0EDE8 !important; }
+.turn-in-item.checked { background: #EEF8F0 !important; border-color: #B8E8CF !important; }
+.turn-in-item.checked .check-icon { border-color: transparent !important; background: transparent !important; font-size: 22px !important; }
+.turn-in-item.checked span:last-child { color: #5A4D3E; }
+
+/* ── Quiz ── */
+.quiz-card { background: #fff; border: 2px solid #E8DDD2; border-left: 6px solid #F5A623; border-radius: 18px; margin-bottom: 18px; overflow: hidden; box-shadow: 0 2px 10px rgba(43,29,18,0.04); }
+.quiz-q { background: #FAFAF6; border: 2px solid #E8DDD2; border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
+.quiz-q-text { font-size: 17px; color: #2B1D12; font-weight: 700; line-height: 1.6; margin-bottom: 12px; }
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt { padding: 10px 16px; border-radius: 12px; border: 2px solid #E8DDD2; background: #fff; font-size: 15px; font-weight: 700; color: #2B1D12; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 10px; user-select: none; }
+.quiz-opt:hover { background: #EEF8F0; border-color: #34B76F; }
+.quiz-opt.correct { background: #EEF8F0 !important; border-color: #34B76F !important; color: #1a6b35 !important; }
+.quiz-opt.wrong   { background: #FFF0EC !important; border-color: #E8636B !important; color: #a33 !important; }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.6; }
+.quiz-opt .opt-letter { width: 28px; height: 28px; border-radius: 50%; background: #E8DDD2; color: #5A4D3E; font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+.quiz-opt.correct .opt-letter { background: #34B76F; color: #fff; }
+.quiz-opt.wrong .opt-letter   { background: #E8636B; color: #fff; }
+.quiz-feedback { font-size: 14px; padding: 10px 14px; border-radius: 10px; margin-top: 10px; display: none; font-weight: 600; line-height: 1.5; }
+.quiz-feedback.show { display: block; }
+.quiz-feedback.fb-correct { background: #EEF8F0; color: #1a6b35; border: 1.5px solid #B8E8CF; }
+.quiz-feedback.fb-wrong   { background: #FFF0EC; color: #8a3030; border: 1.5px solid #F5C4BA; }
+.quiz-score { text-align: center; padding: 16px; background: linear-gradient(135deg, #EEF8F0, #D6F5DE); border: 2px solid #B8E8CF; border-radius: 14px; margin-top: 8px; display: none; }
+.quiz-score.show { display: block; }
+.quiz-score-num { font-size: 36px; font-weight: 900; color: #0E1C42; }
+.quiz-score-label { font-size: 14px; color: #9A8E82; font-weight: 700; }
+.quiz-score-msg { font-size: 16px; color: #2B1D12; font-weight: 700; margin-top: 6px; }
+
+/* ── Diagram Wrap ── */
+.diagram-wrap { background: #fff; border: 2px solid #E8DDD2; border-radius: 16px; padding: 16px; margin: 16px 0; text-align: center; }
+.diagram-wrap svg { max-width: 100%; height: auto; }
+.diagram-caption { font-size: 13px; color: #9A8E82; margin-top: 10px; font-weight: 600; }
+
+/* ── Back to Top ── */
+.back-to-top { position: fixed; bottom: 28px; right: 28px; height: 44px; padding: 0 18px 0 14px; border-radius: 22px; background: linear-gradient(135deg, #8B6FC0, #55C8E8); color: #fff; border: none; font-size: 14px; font-weight: 800; font-family: 'Nunito', sans-serif; cursor: pointer; box-shadow: 0 4px 18px rgba(139,111,192,0.4); display: flex; align-items: center; gap: 6px; opacity: 0; visibility: hidden; transform: translateY(20px); transition: opacity 0.3s, visibility 0.3s, transform 0.3s, box-shadow 0.2s; z-index: 500; letter-spacing: 0.3px; }
+.back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { box-shadow: 0 6px 24px rgba(139,111,192,0.55); transform: translateY(-3px); }
+
+/* ── Confetti ── */
+#confettiCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10000; }
+
+/* ── Footer ── */
+.footer { background: #0E1C42; border-top: 4px solid #8B6FC0; padding: 18px 28px; text-align: center; }
+.footer-line1 { font-size: 15px; color: #fff; margin-bottom: 4px; }
+.footer-line1 span { color: #D6BFEC; font-weight: 700; }
+.footer-line2 { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 2px; }
+.footer-line3 { font-size: 12px; color: rgba(255,255,255,0.4); }
+
+strong { color: #0E1C42; }
+em { color: #5A4D3E; }
+
+/* ── Hero animations ── */
+@keyframes hero-lens-pulse { 0%,100%{opacity:.7;transform:scale(1)} 50%{opacity:1;transform:scale(1.04)} }
+@keyframes hero-twinkle-anim { 0%,100%{opacity:.4;transform:scale(.85)} 50%{opacity:1;transform:scale(1.15)} }
+@keyframes hero-page-sway { 0%,100%{transform:rotate(-1deg)} 50%{transform:rotate(1deg)} }
+@keyframes hero-pencil-move { 0%,100%{transform:translateY(0) rotate(-12deg)} 50%{transform:translateY(-3px) rotate(-9deg)} }
+@keyframes hero-detail-glow { 0%,100%{opacity:.25} 50%{opacity:.85} }
+.hero-lens { animation: hero-lens-pulse 3.5s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+.hero-twinkle { animation: hero-twinkle-anim 2.2s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+.hero-twinkle-2 { animation: hero-twinkle-anim 3.1s ease-in-out infinite 0.5s; transform-origin: center; transform-box: fill-box; }
+.hero-twinkle-3 { animation: hero-twinkle-anim 2.7s ease-in-out infinite 1.1s; transform-origin: center; transform-box: fill-box; }
+.hero-page { animation: hero-page-sway 5s ease-in-out infinite; transform-origin: bottom left; transform-box: fill-box; }
+.hero-pencil { animation: hero-pencil-move 2.4s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+.hero-detail { animation: hero-detail-glow 2.6s ease-in-out infinite; }
+
+/* ── Conditional Quiz Videos ── */
+.quiz-video-conditional { display: none; margin-top: 16px; }
+.quiz-video-conditional.show { display: block; }
+
+@media (max-width: 620px) {
+  .intro-2col { grid-template-columns: 1fr; }
+  .tab-btn { min-width: 100px; font-size: 11px; padding: 10px 4px; }
+  .vocab-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<a id="pageTop"></a>
+<div class="page-wrap">
+
+<!-- ═══ PROGRESS BAR ═══ -->
+<div class="progress-wrap">
+  <span class="progress-label">🌐 Lesson Progress</span>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <span class="progress-pct" id="progressPct">0%</span>
+</div>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<div class="header">
+  <div class="header-brand">
+    <div class="header-logo">
+      <img src="https://raw.githubusercontent.com/optimaondemand/optima-assets/eeb0b335630058906d52f478028361d352253a93/images/Optima%20Final%20Circle%20-%20Owl%20Only.png" alt="Optima Academy" />
+    </div>
+    <div>
+      <div class="header-org">Optima Academy Online</div>
+      <div class="header-sub">An Education Experience Company</div>
+    </div>
+  </div>
+  <div class="header-title">How Do Earth's Four Spheres Interact?</div>
+  <div class="header-badge">
+    <span>🌐</span>
+    <span>Lesson 27.01</span>
+  </div>
+</div>
+
+<!-- ═══ HERO SVG — Lesson topic scene ═══ -->
+<div class="hero-visual">
+<svg viewBox="0 0 920 260" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bgG6" cx="0.5" cy="0.5" r="0.9">
+      <stop offset="0%" stop-color="#1a2030"/>
+      <stop offset="100%" stop-color="#0a0a18"/>
+    </radialGradient>
+  </defs>
+  <rect width="920" height="260" fill="url(#bgG6)"/>
+
+  <rect x="190" y="15" width="540" height="28" rx="6" fill="rgba(139,111,192,0.2)" stroke="#8B6FC0" stroke-width="1.5"/>
+  <text x="460" y="34" text-anchor="middle" font-family="Nunito,sans-serif" font-size="13" fill="#fff" font-weight="800">Earth has FOUR connected systems. None of them works alone.</text>
+
+  <!-- Four overlapping circles (Venn-style) -->
+  <g transform="translate(460,150)" opacity="0.85">
+    <!-- Geosphere - brown - bottom left -->
+    <circle cx="-50" cy="30" r="58" fill="#8D6E63" opacity="0.75"/>
+    <!-- Hydrosphere - blue - bottom right -->
+    <circle cx="50" cy="30" r="58" fill="#1976D2" opacity="0.75"/>
+    <!-- Atmosphere - light blue - top left -->
+    <circle cx="-50" cy="-30" r="58" fill="#81D4FA" opacity="0.75"/>
+    <!-- Biosphere - green - top right -->
+    <circle cx="50" cy="-30" r="58" fill="#43A047" opacity="0.75"/>
+  </g>
+
+  <!-- Labels -->
+  <text x="350" y="125" font-family="Nunito,sans-serif" font-size="12" fill="#81D4FA" font-weight="800">☁️ ATMOSPHERE</text>
+  <text x="355" y="143" font-family="Nunito,sans-serif" font-size="9" fill="#B3E5FC">the air</text>
+
+  <text x="520" y="125" font-family="Nunito,sans-serif" font-size="12" fill="#A5D6A7" font-weight="800">🌳 BIOSPHERE</text>
+  <text x="525" y="143" font-family="Nunito,sans-serif" font-size="9" fill="#C8E6C9">all living things</text>
+
+  <text x="345" y="200" font-family="Nunito,sans-serif" font-size="12" fill="#D7CCC8" font-weight="800">🪨 GEOSPHERE</text>
+  <text x="350" y="218" font-family="Nunito,sans-serif" font-size="9" fill="#EFEBE9">rock and land</text>
+
+  <text x="525" y="200" font-family="Nunito,sans-serif" font-size="12" fill="#90CAF9" font-weight="800">💧 HYDROSPHERE</text>
+  <text x="530" y="218" font-family="Nunito,sans-serif" font-size="9" fill="#BBDEFB">all the water</text>
+
+  <text x="50" y="80" font-family="Nunito,sans-serif" font-size="12" fill="#FFD700" font-weight="800">Where they overlap...</text>
+  <text x="50" y="100" font-family="Nunito,sans-serif" font-size="10" fill="#fff">they're INTERACTING</text>
+
+  <text x="700" y="80" font-family="Nunito,sans-serif" font-size="12" fill="#FFD700" font-weight="800">Examples:</text>
+  <text x="700" y="100" font-family="Nunito,sans-serif" font-size="10" fill="#fff">Wind shapes rock</text>
+  <text x="700" y="118" font-family="Nunito,sans-serif" font-size="10" fill="#fff">Plants make oxygen</text>
+  <text x="700" y="136" font-family="Nunito,sans-serif" font-size="10" fill="#fff">Rain fills rivers</text>
+
+  <line x1="40" y1="245" x2="880" y2="245" stroke="#8B6FC0" stroke-width="1.5" opacity="0.45"/>
+</svg>
+</div>
+
+<!-- ═══ INFO STRIP ═══ -->
+<div class="info-strip">
+  <div class="info-item">
+    <div class="info-icon" style="background:#EEF8F0;">📅</div>
+    <div>
+      <div class="info-label">Quarter / Unit</div>
+      <div class="info-value">Q3 · Unit 5</div>
+      <div class="info-detail">Geo, hydro, atmo, bio</div>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon" style="background:#EAF8FD;">📖</div>
+    <div>
+      <div class="info-label">Week / Lesson</div>
+      <div class="info-value">Week 27</div>
+      <div class="info-detail">Lesson 27.01 — 5th Grade Science</div>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon" style="background:#F3E5F5;">🌐</div>
+    <div>
+      <div class="info-label">Science Focus</div>
+      <div class="info-value">Scientific Thinking</div>
+      <div class="info-detail">Geo, hydro, atmo, bio</div>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon" style="background:#F0EDF6;">🌎</div>
+    <div>
+      <div class="info-label">Standard</div>
+      <div class="info-value">SC.5.E.7.1</div>
+      <div class="info-detail">Geo, hydro, atmo, bio</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ INTRO 2-COL ═══ -->
+<div class="intro-2col">
+  <div class="card theme-earth">
+    <div class="card-head">
+      <div class="card-head-icon">🤔</div>
+      <div>
+        <div class="card-head-label">Big Question</div>
+        <div class="card-head-title">Think About This…</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>How do scientists tell the difference between what they <em>see</em> and what they <em>think it means</em>?</p>
+      <p style="font-size:14px;color:#9A8E82;">Keep this question in mind as you work through the lesson today.</p>
+    </div>
+  </div>
+  <div class="card theme-sky">
+    <div class="card-head">
+      <div class="card-head-icon">🎯</div>
+      <div>
+        <div class="card-head-label">Learning Goals</div>
+        <div class="card-head-title">I Can…</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#E8636B;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">1</span>describe what a galaxy is made of.</p>
+      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#D4772C;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">2</span>identify the Milky Way as our home galaxy.</p>
+      <p style="margin-bottom:0;"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#34B76F;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">3</span>compare the size of stars, solar systems, and galaxies.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ NEED STRIP ═══ -->
+<div class="need-strip">
+  <span class="need-strip-label">You'll need:</span>
+  <span class="need-chip">📓 Science notebook</span>
+  <span class="need-chip">✏️ Pencil &amp; colored pencils</span>
+  <span class="need-chip">🔍 Something small to look at closely</span>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="vocab"      onclick="switchTab('vocab')">📚 Vocabulary<span class="tab-check">✓</span></button>
+  <button class="tab-btn"        data-tab="lesson"     onclick="switchTab('lesson')">📖 The Lesson<span class="tab-check">✓</span></button>
+  <button class="tab-btn"        data-tab="explore"    onclick="switchTab('explore')">🔬 Investigate<span class="tab-check">✓</span></button>
+  <button class="tab-btn"        data-tab="quiz"       onclick="switchTab('quiz')">🧠 Self-Check<span class="tab-check">✓</span></button>
+  <button class="tab-btn"        data-tab="assignment" onclick="switchTab('assignment')">✍️ Assignment<span class="tab-check">✓</span></button>
+</div>
+
+<!-- ══════════════════════════════════════════
+     TAB 1: VOCABULARY
+══════════════════════════════════════════ -->
+<div class="tab-panel active" id="tab-vocab">
+
+  <!-- Welcome Video -->
+  <div class="video-wrap">
+    <div class="video-wrap-header">
+      <span style="font-size:20px;">🎬</span>
+      <div>
+        <div class="video-wrap-type">Introduction · Welcome Video</div>
+        <div class="video-wrap-title">Welcome to Lesson 27.01 — Four Connected Worlds</div>
+      </div>
+    </div>
+    <div class="video-ratio">
+      <div class="video-placeholder">
+        <div class="video-placeholder-icon">🔬</div>
+        <div class="video-placeholder-text">Teacher introduction video coming soon</div>
+        <div class="video-placeholder-id"><!-- slot: 27-01-welcome --></div>
+        <div class="video-placeholder-desc">
+          <span class="video-placeholder-desc-label">📹 Suggested content (1–2 min)</span>
+          Greet students warmly. Show a wide-angle photo of the Milky Way at night (the band of stars). Say: "Every star you see in the sky belongs to our galaxy — the Milky Way. But our galaxy is just ONE of trillions. Today we'll zoom out to see where we live in the universe."
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Activity 1: Notice, Wonder, and Predict -->
+  <div class="activity-card act-warmup scroll-reveal">
+    <div class="act-head">
+      <div class="act-num" style="background:#E8636B;">1</div>
+      <div style="flex:1;">
+        <div class="act-title">🔍 Notice, Wonder, and Predict</div>
+        <div class="act-subtitle">Step way back. Find Earth on the cosmic map.</div>
+      </div>
+      <div class="act-time" style="background:#E8636B;">⏱ 5 min</div>
+    </div>
+    <div class="act-body">
+      <p>Stand outside on a clear, dark night and look up. You see stars. Lots of them. Maybe you spot the Big Dipper, or notice a bright planet. What you can't see — but what's actually there — is one of the most amazing things in the universe: a vast, spinning collection of more than 200 billion stars called the Milky Way Galaxy.</p>
+      <p>Every single star you can see with your eyes is in OUR galaxy. Our Sun is one of those stars. So is Polaris (the North Star). And Sirius (the brightest one). All 4,000 stars you can see — and 200 BILLION more you can't — are all neighbors in the same galaxy. Today we explore what a galaxy actually is.</p>
+
+      <div class="socratic-q">
+        <span class="sq-icon">👀</span>
+        <div>
+          <div class="label">In Your Science Notebook</div>
+          <div class="question">"What's the biggest thing you've ever seen with your own eyes? Now imagine something that's 100,000 light-years across. That's our galaxy."</div>
+        </div>
+      </div>
+
+      <!-- Prediction -->
+      <div class="callout callout-sky">
+        <span class="callout-icon">🔭</span>
+        <p><strong>Write your prediction below.</strong> Use at least two sentences. What do you think Earth's spheres are? How do you think they connect?</p>
+      </div>
+
+      <div class="response-q">
+        <textarea class="response-textarea" id="pred-1"
+          data-label="Prediction"
+          placeholder="I think a galaxy is made of... I think it's bigger / smaller than..."
+          oninput="autoSave(this,'dot-pred-1')"></textarea>
+        <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+          Your prediction<span class="response-save-dot" id="dot-pred-1"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vocab Flip Cards -->
+  <div class="card theme-rock scroll-reveal">
+    <div class="card-head">
+      <div class="card-head-icon">📚</div>
+      <div>
+        <div class="card-head-label">Word Wall</div>
+        <div class="card-head-title">Key Vocabulary</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>These six words are tools you'll use all year. <strong>Tap each card to flip it</strong> and read the definition. You'll use most of them in your investigation today.</p>
+
+      <div class="vocab-grid">
+
+        <div class="flip-card fc-color-1" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front"><div class="fc-emoji">🌌</div><div class="fc-word">galaxy</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">galaxy</div><div class="fc-def">A huge group of stars, gas, dust, and orbiting objects — held together by gravity. Galaxies hold billions of stars.</div><div class="fc-tap-back">tap to flip back</div></div>
+          </div>
+        </div>
+
+        <div class="flip-card fc-color-2" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front"><div class="fc-emoji">🌠</div><div class="fc-word">Milky Way</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">Milky Way</div><div class="fc-def">Our home galaxy. Has a spiral shape and contains over 200 billion stars, including our Sun.</div><div class="fc-tap-back">tap to flip back</div></div>
+          </div>
+        </div>
+
+        <div class="flip-card fc-color-3" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front"><div class="fc-emoji">⭐</div><div class="fc-word">star</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">star</div><div class="fc-def">A giant ball of hot, glowing gas. The Sun is a star. So is every twinkling light you see at night.</div><div class="fc-tap-back">tap to flip back</div></div>
+          </div>
+        </div>
+
+        <div class="flip-card fc-color-4" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front"><div class="fc-emoji">☀️</div><div class="fc-word">solar system</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">solar system</div><div class="fc-def">A star plus everything that orbits it — planets, moons, asteroids, comets. Our solar system has the Sun in the middle.</div><div class="fc-tap-back">tap to flip back</div></div>
+          </div>
+        </div>
+
+        <div class="flip-card fc-color-5" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front"><div class="fc-emoji">🪐</div><div class="fc-word">planet</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">planet</div><div class="fc-def">A large object that orbits a star. Earth is a planet. So are Mars, Jupiter, and Saturn.</div><div class="fc-tap-back">tap to flip back</div></div>
+          </div>
+        </div>
+
+        <div class="flip-card fc-color-6" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front"><div class="fc-emoji">🔄</div><div class="fc-word">orbit</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">orbit</div><div class="fc-def">A curved path one object travels around another. Planets orbit the Sun. The Sun orbits the center of the Milky Way.</div><div class="fc-tap-back">tap to flip back</div></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Copywork -->
+      <div class="callout callout-think" style="margin-top:16px;">
+        <span class="callout-icon">📓</span>
+        <p>Copy this sentence carefully into your science notebook:<br><strong>"A galaxy is a huge group of stars, gas, and dust. The Milky Way is our home galaxy."</strong><br>Then write one sentence about something you find amazing about space.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="tab-next-wrap">
+    <button class="tab-next-btn" onclick="switchTab('lesson')">Continue to 📖 The Lesson →</button>
+  </div>
+
+</div><!-- /tab-vocab -->
+
+
+<!-- ══════════════════════════════════════════
+     TAB 2: THE LESSON
+══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-lesson">
+
+  <!-- Lesson Video -->
+  <div class="video-wrap">
+    <div class="video-wrap-header">
+      <span style="font-size:20px;">📖</span>
+      <div>
+        <div class="video-wrap-type">Activity 2 · Core Lesson</div>
+        <div class="video-wrap-title">Inside the Milky Way</div>
+      </div>
+    </div>
+    <div class="video-ratio">
+      <div class="video-placeholder">
+        <div class="video-placeholder-icon">📖</div>
+        <div class="video-placeholder-text">Core lesson video coming soon</div>
+        <div class="video-placeholder-id"><!-- slot: 27-01-lesson-explainer --></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Suggested image: lesson topic scene -->
+  <div class="lesson-figure">
+    <div class="lesson-figure-label">📷 Reference · Sort the Cosmic Objects</div>
+        <img
+          src="images/24-01-milky-way-night.jpg"
+          alt="A nighttime photograph of the Milky Way galaxy as a bright band of stars stretching across a dark sky, with a silhouetted mountain landscape below."
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; this.parentElement.querySelector('.lesson-figure-label').style.display='none';"
+        />
+        <div class="image-suggestion" style="display:none;">
+          <div class="image-suggestion-icon">🖼️</div>
+          <div class="image-suggestion-label">Suggested Image — Generate This</div>
+          <div class="image-suggestion-desc">
+            Photorealistic nighttime landscape photo of the Milky Way galaxy. The bright band of stars curves across the upper sky. A silhouette of mountains or trees lines the bottom. Sharp focus on the stars. No people, no text, no cartoons.
+          </div>
+          <div class="image-suggestion-file">Save as: images/24-01-milky-way-night.jpg</div>
+        </div>
+        <div class="lesson-figure-caption">
+          The Milky Way seen from Earth. That bright band of light IS our home galaxy — seen from the inside.
+        </div>
+  </div>
+
+  <!-- ACTIVITY 2: Core Content -->
+  <div class="activity-card act-lesson scroll-reveal">
+    <div class="act-head">
+      <div class="act-num" style="background:#D4772C;">2</div>
+      <div style="flex:1;">
+        <div class="act-title">📖 The Lesson</div>
+        <div class="act-subtitle">Stars, solar systems, and our home galaxy</div>
+      </div>
+      <div class="act-time" style="background:#D4772C;">⏱ 15 min</div>
+    </div>
+    <div class="act-body">
+
+      <!-- Section 1 -->
+      <div class="card theme-forest" style="margin-bottom:18px;">
+        <div class="card-head">
+          <div class="card-head-icon">👁️</div>
+          <div>
+            <div class="card-head-label">Section 1</div>
+            <div class="card-head-title">What a Galaxy Actually Is</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>A <strong>galaxy</strong> is an enormous collection of stars, gas, dust, and other things — all held together by gravity. The smallest galaxies have millions of stars. The biggest have trillions. The number of stars in galaxies is so big it’s hard to imagine.</p>
+          <p>Galaxies come in different shapes. Some are SPIRAL (curved arms wrapping around a center). Some are ELLIPTICAL (egg-shaped). Some are IRREGULAR (no special shape). Our galaxy — the Milky Way — is a spiral galaxy with about 200 billion stars.</p>
+          <div class="socratic-q">
+            <span class="sq-icon">🤔</span>
+            <div>
+              <div class="label">Stop and Think</div>
+              <div class="question">"If you tried to count to 200 billion at one number per second, how long would it take?"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="card theme-sky" style="margin-bottom:18px;">
+        <div class="card-head">
+          <div class="card-head-icon">🧾</div>
+          <div>
+            <div class="card-head-label">Section 2</div>
+            <div class="card-head-title">Our Place in the Milky Way</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>Our Sun is just one of 200 billion stars in the Milky Way. Earth is one of 8 planets that orbit the Sun. Together, the Sun and its planets make up our <strong>solar system</strong>. Our solar system sits in one of the Milky Way’s spiral arms — about two-thirds of the way out from the center.</p>
+          <p>Layered structure: Earth orbits the Sun. The Sun and its planets orbit the center of the Milky Way. The Milky Way is one of trillions of galaxies in the universe. We live on a tiny rocky world, in a small solar system, in a vast galaxy, in an even vaster cosmos.</p>
+          <div class="socratic-q">
+            <span class="sq-icon">🧪</span>
+            <div>
+              <div class="label">Stop and Reason</div>
+              <div class="question">"What’s the difference between a solar system and a galaxy? Which is bigger, and by how much?"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3 -->
+      <div class="card theme-earth" style="margin-bottom:18px;">
+        <div class="card-head">
+          <div class="card-head-icon">❓</div>
+          <div>
+            <div class="card-head-label">Section 3</div>
+            <div class="card-head-title">Why the Milky Way Looks Like a Band</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>Scientists don't ask just any question — they ask <span class="vtip">testable questions<span class="vtip-box"><span class="vtip-word">testable question</span>A question you can answer by observing, measuring, or testing.</span></span>. "Why are clouds beautiful?" isn't testable. But "Do clouds form more often in the morning or the afternoon?" — that's something you could actually find out by watching the sky for a week.</p>
+          <p><strong>Real-World Connection:</strong> Telescopes have shown us thousands of other galaxies. Some are very far away — so far that the light traveling from them took billions of years to reach Earth. When you look at a faraway galaxy through a telescope, you're actually seeing what it looked like in the distant past.</p>
+        </div>
+      </div>
+
+      <!-- Key Concept Box -->
+      <div class="key-concept">
+        <div class="kc-label">🔑 Key Concept</div>
+          <p>Earth has four interconnected systems: the geosphere (rock and land), hydrosphere (water), atmosphere (air), and biosphere (living things). They constantly interact — a change in one affects the others.</p>
+      </div>
+
+      <!-- Interactive Diagram -->
+      <div class="diagram-wrap scroll-reveal">
+        <div style="font-size:13px;color:#9A8E82;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">
+          🗺 Tap each side to compare
+        </div>
+        <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;line-height:1.65;">Six things that exist in space — from smallest to largest. Tap each one to see how they fit together.</p>
+        <div class="diagram-interactive">
+          <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="font-family:Nunito,Arial,sans-serif;max-width:100%;height:auto;" role="img" aria-label="Earth sphere interactions diagram with six examples">
+            <rect width="720" height="360" fill="#FAF7F3" rx="12" stroke="#c8b896" stroke-width="2"/>
+            <rect x="180" y="15" width="360" height="28" rx="6" fill="#0E1C42"/>
+            <text x="360" y="33" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">Sphere Interactions · Tap to Explore</text>
+
+            <rect x="20" y="60" width="220" height="130" rx="10" fill="#E1F5FE" stroke="#0288D1" stroke-width="2.5"/>
+            <text x="130" y="100" text-anchor="middle" font-size="36">🌧️</text>
+            <text x="130" y="135" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="800">Rain falls</text>
+            <text x="130" y="153" text-anchor="middle" font-size="10" fill="#5A4D3E">on a mountain</text>
+            <rect x="40" y="165" width="180" height="20" rx="5" fill="#0288D1"/>
+            <text x="130" y="180" text-anchor="middle" font-size="10" fill="#fff" font-weight="800">HYDRO + GEO</text>
+
+            <rect x="250" y="60" width="220" height="130" rx="10" fill="#E8F5E9" stroke="#43A047" stroke-width="2.5"/>
+            <text x="360" y="100" text-anchor="middle" font-size="36">🌱</text>
+            <text x="360" y="135" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="800">Plant grows</text>
+            <text x="360" y="153" text-anchor="middle" font-size="10" fill="#5A4D3E">in soil with water</text>
+            <rect x="270" y="165" width="180" height="20" rx="5" fill="#43A047"/>
+            <text x="360" y="180" text-anchor="middle" font-size="10" fill="#fff" font-weight="800">BIO + GEO + HYDRO</text>
+
+            <rect x="480" y="60" width="220" height="130" rx="10" fill="#FFFDE7" stroke="#F9A825" stroke-width="2.5"/>
+            <text x="590" y="100" text-anchor="middle" font-size="36">💨</text>
+            <text x="590" y="135" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="800">Wind shapes rock</text>
+            <text x="590" y="153" text-anchor="middle" font-size="10" fill="#5A4D3E">over many years</text>
+            <rect x="500" y="165" width="180" height="20" rx="5" fill="#F9A825"/>
+            <text x="590" y="180" text-anchor="middle" font-size="10" fill="#fff" font-weight="800">ATMO + GEO</text>
+
+            <rect x="20" y="205" width="220" height="130" rx="10" fill="#FFEBEE" stroke="#E53935" stroke-width="2.5"/>
+            <text x="130" y="245" text-anchor="middle" font-size="36">🐦</text>
+            <text x="130" y="280" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="800">Bird breathes</text>
+            <text x="130" y="298" text-anchor="middle" font-size="10" fill="#5A4D3E">air to live</text>
+            <rect x="40" y="310" width="180" height="20" rx="5" fill="#E53935"/>
+            <text x="130" y="325" text-anchor="middle" font-size="10" fill="#fff" font-weight="800">BIO + ATMO</text>
+
+            <rect x="250" y="205" width="220" height="130" rx="10" fill="#E3F2FD" stroke="#1976D2" stroke-width="2.5"/>
+            <text x="360" y="245" text-anchor="middle" font-size="36">🌊</text>
+            <text x="360" y="280" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="800">Wave crashes</text>
+            <text x="360" y="298" text-anchor="middle" font-size="10" fill="#5A4D3E">on a beach</text>
+            <rect x="270" y="310" width="180" height="20" rx="5" fill="#1976D2"/>
+            <text x="360" y="325" text-anchor="middle" font-size="10" fill="#fff" font-weight="800">HYDRO + GEO</text>
+
+            <rect x="480" y="205" width="220" height="130" rx="10" fill="#F3E5F5" stroke="#8B6FC0" stroke-width="2.5"/>
+            <text x="590" y="245" text-anchor="middle" font-size="36">🌳</text>
+            <text x="590" y="280" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="800">Tree releases</text>
+            <text x="590" y="298" text-anchor="middle" font-size="10" fill="#5A4D3E">oxygen into air</text>
+            <rect x="500" y="310" width="180" height="20" rx="5" fill="#8B6FC0"/>
+            <text x="590" y="325" text-anchor="middle" font-size="10" fill="#fff" font-weight="800">BIO + ATMO</text>
+
+            <rect class="hotspot" data-part="rain" data-info="Rain on a Mountain | Water (hydrosphere) hits rock (geosphere). Over time, the rain slowly wears the rock down — that's erosion. This is how mountains get smaller over millions of years and how soil forms." x="20" y="60" width="220" height="130" rx="10" fill="#0288D1"/>
+            <rect class="hotspot" data-part="plant" data-info="Plant Growing | A plant (biosphere) needs three spheres at once. It pulls water from the soil (hydrosphere), nutrients from the dirt (geosphere), and CO₂ from the air (atmosphere). This is why plants are such important sphere-connectors." x="250" y="60" width="220" height="130" rx="10" fill="#43A047"/>
+            <rect class="hotspot" data-part="wind" data-info="Wind Shapes Rock | Air (atmosphere) carries tiny sand grains that slowly grind down rock (geosphere). The Grand Canyon and the rock arches in the desert were carved partly by wind, partly by water — both over millions of years." x="480" y="60" width="220" height="130" rx="10" fill="#F9A825"/>
+            <rect class="hotspot" data-part="bird" data-info="Bird Breathes | Every animal (biosphere) needs air (atmosphere) to live. You're doing this right now. The oxygen you breathe came from plants — another biosphere–atmosphere connection." x="20" y="205" width="220" height="130" rx="10" fill="#E53935"/>
+            <rect class="hotspot" data-part="wave" data-info="Wave on Beach | Ocean water (hydrosphere) crashes onto sand and rocks (geosphere). The wave moves sand around, breaks rocks into smaller pieces, and shapes coastlines. Every coastline on Earth is a hydro–geo interaction." x="250" y="205" width="220" height="130" rx="10" fill="#1976D2"/>
+            <rect class="hotspot" data-part="tree" data-info="Tree Releases Oxygen | Trees (biosphere) take in CO₂ from the air (atmosphere) and give back oxygen. The air you're breathing right now is being constantly refreshed by plants. Lose the biosphere — lose the breathable atmosphere." x="480" y="205" width="220" height="130" rx="10" fill="#8B6FC0"/>
+          </svg>
+          <div style="background:linear-gradient(135deg,#EEF8F0,#D6F5DE);border:2px solid #B8E8CF;border-radius:14px;padding:12px 18px;margin-top:10px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:28px;flex-shrink:0;animation:mind-blow-bounce 2s ease-in-out infinite;">👆</span>
+            <p style="font-size:15px;color:#0E1C42;line-height:1.55;margin:0;font-weight:600;">Tap each box to see how the cosmic scale fits together.</p>
+          </div>
+          <div class="diagram-info-panel" id="diagramPanel">
+            <span class="dip-word" id="diagramWord"></span>
+            <span id="diagramInfo"></span>
+          </div>
+        </div>
+        <div class="diagram-caption">Six everyday interactions between Earth's spheres. Once you start noticing them, you'll see them everywhere.</div>
+      </div>
+
+      <!-- Mind-Blowing Fact -->
+      <div class="mind-blow">
+        <div class="mind-blow-icon">🤯</div>
+        <div class="mind-blow-content">
+          <div class="mind-blow-label">Mind-Blowing Fact</div>
+          <div class="mind-blow-text">If you could shrink the Sun to the size of a basketball, Earth would be the size of a peppercorn — and the next nearest star would be <strong>4,000 miles</strong> away. Galaxies are mostly empty space, with islands of stars far apart.</div>
+        </div>
+      </div>
+
+      <!-- Go Deeper -->
+      <details class="go-deeper">
+        <summary>Go Deeper — Why galaxies have shapes</summary>
+        <div class="gd-body">
+          <p>Galaxies don't all look the same. Some are SPIRAL like the Milky Way — flat disks with curved arms. Some are ELLIPTICAL — egg-shaped balls of older stars. A few are IRREGULAR — no special shape at all, often because they were pulled apart by a passing neighbor.</p>
+          <p>What gives a galaxy its shape? Gravity, mostly. Spiral galaxies rotate, and the spinning pulls stars and gas into long arms. Elliptical galaxies are older and have stopped making new stars. Astronomers can guess a galaxy's age just from its shape.</p>
+        </div>
+      </details>
+
+    </div>
+  </div><!-- /act-lesson -->
+
+  <div class="tab-next-wrap">
+    <button class="tab-next-btn" onclick="switchTab('explore')">Continue to 🔬 Investigate →</button>
+  </div>
+
+</div><!-- /tab-lesson -->
+
+
+<!-- ══════════════════════════════════════════
+     TAB 3: INVESTIGATE
+══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-explore">
+
+  <!-- ACTIVITY 3: Investigate -->
+  <div class="activity-card act-explore scroll-reveal">
+    <div class="act-head">
+      <div class="act-num" style="background:#55C8E8;">3</div>
+      <div style="flex:1;">
+        <div class="act-title">🔬 Sort the Cosmic Objects</div>
+        <div class="act-subtitle">Planet, star, solar system, or galaxy? You decide.</div>
+      </div>
+      <div class="act-time" style="background:#55C8E8;">⏱ 10 min</div>
+    </div>
+    <div class="act-body">
+
+      <p>Astronomers have a strict order for space objects: planet → star → solar system → galaxy → universe. Each one is bigger than the last. Today you’ll sort six space objects into the right category — and notice how the universe is built in layers.</p>
+
+      <!-- Scenario image suggestion -->
+      <div class="lesson-figure">
+        <div class="lesson-figure-label">📷 Reference · The Milky Way at Night</div>
+        <img
+          src="images/24-01-galaxy-objects-scenario.jpg"
+          alt="A nighttime photograph of the Milky Way galaxy as a bright band of stars stretching across a dark sky, with a silhouetted mountain landscape below."
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; this.parentElement.querySelector('.lesson-figure-label').style.display='none';"
+        />
+        <div class="image-suggestion" style="display:none;">
+          <div class="image-suggestion-icon">🖼️</div>
+          <div class="image-suggestion-label">Suggested Image — Generate This</div>
+          <div class="image-suggestion-desc">
+            Photorealistic nighttime landscape photo of the Milky Way galaxy. The bright band of stars curves across the upper sky. A silhouette of mountains or trees lines the bottom. Sharp focus on the stars. No people, no text, no cartoons.
+          </div>
+          <div class="image-suggestion-file">Save as: images/24-01-milky-way-night.jpg</div>
+        </div>
+        <div class="lesson-figure-caption">
+          The Milky Way seen from Earth. That bright band of light IS our home galaxy — seen from the inside.
+        </div>
+      </div>
+
+      <!-- Step 1 -->
+      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+        <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Read the list of cosmic objects</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Below are six space objects. For each one, decide which category it belongs to: planet, star, solar system, galaxy, or universe. Don’t rush — look at the clues each row gives you.</p>
+        </div>
+      </div>
+
+      <!-- Scenario table -->
+      <div class="student-chart-wrap">
+        <div class="student-chart-label">📋 Cosmic objects — sort each one</div>
+        <table class="student-chart">
+          <thead>
+            <tr>
+              <th style="width:42px;">#</th>
+              <th>Description</th>
+              <th style="width:200px;">Category</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="row-label">1</td><td>Earth — a rocky world about 8,000 miles across, orbits the Sun.</td><td></td></tr>
+            <tr><td class="row-label">2</td><td>The Sun — a ball of hot, glowing gas, 109 times wider than Earth.</td><td></td></tr>
+            <tr><td class="row-label">3</td><td>Our Solar System — the Sun, 8 planets, plus moons and asteroids.</td><td></td></tr>
+            <tr><td class="row-label">4</td><td>The Milky Way — a spiral with 200 billion stars, 100,000 light-years wide.</td><td></td></tr>
+            <tr><td class="row-label">5</td><td>Andromeda — our nearest large galaxy neighbor, 2.5 million light-years away.</td><td></td></tr>
+            <tr><td class="row-label">6</td><td>The observable universe — trillions of galaxies, unimaginably vast.</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Step 2 -->
+      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+        <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Look for the pattern</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Notice how each cosmic object is part of something LARGER. Planets are part of solar systems. Solar systems are part of galaxies. Galaxies are part of the universe. Layers inside layers.</p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
+        <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Find the boundary</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">For each object you sorted, ask: what is it INSIDE of? Earth is inside the solar system. The solar system is inside the Milky Way. Trace each one up to its bigger group.</p>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div>
+        <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Make a claim</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Write a one-sentence claim about how the universe is organized — from smallest object to biggest. You'll use this idea in your CER later.</p>
+        </div>
+      </div>
+
+      <!-- Record Your Thinking -->
+      <div class="card theme-magma scroll-reveal" style="margin-top:10px;">
+        <div class="card-head">
+          <div class="card-head-icon">📝</div>
+          <div>
+            <div class="card-head-label">Record Your Thinking</div>
+            <div class="card-head-title">What Did You Find?</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Answer these in complete sentences. Use the cosmic objects you sorted.</p>
+
+          <div class="pq">
+            <span class="pq-num" style="background:#D4772C;">1</span>
+            <span class="pq-text">List one example each of a planet, a star, a solar system, and a galaxy. Use the objects from the lesson.</span>
+          </div>
+          <div class="response-q">
+            <textarea class="response-textarea ta-sm" id="ryt-1"
+              data-label="Investigate — Q1: Lesson concept"
+              placeholder="A planet is... A star is... A solar system is... A galaxy is..."
+              oninput="autoSave(this,'dot-ryt-1')"></textarea>
+            <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+              Your answer<span class="response-save-dot" id="dot-ryt-1"></span>
+            </span>
+          </div>
+
+          <div class="pq" style="margin-top:14px;">
+            <span class="pq-num" style="background:#D4772C;">2</span>
+            <span class="pq-text">What is a galaxy made of? Use the words “stars” and “gravity” in your answer.</span>
+          </div>
+          <div class="response-q">
+            <textarea class="response-textarea ta-sm" id="ryt-2"
+              data-label="Investigate — Q2: Application"
+              placeholder="A galaxy is made of..."
+              oninput="autoSave(this,'dot-ryt-2')"></textarea>
+            <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+              Your answer<span class="response-save-dot" id="dot-ryt-2"></span>
+            </span>
+          </div>
+
+          <div class="pq" style="margin-top:14px;">
+            <span class="pq-num" style="background:#D4772C;">3</span>
+            <span class="pq-text">How is a solar system different from a galaxy? Use specific numbers if you can.</span>
+          </div>
+          <div class="response-q">
+            <textarea class="response-textarea ta-sm" id="ryt-3"
+              data-label="Investigate — Q3: Testable question"
+              placeholder="A solar system has ___ , but a galaxy has..."
+              oninput="autoSave(this,'dot-ryt-3')"></textarea>
+            <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+              Your answer<span class="response-save-dot" id="dot-ryt-3"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Discuss and Defend -->
+      <div class="card theme-rock scroll-reveal" style="margin-top:10px;">
+        <div class="card-head">
+          <div class="card-head-icon">💬</div>
+          <div>
+            <div class="card-head-label">Discuss and Defend</div>
+            <div class="card-head-title">Use Your Evidence</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Think about these. Be ready to explain your reasoning out loud or in your notebook.</p>
+
+          <div class="socratic-q">
+            <span class="sq-icon">⚔️</span>
+            <div>
+              <div class="label">Defend Your Thinking</div>
+              <div class="question">"A classmate says, 'The Sun is the biggest thing in the universe.' What would you say back? Use what you know about galaxies as your evidence."</div>
+            </div>
+          </div>
+
+          <div class="socratic-q">
+            <span class="sq-icon">🔍</span>
+            <div>
+              <div class="label">Compare the Evidence</div>
+              <div class="question">"Which is bigger by the largest factor — going from a planet to a star, or from a galaxy to the universe? Why is each step so much larger?"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /act-explore -->
+
+  <div class="tab-next-wrap">
+    <button class="tab-next-btn" onclick="switchTab('quiz')">Continue to 🧠 Self-Check →</button>
+  </div>
+
+</div><!-- /tab-explore -->
+
+
+<!-- ══════════════════════════════════════════
+     TAB 4: SELF-CHECK QUIZ
+══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-quiz">
+
+  <div class="quiz-card">
+    <div style="display:flex;align-items:center;gap:12px;padding:16px 22px;background:linear-gradient(135deg,#FFF7DC,#FFF3C4);border-bottom:2px solid #F5E6A8;">
+      <div style="width:48px;height:48px;background:#F5A623;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">🧠</div>
+      <div>
+        <div style="font-size:11px;color:#B8860B;text-transform:uppercase;letter-spacing:0.8px;font-weight:700;">Self-Check</div>
+        <div style="font-size:22px;color:#0E1C42;font-weight:800;line-height:1.2;">Quick Self-Check</div>
+        <div style="font-size:13px;color:#9A8E82;font-weight:600;">Not graded — just for you! See how much you understand.</div>
+      </div>
+    </div>
+
+    <div style="padding:22px 24px;">
+
+      <!-- Question 1 -->
+      <div class="quiz-q" data-answer="b">
+        <div class="quiz-q-text">A wave crashes onto a sandy beach. Which two spheres are interacting?</div>
+        <div class="quiz-options">
+          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>Atmosphere and biosphere</div>
+          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>Hydrosphere and geosphere</div>
+          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>Biosphere and atmosphere</div>
+        </div>
+        <div class="quiz-feedback fb-correct">✅ Correct! Water (hydrosphere) meets sand and rock (geosphere). Every coastline on Earth is shaped by this kind of interaction over time.</div>
+        <div class="quiz-feedback fb-wrong">❌ Not quite. Think about what a wave is made of, and what a beach is made of. Those are the two spheres at work here.</div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="quiz-q" data-answer="a">
+        <div class="quiz-q-text">You take a deep breath. Which TWO spheres are connecting in that moment?</div>
+        <div class="quiz-options">
+          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>Biosphere (you) and atmosphere (the air)</div>
+          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>Geosphere and hydrosphere</div>
+          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>Just the atmosphere by itself</div>
+        </div>
+        <div class="quiz-feedback fb-correct">✅ Correct! You're part of the biosphere (you're alive). The air you breathe is the atmosphere. Every breath is a sphere interaction.</div>
+        <div class="quiz-feedback fb-wrong">❌ Not quite. YOU are a living thing — that puts you in the biosphere. The air you breathe is a separate sphere. Which two are touching when you breathe?</div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="quiz-q" data-answer="c">
+        <div class="quiz-q-text">Why do scientists say Earth is ONE big system instead of four separate things?</div>
+        <div class="quiz-options">
+          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>Because the four spheres never actually touch each other</div>
+          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>Because the atmosphere is the only sphere that matters</div>
+          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>Because the spheres constantly interact — change in one affects all the others</div>
+        </div>
+        <div class="quiz-feedback fb-correct">✅ Correct! That's exactly what a system means. The four spheres are constantly touching and changing each other. You can't change one without changing them all — which is exactly why we have to care about all of them.</div>
+        <div class="quiz-feedback fb-wrong">❌ Not quite. The spheres absolutely DO touch (you breathing right now is proof). And the atmosphere isn't the only sphere that matters — all four matter equally. What makes them work as ONE system?</div>
+      </div>
+
+      <!-- Score Display -->
+      <div class="quiz-score" id="quizScore">
+        <div class="quiz-score-num"><span id="quizScoreNum">0</span>/3</div>
+        <div class="quiz-score-label">Questions Correct</div>
+        <div class="quiz-score-msg" id="quizScoreMsg"></div>
+      </div>
+
+      <!-- Conditional quiz videos -->
+      <div class="quiz-video-conditional" id="quizVideoPerfect">
+        <div class="video-wrap">
+          <div class="video-wrap-header">
+            <span style="font-size:20px;">🎉</span>
+            <div>
+              <div class="video-wrap-type">Perfect Score · Bonus Content</div>
+              <div class="video-wrap-title">Great work — here's something extra!</div>
+            </div>
+          </div>
+          <div class="video-ratio">
+            <div class="video-placeholder">
+              <div class="video-placeholder-icon">🌟</div>
+              <div class="video-placeholder-text">Bonus video coming soon</div>
+              <div class="video-placeholder-id"><!-- slot: 27-01-quiz-perfect --></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-video-conditional" id="quizVideoReview">
+        <div class="video-wrap">
+          <div class="video-wrap-header">
+            <span style="font-size:20px;">🔄</span>
+            <div>
+              <div class="video-wrap-type">Review · Keep Going</div>
+              <div class="video-wrap-title">Let's review the cosmic scale together.</div>
+            </div>
+          </div>
+          <div class="video-ratio">
+            <div class="video-placeholder">
+              <div class="video-placeholder-icon">📖</div>
+              <div class="video-placeholder-text">Review video coming soon</div>
+              <div class="video-placeholder-id"><!-- slot: 27-01-quiz-review --></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /quiz-card -->
+
+  <div class="tab-next-wrap">
+    <button class="tab-next-btn" onclick="switchTab('assignment')">Continue to ✍️ Assignment →</button>
+  </div>
+
+</div><!-- /tab-quiz -->
+
+
+<!-- ══════════════════════════════════════════
+     TAB 5: ASSIGNMENT
+══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-assignment">
+
+  <!-- Assignment Video -->
+  <div class="video-wrap">
+    <div class="video-wrap-header">
+      <span style="font-size:20px;">✍️</span>
+      <div>
+        <div class="video-wrap-type">Assignment · What To Do</div>
+        <div class="video-wrap-title">Here's What to Do — Sort the Cosmic Objects</div>
+      </div>
+    </div>
+    <div class="video-ratio">
+      <div class="video-placeholder">
+        <div class="video-placeholder-icon">✍️</div>
+        <div class="video-placeholder-text">Assignment explainer video coming soon</div>
+        <div class="video-placeholder-id"><!-- slot: 27-01-assignment-explainer --></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Part A -->
+  <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;">📐 Part A — Model the Difference</p>
+  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Add "Lesson 27.01 — Earth's Spheres" to your notebook. Open to a clean page.</p>
+
+  <div class="pq">
+    <span class="pq-num" style="background:#E8636B;">1</span>
+    <span class="pq-text"><strong>Draw and Explain:</strong> Sketch a layered diagram with FIVE concentric circles: Earth (smallest) in the center, then the Sun, then the solar system, then the Milky Way, then the universe (largest). Label each layer. Below your sketch, write one sentence explaining how the layers fit together.</span>
+  </div>
+  <div class="response-q">
+    <textarea class="response-textarea ta-sm" id="parta-1"
+      data-label="Part A — Object &amp; Explanation"
+      placeholder="I drew five layers showing... The layers fit together because..."
+      oninput="autoSave(this,'dot-parta-1')"></textarea>
+    <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+      Your answer<span class="response-save-dot" id="dot-parta-1"></span>
+    </span>
+  </div>
+
+  <!-- Part B -->
+  <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;margin-top:20px;">📊 Part B — Evidence Questions</p>
+  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Answer in complete sentences using your sketch and the lesson.</p>
+
+  <div class="pq">
+    <span class="pq-num" style="background:#D4772C;">2</span>
+    <span class="pq-text">How is a solar system different from a galaxy? Use specific numbers if you can.</span>
+  </div>
+  <div class="response-q">
+    <textarea class="response-textarea ta-sm" id="partb-1"
+      data-label="Part B — Q1"
+      placeholder="A solar system has ___ , but a galaxy has..."
+      oninput="autoSave(this,'dot-partb-1')"></textarea>
+    <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+      Your answer<span class="response-save-dot" id="dot-partb-1"></span>
+    </span>
+  </div>
+
+  <div class="pq">
+    <span class="pq-num" style="background:#D4772C;">3</span>
+    <span class="pq-text">Where in the Milky Way is our Sun located? Describe its position in two sentences.</span>
+  </div>
+  <div class="response-q">
+    <textarea class="response-textarea ta-sm" id="partb-2"
+      data-label="Part B — Q2"
+      placeholder="Our Sun is located..."
+      oninput="autoSave(this,'dot-partb-2')"></textarea>
+    <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+      Your answer<span class="response-save-dot" id="dot-partb-2"></span>
+    </span>
+  </div>
+
+  <div class="pq">
+    <span class="pq-num" style="background:#D4772C;">4</span>
+    <span class="pq-text">Where in the Milky Way is our Sun located? Describe its position.</span>
+  </div>
+  <div class="response-q">
+    <textarea class="response-textarea ta-sm" id="partb-3"
+      data-label="Part B — Q3"
+      placeholder="Our Sun is located..."
+      oninput="autoSave(this,'dot-partb-3')"></textarea>
+    <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+      Your answer<span class="response-save-dot" id="dot-partb-3"></span>
+    </span>
+  </div>
+
+  <!-- Part C -->
+  <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;margin-top:20px;">✍️ Part C — Claim · Evidence · Reasoning</p>
+  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Write your scientific explanation using Claim, Evidence, and Reasoning. Aim for 4–6 sentences total.</p>
+
+  <div class="cer-block">
+    <div class="cer-header">
+      <span class="cer-icon">🔬</span>
+      <div class="cer-header-text">
+        <div class="cer-label">Claim · Evidence · Reasoning</div>
+        <div class="cer-question">How is the universe organized — from smallest to largest? Use evidence from this lesson to support your answer.</div>
+      </div>
+    </div>
+
+    <!-- Claim -->
+    <div class="cer-section">
+      <div class="cer-badge cer-badge-claim">C</div>
+      <div class="cer-section-body">
+        <div class="cer-section-title">Claim <span class="cer-section-hint">— What do you think is true?</span></div>
+        <div class="cer-write-box">
+          <p class="cer-starter" style="color:#9A6420;font-style:normal;font-weight:700;">📋 Write your own claim — no starter. Use what you've learned about Earth's spheres.</p>
+          <textarea class="response-textarea ta-sm" id="cer-claim"
+            data-label="Part C — Claim"
+            placeholder="The universe is organized in layers, from..."
+            oninput="autoSave(this,'dot-cer-claim')"></textarea>
+          <span style="font-size:12px;color:#9A8E82;font-weight:600;display:block;margin-top:4px;">
+            Your claim<span class="response-save-dot" id="dot-cer-claim"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Evidence -->
+    <div class="cer-section">
+      <div class="cer-badge cer-badge-evidence">E</div>
+      <div class="cer-section-body">
+        <div class="cer-section-title">Evidence <span class="cer-section-hint">— What from the lesson supports your claim?</span></div>
+        <div class="cer-write-box">
+          <p class="cer-starter" style="color:#9A6420;font-style:normal;font-weight:700;">📋 Cite at least two examples of sphere interactions. No starter.</p>
+          <textarea class="response-textarea ta-sm" id="cer-evidence"
+            data-label="Part C — Evidence"
+            placeholder="From the lesson, I noticed that..."
+            oninput="autoSave(this,'dot-cer-evidence')"></textarea>
+          <span style="font-size:12px;color:#9A8E82;font-weight:600;display:block;margin-top:4px;">
+            Your evidence<span class="response-save-dot" id="dot-cer-evidence"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reasoning -->
+    <div class="cer-section">
+      <div class="cer-badge cer-badge-reason">R</div>
+      <div class="cer-section-body">
+        <div class="cer-section-title">Reasoning <span class="cer-section-hint">— Why does the evidence support your claim?</span></div>
+        <div class="cer-write-box">
+          <p class="cer-starter" style="color:#9A6420;font-style:normal;font-weight:700;">📋 Explain how the spheres work as one system. No starter.</p>
+          <textarea class="response-textarea ta-sm" id="cer-reasoning"
+            data-label="Part C — Reasoning"
+            placeholder="This shows how the cosmic scale works because..."
+            oninput="autoSave(this,'dot-cer-reasoning')"></textarea>
+          <span style="font-size:12px;color:#9A8E82;font-weight:600;display:block;margin-top:4px;">
+            Your reasoning<span class="response-save-dot" id="dot-cer-reasoning"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vocab check -->
+    <div class="cer-vocab-check">
+      📚 <strong>Vocab check:</strong> Try to use at least two of these words: <strong>galaxy</strong>, <strong>Milky Way</strong>, <strong>star</strong>, <strong>solar system</strong>, <strong>orbit</strong>
+    </div>
+  </div><!-- /cer-block -->
+
+  <!-- Revise Your Thinking -->
+  <div class="revise-block">
+    <div class="revise-header">
+      <span class="revise-icon">🔄</span>
+      <div>
+        <div class="revise-label">Revise Your Thinking</div>
+        <div class="revise-question">Look back at your prediction from the Vocabulary tab.</div>
+      </div>
+    </div>
+    <div class="revise-prompts">
+      <p>Write 3–4 sentences answering these:</p>
+      <ul>
+        <li>What did you predict at the start? Was it accurate?</li>
+        <li>What from the lesson changed or confirmed your thinking?</li>
+        <li>How is your final explanation more complete than your first prediction?</li>
+      </ul>
+    </div>
+    <div class="cer-write-box" style="margin-top:14px;">
+      <textarea class="response-textarea ta-lg" id="revise-1"
+        data-label="Revise Your Thinking"
+        placeholder="At first I predicted... Now I think... The biggest thing that changed my thinking was..."
+        oninput="autoSave(this,'dot-revise-1')"></textarea>
+      <span style="font-size:12px;color:#9A8E82;font-weight:600;display:block;margin-top:4px;">
+        Your reflection<span class="response-save-dot" id="dot-revise-1"></span>
+      </span>
+    </div>
+  </div>
+
+  <!-- Gathered Answers -->
+  <div class="gathered-card">
+    <div class="gathered-header">
+      <div class="gathered-header-icon">📋</div>
+      <div>
+        <div class="gathered-header-label">Lesson 27.01 · Submission Packet</div>
+        <div class="gathered-header-title">Gathered Answers</div>
+      </div>
+    </div>
+    <div class="gathered-body">
+      <div class="gathered-intro">All of your written responses — gathered in one place so you can copy or download them for Canvas turn-in.</div>
+      <div class="gathered-name-row">
+        <span class="gathered-name-label">Your name:</span>
+        <input type="text" class="gathered-name-input" id="student-name" placeholder="Type your name here" oninput="refreshGathered()" />
+      </div>
+      <textarea class="gathered-output" id="gatheredOutput" readonly></textarea>
+      <div class="gathered-actions">
+        <button class="gathered-btn" onclick="copyGathered()">📋 Copy to Clipboard</button>
+        <button class="gathered-btn gathered-btn-download" onclick="downloadGathered()">⬇ Download as Text</button>
+      </div>
+      <div class="gathered-copied" id="copiedMsg">Copied! Paste into your Canvas text box to turn in.</div>
+    </div>
+  </div>
+
+  <!-- Submission Checklist -->
+  <div style="background:#fff;border:2px solid #34B76F;border-radius:18px;margin-top:20px;overflow:hidden;">
+    <div style="display:flex;align-items:center;gap:10px;padding:14px 20px;background:#EEF8F0;border-bottom:2px solid #C4E5CC;">
+      <div style="width:42px;height:42px;border-radius:50%;background:#34B76F;color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">📬</div>
+      <div>
+        <div style="font-size:10px;color:#9A8E82;text-transform:uppercase;letter-spacing:0.8px;font-weight:700;">Time to Submit</div>
+        <div style="font-size:20px;color:#0E1C42;font-weight:800;line-height:1.2;">What to Turn In</div>
+      </div>
+    </div>
+    <div style="padding:18px 22px;">
+      <p style="font-size:16px;color:#5A4D3E;line-height:1.65;margin-bottom:14px;">When you've finished all three parts, copy your gathered answers above into Canvas — or take a photo of your notebook. Use this checklist to make sure everything is ready.</p>
+
+      <div class="turn-in-checklist">
+
+        <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
+          <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part A — Cosmic Layers Sketch:</strong> Drawing of five concentric circles (Earth, Sun, solar system, Milky Way, universe), each labeled, plus a one-sentence explanation underneath.</span>
+        </div>
+
+        <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
+          <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part B — Evidence Questions:</strong> All three questions answered in complete sentences, using terms from the lesson.</span>
+        </div>
+
+        <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
+          <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part C — CER Response:</strong> Claim, at least one piece of evidence from the lesson, and reasoning explaining the cosmic scale.</span>
+        </div>
+
+        <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
+          <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Revise Your Thinking:</strong> 3–4 sentences explaining how your thinking changed from your first prediction.</span>
+        </div>
+
+        <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
+          <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Vocab Check:</strong> At least two lesson words used accurately somewhere in your response.</span>
+        </div>
+
+      </div>
+
+      <!-- How to Submit -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px;">
+        <div style="background:#EEF8F0;border:1.5px solid #C4E5CC;border-radius:12px;padding:12px;text-align:center;">
+          <div style="font-size:22px;margin-bottom:4px;">⌨️</div>
+          <div style="font-size:14px;color:#0E1C42;font-weight:700;">Type It</div>
+          <div style="font-size:12px;color:#5A4D3E;">Type your answers directly into Canvas</div>
+        </div>
+        <div style="background:#EAF8FD;border:1.5px solid #D6F2FB;border-radius:12px;padding:12px;text-align:center;">
+          <div style="font-size:22px;margin-bottom:4px;">📸</div>
+          <div style="font-size:14px;color:#0E1C42;font-weight:700;">Photo It</div>
+          <div style="font-size:12px;color:#5A4D3E;">Take a clear photo of your notebook page</div>
+        </div>
+        <div style="background:#FFF7EE;border:1.5px solid #F0DCC4;border-radius:12px;padding:12px;text-align:center;">
+          <div style="font-size:22px;margin-bottom:4px;">🎥</div>
+          <div style="font-size:14px;color:#0E1C42;font-weight:700;">Record It</div>
+          <div style="font-size:12px;color:#5A4D3E;">Record yourself explaining your work</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Closing video -->
+  <div class="video-wrap" style="margin-top:20px;">
+    <div class="video-wrap-header">
+      <span style="font-size:20px;">👋</span>
+      <div>
+        <div class="video-wrap-type">Wrap-Up · Closing Video</div>
+        <div class="video-wrap-title">You're thinking like a scientist now.</div>
+      </div>
+    </div>
+    <div class="video-ratio">
+      <div class="video-placeholder">
+        <div class="video-placeholder-icon">🌟</div>
+        <div class="video-placeholder-text">Closing video coming soon</div>
+        <div class="video-placeholder-id"><!-- slot: 27-01-closing --></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-assignment -->
+
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="footer-line1">Optima Academy Online &mdash; <span>5th Grade Science</span></div>
+  <div class="footer-line2">Module 27 · Lesson 27.01 — How Do Earth's Four Spheres Interact? · SC.5.E.7.1 · NGSS 5-ESS2-1</div>
+  <div class="footer-line3">© Optima Academy Online. All rights reserved.</div>
+</footer>
+
+<button class="back-to-top" id="backToTop" type="button">🔬 Back to Top</button>
+<canvas id="confettiCanvas"></canvas>
+
+</div><!-- /page-wrap -->
+
+<script>
+// ── Lesson Constants ──
+var LESSON_EMOJI = '🔬';
+var TAB_COUNT = 5;
+
+// ── Tab Switching ──
+var tabProgress = { vocab: false, lesson: false, explore: false, quiz: false, assignment: false };
+
+function switchTab(id) {
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelector('[data-tab="' + id + '"]').classList.add('active');
+  document.querySelector('[data-tab="' + id + '"]').classList.add('visited');
+  document.getElementById('tab-' + id).classList.add('active');
+  tabProgress[id] = true;
+  updateProgress();
+
+  var inIframe = (function(){ try { return window.self !== window.top; } catch(e){ return true; } })();
+  if (inIframe) {
+    try { window.parent.scrollTo(0, 0); } catch(e){}
+    try { document.getElementById('pageTop').scrollIntoView(); } catch(e){}
+  } else {
+    window.scrollTo(0, 0);
+  }
+}
+
+function updateProgress() {
+  var visited = Object.values(tabProgress).filter(Boolean).length;
+  var pct = Math.round((visited / TAB_COUNT) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+}
+
+// ── Interactive Diagram ──
+(function(){
+  var panel = document.getElementById('diagramPanel');
+  if (!panel) return;
+  var wordEl = document.getElementById('diagramWord');
+  var infoEl = document.getElementById('diagramInfo');
+  var hotspots = document.querySelectorAll('.diagram-interactive .hotspot');
+  hotspots.forEach(function(hs){
+    hs.addEventListener('click', function(e){
+      e.stopPropagation();
+      hotspots.forEach(function(h){ h.classList.remove('active'); });
+      hs.classList.add('active');
+      var raw = hs.getAttribute('data-info') || '';
+      var parts = raw.split('|');
+      wordEl.textContent = parts[0] ? parts[0].trim() : '';
+      infoEl.textContent = parts[1] ? parts[1].trim() : raw;
+      panel.classList.add('visible');
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+  document.addEventListener('click', function(e){
+    if (!e.target.classList.contains('hotspot')) {
+      panel.classList.remove('visible');
+      hotspots.forEach(function(h){ h.classList.remove('active'); });
+    }
+  });
+})();
+
+// ── Self-Check Quiz ──
+var quizAnswered = 0;
+var quizCorrect = 0;
+function checkQuiz(optEl) {
+  var q = optEl.closest('.quiz-q');
+  if (q.classList.contains('answered')) return;
+  q.classList.add('answered');
+  quizAnswered++;
+  var correct = q.getAttribute('data-answer');
+  var chosen = optEl.getAttribute('data-val');
+  var opts = q.querySelectorAll('.quiz-opt');
+  opts.forEach(function(o){
+    if (o.getAttribute('data-val') === correct) { o.classList.add('correct'); }
+    else { o.classList.add('disabled'); }
+  });
+  var fbCorrect = q.querySelector('.fb-correct');
+  var fbWrong = q.querySelector('.fb-wrong');
+  if (chosen === correct) {
+    quizCorrect++;
+    optEl.classList.add('correct');
+    if (fbCorrect) fbCorrect.classList.add('show');
+  } else {
+    optEl.classList.add('wrong');
+    if (fbWrong) fbWrong.classList.add('show');
+  }
+  if (quizAnswered === 3) {
+    var scoreBox = document.getElementById('quizScore');
+    var scoreNum = document.getElementById('quizScoreNum');
+    var scoreMsg = document.getElementById('quizScoreMsg');
+    scoreNum.textContent = quizCorrect;
+    if (quizCorrect === 3) {
+      scoreMsg.textContent = '🎉 Perfect score! You\'re already thinking like a scientist.';
+      setTimeout(window.launchConfetti, 300);
+      var vp = document.getElementById('quizVideoPerfect');
+      if (vp) vp.classList.add('show');
+    } else if (quizCorrect === 2) {
+      scoreMsg.textContent = '🌟 Great work! Review the one you missed and you\'ll have it.';
+      var vr = document.getElementById('quizVideoReview');
+      if (vr) vr.classList.add('show');
+    } else {
+      scoreMsg.textContent = '👍 Good effort! Go back and re-read the lesson — you\'ll get it.';
+      var vr2 = document.getElementById('quizVideoReview');
+      if (vr2) vr2.classList.add('show');
+    }
+    scoreBox.classList.add('show');
+  }
+}
+
+// ── Vocab Tooltips ──
+document.querySelectorAll('.vtip').forEach(function(tip){
+  var box = tip.querySelector('.vtip-box');
+  if (!box) return;
+  tip.addEventListener('mouseenter', function(){
+    var rect = tip.getBoundingClientRect();
+    var bw = 250;
+    var left = rect.left + rect.width / 2 - bw / 2;
+    if (left < 8) left = 8;
+    if (left + bw > window.innerWidth - 8) left = window.innerWidth - bw - 8;
+    box.style.left = left + 'px';
+    var topPos = rect.top - 140;
+    if (topPos < 8) topPos = rect.bottom + 10;
+    box.style.top = topPos + 'px';
+  });
+});
+
+// ── Checklist ──
+function toggleCheck(item) {
+  item.classList.toggle('checked');
+  var icon = item.querySelector('.check-icon');
+  if (icon) {
+    icon.textContent = item.classList.contains('checked') ? LESSON_EMOJI : '';
+  }
+  var checklist = item.closest('.turn-in-checklist');
+  if (!checklist) return;
+  var items = checklist.querySelectorAll('.turn-in-item');
+  if (items.length === 0) return;
+  var allChecked = Array.prototype.every.call(items, function(it){
+    return it.classList.contains('checked');
+  });
+  if (allChecked) {
+    setTimeout(window.launchConfetti, 200);
+  }
+}
+
+// ── Back to Top ──
+(function(){
+  var btn = document.getElementById('backToTop');
+  if (!btn) return;
+  btn.textContent = LESSON_EMOJI + ' Back to Top';
+
+  var inIframe = (function(){ try { return window.self !== window.top; } catch(e){ return true; } })();
+
+  btn.addEventListener('click', function() {
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch(e) {}
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    var top = document.getElementById('pageTop');
+    if (top && top.scrollIntoView) {
+      try { top.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch(e) {}
+    }
+    try {
+      if (window.frameElement && window.frameElement.scrollIntoView) {
+        window.frameElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } catch(e) {}
+    if (inIframe) {
+      try { window.parent.postMessage({ type: 'optima-lesson:scroll-to-top' }, '*'); } catch(e) {}
+    }
+  });
+
+  if (inIframe) {
+    setTimeout(function() { btn.classList.add('show'); }, 1500);
+  } else {
+    window.addEventListener('scroll', function() {
+      btn.classList.toggle('show', window.pageYOffset > 400);
+    });
+  }
+})();
+
+// ── Confetti ──
+(function(){
+  var canvas = document.getElementById('confettiCanvas');
+  var ctx = canvas.getContext('2d');
+  var particles = [], animating = false;
+  var colors = ['#55C8E8','#34B76F','#F5A623','#FFD700','#8B6FC0','#E8636B','#1A6FA8','#D4772C'];
+  function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  window.addEventListener('resize', resize); resize();
+  function Particle(x,y){
+    this.x=x; this.y=y; this.vx=(Math.random()-.5)*16; this.vy=Math.random()*-18-4;
+    this.gravity=.45; this.drag=.98; this.size=Math.random()*8+4;
+    this.color=colors[Math.floor(Math.random()*colors.length)];
+    this.rotation=Math.random()*360; this.rotSpeed=(Math.random()-.5)*12;
+    this.opacity=1; this.shape=Math.random()>.5?'rect':'circle';
+  }
+  function burst(x,y,count){ for(var i=0;i<count;i++) particles.push(new Particle(x,y)); if(!animating){animating=true;animate();} }
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(function(p,i){
+      p.vy+=p.gravity; p.vx*=p.drag; p.x+=p.vx; p.y+=p.vy;
+      p.rotation+=p.rotSpeed; p.opacity-=.008;
+      if(p.opacity<=0){particles.splice(i,1);return;}
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rotation*Math.PI/180);
+      ctx.globalAlpha=p.opacity; ctx.fillStyle=p.color;
+      if(p.shape==='rect'){ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*.6);}
+      else{ctx.beginPath();ctx.arc(0,0,p.size/2,0,Math.PI*2);ctx.fill();}
+      ctx.restore();
+    });
+    if(particles.length>0){requestAnimationFrame(animate);} else{animating=false;ctx.clearRect(0,0,canvas.width,canvas.height);}
+  }
+  window.launchConfetti = function(){
+    var cx = window.innerWidth/2;
+    burst(cx-100, window.innerHeight*.4, 50);
+    burst(cx,     window.innerHeight*.3, 60);
+    burst(cx+100, window.innerHeight*.4, 50);
+  };
+})();
+
+// ── Init ──
+document.querySelector('[data-tab="vocab"]').classList.add('visited');
+tabProgress.vocab = true;
+updateProgress();
+
+// ── Tab bar sticky offset ──
+(function(){
+  var progressBar = document.querySelector('.progress-wrap');
+  var tabBar = document.querySelector('.tab-bar');
+  if (!progressBar || !tabBar) return;
+  function alignTabBar() {
+    tabBar.style.top = progressBar.offsetHeight + 'px';
+  }
+  alignTabBar();
+  window.addEventListener('resize', alignTabBar);
+})();
+
+// ── Shuffle quiz options ──
+(function(){
+  document.querySelectorAll('.quiz-q').forEach(function(q){
+    var container = q.querySelector('.quiz-options');
+    if (!container) return;
+    var opts = Array.prototype.slice.call(container.querySelectorAll('.quiz-opt'));
+    for (var i = opts.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      container.appendChild(opts[j]);
+      var tmp = opts[i]; opts[i] = opts[j]; opts[j] = tmp;
+    }
+  });
+})();
+
+// ── Intro card toggle pair ──
+(function(){
+  var cards = document.querySelectorAll('.intro-2col .card');
+  cards.forEach(function(card){
+    card.querySelector('.card-head').addEventListener('click', function(){
+      cards.forEach(function(c){ c.classList.toggle('collapsed'); });
+    });
+  });
+})();
+
+// ── Response Textareas autoSave ──
+function autoSave(el, dotId) {
+  var dot = document.getElementById(dotId);
+  if (!dot) return;
+  if (el.value.trim().length > 0) dot.classList.add('saved');
+  else dot.classList.remove('saved');
+}
+
+// ── Gathered Answers ──
+function refreshGathered() {
+  var out = document.getElementById('gatheredOutput');
+  if (!out) return;
+  var lines = [];
+  var nameEl = document.getElementById('student-name');
+  var name = nameEl ? nameEl.value.trim() : '';
+
+  lines.push('═══════════════════════════════════════════════');
+  lines.push('  OPTIMA ACADEMY ONLINE — 5TH GRADE SCIENCE');
+  lines.push('  Lesson 27.01 · How Do Earth\'s Four Spheres Interact?');
+  lines.push('  Unit 5 — Earth and Space Science');
+  lines.push('  Student: ' + (name || '(add your name above)'));
+  lines.push('═══════════════════════════════════════════════');
+  lines.push('');
+
+  function grab(id, label) {
+    var el = document.getElementById(id);
+    var val = el ? el.value.trim() : '';
+    lines.push('--- ' + label + ' ---');
+    lines.push(val || '(not yet answered)');
+    lines.push('');
+  }
+
+  grab('pred-1',        'PREDICTION');
+  grab('ryt-1',         'INVESTIGATE — Q1: LESSON CONCEPT');
+  grab('ryt-2',         'INVESTIGATE — Q2: APPLICATION');
+  grab('ryt-3',         'INVESTIGATE — Q3: TESTABLE QUESTION');
+  grab('parta-1',       'PART A — OBJECT & EXPLANATION');
+  grab('partb-1',       'PART B — Q1');
+  grab('partb-2',       'PART B — Q2');
+  grab('partb-3',       'PART B — Q3');
+  grab('cer-claim',     'PART C — CLAIM');
+  grab('cer-evidence',  'PART C — EVIDENCE');
+  grab('cer-reasoning', 'PART C — REASONING');
+  grab('revise-1',      'REVISE YOUR THINKING');
+
+  out.value = lines.join('\n');
+}
+
+function copyGathered() {
+  refreshGathered();
+  var out = document.getElementById('gatheredOutput');
+  out.select();
+  try { document.execCommand('copy'); } catch(e) {}
+  var msg = document.getElementById('copiedMsg');
+  if (msg) { msg.classList.add('show'); setTimeout(function(){ msg.classList.remove('show'); }, 2400); }
+}
+
+function downloadGathered() {
+  refreshGathered();
+  var text = document.getElementById('gatheredOutput').value;
+  var blob = new Blob([text], {type: 'text/plain'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'lesson-27-01-how-do-earths-four-spheres-interact.txt';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+
+document.addEventListener('input', function(e) {
+  if (e.target.classList.contains('response-textarea') || e.target.id === 'student-name') {
+    var panel = document.getElementById('tab-assignment');
+    if (panel && panel.classList.contains('active')) { refreshGathered(); }
+  }
+});
+
+(function(){
+  var origSwitch = window.switchTab;
+  window.switchTab = function(id) {
+    origSwitch(id);
+    if (id === 'assignment') { setTimeout(refreshGathered, 50); }
+  };
+})();
+</script>
+</body>
+</html>

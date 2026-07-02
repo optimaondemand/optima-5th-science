@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Optima Academy Online – Does Matter Disappear When It Changes?</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900&display=swap');
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Nunito', 'Century Gothic', 'Arial Rounded MT Bold', Verdana, sans-serif; background: #F4F0EB url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); color: #2B1D12; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.page-wrap { max-width: 920px; margin: 0 auto; background: #FAF7F3; box-shadow: 0 0 40px rgba(0,0,0,0.07); }
+.header { background: linear-gradient(135deg, #0E1C42 0%, #1A2D5A 60%, #243868 100%); border-bottom: 6px solid #55C8E8; padding: 22px 28px 24px; position: relative; overflow: hidden; }
+.header::after { content: ''; position: absolute; bottom: 6px; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #55C8E8, #34B76F, #55C8E8); }
+.header-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.header-logo { width: 52px; height: 52px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.header-logo img { width: 48px; height: 38px; }
+.header-org { font-size: 22px; color: #fff; font-weight: 800; line-height: 1.15; }
+.header-sub { font-size: 11px; color: #55C8E8; letter-spacing: 0.5px; }
+.header-title { font-size: 30px; color: #fff; font-weight: 900; line-height: 1.15; margin-bottom: 10px; text-shadow: 0 2px 12px rgba(85,200,232,0.3); }
+.header-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(85,200,232,0.15); border: 1.5px solid rgba(85,200,232,0.35); border-radius: 28px; padding: 6px 16px; }
+.header-badge span:first-child { font-size: 22px; }
+.header-badge span:last-child { font-size: 18px; color: #fff; font-weight: 800; }
+.hero-visual { background: linear-gradient(180deg, #070a12 0%, #0e1829 60%, #1a2540 100%); padding: 0; position: relative; overflow: hidden; border-bottom: 3px solid #55C8E8; }
+.hero-visual svg { display: block; width: 100%; height: auto; }
+.info-strip { display: flex; flex-wrap: wrap; background: #fff; border-bottom: 2px solid #E8DDD2; }
+.info-item { flex: 1; min-width: 150px; padding: 12px 16px; border-right: 1px solid #E8DDD2; display: flex; align-items: center; gap: 10px; }
+.info-item:last-child { border-right: none; }
+.info-icon { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.info-label { font-size: 10px; color: #9A8E82; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+.info-value { font-size: 16px; color: #0E1C42; font-weight: 800; line-height: 1.2; }
+.info-detail { font-size: 11px; color: #5A4D3E; line-height: 1.3; }
+.card { background: #fff; border: 2px solid #E8DDD2; border-radius: 18px; margin-bottom: 22px; overflow: hidden; box-shadow: 0 2px 12px rgba(43,29,18,0.04); }
+.card-head { display: flex; align-items: center; gap: 10px; padding: 14px 20px; border-bottom: 2px solid; }
+.card-head-icon { width: 42px; height: 42px; border-radius: 50%; color: #fff; font-size: 22px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.card-head-label { font-size: 10px; color: #9A8E82; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; }
+.card-head-title { font-size: 20px; color: #0E1C42; font-weight: 800; line-height: 1.2; }
+.card-body { padding: 18px 22px; }
+.card-body p { font-size: 17px; color: #5A4D3E; line-height: 1.75; margin-bottom: 12px; }
+.card-body p:last-child { margin-bottom: 0; }
+.theme-earth .card-head { background: #FFF7EE; border-color: #F0DCC4; }
+.theme-earth .card-head-icon { background: #C7922C; }
+.theme-sky .card-head { background: #EAF8FD; border-color: #D6F2FB; }
+.theme-sky .card-head-icon { background: #55C8E8; }
+.theme-forest .card-head { background: #EEF8F0; border-color: #C4E5CC; }
+.theme-forest .card-head-icon { background: #34B76F; }
+.theme-rock .card-head { background: #F0EDF6; border-color: #D8D0E8; }
+.theme-rock .card-head-icon { background: #8B6FC0; }
+.theme-magma .card-head { background: #FFF3DC; border-color: #F5E6C8; }
+.theme-magma .card-head-icon { background: #D4772C; }
+.activity-card { background: #fff; border: 2px solid #E8DDD2; border-radius: 18px; margin-bottom: 18px; overflow: hidden; box-shadow: 0 2px 10px rgba(43,29,18,0.04); }
+.activity-card.act-warmup  { border-left: 6px solid #E8636B; }
+.activity-card.act-lesson  { border-left: 6px solid #D4772C; }
+.activity-card.act-explore { border-left: 6px solid #55C8E8; }
+.act-head { display: flex; align-items: center; gap: 12px; padding: 14px 20px 14px 18px; border-bottom: 1.5px solid #E8DDD2; }
+.act-num { width: 38px; height: 38px; border-radius: 14px; color: #fff; font-size: 18px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.act-title { font-size: 19px; color: #0E1C42; font-weight: 800; line-height: 1.2; }
+.act-subtitle { font-size: 12px; color: #9A8E82; }
+.act-time { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 700; color: #fff; white-space: nowrap; margin-left: auto; flex-shrink: 0; }
+.act-body { padding: 18px 22px 18px 20px; }
+.act-body p { font-size: 17px; color: #5A4D3E; line-height: 1.75; margin-bottom: 12px; }
+.callout { border-radius: 14px; padding: 16px 18px; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+.callout-icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+.callout p { font-size: 16px; color: #2B1D12; line-height: 1.65; margin: 0; }
+.callout-sky    { background: #EAF8FD; border: 2px solid #D6F2FB; }
+.callout-think  { background: #FFF7EE; border: 2px solid #F0DCC4; }
+.callout-tip    { background: #EEF8F0; border: 2px solid #C4E5CC; }
+.socratic-q { background: linear-gradient(135deg, #FFF7EE, #FFF3E0); border: 2px solid #E8C88A; border-radius: 16px; padding: 16px 20px; margin: 16px 0; display: flex; align-items: flex-start; gap: 12px; }
+.socratic-q .sq-icon { font-size: 26px; flex-shrink: 0; line-height: 1; }
+.socratic-q .label { font-size: 11px; color: #C7922C; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 4px; }
+.socratic-q .question { font-size: 17px; color: #2B1D12; font-weight: 700; line-height: 1.6; font-style: italic; }
+.key-concept { background: #EAF8FD; border: 2px solid #D6F2FB; border-radius: 14px; padding: 18px 20px; margin: 14px 0; }
+.key-concept .kc-label { font-size: 13px; color: #2A8DB5; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-bottom: 8px; }
+.key-concept p { font-size: 16px; color: #2B1D12; line-height: 1.7; margin-bottom: 8px; }
+.key-concept p:last-child { margin-bottom: 0; }
+.pq { background: #FAFAF6; border: 2px solid #E8DDD2; border-radius: 14px; padding: 14px 18px; margin-bottom: 12px; }
+.pq-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; color: #fff; font-weight: 800; font-size: 14px; margin-right: 8px; vertical-align: middle; }
+.pq-text { font-size: 17px; color: #2B1D12; line-height: 1.65; margin-bottom: 8px; }
+.vocab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
+.flip-card { perspective: 800px; height: 160px; cursor: pointer; }
+.flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s ease; transform-style: preserve-3d; }
+.flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+.flip-card-front, .flip-card-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 16px; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px 20px; text-align: center; border: 2px solid #E8DDD2; box-shadow: 0 2px 10px rgba(43,29,18,0.06); }
+.flip-card-front { background: #FAFAF6; border-top: 5px solid; }
+.flip-card-front .fc-emoji { font-size: 32px; margin-bottom: 8px; }
+.flip-card-front .fc-word { font-size: 18px; font-weight: 800; color: #0E1C42; margin-bottom: 6px; }
+.flip-card-front .fc-tap { font-size: 11px; color: #B0A698; font-weight: 600; letter-spacing: 0.3px; }
+.flip-card-back { background: linear-gradient(145deg, #0E1C42, #1A2D5A); border-color: #0E1C42; transform: rotateY(180deg); }
+.flip-card-back .fc-def { font-size: 15px; color: #fff; line-height: 1.6; font-weight: 600; }
+.flip-card-back .fc-word-back { font-size: 11px; color: #55C8E8; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 8px; }
+.flip-card-back .fc-tap-back { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 10px; font-weight: 600; }
+.fc-color-1 .flip-card-front { border-top-color: #55C8E8; }
+.fc-color-2 .flip-card-front { border-top-color: #34B76F; }
+.fc-color-3 .flip-card-front { border-top-color: #C7922C; }
+.fc-color-4 .flip-card-front { border-top-color: #8B6FC0; }
+.fc-color-5 .flip-card-front { border-top-color: #E8636B; }
+.fc-color-6 .flip-card-front { border-top-color: #D4772C; }
+.vtip { position: relative; color: #8B6FC0; font-weight: 700; cursor: help; border-bottom: 2px dotted rgba(139,111,192,0.45); transition: color 0.15s; }
+.vtip:hover { color: #6B4FA0; }
+.vtip .vtip-box { position: fixed; background: #0E1C42; color: #fff; padding: 12px 16px; border-radius: 12px; font-size: 14px; font-weight: 600; font-style: normal; line-height: 1.55; width: 250px; text-align: center; opacity: 0; visibility: hidden; transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s; pointer-events: none; z-index: 9999; box-shadow: 0 6px 24px rgba(14,28,66,0.35); border: 1.5px solid rgba(85,200,232,0.3); transform: translateY(6px); }
+.vtip .vtip-box::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 7px solid transparent; border-top-color: #0E1C42; }
+.vtip .vtip-word { font-size: 11px; color: #55C8E8; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 4px; display: block; }
+.vtip:hover .vtip-box { opacity: 1; visibility: visible; transform: translateY(0); }
+.go-deeper { background: linear-gradient(135deg, #F0EDF6, #E8E2F2); border: 2px solid #D8D0E8; border-radius: 16px; margin: 16px 0; overflow: hidden; }
+.go-deeper summary { padding: 14px 18px; font-size: 16px; font-weight: 800; color: #0E1C42; cursor: pointer; display: flex; align-items: center; gap: 10px; list-style: none; }
+.go-deeper summary::-webkit-details-marker { display: none; }
+.go-deeper summary::before { content: '🔭'; font-size: 22px; }
+.go-deeper summary::after { content: '▸'; margin-left: auto; font-size: 18px; color: #8B6FC0; transition: transform 0.3s; }
+.go-deeper[open] summary::after { transform: rotate(90deg); }
+.go-deeper .gd-body { padding: 4px 18px 16px; font-size: 15px; color: #5A4D3E; line-height: 1.7; border-top: 1.5px solid #D8D0E8; }
+.go-deeper .gd-body p { margin-bottom: 10px; }
+.mind-blow { background: linear-gradient(135deg, #0a0e1a, #0E1C42); border: 2px solid rgba(85,200,232,0.3); border-radius: 18px; padding: 18px 22px; margin: 18px 0; display: flex; align-items: flex-start; gap: 14px; position: relative; overflow: hidden; }
+.mind-blow::before { content: ''; position: absolute; top: -30px; right: -30px; width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(85,200,232,0.15), transparent); }
+.mind-blow-icon { font-size: 36px; flex-shrink: 0; animation: mind-blow-bounce 2s ease-in-out infinite; }
+@keyframes mind-blow-bounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12)} }
+.mind-blow-content { flex: 1; }
+.mind-blow-label { font-size: 11px; color: #FFD700; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; margin-bottom: 4px; }
+.mind-blow-text { font-size: 16px; color: #fff; line-height: 1.6; font-weight: 600; }
+.mind-blow-text strong { color: #55C8E8; }
+.diagram-interactive { position: relative; }
+.diagram-interactive .hotspot { cursor: pointer; opacity: 0; transition: opacity 0.2s; }
+.diagram-interactive .hotspot:hover { opacity: 0.25; }
+.diagram-interactive .hotspot.active { opacity: 0.35; }
+.diagram-info-panel { background: #0E1C42; color: #fff; padding: 14px 20px; border-radius: 14px; font-size: 15px; line-height: 1.55; font-weight: 600; text-align: center; border: 1.5px solid rgba(85,200,232,0.3); box-shadow: 0 4px 16px rgba(0,0,0,0.2); margin: 10px 0 0; display: none; }
+.diagram-info-panel.visible { display: block; }
+.diagram-info-panel .dip-word { font-size: 11px; color: #FFD700; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; display: block; margin-bottom: 3px; }
+.student-chart-wrap { background: #FAFAF6; border: 2px solid #E8DDD2; border-radius: 14px; padding: 16px 18px; margin: 16px 0; }
+.student-chart-label { font-size: 13px; color: #5A4D3E; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 12px; }
+.student-chart { width: 100%; border-collapse: collapse; font-size: 15px; }
+.student-chart th { background: #0E1C42; color: #fff; padding: 10px 12px; text-align: left; font-size: 13px; font-weight: 700; border: 1px solid #1A2D5A; }
+.student-chart td { padding: 10px 12px; border: 1.5px dashed #D0C8BE; color: #5A4D3E; font-size: 15px; vertical-align: middle; }
+.student-chart td.row-label { background: #F0EDE8; color: #0E1C42; font-weight: 700; border: 1px solid #E8DDD2; border-style: solid; }
+.student-chart tbody tr:nth-child(even) td:not(.row-label) { background: #F9F7F3; }
+.cer-block { background: #FAF7F3; border: 2px solid #8B6FC0; border-radius: 18px; padding: 22px 24px; margin-bottom: 22px; }
+.cer-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1.5px solid #E8DDD2; }
+.cer-icon { font-size: 28px; flex-shrink: 0; line-height: 1; }
+.cer-label { font-size: 11px; color: #8B6FC0; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 4px; }
+.cer-question { font-size: 18px; color: #0E1C42; font-weight: 700; line-height: 1.5; }
+.cer-section { display: flex; gap: 14px; margin-bottom: 18px; }
+.cer-badge { width: 32px; height: 32px; border-radius: 50%; color: #fff; font-size: 16px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.cer-badge-claim    { background: #E8636B; }
+.cer-badge-evidence { background: #D4772C; }
+.cer-badge-reason   { background: #34B76F; }
+.cer-section-body { flex: 1; }
+.cer-section-title { font-size: 16px; color: #0E1C42; font-weight: 800; margin-bottom: 8px; }
+.cer-section-hint { font-size: 13px; color: #9A8E82; font-weight: 600; }
+.cer-write-box { background: #fff; border: 2px dashed #E8DDD2; border-radius: 10px; padding: 14px; }
+.cer-starter { font-size: 14px; color: #C7922C; font-style: italic; margin: 0 0 10px; line-height: 1.5; }
+.cer-line { border-bottom: 1.5px solid #E8DDD2; height: 36px; margin-top: 2px; }
+.cer-vocab-check { background: #EAF8FD; border-radius: 10px; padding: 12px 14px; border-left: 3px solid #55C8E8; margin-top: 6px; font-size: 14px; color: #0E1C42; line-height: 1.5; }
+.revise-block { background: #FFF7EE; border: 2px solid #F0DCC4; border-radius: 16px; padding: 20px 22px; margin-bottom: 20px; }
+.revise-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+.revise-icon { font-size: 28px; flex-shrink: 0; line-height: 1; }
+.revise-label { font-size: 11px; color: #C7922C; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 4px; }
+.revise-question { font-size: 17px; color: #0E1C42; font-weight: 700; line-height: 1.5; }
+.revise-prompts { font-size: 16px; color: #5A4D3E; line-height: 1.7; margin-bottom: 14px; }
+.revise-prompts ul { margin: 10px 0 0 20px; }
+.revise-prompts li { margin-bottom: 6px; }
+.response-q { margin: 10px 0 0; }
+.response-save-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #D0C8BE; margin-left: 6px; vertical-align: middle; transition: background 0.3s; flex-shrink: 0; }
+.response-save-dot.saved { background: #34B76F; }
+.response-textarea { width: 100%; min-height: 80px; padding: 10px 12px; border: 1.5px solid #D0C8BE; border-radius: 10px; background: #FAFAF6; font-family: 'Nunito', sans-serif; font-size: 15px; color: #2B1D12; resize: vertical; line-height: 1.65; transition: border-color 0.2s, box-shadow 0.2s; }
+.response-textarea:focus { outline: none; border-color: #55C8E8; box-shadow: 0 0 0 3px rgba(85,200,232,0.15); background: #fff; }
+.response-textarea.ta-sm { min-height: 64px; }
+.response-textarea.ta-lg { min-height: 110px; }
+.gathered-card { background: #fff; border: 2px solid #E8DDD2; border-radius: 18px; margin: 24px 0; overflow: hidden; box-shadow: 0 2px 12px rgba(43,29,18,0.06); }
+.gathered-header { background: linear-gradient(135deg, #0E1C42, #1A2D5A); padding: 14px 20px; display: flex; align-items: center; gap: 12px; }
+.gathered-header-icon { font-size: 24px; }
+.gathered-header-label { font-size: 10px; color: #55C8E8; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; margin-bottom: 2px; }
+.gathered-header-title { font-size: 18px; color: #fff; font-weight: 800; line-height: 1.2; }
+.gathered-body { padding: 16px 20px 18px; }
+.gathered-intro { font-size: 14px; color: #5A4D3E; line-height: 1.6; margin-bottom: 12px; font-style: italic; }
+.gathered-name-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1.5px solid #E8DDD2; }
+.gathered-name-label { font-size: 13px; color: #0E1C42; font-weight: 800; white-space: nowrap; }
+.gathered-name-input { flex: 1; padding: 8px 12px; border: 1.5px solid #D0C8BE; border-radius: 8px; font-family: 'Nunito', sans-serif; font-size: 14px; color: #2B1D12; background: #FAFAF6; }
+.gathered-name-input:focus { outline: none; border-color: #55C8E8; background: #fff; }
+.gathered-output { width: 100%; min-height: 200px; padding: 12px 14px; border: 1.5px solid #D0C8BE; border-radius: 10px; background: #F4F0EB; font-family: 'Courier New', monospace; font-size: 13px; color: #2B1D12; resize: vertical; line-height: 1.6; white-space: pre-wrap; }
+.gathered-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.gathered-btn { background: #0E1C42; color: #fff; border: none; padding: 9px 18px; border-radius: 10px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 13px; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+.gathered-btn:hover { background: #55C8E8; transform: translateY(-1px); }
+.gathered-btn-download { background: #34B76F; }
+.gathered-copied { display: none; margin-top: 8px; padding: 6px 12px; background: #EEF8F0; color: #1a6b35; border-radius: 8px; font-size: 13px; font-weight: 700; border: 1.5px solid #B8E8CF; }
+.gathered-copied.show { display: block; }
+.lesson-figure { background: #fff; border: 2px solid #E8DDD2; border-radius: 16px; padding: 14px 14px 18px; margin: 0 0 22px; box-shadow: 0 2px 10px rgba(43,29,18,0.04); }
+.lesson-figure-label { font-size: 11px; color: #55C8E8; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 800; margin-bottom: 10px; }
+.lesson-figure img { display: block; max-width: 100%; height: auto; border-radius: 10px; margin: 0 auto; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.lesson-figure-caption { font-size: 14px; color: #5A4D3E; margin-top: 12px; line-height: 1.55; font-weight: 600; text-align: center; }
+.lesson-figure-caption strong { color: #0E1C42; }
+.image-suggestion { background: linear-gradient(135deg, #FFF3E0, #FFF8E1); border: 2.5px dashed #F9A825; border-radius: 16px; padding: 20px 22px; margin: 18px 0; text-align: center; }
+.image-suggestion-icon { font-size: 36px; margin-bottom: 8px; }
+.image-suggestion-label { font-size: 11px; color: #E65100; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+.image-suggestion-desc { font-size: 15px; color: #5A4D3E; line-height: 1.65; font-weight: 600; max-width: 680px; margin: 0 auto 12px; text-align: left; }
+.image-suggestion-file { font-size: 12px; color: #9A8E82; font-family: monospace; background: rgba(0,0,0,0.05); border-radius: 6px; padding: 4px 10px; display: inline-block; margin-top: 6px; }
+.video-wrap { border-radius: 18px; overflow: hidden; border: 2px solid #E8DDD2; box-shadow: 0 4px 20px rgba(43,29,18,0.08); background: #000; margin: 0 0 22px; }
+.video-wrap-header { display: flex; align-items: center; gap: 12px; padding: 12px 18px; background: linear-gradient(135deg, #0E1C42, #1A2D5A); border-bottom: 2px solid rgba(85,200,232,0.2); }
+.video-wrap-type { font-size: 10px; color: #55C8E8; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; margin-bottom: 2px; }
+.video-wrap-title { font-size: 16px; color: #fff; font-weight: 800; line-height: 1.2; }
+.video-ratio { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+.video-ratio iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+.video-placeholder { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #0e1829, #0E1C42); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 18px 24px; overflow-y: auto; }
+.video-placeholder-icon { font-size: 38px; margin-bottom: 6px; opacity: 0.55; }
+.video-placeholder-text { font-size: 13px; color: rgba(255,255,255,0.45); font-weight: 600; line-height: 1.4; font-family: 'Nunito', sans-serif; }
+.video-placeholder-id { font-size: 11px; color: rgba(85,200,232,0.4); font-family: monospace; margin-top: 4px; }
+.video-placeholder-desc { font-size: 12.5px; color: rgba(255,255,255,0.78); font-weight: 600; line-height: 1.55; max-width: 92%; margin-top: 12px; padding: 10px 14px; background: rgba(85,200,232,0.08); border: 1px solid rgba(85,200,232,0.25); border-radius: 8px; text-align: left; }
+.video-placeholder-desc-label { display: block; font-size: 9px; color: #FFD700; text-transform: uppercase; letter-spacing: 0.9px; font-weight: 800; margin-bottom: 4px; }
+.progress-wrap { position: sticky; top: 0; z-index: 200; background: #0E1C42; padding: 8px 20px 10px; border-bottom: 2px solid rgba(85,200,232,0.3); display: flex; align-items: center; gap: 14px; }
+.progress-label { font-size: 12px; color: #55C8E8; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; white-space: nowrap; }
+.progress-track { flex: 1; height: 10px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
+.progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #55C8E8, #34B76F, #FFD700); border-radius: 10px; transition: width 0.4s ease; }
+.progress-pct { font-size: 13px; color: #FFD700; font-weight: 800; min-width: 36px; text-align: right; }
+.tab-bar { position: sticky; top: 44px; z-index: 100; background: #FAF7F3; border-bottom: 3px solid #E8DDD2; display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.tab-bar::-webkit-scrollbar { display: none; }
+.tab-btn { flex: 1; min-width: 130px; padding: 12px 8px 11px; background: transparent; border: none; border-bottom: 4px solid transparent; font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 700; color: #9A8E82; cursor: pointer; transition: all 0.2s; white-space: nowrap; line-height: 1.3; text-align: center; }
+.tab-btn:hover { color: #0E1C42; background: #F0EDE8; }
+.tab-btn.active { color: #0E1C42; border-bottom-color: #55C8E8; background: #fff; }
+.tab-btn .tab-check { display: none; font-size: 12px; color: #34B76F; margin-left: 4px; font-weight: 800; }
+.tab-btn.visited .tab-check { display: inline; }
+.tab-panel { display: none; padding: 24px 28px 36px; background: #ffffff; }
+.tab-panel.active { display: block; }
+.scroll-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+.intro-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px 28px 0; }
+.intro-2col .card { margin-bottom: 0; }
+.intro-2col .card .card-head { cursor: pointer; user-select: none; position: relative; }
+.intro-2col .card .card-head::after { content: '▾'; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 16px; color: #9A8E82; transition: transform 0.25s ease; }
+.intro-2col .card.collapsed .card-head::after { transform: translateY(-50%) rotate(-90deg); }
+.intro-2col .card.collapsed .card-body { display: none; }
+.need-strip { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; padding: 12px 28px 16px; }
+.need-strip-label { font-size: 13px; color: #5A4D3E; font-weight: 700; white-space: nowrap; }
+.need-chip { display: inline-flex; align-items: center; gap: 5px; background: #EAF8FD; border: 1.5px solid #B8E2F0; border-radius: 20px; padding: 5px 12px; font-size: 13px; color: #0E1C42; font-weight: 700; }
+.tab-next-wrap { text-align: center; padding: 24px 0 8px; }
+.tab-next-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 30px; background: linear-gradient(135deg, #55C8E8, #34B76F); color: #fff; border: none; border-radius: 28px; font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 16px rgba(85,200,232,0.3); transition: transform 0.2s, box-shadow 0.2s; }
+.tab-next-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(85,200,232,0.45); }
+.turn-in-item { transition: background .2s, border-color .2s; }
+.turn-in-item:hover { background: #F0EDE8 !important; }
+.turn-in-item.checked { background: #EAF8FD !important; border-color: #B8E2F0 !important; }
+.turn-in-item.checked .check-icon { border-color: transparent !important; background: transparent !important; font-size: 22px !important; }
+.turn-in-item.checked span:last-child { color: #5A4D3E; }
+.quiz-card { background: #fff; border: 2px solid #E8DDD2; border-left: 6px solid #F5A623; border-radius: 18px; margin-bottom: 18px; overflow: hidden; box-shadow: 0 2px 10px rgba(43,29,18,0.04); }
+.quiz-q { background: #FAFAF6; border: 2px solid #E8DDD2; border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
+.quiz-q-text { font-size: 17px; color: #2B1D12; font-weight: 700; line-height: 1.6; margin-bottom: 12px; }
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt { padding: 10px 16px; border-radius: 12px; border: 2px solid #E8DDD2; background: #fff; font-size: 15px; font-weight: 700; color: #2B1D12; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 10px; user-select: none; }
+.quiz-opt:hover { background: #EAF8FD; border-color: #55C8E8; }
+.quiz-opt.correct { background: #EEF8F0 !important; border-color: #34B76F !important; color: #1a6b35 !important; }
+.quiz-opt.wrong   { background: #FFF0EC !important; border-color: #E8636B !important; color: #a33 !important; }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.6; }
+.quiz-opt .opt-letter { width: 28px; height: 28px; border-radius: 50%; background: #E8DDD2; color: #5A4D3E; font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+.quiz-opt.correct .opt-letter { background: #34B76F; color: #fff; }
+.quiz-opt.wrong .opt-letter   { background: #E8636B; color: #fff; }
+.quiz-feedback { font-size: 14px; padding: 10px 14px; border-radius: 10px; margin-top: 10px; display: none; font-weight: 600; line-height: 1.5; }
+.quiz-feedback.show { display: block; }
+.quiz-feedback.fb-correct { background: #EEF8F0; color: #1a6b35; border: 1.5px solid #B8E8CF; }
+.quiz-feedback.fb-wrong   { background: #FFF0EC; color: #8a3030; border: 1.5px solid #F5C4BA; }
+.quiz-score { text-align: center; padding: 16px; background: linear-gradient(135deg, #EAF8FD, #D6F2FB); border: 2px solid #B8E8F5; border-radius: 14px; margin-top: 8px; display: none; }
+.quiz-score.show { display: block; }
+.quiz-score-num { font-size: 36px; font-weight: 900; color: #0E1C42; }
+.quiz-score-label { font-size: 14px; color: #9A8E82; font-weight: 700; }
+.quiz-score-msg { font-size: 16px; color: #2B1D12; font-weight: 700; margin-top: 6px; }
+.diagram-wrap { background: #fff; border: 2px solid #E8DDD2; border-radius: 16px; padding: 16px; margin: 16px 0; text-align: center; }
+.diagram-wrap svg { max-width: 100%; height: auto; }
+.diagram-caption { font-size: 13px; color: #9A8E82; margin-top: 10px; font-weight: 600; }
+.back-to-top { position: fixed; bottom: 28px; right: 28px; height: 44px; padding: 0 18px 0 14px; border-radius: 22px; background: linear-gradient(135deg, #55C8E8, #34B76F); color: #fff; border: none; font-size: 14px; font-weight: 800; font-family: 'Nunito', sans-serif; cursor: pointer; box-shadow: 0 4px 18px rgba(85,200,232,0.35); display: flex; align-items: center; gap: 6px; opacity: 0; visibility: hidden; transform: translateY(20px); transition: opacity 0.3s, visibility 0.3s, transform 0.3s, box-shadow 0.2s; z-index: 500; letter-spacing: 0.3px; }
+.back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { box-shadow: 0 6px 24px rgba(85,200,232,0.5); transform: translateY(-3px); }
+#confettiCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10000; }
+.footer { background: #0E1C42; border-top: 4px solid #55C8E8; padding: 18px 28px; text-align: center; }
+.footer-line1 { font-size: 15px; color: #fff; margin-bottom: 4px; }
+.footer-line1 span { color: #55C8E8; font-weight: 700; }
+.footer-line2 { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 2px; }
+.footer-line3 { font-size: 12px; color: rgba(255,255,255,0.4); }
+strong { color: #0E1C42; }
+em { color: #5A4D3E; }
+/* Hero animations */
+@keyframes hero-needle-stay { 0%,100%{transform:rotate(0deg)} 50%{transform:rotate(0.5deg)} }
+@keyframes hero-cut-anim { 0%,40%{transform:scaleY(1);opacity:1} 50%,100%{transform:scaleY(1);opacity:1} }
+@keyframes hero-melt-anim { 0%{transform:scale(1);opacity:1} 50%{transform:scale(0.6);opacity:0.7} 100%{transform:scale(1);opacity:1} }
+@keyframes hero-twinkle-anim { 0%,100%{opacity:.4;transform:scale(.85)} 50%{opacity:1;transform:scale(1.15)} }
+.hero-needle { animation: hero-needle-stay 4s ease-in-out infinite; transform-origin: bottom center; transform-box: fill-box; }
+.hero-melt { animation: hero-melt-anim 4s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+.hero-twinkle { animation: hero-twinkle-anim 2.2s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+.quiz-video-conditional { display: none; margin-top: 16px; }
+.quiz-video-conditional.show { display: block; }
+@media (max-width: 620px) { .intro-2col { grid-template-columns: 1fr; } .tab-btn { min-width: 100px; font-size: 11px; padding: 10px 4px; } .vocab-grid { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<a id="pageTop"></a>
+<div class="page-wrap">
+
+<div class="progress-wrap">
+  <span class="progress-label">⚖️ Lesson Progress</span>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <span class="progress-pct" id="progressPct">0%</span>
+</div>
+
+<div class="header">
+  <div class="header-brand">
+    <div class="header-logo">
+      <img src="https://raw.githubusercontent.com/optimaondemand/optima-assets/eeb0b335630058906d52f478028361d352253a93/images/Optima%20Final%20Circle%20-%20Owl%20Only.png" alt="Optima Academy" />
+    </div>
+    <div>
+      <div class="header-org">Optima Academy Online</div>
+      <div class="header-sub">An Education Experience Company</div>
+    </div>
+  </div>
+  <div class="header-title">Does Matter Disappear When It Changes?</div>
+  <div class="header-badge">
+    <span>⚖️</span>
+    <span>Lesson 8.01</span>
+  </div>
+</div>
+
+<!-- HERO — Scale with changing items (cut apple, melting ice, dissolving salt) but needle stays -->
+<div class="hero-visual">
+<svg viewBox="0 0 920 260" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a1428"/>
+      <stop offset="60%" stop-color="#102347"/>
+      <stop offset="100%" stop-color="#1a3155"/>
+    </linearGradient>
+    <linearGradient id="scaleG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c0c0c0"/>
+      <stop offset="100%" stop-color="#808080"/>
+    </linearGradient>
+  </defs>
+  <rect width="920" height="260" fill="url(#bgG)"/>
+
+  <!-- Twinkles -->
+  <circle class="hero-twinkle" cx="60" cy="45" r="1.6" fill="#FFD700"/>
+  <circle class="hero-twinkle" cx="870" cy="50" r="1.5" fill="#9CE3F5"/>
+
+  <!-- Title bar -->
+  <rect x="240" y="15" width="440" height="28" rx="6" fill="rgba(85,200,232,0.15)" stroke="#55C8E8" stroke-width="1.5"/>
+  <text x="460" y="34" text-anchor="middle" font-family="Nunito,sans-serif" font-size="13" fill="#fff" font-weight="800">Change the matter. The scale never lies.</text>
+
+  <!-- LEFT: cut apple on scale -->
+  <g transform="translate(110,75)">
+    <!-- Scale base -->
+    <rect x="0" y="100" width="160" height="30" rx="6" fill="url(#scaleG)" stroke="#444" stroke-width="2"/>
+    <rect x="20" y="85" width="120" height="20" rx="3" fill="#f0f0f0" stroke="#666" stroke-width="1.5"/>
+    <!-- Display -->
+    <rect x="35" y="89" width="90" height="14" rx="2" fill="#0E1C42"/>
+    <text x="80" y="100" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" fill="#FFD700" font-weight="900">182 g</text>
+    <!-- Item on top: apple cut in half -->
+    <g transform="translate(35,40)" class="hero-melt">
+      <!-- Left half -->
+      <path d="M 20 20 Q 10 10 20 5 Q 30 0 35 12 Q 35 35 25 40 Q 15 38 20 20 Z" fill="#E8636B" stroke="#a33" stroke-width="1.5"/>
+      <!-- Right half -->
+      <path d="M 50 20 Q 55 5 65 8 Q 75 12 70 25 Q 65 40 55 38 Q 48 32 50 20 Z" fill="#E8636B" stroke="#a33" stroke-width="1.5"/>
+      <!-- Cores -->
+      <ellipse cx="28" cy="22" rx="2" ry="3" fill="#fff"/>
+      <ellipse cx="62" cy="22" rx="2" ry="3" fill="#fff"/>
+      <!-- Stem on left half -->
+      <line x1="22" y1="3" x2="20" y2="0" stroke="#5a3a1a" stroke-width="1.5"/>
+    </g>
+    <!-- Label -->
+    <rect x="0" y="140" width="160" height="22" rx="5" fill="#E8636B"/>
+    <text x="80" y="156" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" fill="#fff" font-weight="800">cut in half</text>
+  </g>
+
+  <!-- CENTER: melting ice on scale -->
+  <g transform="translate(380,75)">
+    <rect x="0" y="100" width="160" height="30" rx="6" fill="url(#scaleG)" stroke="#444" stroke-width="2"/>
+    <rect x="20" y="85" width="120" height="20" rx="3" fill="#f0f0f0" stroke="#666" stroke-width="1.5"/>
+    <rect x="35" y="89" width="90" height="14" rx="2" fill="#0E1C42"/>
+    <text x="80" y="100" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" fill="#FFD700" font-weight="900">182 g</text>
+    <!-- Ice cube melting into puddle -->
+    <g class="hero-melt">
+      <!-- Sealed bag outline -->
+      <rect x="35" y="50" width="90" height="35" rx="4" fill="rgba(180,230,255,0.3)" stroke="#9CE3F5" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <!-- Ice partly melted -->
+      <rect x="48" y="58" width="22" height="18" rx="3" fill="#e8f6fc" stroke="#55C8E8" stroke-width="1.5"/>
+      <!-- Water below -->
+      <path d="M 38 78 Q 38 84 50 83 Q 80 82 110 83 Q 122 84 122 78 L 122 80 L 38 80 Z" fill="rgba(85,200,232,0.5)" stroke="#55C8E8" stroke-width="1"/>
+    </g>
+    <rect x="0" y="140" width="160" height="22" rx="5" fill="#55C8E8"/>
+    <text x="80" y="156" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" fill="#fff" font-weight="800">melted in a sealed bag</text>
+  </g>
+
+  <!-- RIGHT: dissolving sugar on scale -->
+  <g transform="translate(650,75)">
+    <rect x="0" y="100" width="160" height="30" rx="6" fill="url(#scaleG)" stroke="#444" stroke-width="2"/>
+    <rect x="20" y="85" width="120" height="20" rx="3" fill="#f0f0f0" stroke="#666" stroke-width="1.5"/>
+    <rect x="35" y="89" width="90" height="14" rx="2" fill="#0E1C42"/>
+    <text x="80" y="100" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" fill="#FFD700" font-weight="900">182 g</text>
+    <!-- Cup with dissolved sugar -->
+    <g class="hero-melt">
+      <path d="M 50 45 L 55 80 L 105 80 L 110 45 Z" fill="rgba(85,200,232,0.4)" stroke="#55C8E8" stroke-width="1.5"/>
+      <ellipse cx="80" cy="45" rx="30" ry="3" fill="#9CE3F5" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
+      <!-- Tiny particles -->
+      <g fill="rgba(255,255,255,0.85)">
+        <circle cx="65" cy="55" r="1"/>
+        <circle cx="75" cy="60" r="1"/>
+        <circle cx="85" cy="55" r="1"/>
+        <circle cx="95" cy="62" r="1"/>
+        <circle cx="70" cy="70" r="1"/>
+        <circle cx="90" cy="72" r="1"/>
+      </g>
+    </g>
+    <rect x="0" y="140" width="160" height="22" rx="5" fill="#34B76F"/>
+    <text x="80" y="156" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" fill="#fff" font-weight="800">dissolved (sealed)</text>
+  </g>
+
+  <!-- "Same!" callout between scales -->
+  <text x="295" y="195" text-anchor="middle" font-family="Nunito,sans-serif" font-size="16" fill="#FFD700" font-weight="900">= same =</text>
+  <text x="595" y="195" text-anchor="middle" font-family="Nunito,sans-serif" font-size="16" fill="#FFD700" font-weight="900">= same =</text>
+
+  <!-- Bottom bench line -->
+  <line x1="40" y1="245" x2="880" y2="245" stroke="#55C8E8" stroke-width="1.5" opacity="0.35"/>
+</svg>
+</div>
+
+<div class="info-strip">
+  <div class="info-item">
+    <div class="info-icon" style="background:#EAF8FD;">📅</div>
+    <div>
+      <div class="info-label">Quarter / Unit</div>
+      <div class="info-value">Q1 · Unit 2</div>
+      <div class="info-detail">Matter and Its Properties</div>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon" style="background:#EEF8F0;">📖</div>
+    <div>
+      <div class="info-label">Week / Lesson</div>
+      <div class="info-value">Week 8</div>
+      <div class="info-detail">Lesson 8.01 — 5th Grade Science</div>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon" style="background:#FFF7EE;">⚖️</div>
+    <div>
+      <div class="info-label">Science Focus</div>
+      <div class="info-value">Conservation of Matter</div>
+      <div class="info-detail">Mass before &amp; after</div>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon" style="background:#F0EDF6;">🌎</div>
+    <div>
+      <div class="info-label">Standard</div>
+      <div class="info-value">5-PS1-2</div>
+      <div class="info-detail">Conservation of Matter</div>
+    </div>
+  </div>
+</div>
+
+<div class="intro-2col">
+  <div class="card theme-earth">
+    <div class="card-head">
+      <div class="card-head-icon">🤔</div>
+      <div>
+        <div class="card-head-label">Big Question</div>
+        <div class="card-head-title">Think About This…</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>When matter changes shape, size, or form — does it actually lose any mass? How could you prove it one way or the other?</p>
+      <p style="font-size:14px;color:#9A8E82;">Keep this question in mind while you work today.</p>
+    </div>
+  </div>
+  <div class="card theme-sky">
+    <div class="card-head">
+      <div class="card-head-icon">🎯</div>
+      <div>
+        <div class="card-head-label">Learning Goals</div>
+        <div class="card-head-title">I Can…</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#E8636B;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">1</span>explain that matter is not lost when it changes form.</p>
+      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#D4772C;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">2</span>compare mass before and after a change.</p>
+      <p style="margin-bottom:0;"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#34B76F;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">3</span>use scale evidence to argue that matter is conserved.</p>
+    </div>
+  </div>
+</div>
+
+<div class="need-strip">
+  <span class="need-strip-label">You'll need:</span>
+  <span class="need-chip">📓 Science notebook</span>
+  <span class="need-chip">✏️ Pencil &amp; colored pencils</span>
+  <span class="need-chip">📏 Ruler (for drawing)</span>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="vocab"      onclick="switchTab('vocab')">📚 Vocabulary<span class="tab-check">✓</span></button>
+  <button class="tab-btn"        data-tab="lesson"     onclick="switchTab('lesson')">📖 The Lesson<span class="tab-check">✓</span></button>
+  <button class="tab-btn"        data-tab="explore"    onclick="switchTab('explore')">🔬 Investigate<span class="tab-check">✓</span></button>
+  <button class="tab-btn"        data-tab="quiz"       onclick="switchTab('quiz')">🧠 Self-Check<span class="tab-check">✓</span></button>
+  <button class="tab-btn"        data-tab="assignment" onclick="switchTab('assignment')">✍️ Assignment<span class="tab-check">✓</span></button>
+</div>
+
+<!-- TAB 1: VOCAB -->
+<div class="tab-panel active" id="tab-vocab">
+
+  <div class="video-wrap">
+    <div class="video-wrap-header">
+      <span style="font-size:20px;">🎬</span>
+      <div>
+        <div class="video-wrap-type">Introduction · Welcome Video</div>
+        <div class="video-wrap-title">Welcome to Lesson 8.01 — Where Does Matter Go?</div>
+      </div>
+    </div>
+    <div class="video-ratio">
+      <div class="video-placeholder">
+        <div class="video-placeholder-icon">⚖️</div>
+        <div class="video-placeholder-text">Teacher introduction video coming soon</div>
+        <div class="video-placeholder-id"><!-- slot: 8-01-welcome --></div>
+        <div class="video-placeholder-desc">
+          <span class="video-placeholder-desc-label">📹 Suggested content (1–2 min)</span>
+          Greet students warmly. On camera, cut an apple in half (or crumple a piece of paper). Hold up the two halves and ask: "Did I just lose any matter? How could we know for sure?" Don't answer — set up the question that drives the whole lesson. Tease that they'll use a scale to find out.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="activity-card act-warmup scroll-reveal">
+    <div class="act-head">
+      <div class="act-num" style="background:#E8636B;">1</div>
+      <div style="flex:1;">
+        <div class="act-title">🔍 Notice, Wonder, and Predict</div>
+        <div class="act-subtitle">Same matter. Different form. Same mass?</div>
+      </div>
+      <div class="act-time" style="background:#E8636B;">⏱ 5 min</div>
+    </div>
+    <div class="act-body">
+      <p>You weigh a whole apple on a kitchen scale: 182 grams. Then you cut it in half. You put both halves back on the scale together. The scale still reads 182 grams.</p>
+      <p>You take an ice cube out of the freezer, weigh the sealed bag, and let it sit until the ice melts into water. Then you weigh the bag again. Same number.</p>
+      <p>You stir a spoonful of sugar into a sealed cup of water. You weigh the cup before and after. Same number.</p>
+
+      <div class="socratic-q">
+        <span class="sq-icon">👀</span>
+        <div>
+          <div class="label">In Your Science Notebook</div>
+          <div class="question">"In all three cases, the mass stayed the same — even though the matter changed shape, form, or how you could see it. Why?"</div>
+        </div>
+      </div>
+
+      <div class="callout callout-sky">
+        <span class="callout-icon">🔭</span>
+        <p><strong>Write your prediction below.</strong> Use at least two sentences. Predict why the mass doesn't change when matter changes form. Use what you know about particles from Module 3.</p>
+      </div>
+
+      <div class="response-q">
+        <textarea class="response-textarea" id="pred-1"
+          data-label="Prediction"
+          placeholder="The mass stays the same because the particles..."
+          oninput="autoSave(this,'dot-pred-1')"></textarea>
+        <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+          Your prediction<span class="response-save-dot" id="dot-pred-1"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card theme-rock scroll-reveal">
+    <div class="card-head">
+      <div class="card-head-icon">📚</div>
+      <div>
+        <div class="card-head-label">Word Wall</div>
+        <div class="card-head-title">Key Vocabulary</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Two new ideas today: <strong>conservation</strong> and <strong>physical change</strong>. <strong>Tap each card to flip it.</strong></p>
+
+      <div class="vocab-grid">
+
+        <div class="flip-card fc-color-1" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front"><div class="fc-emoji">🧊</div><div class="fc-word">matter</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">matter</div><div class="fc-def">Anything that has mass and takes up space.</div><div class="fc-tap-back">tap to flip back</div></div>
+          </div>
+        </div>
+
+        <div class="flip-card fc-color-2" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front"><div class="fc-emoji">⚖️</div><div class="fc-word">mass</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">mass</div><div class="fc-def">How much stuff is in something. Measured in grams or kilograms with a scale.</div><div class="fc-tap-back">tap to flip back</div></div>
+          </div>
+        </div>
+
+        <div class="flip-card fc-color-3" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front"><div class="fc-emoji">🔄</div><div class="fc-word">change</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">change</div><div class="fc-def">When matter becomes a different shape, form, or arrangement.</div><div class="fc-tap-back">tap to flip back</div></div>
+          </div>
+        </div>
+
+        <div class="flip-card fc-color-4" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front"><div class="fc-emoji">🛡️</div><div class="fc-word">conservation</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">conservation</div><div class="fc-def">The idea that matter is never lost during a change. The mass before equals the mass after.</div><div class="fc-tap-back">tap to flip back</div></div>
+          </div>
+        </div>
+
+        <div class="flip-card fc-color-5" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front"><div class="fc-emoji">✂️</div><div class="fc-word">physical change</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">physical change</div><div class="fc-def">A change in shape, size, or form — but the matter stays the same kind of stuff.</div><div class="fc-tap-back">tap to flip back</div></div>
+          </div>
+        </div>
+
+        <div class="flip-card fc-color-6" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front"><div class="fc-emoji">🧾</div><div class="fc-word">evidence</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">evidence</div><div class="fc-def">Data or observations that support a claim. Scale readings are great evidence for conservation.</div><div class="fc-tap-back">tap to flip back</div></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="callout callout-think" style="margin-top:16px;">
+        <span class="callout-icon">📓</span>
+        <p>Copy this sentence carefully into your science notebook:<br><strong>"In a closed system, the mass before a change is exactly equal to the mass after."</strong><br>Then give one example of a change you've seen where this would be true.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="tab-next-wrap">
+    <button class="tab-next-btn" onclick="switchTab('lesson')">Continue to 📖 The Lesson →</button>
+  </div>
+
+</div><!-- /tab-vocab -->
+
+
+<!-- TAB 2: THE LESSON -->
+<div class="tab-panel" id="tab-lesson">
+
+  <div class="video-wrap">
+    <div class="video-wrap-header">
+      <span style="font-size:20px;">📖</span>
+      <div>
+        <div class="video-wrap-type">Activity 2 · Core Lesson</div>
+        <div class="video-wrap-title">The Law of Conservation of Matter</div>
+      </div>
+    </div>
+    <div class="video-ratio">
+      <div class="video-placeholder">
+        <div class="video-placeholder-icon">📖</div>
+        <div class="video-placeholder-text">Core lesson video coming soon</div>
+        <div class="video-placeholder-id"><!-- slot: 8-01-lesson-explainer --></div>
+        <div class="video-placeholder-desc">
+          <span class="video-placeholder-desc-label">📹 Suggested content (3–5 min)</span>
+          Explain conservation of matter with a real-time demonstration. Use a digital kitchen scale on camera. Weigh: (1) an apple before and after cutting, (2) a sealed bag with ice before and after melting, (3) a sealed cup with water + sugar before and after stirring. Each time, point out: "Same number." Tie back to the particle model from Module 3 — particles rearrange but don't disappear. Be clear about WHY the container has to be sealed: if water vapor or gas can escape, the scale will show less mass.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="activity-card act-lesson scroll-reveal">
+    <div class="act-head">
+      <div class="act-num" style="background:#D4772C;">2</div>
+      <div style="flex:1;">
+        <div class="act-title">📖 The Lesson</div>
+        <div class="act-subtitle">Why the scale never lies about matter</div>
+      </div>
+      <div class="act-time" style="background:#D4772C;">⏱ 15 min</div>
+    </div>
+    <div class="act-body">
+
+      <div class="card theme-forest" style="margin-bottom:18px;">
+        <div class="card-head">
+          <div class="card-head-icon">🛡️</div>
+          <div>
+            <div class="card-head-label">Section 1</div>
+            <div class="card-head-title">A Big Idea: Matter Is Conserved</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>One of the most important ideas in all of science: matter is never lost. Not when you cut it, melt it, dissolve it, or smash it into pieces. The form might change, but the <span class="vtip">mass<span class="vtip-box"><span class="vtip-word">mass</span>How much stuff is in something.</span></span> stays the same. This idea has a name: <span class="vtip">conservation<span class="vtip-box"><span class="vtip-word">conservation</span>The rule that matter is never lost in a change.</span></span> of matter.</p>
+          <p>Why? Because when matter changes form, its particles just rearrange. They don't vanish. There's the exact same number of particles before AND after — they're just in different positions. So the total <span class="vtip">mass<span class="vtip-box"><span class="vtip-word">mass</span>How much stuff is in something.</span></span> can't change.</p>
+          <div class="socratic-q">
+            <span class="sq-icon">🤔</span>
+            <div>
+              <div class="label">Stop and Think</div>
+              <div class="question">"If you weigh a sandwich, then chew it up into a thousand pieces, do you have more, less, or the same amount of sandwich? Why?"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card theme-sky" style="margin-bottom:18px;">
+        <div class="card-head">
+          <div class="card-head-icon">✂️</div>
+          <div>
+            <div class="card-head-label">Section 2</div>
+            <div class="card-head-title">Physical Changes — Same Matter, New Form</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>A <span class="vtip">physical change<span class="vtip-box"><span class="vtip-word">physical change</span>A change in shape, size, or form — but the matter stays the same.</span></span> is the kind of change you see every day. Cutting paper. Melting ice. Crumpling a soda can. Dissolving sugar in water. Tearing bread into bits.</p>
+          <p>In every physical change, the matter is still the same kind of stuff — just in a different shape or form. Ice and water and steam are all H₂O. Bread crumbs are still bread. A torn piece of paper is still paper. The mass stays the same.</p>
+          <div class="socratic-q">
+            <span class="sq-icon">🧪</span>
+            <div>
+              <div class="label">Stop and Reason</div>
+              <div class="question">"If you carefully cut an apple into 100 tiny pieces and weighed every piece together, the mass would be the same as before. But what if you ATE some of it — would the mass on the scale still be the same?"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card theme-earth" style="margin-bottom:18px;">
+        <div class="card-head">
+          <div class="card-head-icon">📦</div>
+          <div>
+            <div class="card-head-label">Section 3</div>
+            <div class="card-head-title">Why "Closed" Containers Matter</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>There's one trick: matter is only conserved if it can't escape. Melt an ice cube in an open bowl, and the puddle might weigh slightly less days later — because water has slowly evaporated into the air. The matter isn't gone, it just left the bowl. The TOTAL mass of the world is still the same.</p>
+          <p>That's why scientists use closed containers for conservation tests — sealed bags, lidded cups, or sealed jars. Everything that was inside stays inside.</p>
+          <p><strong>Real-World Connection:</strong> When chefs reduce a sauce on the stove, the sauce gets thicker not because anything was destroyed, but because water vapor evaporated out of the pot. If you'd put a lid on and weighed the pot, the mass would never have changed.</p>
+        </div>
+      </div>
+
+      <div class="key-concept">
+        <div class="kc-label">🔑 Key Concept</div>
+        <p>When matter changes form, no matter is lost. The mass before equals the mass after — as long as nothing escapes the container. Scales are the proof.</p>
+      </div>
+
+      <!-- Interactive diagram -->
+      <div class="diagram-wrap scroll-reveal">
+        <div style="font-size:13px;color:#9A8E82;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">
+          🗺 Tap each change to see what the scale shows
+        </div>
+        <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;line-height:1.65;">Three different physical changes. Three before/after pairs. Tap each one to see why the scale reads the same number both times.</p>
+        <div class="diagram-interactive">
+          <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="font-family:Nunito,Arial,sans-serif;max-width:100%;height:auto;" role="img" aria-label="Three before-and-after mass measurements">
+            <rect width="720" height="360" fill="#FAF7F3" rx="12" stroke="#c8b896" stroke-width="2"/>
+
+            <!-- Title -->
+            <rect x="200" y="15" width="320" height="28" rx="6" fill="#0E1C42"/>
+            <text x="360" y="33" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">Before → After: Same Mass</text>
+
+            <!-- Row 1: Cutting paper -->
+            <rect x="20" y="60" width="240" height="80" rx="8" fill="#EEF8F0" stroke="#34B76F" stroke-width="2"/>
+            <text x="140" y="85" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="800">📄 Crumpled paper</text>
+            <rect x="35" y="92" width="100" height="38" rx="4" fill="#fff" stroke="#34B76F" stroke-width="1"/>
+            <text x="85" y="108" text-anchor="middle" font-size="10" fill="#5A4D3E" font-weight="700">Before</text>
+            <text x="85" y="124" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="900">5 g</text>
+            <rect x="145" y="92" width="100" height="38" rx="4" fill="#fff" stroke="#34B76F" stroke-width="1"/>
+            <text x="195" y="108" text-anchor="middle" font-size="10" fill="#5A4D3E" font-weight="700">After</text>
+            <text x="195" y="124" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="900">5 g</text>
+
+            <rect x="280" y="60" width="200" height="80" rx="8" fill="#FFF7EE" stroke="#D4772C" stroke-width="1.5"/>
+            <text x="380" y="90" text-anchor="middle" font-size="11" fill="#0E1C42" font-weight="800">What changed</text>
+            <text x="380" y="110" text-anchor="middle" font-size="11" fill="#5A4D3E">shape went from flat</text>
+            <text x="380" y="124" text-anchor="middle" font-size="11" fill="#5A4D3E">to crumpled ball</text>
+
+            <rect x="500" y="60" width="200" height="80" rx="8" fill="#EAF8FD" stroke="#55C8E8" stroke-width="1.5"/>
+            <text x="600" y="90" text-anchor="middle" font-size="11" fill="#0E1C42" font-weight="800">What stayed</text>
+            <text x="600" y="110" text-anchor="middle" font-size="11" fill="#5A4D3E">mass — every paper</text>
+            <text x="600" y="124" text-anchor="middle" font-size="11" fill="#5A4D3E">particle is still there</text>
+
+            <!-- Row 2: Melting ice -->
+            <rect x="20" y="155" width="240" height="80" rx="8" fill="#EEF8F0" stroke="#34B76F" stroke-width="2"/>
+            <text x="140" y="180" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="800">🧊 Melted ice (sealed)</text>
+            <rect x="35" y="187" width="100" height="38" rx="4" fill="#fff" stroke="#34B76F" stroke-width="1"/>
+            <text x="85" y="203" text-anchor="middle" font-size="10" fill="#5A4D3E" font-weight="700">Before</text>
+            <text x="85" y="219" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="900">30 g</text>
+            <rect x="145" y="187" width="100" height="38" rx="4" fill="#fff" stroke="#34B76F" stroke-width="1"/>
+            <text x="195" y="203" text-anchor="middle" font-size="10" fill="#5A4D3E" font-weight="700">After</text>
+            <text x="195" y="219" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="900">30 g</text>
+
+            <rect x="280" y="155" width="200" height="80" rx="8" fill="#FFF7EE" stroke="#D4772C" stroke-width="1.5"/>
+            <text x="380" y="185" text-anchor="middle" font-size="11" fill="#0E1C42" font-weight="800">What changed</text>
+            <text x="380" y="205" text-anchor="middle" font-size="11" fill="#5A4D3E">solid ice → liquid water</text>
+            <text x="380" y="219" text-anchor="middle" font-size="11" fill="#5A4D3E">(state of matter)</text>
+
+            <rect x="500" y="155" width="200" height="80" rx="8" fill="#EAF8FD" stroke="#55C8E8" stroke-width="1.5"/>
+            <text x="600" y="185" text-anchor="middle" font-size="11" fill="#0E1C42" font-weight="800">What stayed</text>
+            <text x="600" y="205" text-anchor="middle" font-size="11" fill="#5A4D3E">mass — water particles</text>
+            <text x="600" y="219" text-anchor="middle" font-size="11" fill="#5A4D3E">are still in the bag</text>
+
+            <!-- Row 3: Dissolving sugar -->
+            <rect x="20" y="250" width="240" height="80" rx="8" fill="#EEF8F0" stroke="#34B76F" stroke-width="2"/>
+            <text x="140" y="275" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="800">🧂 Sugar in water (sealed)</text>
+            <rect x="35" y="282" width="100" height="38" rx="4" fill="#fff" stroke="#34B76F" stroke-width="1"/>
+            <text x="85" y="298" text-anchor="middle" font-size="10" fill="#5A4D3E" font-weight="700">Before</text>
+            <text x="85" y="314" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="900">105 g</text>
+            <rect x="145" y="282" width="100" height="38" rx="4" fill="#fff" stroke="#34B76F" stroke-width="1"/>
+            <text x="195" y="298" text-anchor="middle" font-size="10" fill="#5A4D3E" font-weight="700">After</text>
+            <text x="195" y="314" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="900">105 g</text>
+
+            <rect x="280" y="250" width="200" height="80" rx="8" fill="#FFF7EE" stroke="#D4772C" stroke-width="1.5"/>
+            <text x="380" y="280" text-anchor="middle" font-size="11" fill="#0E1C42" font-weight="800">What changed</text>
+            <text x="380" y="300" text-anchor="middle" font-size="11" fill="#5A4D3E">sugar grains → spread out</text>
+            <text x="380" y="314" text-anchor="middle" font-size="11" fill="#5A4D3E">particles in water</text>
+
+            <rect x="500" y="250" width="200" height="80" rx="8" fill="#EAF8FD" stroke="#55C8E8" stroke-width="1.5"/>
+            <text x="600" y="280" text-anchor="middle" font-size="11" fill="#0E1C42" font-weight="800">What stayed</text>
+            <text x="600" y="300" text-anchor="middle" font-size="11" fill="#5A4D3E">mass — sugar particles</text>
+            <text x="600" y="314" text-anchor="middle" font-size="11" fill="#5A4D3E">are still in the cup</text>
+
+            <!-- Hotspots -->
+            <rect class="hotspot" data-part="paper" data-info="Crumpled paper | A piece of paper weighed 5 grams. You crumple it into a ball. It still weighs 5 grams. Why? Every paper particle is still in your hand — they're just packed differently. Shape changed; matter didn't." x="20" y="60" width="240" height="80" rx="8" fill="#34B76F"/>
+            <rect class="hotspot" data-part="ice" data-info="Melted ice (sealed) | A sealed bag with a 30g ice cube. You let it sit on the counter for an hour. The ice melts into water inside the sealed bag. The bag still weighs 30g. Why sealed? Because if vapor escaped, you'd lose mass — but the bag traps everything." x="20" y="155" width="240" height="80" rx="8" fill="#34B76F"/>
+            <rect class="hotspot" data-part="sugar" data-info="Sugar in water (sealed) | A sealed cup of water plus a teaspoon of sugar weighs 105g. You stir until the sugar dissolves. The cup still weighs 105g. The sugar didn't disappear — its particles are spread through the water. Same particles, same total mass." x="20" y="250" width="240" height="80" rx="8" fill="#34B76F"/>
+            <rect class="hotspot" data-part="changed" data-info="What changed in all three | Just the form — the way matter is arranged. Flat paper became a ball. Solid ice became liquid water. Tightly-packed sugar grains became spread-out sugar particles. None of these are losing matter. They're just rearranging." x="280" y="60" width="200" height="270" rx="8" fill="#D4772C"/>
+            <rect class="hotspot" data-part="stayed" data-info="What stayed in all three | Mass. Every particle that was inside the container at the start is still inside at the end. The scale tells you the truth — even when your eyes might fool you." x="500" y="60" width="200" height="270" rx="8" fill="#55C8E8"/>
+          </svg>
+          <div style="background:linear-gradient(135deg,#EAF8FD,#D6F2FB);border:2px solid #B8E2F0;border-radius:14px;padding:12px 18px;margin-top:10px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:28px;flex-shrink:0;animation:mind-blow-bounce 2s ease-in-out infinite;">👆</span>
+            <p style="font-size:15px;color:#0E1C42;line-height:1.55;margin:0;font-weight:600;">Tap each row to see why the mass didn't change.</p>
+          </div>
+          <div class="diagram-info-panel" id="diagramPanel">
+            <span class="dip-word" id="diagramWord"></span>
+            <span id="diagramInfo"></span>
+          </div>
+        </div>
+        <div class="diagram-caption">In a sealed container, the mass before always equals the mass after. Every time.</div>
+      </div>
+
+      <div class="mind-blow">
+        <div class="mind-blow-icon">🤯</div>
+        <div class="mind-blow-content">
+          <div class="mind-blow-label">Mind-Blowing Fact</div>
+          <div class="mind-blow-text">The conservation of matter rule was discovered around <strong>1789</strong> by a French scientist named Antoine Lavoisier. He used careful scales to prove it — and changed all of chemistry. Your work today follows the same method he invented over 230 years ago.</div>
+        </div>
+      </div>
+
+      <details class="go-deeper">
+        <summary>Go Deeper — Why does it LOOK like matter disappears?</summary>
+        <div class="gd-body">
+          <p>Lots of things trick us into thinking matter is lost. A puddle dries up — but the water just turned to vapor and drifted into the air. A candle burns down — but the wax became gases that floated away. A piece of food rots — but the matter became gases plus tiny pieces eaten by microbes.</p>
+          <p>In every case, if you could collect ALL the gases and tiny pieces that left, the total mass would still match. Scientists know this because they can do exactly that experiment — and they get the same answer every time.</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <div class="tab-next-wrap">
+    <button class="tab-next-btn" onclick="switchTab('explore')">Continue to 🔬 Investigate →</button>
+  </div>
+
+</div><!-- /tab-lesson -->
+
+
+<!-- TAB 3: INVESTIGATE -->
+<div class="tab-panel" id="tab-explore">
+
+  <div class="activity-card act-explore scroll-reveal">
+    <div class="act-head">
+      <div class="act-num" style="background:#55C8E8;">3</div>
+      <div style="flex:1;">
+        <div class="act-title">🔬 Predict the Scale</div>
+        <div class="act-subtitle">Three change scenarios. What does the scale show?</div>
+      </div>
+      <div class="act-time" style="background:#55C8E8;">⏱ 12 min</div>
+    </div>
+    <div class="act-body">
+
+      <p>Below are three change scenarios. For each one, you'll predict what the scale should read after the change. Then you'll explain WHY — using what you know about particles.</p>
+
+      <!-- Scenario A -->
+      <div style="background:#EEF8F0;border:2px solid #C4E5CC;border-radius:14px;padding:14px 18px;margin-bottom:12px;">
+        <p style="font-size:13px;color:#34B76F;text-transform:uppercase;letter-spacing:0.5px;font-weight:800;margin-bottom:6px;">Scenario A</p>
+        <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">A piece of clay weighs <strong>40 grams</strong>. You squash it flat, then roll it into a snake, then smash it into a ball. You weigh it again.</p>
+      </div>
+
+      <!-- Scenario B -->
+      <div style="background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 18px;margin-bottom:12px;">
+        <p style="font-size:13px;color:#55C8E8;text-transform:uppercase;letter-spacing:0.5px;font-weight:800;margin-bottom:6px;">Scenario B</p>
+        <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">A sealed zip-top bag with an ice cube inside weighs <strong>50 grams</strong>. You set it on the counter for an hour. The ice fully melts into water — still trapped in the sealed bag. You weigh it again.</p>
+      </div>
+
+      <!-- Scenario C -->
+      <div style="background:#FFF7EE;border:2px solid #F0DCC4;border-radius:14px;padding:14px 18px;margin-bottom:14px;">
+        <p style="font-size:13px;color:#D4772C;text-transform:uppercase;letter-spacing:0.5px;font-weight:800;margin-bottom:6px;">Scenario C (tricky!)</p>
+        <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">An <strong>open</strong> cup of water with the same ice cube starts at <strong>50 grams</strong>. You leave it out for THREE DAYS. The water level drops because some evaporated. You weigh it again.</p>
+      </div>
+
+      <!-- Step 1 -->
+      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+        <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Predict the after-mass</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Copy the table below into your notebook. For each scenario, predict whether the mass goes UP, DOWN, or STAYS THE SAME. Then give the number you'd predict on the scale.</p>
+        </div>
+      </div>
+
+      <div class="student-chart-wrap">
+        <div class="student-chart-label">📋 Mass predictions — copy into your notebook</div>
+        <table class="student-chart">
+          <thead>
+            <tr>
+              <th style="width:22%;">Scenario</th>
+              <th>Before</th>
+              <th>Predicted after</th>
+              <th>Why?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="row-label">A. Clay (squashed)</td><td>40 g</td><td></td><td></td></tr>
+            <tr><td class="row-label">B. Ice (sealed bag)</td><td>50 g</td><td></td><td></td></tr>
+            <tr><td class="row-label">C. Ice (open cup, 3 days)</td><td>50 g</td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Step 2 -->
+      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+        <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Watch out for the tricky one</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Scenario C is different from A and B. The container is OPEN. What does that change? Where does the water actually go when it evaporates? Is it really lost from the world, or just from the cup?</p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
+        <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Make a claim</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Write a one-sentence claim: "Matter is conserved when ___, but a scale might read less when ___." This will be part of your CER.</p>
+        </div>
+      </div>
+
+      <div class="card theme-magma scroll-reveal" style="margin-top:10px;">
+        <div class="card-head">
+          <div class="card-head-icon">📝</div>
+          <div>
+            <div class="card-head-label">Record Your Thinking</div>
+            <div class="card-head-title">What Did You Find?</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Answer in complete sentences.</p>
+
+          <div class="pq">
+            <span class="pq-num" style="background:#D4772C;">1</span>
+            <span class="pq-text">For Scenario A (squashing clay), what's the after-mass? Use the word "particles" to explain why.</span>
+          </div>
+          <div class="response-q">
+            <textarea class="response-textarea ta-sm" id="ryt-1"
+              data-label="Investigate — Q1: Clay"
+              placeholder="The after-mass is ___ grams. The particles..."
+              oninput="autoSave(this,'dot-ryt-1')"></textarea>
+            <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+              Your answer<span class="response-save-dot" id="dot-ryt-1"></span>
+            </span>
+          </div>
+
+          <div class="pq" style="margin-top:14px;">
+            <span class="pq-num" style="background:#D4772C;">2</span>
+            <span class="pq-text">For Scenario B (sealed bag), why is sealing the bag important?</span>
+          </div>
+          <div class="response-q">
+            <textarea class="response-textarea ta-sm" id="ryt-2"
+              data-label="Investigate — Q2: Sealed bag"
+              placeholder="Sealing the bag matters because..."
+              oninput="autoSave(this,'dot-ryt-2')"></textarea>
+            <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+              Your answer<span class="response-save-dot" id="dot-ryt-2"></span>
+            </span>
+          </div>
+
+          <div class="pq" style="margin-top:14px;">
+            <span class="pq-num" style="background:#D4772C;">3</span>
+            <span class="pq-text">For Scenario C (open cup, 3 days), the scale reads LESS than before. Is matter actually gone, or did it just leave the cup? Where did it go?</span>
+          </div>
+          <div class="response-q">
+            <textarea class="response-textarea ta-sm" id="ryt-3"
+              data-label="Investigate — Q3: Open cup"
+              placeholder="The matter is/isn't really gone because... It went..."
+              oninput="autoSave(this,'dot-ryt-3')"></textarea>
+            <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+              Your answer<span class="response-save-dot" id="dot-ryt-3"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card theme-rock scroll-reveal" style="margin-top:10px;">
+        <div class="card-head">
+          <div class="card-head-icon">💬</div>
+          <div>
+            <div class="card-head-label">Discuss and Defend</div>
+            <div class="card-head-title">Use Your Evidence</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Think about these. Be ready to explain your reasoning.</p>
+
+          <div class="socratic-q">
+            <span class="sq-icon">⚔️</span>
+            <div>
+              <div class="label">Defend Your Thinking</div>
+              <div class="question">"A classmate looks at Scenario C and says, 'See? Matter CAN disappear — the water vanished.' Use your knowledge of evaporation to argue against that claim."</div>
+            </div>
+          </div>
+
+          <div class="socratic-q">
+            <span class="sq-icon">🔍</span>
+            <div>
+              <div class="label">Compare the Evidence</div>
+              <div class="question">"Why is a sealed container the most reliable way to prove conservation of matter? What does it stop from happening?"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="tab-next-wrap">
+    <button class="tab-next-btn" onclick="switchTab('quiz')">Continue to 🧠 Self-Check →</button>
+  </div>
+
+</div><!-- /tab-explore -->
+
+
+<!-- TAB 4: QUIZ -->
+<div class="tab-panel" id="tab-quiz">
+
+  <div class="quiz-card">
+    <div style="display:flex;align-items:center;gap:12px;padding:16px 22px;background:linear-gradient(135deg,#FFF7DC,#FFF3C4);border-bottom:2px solid #F5E6A8;">
+      <div style="width:48px;height:48px;background:#F5A623;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">🧠</div>
+      <div>
+        <div style="font-size:11px;color:#B8860B;text-transform:uppercase;letter-spacing:0.8px;font-weight:700;">Self-Check</div>
+        <div style="font-size:22px;color:#0E1C42;font-weight:800;line-height:1.2;">Quick Self-Check</div>
+        <div style="font-size:13px;color:#9A8E82;font-weight:600;">Not graded — just for you! See how much you understand.</div>
+      </div>
+    </div>
+
+    <div style="padding:22px 24px;">
+
+      <div class="quiz-q" data-answer="b">
+        <div class="quiz-q-text">A 25-gram piece of clay is shaped into a snake, then a ball, then flattened. What does it weigh now?</div>
+        <div class="quiz-options">
+          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>Less than 25 grams — some was lost</div>
+          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>Exactly 25 grams — same particles, same mass</div>
+          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>More than 25 grams — squashing added matter</div>
+        </div>
+        <div class="quiz-feedback fb-correct">✅ Correct! Shaping clay is a physical change. Every clay particle is still there — just in a different arrangement. The mass doesn't budge.</div>
+        <div class="quiz-feedback fb-wrong">❌ Not quite. The shape changed, but no particles left or arrived. What stays the same when matter just changes form?</div>
+      </div>
+
+      <div class="quiz-q" data-answer="c">
+        <div class="quiz-q-text">A sealed cup of water + salt weighs 200 g. After all the salt dissolves, what does the cup weigh?</div>
+        <div class="quiz-options">
+          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>Less than 200 g — salt disappeared</div>
+          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>It depends how long you stir</div>
+          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>Exactly 200 g — salt particles are still in the cup, just spread out</div>
+        </div>
+        <div class="quiz-feedback fb-correct">✅ Correct! Dissolving is a physical change. The salt particles got pulled apart and spread through the water, but they're all still in the sealed cup.</div>
+        <div class="quiz-feedback fb-wrong">❌ Not quite. The cup is sealed — nothing can leave. The salt didn't actually disappear; it just spread out. So the total mass…?</div>
+      </div>
+
+      <div class="quiz-q" data-answer="a">
+        <div class="quiz-q-text">An OPEN pot of soup on the stove starts at 1,000 g. You simmer it for an hour. Now it weighs 850 g. Where did the mass go?</div>
+        <div class="quiz-options">
+          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>About 150 g of water evaporated as steam into the kitchen air.</div>
+          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>The matter was destroyed by heat.</div>
+          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>Soup molecules turn into less mass when heated.</div>
+        </div>
+        <div class="quiz-feedback fb-correct">✅ Correct! Matter is never actually destroyed. The 150 g of "missing" soup is now water vapor floating around your kitchen. If you could catch every bit, you'd find your 1,000 g.</div>
+        <div class="quiz-feedback fb-wrong">❌ Not quite. Matter is never actually destroyed. The cup is open — so something MUST have left. What rises off boiling water?</div>
+      </div>
+
+      <div class="quiz-score" id="quizScore">
+        <div class="quiz-score-num"><span id="quizScoreNum">0</span>/3</div>
+        <div class="quiz-score-label">Questions Correct</div>
+        <div class="quiz-score-msg" id="quizScoreMsg"></div>
+      </div>
+
+      <div class="quiz-video-conditional" id="quizVideoPerfect">
+        <div class="video-wrap">
+          <div class="video-wrap-header">
+            <span style="font-size:20px;">🎉</span>
+            <div>
+              <div class="video-wrap-type">Perfect Score · Bonus Content</div>
+              <div class="video-wrap-title">Bonus — Lavoisier's burning candle experiment.</div>
+            </div>
+          </div>
+          <div class="video-ratio">
+            <div class="video-placeholder">
+              <div class="video-placeholder-icon">🌟</div>
+              <div class="video-placeholder-text">Bonus video coming soon</div>
+              <div class="video-placeholder-id"><!-- slot: 8-01-quiz-perfect --></div>
+              <div class="video-placeholder-desc">
+                <span class="video-placeholder-desc-label">📹 Suggested content (30–60 sec)</span>
+                Quick "did you know" celebration. Show a candle burning in a sealed glass jar on a scale. The candle wax is being used up, but the scale reading stays the same — because the gases produced stay in the jar. Briefly mention Antoine Lavoisier, the 1700s scientist who proved this. Frame it as "you just figured out something that took the world hundreds of years to confirm."
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-video-conditional" id="quizVideoReview">
+        <div class="video-wrap">
+          <div class="video-wrap-header">
+            <span style="font-size:20px;">🔄</span>
+            <div>
+              <div class="video-wrap-type">Review · Keep Going</div>
+              <div class="video-wrap-title">Let's review conservation together.</div>
+            </div>
+          </div>
+          <div class="video-ratio">
+            <div class="video-placeholder">
+              <div class="video-placeholder-icon">📖</div>
+              <div class="video-placeholder-text">Review video coming soon</div>
+              <div class="video-placeholder-id"><!-- slot: 8-01-quiz-review --></div>
+              <div class="video-placeholder-desc">
+                <span class="video-placeholder-desc-label">📹 Suggested content (1–2 min)</span>
+                Re-explain the key idea slowly. Reuse the three-row diagram from the Lesson tab (paper, ice, sugar). Emphasize the closed-container rule: matter is conserved as long as nothing escapes. Walk through one of the quiz scenarios that students often miss — especially the open-pot soup question. Reassure: this idea is famously tricky, and most adults get it wrong too.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="tab-next-wrap">
+    <button class="tab-next-btn" onclick="switchTab('assignment')">Continue to ✍️ Assignment →</button>
+  </div>
+
+</div><!-- /tab-quiz -->
+
+
+<!-- TAB 5: ASSIGNMENT -->
+<div class="tab-panel" id="tab-assignment">
+
+  <div class="video-wrap">
+    <div class="video-wrap-header">
+      <span style="font-size:20px;">✍️</span>
+      <div>
+        <div class="video-wrap-type">Assignment · What To Do</div>
+        <div class="video-wrap-title">Here's What to Do — Prove Conservation</div>
+      </div>
+    </div>
+    <div class="video-ratio">
+      <div class="video-placeholder">
+        <div class="video-placeholder-icon">✍️</div>
+        <div class="video-placeholder-text">Assignment explainer video coming soon</div>
+        <div class="video-placeholder-id"><!-- slot: 8-01-assignment-explainer --></div>
+        <div class="video-placeholder-desc">
+          <span class="video-placeholder-desc-label">📹 Suggested content (1–2 min)</span>
+          Walk students through the assignment parts. Show your screen with each section open. Point to Part A (predict three home scenarios), Part B (evidence questions about the three Investigate scenarios), and Part C (CER on conservation). Read the CER question out loud and remind them of the sentence starters. End by reminding them tomorrow they'll DO the actual measuring.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;">📐 Part A — Predict Three Home Changes</p>
+  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Add "Lesson 8.01 — Conservation of Matter" to your notebook.</p>
+
+  <div class="pq">
+    <span class="pq-num" style="background:#E8636B;">1</span>
+    <span class="pq-text"><strong>Pick three changes:</strong> List three physical changes you could do at home (cutting, melting, dissolving, crumpling, etc.). For each one, predict whether the mass should change. Write a sentence explaining your prediction.</span>
+  </div>
+  <div class="response-q">
+    <textarea class="response-textarea ta-lg" id="parta-1"
+      data-label="Part A — Three home changes"
+      placeholder="Change 1: ___. My prediction: ___ because... Change 2: ___. My prediction: ___ because... Change 3: ___. My prediction: ___ because..."
+      oninput="autoSave(this,'dot-parta-1')"></textarea>
+    <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+      Your answer<span class="response-save-dot" id="dot-parta-1"></span>
+    </span>
+  </div>
+
+  <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;margin-top:20px;">📊 Part B — Evidence Questions</p>
+  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Answer using the three scenarios from the Investigate tab.</p>
+
+  <div class="pq">
+    <span class="pq-num" style="background:#D4772C;">2</span>
+    <span class="pq-text">Scenarios A and B both kept the same mass before and after. What do they have in common that scenario C does not?</span>
+  </div>
+  <div class="response-q">
+    <textarea class="response-textarea ta-sm" id="partb-1"
+      data-label="Part B — Q1: A &amp; B vs C"
+      placeholder="Scenarios A and B both have ___. Scenario C is different because..."
+      oninput="autoSave(this,'dot-partb-1')"></textarea>
+    <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+      Your answer<span class="response-save-dot" id="dot-partb-1"></span>
+    </span>
+  </div>
+
+  <div class="pq">
+    <span class="pq-num" style="background:#D4772C;">3</span>
+    <span class="pq-text">In Scenario C, the scale showed LESS mass after 3 days. Does this prove matter can disappear? Why or why not? Use the word "evaporated" in your answer.</span>
+  </div>
+  <div class="response-q">
+    <textarea class="response-textarea ta-sm" id="partb-2"
+      data-label="Part B — Q2: Open cup explanation"
+      placeholder="No / yes, because the water evaporated..."
+      oninput="autoSave(this,'dot-partb-2')"></textarea>
+    <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+      Your answer<span class="response-save-dot" id="dot-partb-2"></span>
+    </span>
+  </div>
+
+  <div class="pq">
+    <span class="pq-num" style="background:#D4772C;">4</span>
+    <span class="pq-text">A bowl of fresh apple slices weighs 200 g. You leave them out for two weeks and they shrivel up. The bowl now weighs 140 g. Did matter disappear? Explain.</span>
+  </div>
+  <div class="response-q">
+    <textarea class="response-textarea ta-sm" id="partb-3"
+      data-label="Part B — Q3: Shriveled apples"
+      placeholder="Matter did/didn't disappear. The 60 g..."
+      oninput="autoSave(this,'dot-partb-3')"></textarea>
+    <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+      Your answer<span class="response-save-dot" id="dot-partb-3"></span>
+    </span>
+  </div>
+
+  <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;margin-top:20px;">✍️ Part C — Claim · Evidence · Reasoning</p>
+  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Aim for 4–6 sentences total.</p>
+
+  <div class="cer-block">
+    <div class="cer-header">
+      <span class="cer-icon">⚖️</span>
+      <div class="cer-header-text">
+        <div class="cer-label">Claim · Evidence · Reasoning</div>
+        <div class="cer-question">When matter changes form, is any of it actually lost? Use what you know to defend your answer.</div>
+      </div>
+    </div>
+
+    <div class="cer-section">
+      <div class="cer-badge cer-badge-claim">C</div>
+      <div class="cer-section-body">
+        <div class="cer-section-title">Claim <span class="cer-section-hint">— What's actually true about matter and change?</span></div>
+        <div class="cer-write-box">
+          <p class="cer-starter">💡 Start with: <em>"When matter changes form, no matter is actually lost — as long as…"</em></p>
+          <textarea class="response-textarea ta-sm" id="cer-claim"
+            data-label="Part C — Claim"
+            placeholder="When matter changes form, no matter is actually lost — as long as..."
+            oninput="autoSave(this,'dot-cer-claim')"></textarea>
+          <span style="font-size:12px;color:#9A8E82;font-weight:600;display:block;margin-top:4px;">
+            Your claim<span class="response-save-dot" id="dot-cer-claim"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cer-section">
+      <div class="cer-badge cer-badge-evidence">E</div>
+      <div class="cer-section-body">
+        <div class="cer-section-title">Evidence <span class="cer-section-hint">— Use one or more of the lab scenarios.</span></div>
+        <div class="cer-write-box">
+          <p class="cer-starter">💡 Start with: <em>"For example, in the clay scenario the mass stayed at ___ , and in the sealed bag…"</em></p>
+          <textarea class="response-textarea ta-sm" id="cer-evidence"
+            data-label="Part C — Evidence"
+            placeholder="For example, in the clay scenario the mass stayed at... and in the sealed bag..."
+            oninput="autoSave(this,'dot-cer-evidence')"></textarea>
+          <span style="font-size:12px;color:#9A8E82;font-weight:600;display:block;margin-top:4px;">
+            Your evidence<span class="response-save-dot" id="dot-cer-evidence"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cer-section">
+      <div class="cer-badge cer-badge-reason">R</div>
+      <div class="cer-section-body">
+        <div class="cer-section-title">Reasoning <span class="cer-section-hint">— Why does conservation make sense at the particle level?</span></div>
+        <div class="cer-write-box">
+          <p class="cer-starter">💡 Start with: <em>"This makes sense because particles can rearrange, but they don't…"</em></p>
+          <textarea class="response-textarea ta-sm" id="cer-reasoning"
+            data-label="Part C — Reasoning"
+            placeholder="This makes sense because particles can rearrange, but they don't..."
+            oninput="autoSave(this,'dot-cer-reasoning')"></textarea>
+          <span style="font-size:12px;color:#9A8E82;font-weight:600;display:block;margin-top:4px;">
+            Your reasoning<span class="response-save-dot" id="dot-cer-reasoning"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cer-vocab-check">
+      📚 <strong>Vocab check:</strong> Use at least two of these words: <strong>matter</strong>, <strong>mass</strong>, <strong>conservation</strong>, <strong>physical change</strong>, <strong>evidence</strong>
+    </div>
+  </div>
+
+  <div class="revise-block">
+    <div class="revise-header">
+      <span class="revise-icon">🔄</span>
+      <div>
+        <div class="revise-label">Revise Your Thinking</div>
+        <div class="revise-question">Look back at your prediction from the Vocabulary tab.</div>
+      </div>
+    </div>
+    <div class="revise-prompts">
+      <p>Write 3–4 sentences answering these:</p>
+      <ul>
+        <li>What did you predict about why mass stays the same?</li>
+        <li>How does today's lesson confirm or strengthen your idea?</li>
+        <li>What's the biggest new idea about conservation you'd add now?</li>
+      </ul>
+    </div>
+    <div class="cer-write-box" style="margin-top:14px;">
+      <textarea class="response-textarea ta-lg" id="revise-1"
+        data-label="Revise Your Thinking"
+        placeholder="At first I predicted... Now I know..."
+        oninput="autoSave(this,'dot-revise-1')"></textarea>
+      <span style="font-size:12px;color:#9A8E82;font-weight:600;display:block;margin-top:4px;">
+        Your reflection<span class="response-save-dot" id="dot-revise-1"></span>
+      </span>
+    </div>
+  </div>
+
+  <div class="gathered-card">
+    <div class="gathered-header">
+      <div class="gathered-header-icon">📋</div>
+      <div>
+        <div class="gathered-header-label">Lesson 8.01 · Submission Packet</div>
+        <div class="gathered-header-title">Gathered Answers</div>
+      </div>
+    </div>
+    <div class="gathered-body">
+      <div class="gathered-intro">All of your written responses — gathered in one place so you can copy or download them for Canvas turn-in.</div>
+      <div class="gathered-name-row">
+        <span class="gathered-name-label">Your name:</span>
+        <input type="text" class="gathered-name-input" id="student-name" placeholder="Type your name here" oninput="refreshGathered()" />
+      </div>
+      <textarea class="gathered-output" id="gatheredOutput" readonly></textarea>
+      <div class="gathered-actions">
+        <button class="gathered-btn" onclick="copyGathered()">📋 Copy to Clipboard</button>
+        <button class="gathered-btn gathered-btn-download" onclick="downloadGathered()">⬇ Download as Text</button>
+      </div>
+      <div class="gathered-copied" id="copiedMsg">Copied! Paste into your Canvas text box to turn in.</div>
+    </div>
+  </div>
+
+  <div style="background:#fff;border:2px solid #55C8E8;border-radius:18px;margin-top:20px;overflow:hidden;">
+    <div style="display:flex;align-items:center;gap:10px;padding:14px 20px;background:#EAF8FD;border-bottom:2px solid #B8E2F0;">
+      <div style="width:42px;height:42px;border-radius:50%;background:#55C8E8;color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">📬</div>
+      <div>
+        <div style="font-size:10px;color:#9A8E82;text-transform:uppercase;letter-spacing:0.8px;font-weight:700;">Time to Submit</div>
+        <div style="font-size:20px;color:#0E1C42;font-weight:800;line-height:1.2;">What to Turn In</div>
+      </div>
+    </div>
+    <div style="padding:18px 22px;">
+      <p style="font-size:16px;color:#5A4D3E;line-height:1.65;margin-bottom:14px;">When you've finished, copy your gathered answers into Canvas. Use this checklist before you submit.</p>
+
+      <div class="turn-in-checklist">
+
+        <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
+          <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part A — Three changes:</strong> Three physical changes from home, each with a prediction.</span>
+        </div>
+
+        <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
+          <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part B — Evidence Questions:</strong> All three answered using the lab scenarios.</span>
+        </div>
+
+        <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
+          <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part C — CER:</strong> Claim, evidence from one scenario, and reasoning about particles.</span>
+        </div>
+
+        <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
+          <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Revise Your Thinking:</strong> 3–4 sentences explaining how your thinking changed.</span>
+        </div>
+
+        <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
+          <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Vocab Check:</strong> At least two lesson words used accurately.</span>
+        </div>
+
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px;">
+        <div style="background:#EEF8F0;border:1.5px solid #C4E5CC;border-radius:12px;padding:12px;text-align:center;">
+          <div style="font-size:22px;margin-bottom:4px;">⌨️</div>
+          <div style="font-size:14px;color:#0E1C42;font-weight:700;">Type It</div>
+          <div style="font-size:12px;color:#5A4D3E;">Type your answers directly into Canvas</div>
+        </div>
+        <div style="background:#EAF8FD;border:1.5px solid #D6F2FB;border-radius:12px;padding:12px;text-align:center;">
+          <div style="font-size:22px;margin-bottom:4px;">📸</div>
+          <div style="font-size:14px;color:#0E1C42;font-weight:700;">Photo It</div>
+          <div style="font-size:12px;color:#5A4D3E;">Take a clear photo of your notebook page</div>
+        </div>
+        <div style="background:#FFF7EE;border:1.5px solid #F0DCC4;border-radius:12px;padding:12px;text-align:center;">
+          <div style="font-size:22px;margin-bottom:4px;">🎥</div>
+          <div style="font-size:14px;color:#0E1C42;font-weight:700;">Record It</div>
+          <div style="font-size:12px;color:#5A4D3E;">Record yourself explaining your work</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="video-wrap" style="margin-top:20px;">
+    <div class="video-wrap-header">
+      <span style="font-size:20px;">👋</span>
+      <div>
+        <div class="video-wrap-type">Wrap-Up · Closing Video</div>
+        <div class="video-wrap-title">Tomorrow you'll prove this with a scale of your own.</div>
+      </div>
+    </div>
+    <div class="video-ratio">
+      <div class="video-placeholder">
+        <div class="video-placeholder-icon">🌟</div>
+        <div class="video-placeholder-text">Closing video coming soon</div>
+        <div class="video-placeholder-id"><!-- slot: 8-01-closing --></div>
+        <div class="video-placeholder-desc">
+          <span class="video-placeholder-desc-label">📹 Suggested content (30–60 sec)</span>
+          Warm wrap-up. Acknowledge that conservation can be a slippery idea — congratulate them for sticking with it. Preview Lesson 8.02: "Tomorrow you'll grab a kitchen scale and measure this yourself — before and after a real change. Bring an ice cube, a small bag, and any soluble item like salt or sugar."
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-assignment -->
+
+
+<footer class="footer">
+  <div class="footer-line1">Optima Academy Online &mdash; <span>5th Grade Science</span></div>
+  <div class="footer-line2">Module 8 · Lesson 8.01 — Does Matter Disappear When It Changes? · SC.5.P.9.1 · 5-PS1-2</div>
+  <div class="footer-line3">© Optima Academy Online. All rights reserved.</div>
+</footer>
+
+<button class="back-to-top" id="backToTop" type="button">⚖️ Back to Top</button>
+<canvas id="confettiCanvas"></canvas>
+
+</div><!-- /page-wrap -->
+
+<script>
+var LESSON_EMOJI = '⚖️';
+var TAB_COUNT = 5;
+var tabProgress = { vocab: false, lesson: false, explore: false, quiz: false, assignment: false };
+function switchTab(id) {
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelector('[data-tab="' + id + '"]').classList.add('active');
+  document.querySelector('[data-tab="' + id + '"]').classList.add('visited');
+  document.getElementById('tab-' + id).classList.add('active');
+  tabProgress[id] = true;
+  updateProgress();
+  var inIframe = (function(){ try { return window.self !== window.top; } catch(e){ return true; } })();
+  if (inIframe) { try { window.parent.scrollTo(0, 0); } catch(e){} try { document.getElementById('pageTop').scrollIntoView(); } catch(e){} }
+  else { window.scrollTo(0, 0); }
+}
+function updateProgress() {
+  var visited = Object.values(tabProgress).filter(Boolean).length;
+  var pct = Math.round((visited / TAB_COUNT) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+}
+(function(){
+  var panel = document.getElementById('diagramPanel'); if (!panel) return;
+  var wordEl = document.getElementById('diagramWord');
+  var infoEl = document.getElementById('diagramInfo');
+  var hotspots = document.querySelectorAll('.diagram-interactive .hotspot');
+  hotspots.forEach(function(hs){
+    hs.addEventListener('click', function(e){
+      e.stopPropagation();
+      hotspots.forEach(function(h){ h.classList.remove('active'); });
+      hs.classList.add('active');
+      var raw = hs.getAttribute('data-info') || '';
+      var parts = raw.split('|');
+      wordEl.textContent = parts[0] ? parts[0].trim() : '';
+      infoEl.textContent = parts[1] ? parts[1].trim() : raw;
+      panel.classList.add('visible');
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+  document.addEventListener('click', function(e){
+    if (!e.target.classList.contains('hotspot')) {
+      panel.classList.remove('visible');
+      hotspots.forEach(function(h){ h.classList.remove('active'); });
+    }
+  });
+})();
+var quizAnswered = 0, quizCorrect = 0;
+function checkQuiz(optEl) {
+  var q = optEl.closest('.quiz-q'); if (q.classList.contains('answered')) return;
+  q.classList.add('answered'); quizAnswered++;
+  var correct = q.getAttribute('data-answer');
+  var chosen = optEl.getAttribute('data-val');
+  var opts = q.querySelectorAll('.quiz-opt');
+  opts.forEach(function(o){ if (o.getAttribute('data-val') === correct) o.classList.add('correct'); else o.classList.add('disabled'); });
+  var fbCorrect = q.querySelector('.fb-correct'); var fbWrong = q.querySelector('.fb-wrong');
+  if (chosen === correct) { quizCorrect++; optEl.classList.add('correct'); if (fbCorrect) fbCorrect.classList.add('show'); }
+  else { optEl.classList.add('wrong'); if (fbWrong) fbWrong.classList.add('show'); }
+  if (quizAnswered === 3) {
+    var scoreBox = document.getElementById('quizScore');
+    var scoreNum = document.getElementById('quizScoreNum');
+    var scoreMsg = document.getElementById('quizScoreMsg');
+    scoreNum.textContent = quizCorrect;
+    if (quizCorrect === 3) { scoreMsg.textContent = '🎉 Perfect score! You\'ve mastered conservation of matter.'; setTimeout(window.launchConfetti, 300); var vp = document.getElementById('quizVideoPerfect'); if (vp) vp.classList.add('show'); }
+    else if (quizCorrect === 2) { scoreMsg.textContent = '🌟 Great work! Review the one you missed.'; var vr = document.getElementById('quizVideoReview'); if (vr) vr.classList.add('show'); }
+    else { scoreMsg.textContent = '👍 Good effort! Look back at the three-row diagram.'; var vr2 = document.getElementById('quizVideoReview'); if (vr2) vr2.classList.add('show'); }
+    scoreBox.classList.add('show');
+  }
+}
+document.querySelectorAll('.vtip').forEach(function(tip){
+  var box = tip.querySelector('.vtip-box'); if (!box) return;
+  tip.addEventListener('mouseenter', function(){
+    var rect = tip.getBoundingClientRect(); var bw = 250;
+    var left = rect.left + rect.width / 2 - bw / 2;
+    if (left < 8) left = 8;
+    if (left + bw > window.innerWidth - 8) left = window.innerWidth - bw - 8;
+    box.style.left = left + 'px';
+    var topPos = rect.top - 140;
+    if (topPos < 8) topPos = rect.bottom + 10;
+    box.style.top = topPos + 'px';
+  });
+});
+function toggleCheck(item) {
+  item.classList.toggle('checked');
+  var icon = item.querySelector('.check-icon');
+  if (icon) icon.textContent = item.classList.contains('checked') ? LESSON_EMOJI : '';
+  var checklist = item.closest('.turn-in-checklist'); if (!checklist) return;
+  var items = checklist.querySelectorAll('.turn-in-item'); if (items.length === 0) return;
+  var allChecked = Array.prototype.every.call(items, function(it){ return it.classList.contains('checked'); });
+  if (allChecked) setTimeout(window.launchConfetti, 200);
+}
+(function(){
+  var btn = document.getElementById('backToTop'); if (!btn) return;
+  btn.textContent = LESSON_EMOJI + ' Back to Top';
+  var inIframe = (function(){ try { return window.self !== window.top; } catch(e){ return true; } })();
+  btn.addEventListener('click', function() {
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch(e) {}
+    document.documentElement.scrollTop = 0; document.body.scrollTop = 0;
+    var top = document.getElementById('pageTop');
+    if (top && top.scrollIntoView) { try { top.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch(e) {} }
+    try { if (window.frameElement && window.frameElement.scrollIntoView) window.frameElement.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch(e) {}
+    if (inIframe) { try { window.parent.postMessage({ type: 'optima-lesson:scroll-to-top' }, '*'); } catch(e) {} }
+  });
+  if (inIframe) setTimeout(function() { btn.classList.add('show'); }, 1500);
+  else window.addEventListener('scroll', function() { btn.classList.toggle('show', window.pageYOffset > 400); });
+})();
+(function(){
+  var canvas = document.getElementById('confettiCanvas');
+  var ctx = canvas.getContext('2d');
+  var particles = [], animating = false;
+  var colors = ['#55C8E8','#34B76F','#F5A623','#FFD700','#8B6FC0','#E8636B','#1A6FA8','#D4772C'];
+  function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  window.addEventListener('resize', resize); resize();
+  function Particle(x,y){ this.x=x; this.y=y; this.vx=(Math.random()-.5)*16; this.vy=Math.random()*-18-4; this.gravity=.45; this.drag=.98; this.size=Math.random()*8+4; this.color=colors[Math.floor(Math.random()*colors.length)]; this.rotation=Math.random()*360; this.rotSpeed=(Math.random()-.5)*12; this.opacity=1; this.shape=Math.random()>.5?'rect':'circle'; }
+  function burst(x,y,count){ for(var i=0;i<count;i++) particles.push(new Particle(x,y)); if(!animating){animating=true;animate();} }
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(function(p,i){
+      p.vy+=p.gravity; p.vx*=p.drag; p.x+=p.vx; p.y+=p.vy;
+      p.rotation+=p.rotSpeed; p.opacity-=.008;
+      if(p.opacity<=0){particles.splice(i,1);return;}
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rotation*Math.PI/180);
+      ctx.globalAlpha=p.opacity; ctx.fillStyle=p.color;
+      if(p.shape==='rect')ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*.6);
+      else{ctx.beginPath();ctx.arc(0,0,p.size/2,0,Math.PI*2);ctx.fill();}
+      ctx.restore();
+    });
+    if(particles.length>0)requestAnimationFrame(animate); else{animating=false;ctx.clearRect(0,0,canvas.width,canvas.height);}
+  }
+  window.launchConfetti = function(){
+    var cx = window.innerWidth/2;
+    burst(cx-100, window.innerHeight*.4, 50);
+    burst(cx, window.innerHeight*.3, 60);
+    burst(cx+100, window.innerHeight*.4, 50);
+  };
+})();
+document.querySelector('[data-tab="vocab"]').classList.add('visited');
+tabProgress.vocab = true; updateProgress();
+(function(){
+  var progressBar = document.querySelector('.progress-wrap');
+  var tabBar = document.querySelector('.tab-bar');
+  if (!progressBar || !tabBar) return;
+  function alignTabBar() { tabBar.style.top = progressBar.offsetHeight + 'px'; }
+  alignTabBar();
+  window.addEventListener('resize', alignTabBar);
+})();
+(function(){
+  document.querySelectorAll('.quiz-q').forEach(function(q){
+    var container = q.querySelector('.quiz-options'); if (!container) return;
+    var opts = Array.prototype.slice.call(container.querySelectorAll('.quiz-opt'));
+    for (var i = opts.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      container.appendChild(opts[j]);
+      var tmp = opts[i]; opts[i] = opts[j]; opts[j] = tmp;
+    }
+  });
+})();
+(function(){
+  var cards = document.querySelectorAll('.intro-2col .card');
+  cards.forEach(function(card){
+    card.querySelector('.card-head').addEventListener('click', function(){
+      cards.forEach(function(c){ c.classList.toggle('collapsed'); });
+    });
+  });
+})();
+function autoSave(el, dotId) { var dot = document.getElementById(dotId); if (!dot) return; if (el.value.trim().length > 0) dot.classList.add('saved'); else dot.classList.remove('saved'); }
+function refreshGathered() {
+  var out = document.getElementById('gatheredOutput'); if (!out) return;
+  var lines = [];
+  var nameEl = document.getElementById('student-name'); var name = nameEl ? nameEl.value.trim() : '';
+  lines.push('═══════════════════════════════════════════════');
+  lines.push('  OPTIMA ACADEMY ONLINE — 5TH GRADE SCIENCE');
+  lines.push('  Lesson 8.01 · Does Matter Disappear When It Changes?');
+  lines.push('  Unit 2 — Matter and Its Properties');
+  lines.push('  Student: ' + (name || '(add your name above)'));
+  lines.push('═══════════════════════════════════════════════');
+  lines.push('');
+  function grab(id, label) {
+    var el = document.getElementById(id); var val = el ? el.value.trim() : '';
+    lines.push('--- ' + label + ' ---');
+    lines.push(val || '(not yet answered)');
+    lines.push('');
+  }
+  grab('pred-1',        'PREDICTION');
+  grab('ryt-1',         'INVESTIGATE — Q1: CLAY');
+  grab('ryt-2',         'INVESTIGATE — Q2: SEALED BAG');
+  grab('ryt-3',         'INVESTIGATE — Q3: OPEN CUP');
+  grab('parta-1',       'PART A — THREE HOME CHANGES');
+  grab('partb-1',       'PART B — Q1: A & B VS C');
+  grab('partb-2',       'PART B — Q2: OPEN CUP EXPLANATION');
+  grab('partb-3',       'PART B — Q3: SHRIVELED APPLES');
+  grab('cer-claim',     'PART C — CLAIM');
+  grab('cer-evidence',  'PART C — EVIDENCE');
+  grab('cer-reasoning', 'PART C — REASONING');
+  grab('revise-1',      'REVISE YOUR THINKING');
+  out.value = lines.join('\n');
+}
+function copyGathered() {
+  refreshGathered();
+  var out = document.getElementById('gatheredOutput'); out.select();
+  try { document.execCommand('copy'); } catch(e) {}
+  var msg = document.getElementById('copiedMsg');
+  if (msg) { msg.classList.add('show'); setTimeout(function(){ msg.classList.remove('show'); }, 2400); }
+}
+function downloadGathered() {
+  refreshGathered();
+  var text = document.getElementById('gatheredOutput').value;
+  var blob = new Blob([text], {type: 'text/plain'});
+  var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'lesson-8-01-does-matter-disappear-when-it-changes.txt';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+document.addEventListener('input', function(e) {
+  if (e.target.classList.contains('response-textarea') || e.target.id === 'student-name') {
+    var panel = document.getElementById('tab-assignment');
+    if (panel && panel.classList.contains('active')) refreshGathered();
+  }
+});
+(function(){
+  var origSwitch = window.switchTab;
+  window.switchTab = function(id) { origSwitch(id); if (id === 'assignment') setTimeout(refreshGathered, 50); };
+})();
+</script>
+</body>
+</html>

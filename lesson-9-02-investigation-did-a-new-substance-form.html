@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Optima Academy Online – Investigation: Did a New Substance Form?</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900&display=swap');
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Nunito', 'Century Gothic', 'Arial Rounded MT Bold', Verdana, sans-serif; background: #F4F0EB url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); color: #2B1D12; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.page-wrap { max-width: 920px; margin: 0 auto; background: #FAF7F3; box-shadow: 0 0 40px rgba(0,0,0,0.07); }
+.header { background: linear-gradient(135deg, #0E1C42 0%, #1A2D5A 60%, #243868 100%); border-bottom: 6px solid #55C8E8; padding: 22px 28px 24px; position: relative; overflow: hidden; }
+.header::after { content: ''; position: absolute; bottom: 6px; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #55C8E8, #34B76F, #55C8E8); }
+.header-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.header-logo { width: 52px; height: 52px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.header-logo img { width: 48px; height: 38px; }
+.header-org { font-size: 22px; color: #fff; font-weight: 800; line-height: 1.15; }
+.header-sub { font-size: 11px; color: #55C8E8; letter-spacing: 0.5px; }
+.header-title { font-size: 30px; color: #fff; font-weight: 900; line-height: 1.15; margin-bottom: 10px; text-shadow: 0 2px 12px rgba(85,200,232,0.3); }
+.header-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(85,200,232,0.15); border: 1.5px solid rgba(85,200,232,0.35); border-radius: 28px; padding: 6px 16px; }
+.header-badge span:first-child { font-size: 22px; }
+.header-badge span:last-child { font-size: 18px; color: #fff; font-weight: 800; }
+.hero-visual { background: linear-gradient(180deg, #070a12 0%, #0e1829 60%, #1a2540 100%); padding: 0; position: relative; overflow: hidden; border-bottom: 3px solid #55C8E8; }
+.hero-visual svg { display: block; width: 100%; height: auto; }
+.info-strip { display: flex; flex-wrap: wrap; background: #fff; border-bottom: 2px solid #E8DDD2; }
+.info-item { flex: 1; min-width: 150px; padding: 12px 16px; border-right: 1px solid #E8DDD2; display: flex; align-items: center; gap: 10px; }
+.info-item:last-child { border-right: none; }
+.info-icon { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.info-label { font-size: 10px; color: #9A8E82; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+.info-value { font-size: 16px; color: #0E1C42; font-weight: 800; line-height: 1.2; }
+.info-detail { font-size: 11px; color: #5A4D3E; line-height: 1.3; }
+.card { background: #fff; border: 2px solid #E8DDD2; border-radius: 18px; margin-bottom: 22px; overflow: hidden; box-shadow: 0 2px 12px rgba(43,29,18,0.04); }
+.card-head { display: flex; align-items: center; gap: 10px; padding: 14px 20px; border-bottom: 2px solid; }
+.card-head-icon { width: 42px; height: 42px; border-radius: 50%; color: #fff; font-size: 22px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.card-head-label { font-size: 10px; color: #9A8E82; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; }
+.card-head-title { font-size: 20px; color: #0E1C42; font-weight: 800; line-height: 1.2; }
+.card-body { padding: 18px 22px; }
+.card-body p { font-size: 17px; color: #5A4D3E; line-height: 1.75; margin-bottom: 12px; }
+.card-body p:last-child { margin-bottom: 0; }
+.theme-earth .card-head { background: #FFF7EE; border-color: #F0DCC4; }
+.theme-earth .card-head-icon { background: #C7922C; }
+.theme-sky .card-head { background: #EAF8FD; border-color: #D6F2FB; }
+.theme-sky .card-head-icon { background: #55C8E8; }
+.theme-forest .card-head { background: #EEF8F0; border-color: #C4E5CC; }
+.theme-forest .card-head-icon { background: #34B76F; }
+.theme-rock .card-head { background: #F0EDF6; border-color: #D8D0E8; }
+.theme-rock .card-head-icon { background: #8B6FC0; }
+.theme-magma .card-head { background: #FFF3DC; border-color: #F5E6C8; }
+.theme-magma .card-head-icon { background: #D4772C; }
+.activity-card { background: #fff; border: 2px solid #E8DDD2; border-radius: 18px; margin-bottom: 18px; overflow: hidden; box-shadow: 0 2px 10px rgba(43,29,18,0.04); }
+.activity-card.act-warmup  { border-left: 6px solid #E8636B; }
+.activity-card.act-lesson  { border-left: 6px solid #D4772C; }
+.activity-card.act-explore { border-left: 6px solid #55C8E8; }
+.act-head { display: flex; align-items: center; gap: 12px; padding: 14px 20px 14px 18px; border-bottom: 1.5px solid #E8DDD2; }
+.act-num { width: 38px; height: 38px; border-radius: 14px; color: #fff; font-size: 18px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.act-title { font-size: 19px; color: #0E1C42; font-weight: 800; line-height: 1.2; }
+.act-subtitle { font-size: 12px; color: #9A8E82; }
+.act-time { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 700; color: #fff; white-space: nowrap; margin-left: auto; flex-shrink: 0; }
+.act-body { padding: 18px 22px 18px 20px; }
+.act-body p { font-size: 17px; color: #5A4D3E; line-height: 1.75; margin-bottom: 12px; }
+.callout { border-radius: 14px; padding: 16px 18px; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+.callout-icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+.callout p { font-size: 16px; color: #2B1D12; line-height: 1.65; margin: 0; }
+.callout-sky    { background: #EAF8FD; border: 2px solid #D6F2FB; }
+.callout-think  { background: #FFF7EE; border: 2px solid #F0DCC4; }
+.callout-tip    { background: #EEF8F0; border: 2px solid #C4E5CC; }
+.socratic-q { background: linear-gradient(135deg, #FFF7EE, #FFF3E0); border: 2px solid #E8C88A; border-radius: 16px; padding: 16px 20px; margin: 16px 0; display: flex; align-items: flex-start; gap: 12px; }
+.socratic-q .sq-icon { font-size: 26px; flex-shrink: 0; line-height: 1; }
+.socratic-q .label { font-size: 11px; color: #C7922C; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 4px; }
+.socratic-q .question { font-size: 17px; color: #2B1D12; font-weight: 700; line-height: 1.6; font-style: italic; }
+.key-concept { background: #EAF8FD; border: 2px solid #D6F2FB; border-radius: 14px; padding: 18px 20px; margin: 14px 0; }
+.key-concept .kc-label { font-size: 13px; color: #2A8DB5; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-bottom: 8px; }
+.key-concept p { font-size: 16px; color: #2B1D12; line-height: 1.7; margin-bottom: 8px; }
+.key-concept p:last-child { margin-bottom: 0; }
+.pq { background: #FAFAF6; border: 2px solid #E8DDD2; border-radius: 14px; padding: 14px 18px; margin-bottom: 12px; }
+.pq-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; color: #fff; font-weight: 800; font-size: 14px; margin-right: 8px; vertical-align: middle; }
+.pq-text { font-size: 17px; color: #2B1D12; line-height: 1.65; margin-bottom: 8px; }
+.vocab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
+.flip-card { perspective: 800px; height: 160px; cursor: pointer; }
+.flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s ease; transform-style: preserve-3d; }
+.flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+.flip-card-front, .flip-card-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 16px; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px 20px; text-align: center; border: 2px solid #E8DDD2; box-shadow: 0 2px 10px rgba(43,29,18,0.06); }
+.flip-card-front { background: #FAFAF6; border-top: 5px solid; }
+.flip-card-front .fc-emoji { font-size: 32px; margin-bottom: 8px; }
+.flip-card-front .fc-word { font-size: 18px; font-weight: 800; color: #0E1C42; margin-bottom: 6px; }
+.flip-card-front .fc-tap { font-size: 11px; color: #B0A698; font-weight: 600; letter-spacing: 0.3px; }
+.flip-card-back { background: linear-gradient(145deg, #0E1C42, #1A2D5A); border-color: #0E1C42; transform: rotateY(180deg); }
+.flip-card-back .fc-def { font-size: 15px; color: #fff; line-height: 1.6; font-weight: 600; }
+.flip-card-back .fc-word-back { font-size: 11px; color: #55C8E8; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 8px; }
+.flip-card-back .fc-tap-back { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 10px; font-weight: 600; }
+.fc-color-1 .flip-card-front { border-top-color: #55C8E8; }
+.fc-color-2 .flip-card-front { border-top-color: #34B76F; }
+.fc-color-3 .flip-card-front { border-top-color: #C7922C; }
+.fc-color-4 .flip-card-front { border-top-color: #8B6FC0; }
+.fc-color-5 .flip-card-front { border-top-color: #E8636B; }
+.fc-color-6 .flip-card-front { border-top-color: #D4772C; }
+.vtip { position: relative; color: #8B6FC0; font-weight: 700; cursor: help; border-bottom: 2px dotted rgba(139,111,192,0.45); transition: color 0.15s; }
+.vtip:hover { color: #6B4FA0; }
+.vtip .vtip-box { position: fixed; background: #0E1C42; color: #fff; padding: 12px 16px; border-radius: 12px; font-size: 14px; font-weight: 600; font-style: normal; line-height: 1.55; width: 250px; text-align: center; opacity: 0; visibility: hidden; transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s; pointer-events: none; z-index: 9999; box-shadow: 0 6px 24px rgba(14,28,66,0.35); border: 1.5px solid rgba(85,200,232,0.3); transform: translateY(6px); }
+.vtip .vtip-box::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 7px solid transparent; border-top-color: #0E1C42; }
+.vtip .vtip-word { font-size: 11px; color: #55C8E8; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 4px; display: block; }
+.vtip:hover .vtip-box { opacity: 1; visibility: visible; transform: translateY(0); }
+.go-deeper { background: linear-gradient(135deg, #F0EDF6, #E8E2F2); border: 2px solid #D8D0E8; border-radius: 16px; margin: 16px 0; overflow: hidden; }
+.go-deeper summary { padding: 14px 18px; font-size: 16px; font-weight: 800; color: #0E1C42; cursor: pointer; display: flex; align-items: center; gap: 10px; list-style: none; }
+.go-deeper summary::-webkit-details-marker { display: none; }
+.go-deeper summary::before { content: '🔭'; font-size: 22px; }
+.go-deeper summary::after { content: '▸'; margin-left: auto; font-size: 18px; color: #8B6FC0; transition: transform 0.3s; }
+.go-deeper[open] summary::after { transform: rotate(90deg); }
+.go-deeper .gd-body { padding: 4px 18px 16px; font-size: 15px; color: #5A4D3E; line-height: 1.7; border-top: 1.5px solid #D8D0E8; }
+.go-deeper .gd-body p { margin-bottom: 10px; }
+.mind-blow { background: linear-gradient(135deg, #0a0e1a, #0E1C42); border: 2px solid rgba(85,200,232,0.3); border-radius: 18px; padding: 18px 22px; margin: 18px 0; display: flex; align-items: flex-start; gap: 14px; position: relative; overflow: hidden; }
+.mind-blow::before { content: ''; position: absolute; top: -30px; right: -30px; width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(85,200,232,0.15), transparent); }
+.mind-blow-icon { font-size: 36px; flex-shrink: 0; animation: mind-blow-bounce 2s ease-in-out infinite; }
+@keyframes mind-blow-bounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12)} }
+.mind-blow-content { flex: 1; }
+.mind-blow-label { font-size: 11px; color: #FFD700; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; margin-bottom: 4px; }
+.mind-blow-text { font-size: 16px; color: #fff; line-height: 1.6; font-weight: 600; }
+.mind-blow-text strong { color: #55C8E8; }
+.diagram-interactive { position: relative; }
+.diagram-interactive .hotspot { cursor: pointer; opacity: 0; transition: opacity 0.2s; }
+.diagram-interactive .hotspot:hover { opacity: 0.25; }
+.diagram-interactive .hotspot.active { opacity: 0.35; }
+.diagram-info-panel { background: #0E1C42; color: #fff; padding: 14px 20px; border-radius: 14px; font-size: 15px; line-height: 1.55; font-weight: 600; text-align: center; border: 1.5px solid rgba(85,200,232,0.3); box-shadow: 0 4px 16px rgba(0,0,0,0.2); margin: 10px 0 0; display: none; }
+.diagram-info-panel.visible { display: block; }
+.diagram-info-panel .dip-word { font-size: 11px; color: #FFD700; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; display: block; margin-bottom: 3px; }
+.student-chart-wrap { background: #FAFAF6; border: 2px solid #E8DDD2; border-radius: 14px; padding: 16px 18px; margin: 16px 0; }
+.student-chart-label { font-size: 13px; color: #5A4D3E; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 12px; }
+.student-chart { width: 100%; border-collapse: collapse; font-size: 15px; }
+.student-chart th { background: #0E1C42; color: #fff; padding: 10px 12px; text-align: left; font-size: 13px; font-weight: 700; border: 1px solid #1A2D5A; }
+.student-chart td { padding: 10px 12px; border: 1.5px dashed #D0C8BE; color: #5A4D3E; font-size: 15px; vertical-align: middle; }
+.student-chart td.row-label { background: #F0EDE8; color: #0E1C42; font-weight: 700; border: 1px solid #E8DDD2; border-style: solid; }
+.student-chart tbody tr:nth-child(even) td:not(.row-label) { background: #F9F7F3; }
+.cer-block { background: #FAF7F3; border: 2px solid #8B6FC0; border-radius: 18px; padding: 22px 24px; margin-bottom: 22px; }
+.cer-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1.5px solid #E8DDD2; }
+.cer-icon { font-size: 28px; flex-shrink: 0; line-height: 1; }
+.cer-label { font-size: 11px; color: #8B6FC0; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 4px; }
+.cer-question { font-size: 18px; color: #0E1C42; font-weight: 700; line-height: 1.5; }
+.cer-section { display: flex; gap: 14px; margin-bottom: 18px; }
+.cer-badge { width: 32px; height: 32px; border-radius: 50%; color: #fff; font-size: 16px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.cer-badge-claim    { background: #E8636B; }
+.cer-badge-evidence { background: #D4772C; }
+.cer-badge-reason   { background: #34B76F; }
+.cer-section-body { flex: 1; }
+.cer-section-title { font-size: 16px; color: #0E1C42; font-weight: 800; margin-bottom: 8px; }
+.cer-section-hint { font-size: 13px; color: #9A8E82; font-weight: 600; }
+.cer-write-box { background: #fff; border: 2px dashed #E8DDD2; border-radius: 10px; padding: 14px; }
+.cer-starter { font-size: 14px; color: #C7922C; font-style: italic; margin: 0 0 10px; line-height: 1.5; }
+.cer-line { border-bottom: 1.5px solid #E8DDD2; height: 36px; margin-top: 2px; }
+.cer-vocab-check { background: #EAF8FD; border-radius: 10px; padding: 12px 14px; border-left: 3px solid #55C8E8; margin-top: 6px; font-size: 14px; color: #0E1C42; line-height: 1.5; }
+.revise-block { background: #FFF7EE; border: 2px solid #F0DCC4; border-radius: 16px; padding: 20px 22px; margin-bottom: 20px; }
+.revise-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+.revise-icon { font-size: 28px; flex-shrink: 0; line-height: 1; }
+.revise-label { font-size: 11px; color: #C7922C; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 4px; }
+.revise-question { font-size: 17px; color: #0E1C42; font-weight: 700; line-height: 1.5; }
+.revise-prompts { font-size: 16px; color: #5A4D3E; line-height: 1.7; margin-bottom: 14px; }
+.revise-prompts ul { margin: 10px 0 0 20px; }
+.revise-prompts li { margin-bottom: 6px; }
+.response-q { margin: 10px 0 0; }
+.response-save-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #D0C8BE; margin-left: 6px; vertical-align: middle; transition: background 0.3s; flex-shrink: 0; }
+.response-save-dot.saved { background: #34B76F; }
+.response-textarea { width: 100%; min-height: 80px; padding: 10px 12px; border: 1.5px solid #D0C8BE; border-radius: 10px; background: #FAFAF6; font-family: 'Nunito', sans-serif; font-size: 15px; color: #2B1D12; resize: vertical; line-height: 1.65; transition: border-color 0.2s, box-shadow 0.2s; }
+.response-textarea:focus { outline: none; border-color: #55C8E8; box-shadow: 0 0 0 3px rgba(85,200,232,0.15); background: #fff; }
+.response-textarea.ta-sm { min-height: 64px; }
+.response-textarea.ta-lg { min-height: 110px; }
+.gathered-card { background: #fff; border: 2px solid #E8DDD2; border-radius: 18px; margin: 24px 0; overflow: hidden; box-shadow: 0 2px 12px rgba(43,29,18,0.06); }
+.gathered-header { background: linear-gradient(135deg, #0E1C42, #1A2D5A); padding: 14px 20px; display: flex; align-items: center; gap: 12px; }
+.gathered-header-icon { font-size: 24px; }
+.gathered-header-label { font-size: 10px; color: #55C8E8; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; margin-bottom: 2px; }
+.gathered-header-title { font-size: 18px; color: #fff; font-weight: 800; line-height: 1.2; }
+.gathered-body { padding: 16px 20px 18px; }
+.gathered-intro { font-size: 14px; color: #5A4D3E; line-height: 1.6; margin-bottom: 12px; font-style: italic; }
+.gathered-name-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1.5px solid #E8DDD2; }
+.gathered-name-label { font-size: 13px; color: #0E1C42; font-weight: 800; white-space: nowrap; }
+.gathered-name-input { flex: 1; padding: 8px 12px; border: 1.5px solid #D0C8BE; border-radius: 8px; font-family: 'Nunito', sans-serif; font-size: 14px; color: #2B1D12; background: #FAFAF6; }
+.gathered-name-input:focus { outline: none; border-color: #55C8E8; background: #fff; }
+.gathered-output { width: 100%; min-height: 200px; padding: 12px 14px; border: 1.5px solid #D0C8BE; border-radius: 10px; background: #F4F0EB; font-family: 'Courier New', monospace; font-size: 13px; color: #2B1D12; resize: vertical; line-height: 1.6; white-space: pre-wrap; }
+.gathered-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.gathered-btn { background: #0E1C42; color: #fff; border: none; padding: 9px 18px; border-radius: 10px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 13px; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+.gathered-btn:hover { background: #55C8E8; transform: translateY(-1px); }
+.gathered-btn-download { background: #34B76F; }
+.gathered-copied { display: none; margin-top: 8px; padding: 6px 12px; background: #EEF8F0; color: #1a6b35; border-radius: 8px; font-size: 13px; font-weight: 700; border: 1.5px solid #B8E8CF; }
+.gathered-copied.show { display: block; }
+.lesson-figure { background: #fff; border: 2px solid #E8DDD2; border-radius: 16px; padding: 14px 14px 18px; margin: 0 0 22px; box-shadow: 0 2px 10px rgba(43,29,18,0.04); }
+.lesson-figure-label { font-size: 11px; color: #55C8E8; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 800; margin-bottom: 10px; }
+.lesson-figure img { display: block; max-width: 100%; height: auto; border-radius: 10px; margin: 0 auto; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.lesson-figure-caption { font-size: 14px; color: #5A4D3E; margin-top: 12px; line-height: 1.55; font-weight: 600; text-align: center; }
+.lesson-figure-caption strong { color: #0E1C42; }
+.image-suggestion { background: linear-gradient(135deg, #FFF3E0, #FFF8E1); border: 2.5px dashed #F9A825; border-radius: 16px; padding: 20px 22px; margin: 18px 0; text-align: center; }
+.image-suggestion-icon { font-size: 36px; margin-bottom: 8px; }
+.image-suggestion-label { font-size: 11px; color: #E65100; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+.image-suggestion-desc { font-size: 15px; color: #5A4D3E; line-height: 1.65; font-weight: 600; max-width: 680px; margin: 0 auto 12px; text-align: left; }
+.image-suggestion-file { font-size: 12px; color: #9A8E82; font-family: monospace; background: rgba(0,0,0,0.05); border-radius: 6px; padding: 4px 10px; display: inline-block; margin-top: 6px; }
+.video-wrap { border-radius: 18px; overflow: hidden; border: 2px solid #E8DDD2; box-shadow: 0 4px 20px rgba(43,29,18,0.08); background: #000; margin: 0 0 22px; }
+.video-wrap-header { display: flex; align-items: center; gap: 12px; padding: 12px 18px; background: linear-gradient(135deg, #0E1C42, #1A2D5A); border-bottom: 2px solid rgba(85,200,232,0.2); }
+.video-wrap-type { font-size: 10px; color: #55C8E8; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; margin-bottom: 2px; }
+.video-wrap-title { font-size: 16px; color: #fff; font-weight: 800; line-height: 1.2; }
+.video-ratio { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+.video-ratio iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+.video-placeholder { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #0e1829, #0E1C42); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 18px 24px; overflow-y: auto; }
+.video-placeholder-icon { font-size: 38px; margin-bottom: 6px; opacity: 0.55; }
+.video-placeholder-text { font-size: 13px; color: rgba(255,255,255,0.45); font-weight: 600; line-height: 1.4; font-family: 'Nunito', sans-serif; }
+.video-placeholder-id { font-size: 11px; color: rgba(85,200,232,0.4); font-family: monospace; margin-top: 4px; }
+.video-placeholder-desc { font-size: 12.5px; color: rgba(255,255,255,0.78); font-weight: 600; line-height: 1.55; max-width: 92%; margin-top: 12px; padding: 10px 14px; background: rgba(85,200,232,0.08); border: 1px solid rgba(85,200,232,0.25); border-radius: 8px; text-align: left; }
+.video-placeholder-desc-label { display: block; font-size: 9px; color: #FFD700; text-transform: uppercase; letter-spacing: 0.9px; font-weight: 800; margin-bottom: 4px; }
+.progress-wrap { position: sticky; top: 0; z-index: 200; background: #0E1C42; padding: 8px 20px 10px; border-bottom: 2px solid rgba(85,200,232,0.3); display: flex; align-items: center; gap: 14px; }
+.progress-label { font-size: 12px; color: #55C8E8; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; white-space: nowrap; }
+.progress-track { flex: 1; height: 10px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
+.progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #55C8E8, #34B76F, #FFD700); border-radius: 10px; transition: width 0.4s ease; }
+.progress-pct { font-size: 13px; color: #FFD700; font-weight: 800; min-width: 36px; text-align: right; }
+.tab-bar { position: sticky; top: 44px; z-index: 100; background: #FAF7F3; border-bottom: 3px solid #E8DDD2; display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.tab-bar::-webkit-scrollbar { display: none; }
+.tab-btn { flex: 1; min-width: 130px; padding: 12px 8px 11px; background: transparent; border: none; border-bottom: 4px solid transparent; font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 700; color: #9A8E82; cursor: pointer; transition: all 0.2s; white-space: nowrap; line-height: 1.3; text-align: center; }
+.tab-btn:hover { color: #0E1C42; background: #F0EDE8; }
+.tab-btn.active { color: #0E1C42; border-bottom-color: #55C8E8; background: #fff; }
+.tab-btn .tab-check { display: none; font-size: 12px; color: #34B76F; margin-left: 4px; font-weight: 800; }
+.tab-btn.visited .tab-check { display: inline; }
+.tab-panel { display: none; padding: 24px 28px 36px; background: #ffffff; }
+.tab-panel.active { display: block; }
+.scroll-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+.intro-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px 28px 0; }
+.intro-2col .card { margin-bottom: 0; }
+.intro-2col .card .card-head { cursor: pointer; user-select: none; position: relative; }
+.intro-2col .card .card-head::after { content: '▾'; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 16px; color: #9A8E82; transition: transform 0.25s ease; }
+.intro-2col .card.collapsed .card-head::after { transform: translateY(-50%) rotate(-90deg); }
+.intro-2col .card.collapsed .card-body { display: none; }
+.need-strip { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; padding: 12px 28px 16px; }
+.need-strip-label { font-size: 13px; color: #5A4D3E; font-weight: 700; white-space: nowrap; }
+.need-chip { display: inline-flex; align-items: center; gap: 5px; background: #EAF8FD; border: 1.5px solid #B8E2F0; border-radius: 20px; padding: 5px 12px; font-size: 13px; color: #0E1C42; font-weight: 700; }
+.tab-next-wrap { text-align: center; padding: 24px 0 8px; }
+.tab-next-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 30px; background: linear-gradient(135deg, #55C8E8, #34B76F); color: #fff; border: none; border-radius: 28px; font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 16px rgba(85,200,232,0.3); transition: transform 0.2s, box-shadow 0.2s; }
+.tab-next-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(85,200,232,0.45); }
+.turn-in-item { transition: background .2s, border-color .2s; }
+.turn-in-item:hover { background: #F0EDE8 !important; }
+.turn-in-item.checked { background: #EAF8FD !important; border-color: #B8E2F0 !important; }
+.turn-in-item.checked .check-icon { border-color: transparent !important; background: transparent !important; font-size: 22px !important; }
+.turn-in-item.checked span:last-child { color: #5A4D3E; }
+.quiz-card { background: #fff; border: 2px solid #E8DDD2; border-left: 6px solid #F5A623; border-radius: 18px; margin-bottom: 18px; overflow: hidden; box-shadow: 0 2px 10px rgba(43,29,18,0.04); }
+.quiz-q { background: #FAFAF6; border: 2px solid #E8DDD2; border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
+.quiz-q-text { font-size: 17px; color: #2B1D12; font-weight: 700; line-height: 1.6; margin-bottom: 12px; }
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt { padding: 10px 16px; border-radius: 12px; border: 2px solid #E8DDD2; background: #fff; font-size: 15px; font-weight: 700; color: #2B1D12; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 10px; user-select: none; }
+.quiz-opt:hover { background: #EAF8FD; border-color: #55C8E8; }
+.quiz-opt.correct { background: #EEF8F0 !important; border-color: #34B76F !important; color: #1a6b35 !important; }
+.quiz-opt.wrong   { background: #FFF0EC !important; border-color: #E8636B !important; color: #a33 !important; }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.6; }
+.quiz-opt .opt-letter { width: 28px; height: 28px; border-radius: 50%; background: #E8DDD2; color: #5A4D3E; font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+.quiz-opt.correct .opt-letter { background: #34B76F; color: #fff; }
+.quiz-opt.wrong .opt-letter   { background: #E8636B; color: #fff; }
+.quiz-feedback { font-size: 14px; padding: 10px 14px; border-radius: 10px; margin-top: 10px; display: none; font-weight: 600; line-height: 1.5; }
+.quiz-feedback.show { display: block; }
+.quiz-feedback.fb-correct { background: #EEF8F0; color: #1a6b35; border: 1.5px solid #B8E8CF; }
+.quiz-feedback.fb-wrong   { background: #FFF0EC; color: #8a3030; border: 1.5px solid #F5C4BA; }
+.quiz-score { text-align: center; padding: 16px; background: linear-gradient(135deg, #EAF8FD, #D6F2FB); border: 2px solid #B8E8F5; border-radius: 14px; margin-top: 8px; display: none; }
+.quiz-score.show { display: block; }
+.quiz-score-num { font-size: 36px; font-weight: 900; color: #0E1C42; }
+.quiz-score-label { font-size: 14px; color: #9A8E82; font-weight: 700; }
+.quiz-score-msg { font-size: 16px; color: #2B1D12; font-weight: 700; margin-top: 6px; }
+.diagram-wrap { background: #fff; border: 2px solid #E8DDD2; border-radius: 16px; padding: 16px; margin: 16px 0; text-align: center; }
+.diagram-wrap svg { max-width: 100%; height: auto; }
+.diagram-caption { font-size: 13px; color: #9A8E82; margin-top: 10px; font-weight: 600; }
+.back-to-top { position: fixed; bottom: 28px; right: 28px; height: 44px; padding: 0 18px 0 14px; border-radius: 22px; background: linear-gradient(135deg, #55C8E8, #34B76F); color: #fff; border: none; font-size: 14px; font-weight: 800; font-family: 'Nunito', sans-serif; cursor: pointer; box-shadow: 0 4px 18px rgba(85,200,232,0.35); display: flex; align-items: center; gap: 6px; opacity: 0; visibility: hidden; transform: translateY(20px); transition: opacity 0.3s, visibility 0.3s, transform 0.3s, box-shadow 0.2s; z-index: 500; letter-spacing: 0.3px; }
+.back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { box-shadow: 0 6px 24px rgba(85,200,232,0.5); transform: translateY(-3px); }
+#confettiCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10000; }
+.footer { background: #0E1C42; border-top: 4px solid #55C8E8; padding: 18px 28px; text-align: center; }
+.footer-line1 { font-size: 15px; color: #fff; margin-bottom: 4px; }
+.footer-line1 span { color: #55C8E8; font-weight: 700; }
+.footer-line2 { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 2px; }
+.footer-line3 { font-size: 12px; color: rgba(255,255,255,0.4); }
+strong { color: #0E1C42; }
+em { color: #5A4D3E; }
+/* Hero animations */
+@keyframes hero-bar-grow-1 { 0%,100%{height:50px} 50%{height:50px} }
+@keyframes hero-bar-grow-2 { 0%,100%{height:50px} 50%{height:50px} }
+@keyframes hero-bar-grow-3 { 0%,100%{height:50px} 50%{height:50px} }
+@keyframes hero-scale-blink { 0%,100%{opacity:1} 50%{opacity:0.7} }
+@keyframes hero-twinkle-anim { 0%,100%{opacity:.4;transform:scale(.85)} 50%{opacity:1;transform:scale(1.15)} }
+.hero-blink { animation: hero-scale-blink 2s ease-in-out infinite; }
+.hero-twinkle { animation: hero-twinkle-anim 2.2s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+.quiz-video-conditional { display: none; margin-top: 16px; }
+.quiz-video-conditional.show { display: block; }
+@media (max-width: 620px) { .intro-2col { grid-template-columns: 1fr; } .tab-btn { min-width: 100px; font-size: 11px; padding: 10px 4px; } .vocab-grid { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<a id="pageTop"></a>
+<div class="page-wrap">
+
+<div class="progress-wrap">
+  <span class="progress-label">🫧 Lesson Progress</span>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <span class="progress-pct" id="progressPct">0%</span>
+</div>
+
+<div class="header">
+  <div class="header-brand">
+    <div class="header-logo">
+      <img src="https://raw.githubusercontent.com/optimaondemand/optima-assets/eeb0b335630058906d52f478028361d352253a93/images/Optima%20Final%20Circle%20-%20Owl%20Only.png" alt="Optima Academy" />
+    </div>
+    <div>
+      <div class="header-org">Optima Academy Online</div>
+      <div class="header-sub">An Education Experience Company</div>
+    </div>
+  </div>
+  <div class="header-title">Investigation: Did a New Substance Form?</div>
+  <div class="header-badge">
+    <span>🫧</span>
+    <span>Lesson 9.02</span>
+  </div>
+</div>
+
+<!-- HERO — Three before/after scale readings with a bar graph -->
+<div class="hero-visual">
+<svg viewBox="0 0 920 260" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a1428"/>
+      <stop offset="60%" stop-color="#102347"/>
+      <stop offset="100%" stop-color="#1a3155"/>
+    </linearGradient>
+    <linearGradient id="cupG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.15)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.05)"/>
+    </linearGradient>
+  </defs>
+  <rect width="920" height="260" fill="url(#bgG)"/>
+  <circle class="hero-twinkle" cx="60" cy="45" r="1.6" fill="#FFD700"/>
+  <circle class="hero-twinkle" cx="870" cy="50" r="1.5" fill="#9CE3F5"/>
+
+  <rect x="220" y="15" width="480" height="28" rx="6" fill="rgba(85,200,232,0.15)" stroke="#55C8E8" stroke-width="1.5"/>
+  <text x="460" y="34" text-anchor="middle" font-family="Nunito,sans-serif" font-size="13" fill="#fff" font-weight="800">Mix two things. Watch for the clues.</text>
+
+  <!-- LEFT: salt + water (physical) -->
+  <g transform="translate(130,75)">
+    <!-- Cup -->
+    <path d="M 10 30 L 18 130 L 122 130 L 130 30 Z" fill="url(#cupG)" stroke="#9CE3F5" stroke-width="2.5"/>
+    <!-- Water -->
+    <path d="M 18 130 L 122 130 L 119 70 L 21 70 Z" fill="rgba(85,200,232,0.55)" stroke="#55C8E8" stroke-width="1.5"/>
+    <ellipse cx="70" cy="70" rx="49" ry="3" fill="#9CE3F5"/>
+    <!-- Salt dissolved (dots) -->
+    <g fill="rgba(255,255,255,0.7)">
+      <circle cx="35" cy="85" r="1.2"/>
+      <circle cx="55" cy="95" r="1.0"/>
+      <circle cx="75" cy="100" r="1.3"/>
+      <circle cx="95" cy="90" r="1.1"/>
+      <circle cx="45" cy="110" r="1.2"/>
+      <circle cx="85" cy="115" r="1.0"/>
+      <circle cx="65" cy="120" r="1.3"/>
+    </g>
+    <!-- Label -->
+    <rect x="-10" y="145" width="160" height="22" rx="5" fill="#55C8E8"/>
+    <text x="70" y="161" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" fill="#fff" font-weight="800">salt + water</text>
+    <text x="70" y="185" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" fill="#9CE3F5" font-weight="700">looks clear · no clues</text>
+    <text x="70" y="202" text-anchor="middle" font-family="Nunito,sans-serif" font-size="10" fill="#fff" font-weight="700">PHYSICAL</text>
+  </g>
+
+  <!-- CENTER: vinegar + baking soda (chemical, fizzing) -->
+  <g transform="translate(380,55)">
+    <path d="M 10 50 L 18 150 L 122 150 L 130 50 Z" fill="url(#cupG)" stroke="#FFB74D" stroke-width="2.5"/>
+    <!-- Liquid -->
+    <path d="M 18 150 L 122 150 L 119 90 L 21 90 Z" fill="rgba(255,193,7,0.35)" stroke="#FFB74D" stroke-width="1.5"/>
+    <!-- Foam at top -->
+    <ellipse cx="70" cy="88" rx="50" ry="6" fill="rgba(255,255,255,0.85)"/>
+    <circle cx="40" cy="82" r="6" fill="rgba(255,255,255,0.9)" class="hero-melt"/>
+    <circle cx="58" cy="76" r="5" fill="rgba(255,255,255,0.85)" class="hero-melt"/>
+    <circle cx="80" cy="78" r="7" fill="rgba(255,255,255,0.95)" class="hero-melt"/>
+    <circle cx="100" cy="83" r="5" fill="rgba(255,255,255,0.85)" class="hero-melt"/>
+    <!-- Rising bubbles -->
+    <g class="hero-twinkle">
+      <circle cx="45" cy="60" r="3" fill="rgba(255,255,255,0.7)"/>
+      <circle cx="65" cy="40" r="2.5" fill="rgba(255,255,255,0.6)"/>
+      <circle cx="90" cy="55" r="3.5" fill="rgba(255,255,255,0.7)"/>
+      <circle cx="105" cy="35" r="2" fill="rgba(255,255,255,0.6)"/>
+    </g>
+    <!-- Bubbles inside -->
+    <g fill="rgba(255,255,255,0.6)">
+      <circle cx="35" cy="115" r="2"/>
+      <circle cx="55" cy="130" r="2.5"/>
+      <circle cx="80" cy="120" r="2"/>
+      <circle cx="100" cy="125" r="2.5"/>
+    </g>
+    <!-- Label -->
+    <rect x="-10" y="165" width="160" height="22" rx="5" fill="#D4772C"/>
+    <text x="70" y="181" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" fill="#fff" font-weight="800">vinegar + baking soda</text>
+    <text x="70" y="205" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" fill="#FFD700" font-weight="700">fizz · foam · new gas!</text>
+  </g>
+
+  <!-- RIGHT: sugar + water (physical) -->
+  <g transform="translate(640,75)">
+    <path d="M 10 30 L 18 130 L 122 130 L 130 30 Z" fill="url(#cupG)" stroke="#9CE3F5" stroke-width="2.5"/>
+    <path d="M 18 130 L 122 130 L 119 70 L 21 70 Z" fill="rgba(85,200,232,0.55)" stroke="#55C8E8" stroke-width="1.5"/>
+    <ellipse cx="70" cy="70" rx="49" ry="3" fill="#9CE3F5"/>
+    <g fill="rgba(255,255,255,0.6)">
+      <circle cx="40" cy="90" r="1.0"/>
+      <circle cx="60" cy="100" r="1.2"/>
+      <circle cx="80" cy="105" r="1.0"/>
+      <circle cx="100" cy="95" r="1.1"/>
+      <circle cx="50" cy="115" r="1.0"/>
+      <circle cx="90" cy="120" r="1.2"/>
+    </g>
+    <rect x="-10" y="145" width="160" height="22" rx="5" fill="#55C8E8"/>
+    <text x="70" y="161" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" fill="#fff" font-weight="800">sugar + warm water</text>
+    <text x="70" y="185" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" fill="#9CE3F5" font-weight="700">dissolves · no clues</text>
+    <text x="70" y="202" text-anchor="middle" font-family="Nunito,sans-serif" font-size="10" fill="#fff" font-weight="700">PHYSICAL</text>
+  </g>
+
+  <line x1="40" y1="245" x2="880" y2="245" stroke="#55C8E8" stroke-width="1.5" opacity="0.35"/>
+</svg>
+</div>
+
+<div class="info-strip">
+  <div class="info-item">
+    <div class="info-icon" style="background:#EAF8FD;">📅</div>
+    <div>
+      <div class="info-label">Quarter / Unit</div>
+      <div class="info-value">Q2 · Unit 2</div>
+      <div class="info-detail">Matter and Its Properties</div>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon" style="background:#EEF8F0;">📖</div>
+    <div>
+      <div class="info-label">Week / Lesson</div>
+      <div class="info-value">Week 9</div>
+      <div class="info-detail">Lesson 9.02 — 5th Grade Science</div>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon" style="background:#FFF7EE;">🫧</div>
+    <div>
+      <div class="info-label">Science Focus</div>
+      <div class="info-value">Mixing Tests</div>
+      <div class="info-detail">Spot the chemical change</div>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon" style="background:#F0EDF6;">🌎</div>
+    <div>
+      <div class="info-label">Standard</div>
+      <div class="info-value">5-PS1-4</div>
+      <div class="info-detail">Did new matter form?</div>
+    </div>
+  </div>
+</div>
+
+<div class="intro-2col">
+  <div class="card theme-earth">
+    <div class="card-head">
+      <div class="card-head-icon">🤔</div>
+      <div>
+        <div class="card-head-label">Big Question</div>
+        <div class="card-head-title">Think About This…</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Can you prove with a real scale that matter is conserved — even when it changes form right in front of you?</p>
+      <p style="font-size:14px;color:#9A8E82;">Keep this question in mind during your lab.</p>
+    </div>
+  </div>
+  <div class="card theme-sky">
+    <div class="card-head">
+      <div class="card-head-icon">🎯</div>
+      <div>
+        <div class="card-head-label">Learning Goals</div>
+        <div class="card-head-title">I Can…</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#E8636B;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">1</span>measure mass with a scale before and after a change.</p>
+      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#D4772C;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">2</span>record my data and graph it in a simple chart.</p>
+      <p style="margin-bottom:0;"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#34B76F;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">3</span>use evidence to argue which test made a new substance.</p>
+    </div>
+  </div>
+</div>
+
+<div class="need-strip">
+  <span class="need-strip-label">You'll need:</span>
+  <span class="need-chip">📓 Science notebook</span>
+  <span class="need-chip">✏️ Pencil</span>
+  <span class="need-chip">⚖️ A kitchen scale (digital, in grams)</span>
+  <span class="need-chip">🧊 1 ice cube</span>
+  <span class="need-chip">🛍️ A sealable zip-top sandwich bag</span>
+  <span class="need-chip">🥃 A cup with lid (or sealed container)</span>
+  <span class="need-chip">🧂 1 tsp salt or sugar</span>
+  <span class="need-chip">💧 ¼ cup water</span>
+  <span class="need-chip">📄 A piece of paper</span>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="vocab"      onclick="switchTab('vocab')">📚 Vocabulary<span class="tab-check">✓</span></button>
+  <button class="tab-btn"        data-tab="lesson"     onclick="switchTab('lesson')">📖 The Lesson<span class="tab-check">✓</span></button>
+  <button class="tab-btn"        data-tab="explore"    onclick="switchTab('explore')">🔬 Investigate<span class="tab-check">✓</span></button>
+  <button class="tab-btn"        data-tab="quiz"       onclick="switchTab('quiz')">🧠 Self-Check<span class="tab-check">✓</span></button>
+  <button class="tab-btn"        data-tab="assignment" onclick="switchTab('assignment')">✍️ Assignment<span class="tab-check">✓</span></button>
+</div>
+
+<!-- TAB 1: VOCAB -->
+<div class="tab-panel active" id="tab-vocab">
+
+  <div class="video-wrap">
+    <div class="video-wrap-header">
+      <span style="font-size:20px;">🎬</span>
+      <div>
+        <div class="video-wrap-type">Introduction · Welcome Video</div>
+        <div class="video-wrap-title">Welcome to Lesson 9.02 — Find the Chemical Change</div>
+      </div>
+    </div>
+    <div class="video-ratio">
+      <div class="video-placeholder">
+        <div class="video-placeholder-icon">📊</div>
+        <div class="video-placeholder-text">Teacher introduction video coming soon</div>
+        <div class="video-placeholder-id"><!-- slot: 9-02-welcome --></div>
+        <div class="video-placeholder-desc">
+          <span class="video-placeholder-desc-label">📹 Suggested content (1–2 min)</span>
+          Quick warm welcome. Hold up a digital kitchen scale on camera. Say: "Yesterday you predicted that mass stays the same when matter changes form. Today you're going to PROVE it — with your own scale, your own ice cube, your own data." Briefly show the three trials they'll do: crumpling paper, melting ice in a sealed bag, dissolving salt in a sealed cup. Don't run the trials — save the suspense.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="activity-card act-warmup scroll-reveal">
+    <div class="act-head">
+      <div class="act-num" style="background:#E8636B;">1</div>
+      <div style="flex:1;">
+        <div class="act-title">🔍 Notice, Wonder, and Predict</div>
+        <div class="act-subtitle">Three changes. Three scale readings each.</div>
+      </div>
+      <div class="act-time" style="background:#E8636B;">⏱ 5 min</div>
+    </div>
+    <div class="act-body">
+      <p>Today you're going to run three quick trials with a kitchen scale. In each trial, you'll measure mass, change something about the matter, and measure again. You'll do this three times — with three different changes — and write all six numbers down.</p>
+      <p>The three changes: crumpling a piece of paper, melting an ice cube in a sealed bag, and dissolving salt in a sealed cup of water. Three changes, three before-and-after pairs.</p>
+
+      <div class="socratic-q">
+        <span class="sq-icon">👀</span>
+        <div>
+          <div class="label">In Your Science Notebook</div>
+          <div class="question">"In each of the three trials, do you predict the mass will go UP, DOWN, or STAY THE SAME?"</div>
+        </div>
+      </div>
+
+      <div class="callout callout-sky">
+        <span class="callout-icon">🔭</span>
+        <p><strong>Write your prediction below.</strong> Use at least two sentences. Predict each of the three trials — does the mass go up, down, or stay the same? Explain why.</p>
+      </div>
+
+      <div class="response-q">
+        <textarea class="response-textarea" id="pred-1"
+          data-label="Prediction"
+          placeholder="Trial 1 (paper): I predict ___. Trial 2 (ice in bag): I predict ___. Trial 3 (salt in cup): I predict ___. I think this because..."
+          oninput="autoSave(this,'dot-pred-1')"></textarea>
+        <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+          Your prediction<span class="response-save-dot" id="dot-pred-1"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card theme-rock scroll-reveal">
+    <div class="card-head">
+      <div class="card-head-icon">📚</div>
+      <div>
+        <div class="card-head-label">Word Wall</div>
+        <div class="card-head-title">Key Vocabulary</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Words you'll need today: <strong>physical change</strong>, <strong>chemical change</strong>, and <strong>evidence</strong>. <strong>Tap each card to flip it.</strong></p>
+
+      <div class="vocab-grid">
+
+        <div class="flip-card fc-color-1" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front"><div class="fc-emoji">✂️</div><div class="fc-word">physical change</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">physical change</div><div class="fc-def">A change in shape or form. Same kind of matter. Often reversible.</div><div class="fc-tap-back">tap to flip back</div></div>
+          </div>
+        </div>
+
+        <div class="flip-card fc-color-2" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front"><div class="fc-emoji">🫧</div><div class="fc-word">chemical change</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">chemical change</div><div class="fc-def">A change that makes one or more new substances. Often shows bubbles, color, smell, or heat.</div><div class="fc-tap-back">tap to flip back</div></div>
+          </div>
+        </div>
+
+        <div class="flip-card fc-color-3" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front"><div class="fc-emoji">💨</div><div class="fc-word">gas</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">gas</div><div class="fc-def">A form of matter that spreads to fill its container. New gas bubbles can be a clue something chemical happened.</div><div class="fc-tap-back">tap to flip back</div></div>
+          </div>
+        </div>
+
+        <div class="flip-card fc-color-4" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front"><div class="fc-emoji">🧪</div><div class="fc-word">substance</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">substance</div><div class="fc-def">A single kind of matter. Salt is one substance. Vinegar is another. Mixing can make a third.</div><div class="fc-tap-back">tap to flip back</div></div>
+          </div>
+        </div>
+
+        <div class="flip-card fc-color-5" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front"><div class="fc-emoji">👀</div><div class="fc-word">observation</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">observation</div><div class="fc-def">Something you see, hear, smell, or feel and record. The basis of scientific evidence.</div><div class="fc-tap-back">tap to flip back</div></div>
+          </div>
+        </div>
+
+        <div class="flip-card fc-color-6" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front"><div class="fc-emoji">🧾</div><div class="fc-word">evidence</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">evidence</div><div class="fc-def">Observations or data that support a claim. Bubbles, new color, or new smell can be evidence of a chemical change.</div><div class="fc-tap-back">tap to flip back</div></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="tab-next-wrap">
+    <button class="tab-next-btn" onclick="switchTab('lesson')">Continue to 📖 The Lesson →</button>
+  </div>
+
+</div><!-- /tab-vocab -->
+
+
+<!-- TAB 2: THE LESSON -->
+<div class="tab-panel" id="tab-lesson">
+
+  <div class="video-wrap">
+    <div class="video-wrap-header">
+      <span style="font-size:20px;">📖</span>
+      <div>
+        <div class="video-wrap-type">Activity 2 · Setup &amp; Plan</div>
+        <div class="video-wrap-title">Setting Up Your Mixing Tests</div>
+      </div>
+    </div>
+    <div class="video-ratio">
+      <div class="video-placeholder">
+        <div class="video-placeholder-icon">📖</div>
+        <div class="video-placeholder-text">Setup video coming soon</div>
+        <div class="video-placeholder-id"><!-- slot: 9-02-lesson-explainer --></div>
+        <div class="video-placeholder-desc">
+          <span class="video-placeholder-desc-label">📹 Suggested content (2–3 min)</span>
+          Demonstrate the safe setup. Show the materials laid out: small clear cup or jar, water, salt, sugar, baking soda, and vinegar. Demonstrate how to fill a cup about 1/3 with water. Then how to slowly tap baking soda into vinegar (over the sink — it foams!). Safety reminders: vinegar can sting eyes if it splashes, so step back when you stir. Don't taste anything. Wipe up spills.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="activity-card act-lesson scroll-reveal">
+    <div class="act-head">
+      <div class="act-num" style="background:#D4772C;">2</div>
+      <div style="flex:1;">
+        <div class="act-title">📖 Before You Mix</div>
+        <div class="act-subtitle">Quick safety check and the three-test plan</div>
+      </div>
+      <div class="act-time" style="background:#D4772C;">⏱ 7 min</div>
+    </div>
+    <div class="act-body">
+
+      <div class="card theme-forest" style="margin-bottom:18px;">
+        <div class="card-head">
+          <div class="card-head-icon">⚖️</div>
+          <div>
+            <div class="card-head-label">Section 1</div>
+            <div class="card-head-title">Safety First</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>Today's mixing tests are safe — they use ordinary kitchen ingredients. But you should still be careful. Vinegar can sting your eyes, so don't lean over the cup when you pour. The fizzing test can foam up over the cup, so work over the sink or on a paper towel. Don't taste or drink any of the mixtures.</p>
+          <p>Wash your hands when you're done. Pour the mixtures down the sink and rinse your cups. If anything spills on the counter, wipe it up before it dries.</p>
+          <div class="socratic-q">
+            <span class="sq-icon">🤔</span>
+            <div>
+              <div class="label">Stop and Think</div>
+              <div class="question">"Why is it smart to do the fizzing test over the sink instead of on your kitchen table?"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card theme-sky" style="margin-bottom:18px;">
+        <div class="card-head">
+          <div class="card-head-icon">📦</div>
+          <div>
+            <div class="card-head-label">Section 2</div>
+            <div class="card-head-title">The Three Tests</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>You'll run three small tests. <strong>Test A:</strong> stir 1 spoon of salt into about half a cup of cool water. <strong>Test B:</strong> drop 1 spoon of baking soda into about a quarter cup of vinegar. <strong>Test C:</strong> stir 1 spoon of sugar into about half a cup of warm water.</p>
+          <div class="socratic-q">
+            <span class="sq-icon">🧪</span>
+            <div>
+              <div class="label">Stop and Reason</div>
+              <div class="question">"Which of the three tests do you think will give you the most clues? Why?"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card theme-earth" style="margin-bottom:18px;">
+        <div class="card-head">
+          <div class="card-head-icon">📊</div>
+          <div>
+            <div class="card-head-label">Section 3</div>
+            <div class="card-head-title">Recording What You See</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>For each of your three tests, you'll fill out a row of a table. You'll record three things: what you saw <em>before</em> you mixed, what you saw <em>during</em> the mix (any fizz? color? smell?), and what you saw <em>after</em>. You can also draw a small picture next to each row.</p>
+          <p><strong>Real-World Connection:</strong> Chemists in real labs work like this all the time. They mix tiny amounts of two substances and look for clues. Sometimes a clue is a brand-new color. Sometimes it's heat. Sometimes it's bubbles. The clues guide their next test.</p>
+        </div>
+      </div>
+
+      <div class="key-concept">
+        <div class="kc-label">🔑 Key Concept</div>
+        <p>To test for a chemical change, mix two things and watch carefully. New bubbles, new color, new smell, or new feel are strong clues that a new substance just formed.</p>
+      </div>
+
+      <!-- Interactive diagram: 3-trial procedure flow -->
+      <div class="diagram-wrap scroll-reveal">
+        <div style="font-size:13px;color:#9A8E82;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">
+          🗺 Tap each test to see what to expect
+        </div>
+        <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;line-height:1.65;">Three small mixing tests. Two are physical changes. One makes a brand-new substance. Tap each one to see the steps.</p>
+        <div class="diagram-interactive">
+          <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="font-family:Nunito,Arial,sans-serif;max-width:100%;height:auto;" role="img" aria-label="Three home chemistry tests">
+            <rect width="720" height="360" fill="#FAF7F3" rx="12" stroke="#c8b896" stroke-width="2"/>
+
+            <rect x="200" y="15" width="320" height="28" rx="6" fill="#0E1C42"/>
+            <text x="360" y="33" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">Three Tests · Tap to Explore</text>
+
+            <!-- Test A: Salt + water -->
+            <rect x="20" y="65" width="680" height="80" rx="8" fill="#EAF8FD" stroke="#55C8E8" stroke-width="2.5"/>
+            <text x="55" y="100" text-anchor="middle" font-size="26">🧂</text>
+            <text x="55" y="120" text-anchor="middle" font-size="11" fill="#0E1C42" font-weight="800">Test A</text>
+            <text x="100" y="90" font-size="12" fill="#0E1C42" font-weight="700">Salt + cool water</text>
+            <text x="100" y="108" font-size="10" fill="#5A4D3E">1. ½ cup cool water in a cup. 2. Add 1 tsp salt. 3. Stir until clear.</text>
+            <text x="100" y="125" font-size="10" fill="#2A8DB5" font-weight="700">Expected clues: salt vanishes from sight — physical change (dissolving)</text>
+
+            <!-- Test B: Vinegar + baking soda -->
+            <rect x="20" y="155" width="680" height="80" rx="8" fill="#FFF7EE" stroke="#D4772C" stroke-width="2.5"/>
+            <text x="55" y="190" text-anchor="middle" font-size="26">🫧</text>
+            <text x="55" y="210" text-anchor="middle" font-size="11" fill="#0E1C42" font-weight="800">Test B</text>
+            <text x="100" y="180" font-size="12" fill="#0E1C42" font-weight="700">Vinegar + baking soda  (over the sink!)</text>
+            <text x="100" y="198" font-size="10" fill="#5A4D3E">1. ¼ cup vinegar in a cup. 2. Sprinkle in 1 tsp baking soda. 3. Watch closely.</text>
+            <text x="100" y="215" font-size="10" fill="#a85a18" font-weight="700">Expected clues: BIG fizz, foam, new gas — chemical change!</text>
+
+            <!-- Test C: Sugar + water -->
+            <rect x="20" y="245" width="680" height="80" rx="8" fill="#EAF8FD" stroke="#55C8E8" stroke-width="2.5"/>
+            <text x="55" y="280" text-anchor="middle" font-size="26">🍬</text>
+            <text x="55" y="300" text-anchor="middle" font-size="11" fill="#0E1C42" font-weight="800">Test C</text>
+            <text x="100" y="270" font-size="12" fill="#0E1C42" font-weight="700">Sugar + warm water</text>
+            <text x="100" y="288" font-size="10" fill="#5A4D3E">1. ½ cup warm water in a cup. 2. Add 1 tsp sugar. 3. Stir until clear.</text>
+            <text x="100" y="305" font-size="10" fill="#2A8DB5" font-weight="700">Expected clues: sugar vanishes from sight — physical change (dissolving)</text>
+
+            <rect class="hotspot" data-part="testA" data-info="Test A — Salt in water | Pour about half a cup of cool tap water into a small clear cup. Add one teaspoon of salt. Stir gently with a spoon until the salt is no longer visible. The salt didn't disappear — its particles are spread through the water. This is a physical change. No new substance formed." x="20" y="65" width="680" height="80" rx="8" fill="#55C8E8"/>
+            <rect class="hotspot" data-part="testB" data-info="Test B — Vinegar plus baking soda | Pour about a quarter cup of vinegar into a small clear cup placed in the sink (it can foam over). Slowly sprinkle in one teaspoon of baking soda. Watch carefully! You'll see a sudden burst of bubbles and foam. The bubbles are a brand-new gas (carbon dioxide). The starting materials are reacting — vinegar particles and baking soda particles are rearranging into NEW substances. This is a chemical change." x="20" y="155" width="680" height="80" rx="8" fill="#D4772C"/>
+            <rect class="hotspot" data-part="testC" data-info="Test C — Sugar in warm water | Pour about half a cup of warm tap water into a clear cup. Add one teaspoon of sugar. Stir until clear. Just like the salt, the sugar dissolved — but the sugar particles are still in there. Taste a drop? It would still taste sweet. (Don't actually — never taste lab materials.) Physical change. No new substance." x="20" y="245" width="680" height="80" rx="8" fill="#55C8E8"/>
+          </svg>
+          <div style="background:linear-gradient(135deg,#EAF8FD,#D6F2FB);border:2px solid #B8E2F0;border-radius:14px;padding:12px 18px;margin-top:10px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:28px;flex-shrink:0;animation:mind-blow-bounce 2s ease-in-out infinite;">👆</span>
+            <p style="font-size:15px;color:#0E1C42;line-height:1.55;margin:0;font-weight:600;">Tap each trial for the full procedure.</p>
+          </div>
+          <div class="diagram-info-panel" id="diagramPanel">
+            <span class="dip-word" id="diagramWord"></span>
+            <span id="diagramInfo"></span>
+          </div>
+        </div>
+        <div class="diagram-caption">Three tests. Three observations. The clues will tell you which one was chemical.</div>
+      </div>
+
+      <div class="mind-blow">
+        <div class="mind-blow-icon">🤯</div>
+        <div class="mind-blow-content">
+          <div class="mind-blow-label">Mind-Blowing Fact</div>
+          <div class="mind-blow-text">When vinegar and baking soda fizz, the new gas they make is the same gas you breathe out — <strong>carbon dioxide</strong>. That same fizz is what makes bread rise, what makes soda sparkle, and what helps plants grow.</div>
+        </div>
+      </div>
+
+      <details class="go-deeper">
+        <summary>Go Deeper — Why does the fizz stop after a while?</summary>
+        <div class="gd-body">
+          <p>Once you mix vinegar and baking soda, you might notice the foam slows down and eventually stops. Why? Because chemical changes use up the starting materials. Either the vinegar runs out, or the baking soda does. When one of them is gone, there's nothing left to react with — so the fizz stops.</p>
+          <p>Real chemists call this a 'completed reaction.' You can sometimes restart the fizz by adding more of the missing ingredient — which is a clue that the reaction is real, not magic.</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <div class="tab-next-wrap">
+    <button class="tab-next-btn" onclick="switchTab('explore')">Continue to 🔬 Investigate →</button>
+  </div>
+
+</div><!-- /tab-lesson -->
+
+
+<!-- TAB 3: INVESTIGATE -->
+<div class="tab-panel" id="tab-explore">
+
+  <div class="video-wrap">
+    <div class="video-wrap-header">
+      <span style="font-size:20px;">🔬</span>
+      <div>
+        <div class="video-wrap-type">Activity 3 · Investigation</div>
+        <div class="video-wrap-title">Run All Three Tests</div>
+      </div>
+    </div>
+    <div class="video-ratio">
+      <div class="video-placeholder">
+        <div class="video-placeholder-icon">🔬</div>
+        <div class="video-placeholder-text">Investigation video coming soon</div>
+        <div class="video-placeholder-id"><!-- slot: 9-02-investigation-explainer --></div>
+        <div class="video-placeholder-desc">
+          <span class="video-placeholder-desc-label">📹 Suggested content (2–3 min)</span>
+          Live demo all three tests. Show Test A (salt dissolving) at normal speed — boring, on purpose. Then Test B (vinegar + baking soda) over the sink — make sure the audio picks up the fizzing. Then Test C (sugar dissolving) — also boring. After all three, point to the lab notebook and walk through how to fill out the observation table. Emphasize: write down what you SEE, not what you guess.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="activity-card act-explore scroll-reveal">
+    <div class="act-head">
+      <div class="act-num" style="background:#55C8E8;">3</div>
+      <div style="flex:1;">
+        <div class="act-title">🔬 Three Mixing Tests</div>
+        <div class="act-subtitle">Two physical changes. One chemical change. Spot the clues.</div>
+      </div>
+      <div class="act-time" style="background:#55C8E8;">⏱ 20 min total</div>
+    </div>
+    <div class="act-body">
+
+      <p>Gather your materials. You'll need: a small clear cup or jar (a second one is helpful but not required), water (cool and warm), 2 teaspoons of salt, 2 teaspoons of sugar, 1 teaspoon of baking soda, and about ¼ cup of vinegar. Plus a spoon.</p>
+
+      <div class="callout callout-tip">
+        <span class="callout-icon">⚠️</span>
+        <p><strong>Before you start:</strong> Test B (vinegar + baking soda) can foam up — do that one in the sink or over a paper towel. Don't lean your face over the cup. Wash hands after. Pour mixtures down the sink when finished. Never taste anything.</p>
+      </div>
+
+      <div class="lesson-figure">
+        <div class="lesson-figure-label">📷 Reference · Lab setup</div>
+        <img
+          src="images/9-02-mixing-tests-setup.jpg"
+          alt="A clean kitchen counter set up for three small chemistry tests. Three clear glass cups in a row. Next to them: a small bowl of salt, a small bowl of sugar, a small bowl of baking soda, a small bottle of white vinegar, and a metal spoon."
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; this.parentElement.querySelector('.lesson-figure-label').style.display='none';"
+        />
+        <div class="image-suggestion" style="display:none;">
+          <div class="image-suggestion-icon">🖼️</div>
+          <div class="image-suggestion-label">Suggested Image — Generate This</div>
+          <div class="image-suggestion-desc">
+            Photorealistic top-down photo of a kitchen counter set up for a small home chemistry investigation. Three small clear glass cups or jars in a row. Around them: a small ramekin or pinch bowl of white salt, another of white sugar, another of baking soda, a small clear glass bottle of white vinegar, and one stainless steel spoon. Clean wooden countertop, soft natural daylight, sharp focus, no hands, no text overlay, no white background.
+          </div>
+          <div class="image-suggestion-file">Save as: images/9-02-mixing-tests-setup.jpg</div>
+        </div>
+        <div class="lesson-figure-caption">
+          Your lineup before Test A. Three cups, three ingredients to add. Take your time and look closely.
+        </div>
+      </div>
+
+      <!-- Step 1: Start Trial 2 first -->
+      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+        <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Test A — Salt in cool water</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Pour about half a cup of cool tap water into a clear cup. <strong>Look closely</strong> at the salt before you add it — color, texture, smell. Add 1 teaspoon of salt and stir until you can't see the salt anymore. Write down what happened. Did anything bubble, change color, or smell different?</p>
+        </div>
+      </div>
+
+      <!-- Step 2: Trial 1 -->
+      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+        <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Test B — Vinegar + baking soda (over the sink!)</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Set your second cup in the sink (or on a paper towel). Pour in about ¼ cup of vinegar. Smell carefully (don't inhale deeply). Now slowly sprinkle in 1 teaspoon of baking soda. <strong>Stand back!</strong> Watch what happens. Write down every clue you see, hear, or smell.</p>
+        </div>
+      </div>
+
+      <!-- Step 3: Trial 3 -->
+      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
+        <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Test C — Sugar in warm water</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">In a clean cup, pour about half a cup of warm (not hot) tap water. Look at the sugar grains. Add 1 teaspoon of sugar and stir until clear. Write down what happened. Bubbles? New smell? New color?</p>
+        </div>
+      </div>
+
+      <!-- Step 4: Finish Trial 2 -->
+      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div>
+        <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Clean up &amp; safety check</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Pour all three mixtures down the sink. Rinse and dry your cups. Wash your hands with soap. Wipe up any drips on the counter.</p>
+        </div>
+      </div>
+
+      <!-- Data Table -->
+      <div class="student-chart-wrap">
+        <div class="student-chart-label">📋 Observation table — copy into your notebook</div>
+        <table class="student-chart">
+          <thead><tr><th style="width:24%;">Test</th><th>Before mixing</th><th>During / after</th><th>Any clues?</th></tr></thead>
+          <tbody><tr><td class="row-label">🧂 Test A — Salt + water</td><td></td><td></td><td></td></tr><tr><td class="row-label">🫧 Test B — Vinegar + baking soda</td><td></td><td></td><td></td></tr><tr><td class="row-label">🍬 Test C — Sugar + warm water</td><td></td><td></td><td></td></tr></tbody>
+        </table>
+      </div>
+
+      <div class="callout callout-think">
+        <span class="callout-icon">📊</span>
+        <p><strong>Sketch what you saw:</strong> Draw each cup before and after mixing. Pay special attention to Test B — try to show the foam, bubbles, and overflowing fizz. A small picture next to each row of your table is great evidence.</p>
+      </div>
+
+      <!-- Step 5: Analyze -->
+      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">5</div>
+        <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Compare your observations</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Compare your three rows. Which test had clear, dramatic clues? Which had almost no clues? In Test A and Test C, the cup looked clear and the salt or sugar seemed to "disappear" — but it didn't really. Where did it go? In Test B, what looked totally new?</p>
+        </div>
+      </div>
+
+      <!-- Step 6: Make a claim -->
+      <div style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">6</div>
+        <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Write a short claim</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Write one sentence: "Out of my three tests, the one that made a new substance was ___ because ___." This will become part of your CER.</p>
+        </div>
+      </div>
+
+      <div class="card theme-magma scroll-reveal" style="margin-top:10px;">
+        <div class="card-head">
+          <div class="card-head-icon">📝</div>
+          <div>
+            <div class="card-head-label">Record Your Thinking</div>
+            <div class="card-head-title">What Did You Find?</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Answer in complete sentences using your real data.</p>
+
+          <div class="pq">
+            <span class="pq-num" style="background:#D4772C;">1</span>
+            <span class="pq-text">Which test gave you the strongest clues that a new substance formed? List two specific clues you saw, heard, or smelled.</span>
+          </div>
+          <div class="response-q">
+            <textarea class="response-textarea ta-sm" id="ryt-1"
+              data-label="Investigate — Q1: Strongest clues"
+              placeholder="Test ___ gave the strongest clues. I saw ___ and I noticed ___."
+              oninput="autoSave(this,'dot-ryt-1')"></textarea>
+            <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+              Your answer<span class="response-save-dot" id="dot-ryt-1"></span>
+            </span>
+          </div>
+
+          <div class="pq" style="margin-top:14px;">
+            <span class="pq-num" style="background:#D4772C;">2</span>
+            <span class="pq-text">In Test A (salt + water), it LOOKED like the salt disappeared. Did it really? Where did the salt particles go?</span>
+          </div>
+          <div class="response-q">
+            <textarea class="response-textarea ta-sm" id="ryt-2"
+              data-label="Investigate — Q2: Where did the salt go?"
+              placeholder="The salt didn't really disappear because... The particles are..."
+              oninput="autoSave(this,'dot-ryt-2')"></textarea>
+            <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+              Your answer<span class="response-save-dot" id="dot-ryt-2"></span>
+            </span>
+          </div>
+
+          <div class="pq" style="margin-top:14px;">
+            <span class="pq-num" style="background:#D4772C;">3</span>
+            <span class="pq-text">Could you "un-do" Test B and get the vinegar and baking soda back? Why or why not? Compare that to Test A.</span>
+          </div>
+          <div class="response-q">
+            <textarea class="response-textarea ta-sm" id="ryt-3"
+              data-label="Investigate — Q3: Can you un-do it?"
+              placeholder="No / Yes, you can't / can un-do Test B because..."
+              oninput="autoSave(this,'dot-ryt-3')"></textarea>
+            <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+              Your answer<span class="response-save-dot" id="dot-ryt-3"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card theme-rock scroll-reveal" style="margin-top:10px;">
+        <div class="card-head">
+          <div class="card-head-icon">💬</div>
+          <div>
+            <div class="card-head-label">Discuss and Defend</div>
+            <div class="card-head-title">Use Your Evidence</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Think about these. Be ready to explain your reasoning.</p>
+
+          <div class="socratic-q">
+            <span class="sq-icon">⚔️</span>
+            <div>
+              <div class="label">Defend Your Thinking</div>
+              <div class="question">"A friend says, 'Test B is just a physical change because it's still a liquid afterward.' What clues from your investigation would you use to disagree?"</div>
+            </div>
+          </div>
+
+          <div class="socratic-q">
+            <span class="sq-icon">🔍</span>
+            <div>
+              <div class="label">Compare the Evidence</div>
+              <div class="question">"Why does Test A look so different from Test B even though both are mixes? Use what you know about particles to explain."</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="tab-next-wrap">
+    <button class="tab-next-btn" onclick="switchTab('quiz')">Continue to 🧠 Self-Check →</button>
+  </div>
+
+</div><!-- /tab-explore -->
+
+
+<!-- TAB 4: QUIZ -->
+<div class="tab-panel" id="tab-quiz">
+
+  <div class="quiz-card">
+    <div style="display:flex;align-items:center;gap:12px;padding:16px 22px;background:linear-gradient(135deg,#FFF7DC,#FFF3C4);border-bottom:2px solid #F5E6A8;">
+      <div style="width:48px;height:48px;background:#F5A623;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">🧠</div>
+      <div>
+        <div style="font-size:11px;color:#B8860B;text-transform:uppercase;letter-spacing:0.8px;font-weight:700;">Self-Check</div>
+        <div style="font-size:22px;color:#0E1C42;font-weight:800;line-height:1.2;">Quick Self-Check</div>
+        <div style="font-size:13px;color:#9A8E82;font-weight:600;">Not graded — just for you! See how much you understand.</div>
+      </div>
+    </div>
+
+    <div style="padding:22px 24px;">
+
+      <div class="quiz-q" data-answer="b">
+        <div class="quiz-q-text">In your lab, which test made a brand-new substance?</div>
+        <div class="quiz-options">
+          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>Test A — salt in water</div>
+          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>Test B — vinegar plus baking soda</div>
+          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>Test C — sugar in warm water</div>
+        </div>
+        <div class="quiz-feedback fb-correct">✅ Correct! Vinegar + baking soda fizzes because a new gas (carbon dioxide) is being made. That's a chemical change. The other two tests just dissolved one ingredient into another — physical changes.</div>
+        <div class="quiz-feedback fb-wrong">❌ Not quite. Which test had foam, fizz, and a new gas you could SEE? Only one test produced something brand new.</div>
+      </div>
+
+      <div class="quiz-q" data-answer="b">
+        <div class="quiz-q-text">Which of these is the STRONGEST clue that a chemical change has happened?</div>
+        <div class="quiz-options">
+          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>The shape of the cup looks the same</div>
+          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>Bubbles, foam, and a new gas appear out of nowhere</div>
+          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>The temperature of the room stays the same</div>
+        </div>
+        <div class="quiz-feedback fb-correct">✅ Correct! Bubbles and a new gas appearing out of nowhere are strong evidence that the starting materials have reacted to form a new substance.</div>
+        <div class="quiz-feedback fb-wrong">❌ Not quite. The cup's shape and the room's temperature aren't really clues about the substances inside. What new thing appeared during Test B?</div>
+      </div>
+
+      <div class="quiz-q" data-answer="c">
+        <div class="quiz-q-text">Your friend mixes oil and water. The oil floats. She says, "A new substance just formed!" Was a chemical change happening?</div>
+        <div class="quiz-options">
+          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>Yes — anything that doesn't mix is a chemical change.</div>
+          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>Yes — the oil layer is the new substance.</div>
+          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>No — the oil and water are still the same substances; they just didn't blend. No new substance formed.</div>
+        </div>
+        <div class="quiz-feedback fb-correct">✅ Correct! Oil floating on water is a physical layering, not a chemical change. The oil is still oil. The water is still water. No new substance formed.</div>
+        <div class="quiz-feedback fb-wrong">❌ Not quite. Just because things don't blend doesn't mean a new substance formed. Look for stronger clues — new color, new smell, gas, or a change you can't undo.</div>
+      </div>
+
+      <div class="quiz-score" id="quizScore">
+        <div class="quiz-score-num"><span id="quizScoreNum">0</span>/3</div>
+        <div class="quiz-score-label">Questions Correct</div>
+        <div class="quiz-score-msg" id="quizScoreMsg"></div>
+      </div>
+
+      <div class="quiz-video-conditional" id="quizVideoPerfect">
+        <div class="video-wrap">
+          <div class="video-wrap-header">
+            <span style="font-size:20px;">🎉</span>
+            <div>
+              <div class="video-wrap-type">Perfect Score · Bonus Content</div>
+              <div class="video-wrap-title">Bonus — chemical changes that surprise people.</div>
+            </div>
+          </div>
+          <div class="video-ratio">
+            <div class="video-placeholder">
+              <div class="video-placeholder-icon">🌟</div>
+              <div class="video-placeholder-text">Bonus video coming soon</div>
+              <div class="video-placeholder-id"><!-- slot: 9-02-quiz-perfect --></div>
+              <div class="video-placeholder-desc">
+                <span class="video-placeholder-desc-label">📹 Suggested content (30–60 sec)</span>
+                Quick congratulations + a surprise. Show: a piece of bright red apple cut and left out for 10 minutes — it turns brown! That's a chemical change too (the apple particles react with oxygen in the air). Other surprises: an old penny turning green, fresh bread turning into moldy bread. Real-world chemistry is happening all around them.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-video-conditional" id="quizVideoReview">
+        <div class="video-wrap">
+          <div class="video-wrap-header">
+            <span style="font-size:20px;">🔄</span>
+            <div>
+              <div class="video-wrap-type">Review · Keep Going</div>
+              <div class="video-wrap-title">Let's sort physical vs chemical together.</div>
+            </div>
+          </div>
+          <div class="video-ratio">
+            <div class="video-placeholder">
+              <div class="video-placeholder-icon">📖</div>
+              <div class="video-placeholder-text">Review video coming soon</div>
+              <div class="video-placeholder-id"><!-- slot: 9-02-quiz-review --></div>
+              <div class="video-placeholder-desc">
+                <span class="video-placeholder-desc-label">📹 Suggested content (1–2 min)</span>
+                Re-explain the difference with a quick side-by-side: a cup of salt water (physical) next to a cup of vinegar + baking soda (chemical). Talk through the clues you see in each. Then walk through the trickiest quiz question — likely the oil and water one. Reassure: getting tricked is part of learning to be precise.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="tab-next-wrap">
+    <button class="tab-next-btn" onclick="switchTab('assignment')">Continue to ✍️ Assignment →</button>
+  </div>
+
+</div><!-- /tab-quiz -->
+
+
+<!-- TAB 5: ASSIGNMENT -->
+<div class="tab-panel" id="tab-assignment">
+
+  <div class="video-wrap">
+    <div class="video-wrap-header">
+      <span style="font-size:20px;">✍️</span>
+      <div>
+        <div class="video-wrap-type">Assignment · What To Do</div>
+        <div class="video-wrap-title">Here's What to Do — Submit Your Lab Data</div>
+      </div>
+    </div>
+    <div class="video-ratio">
+      <div class="video-placeholder">
+        <div class="video-placeholder-icon">✍️</div>
+        <div class="video-placeholder-text">Assignment explainer video coming soon</div>
+        <div class="video-placeholder-id"><!-- slot: 9-02-assignment-explainer --></div>
+        <div class="video-placeholder-desc">
+          <span class="video-placeholder-desc-label">📹 Suggested content (1–2 min)</span>
+          Walk through what to submit. Show the observation table they should have filled out. Demonstrate a clean photo of the sketches and notes from each test. Explain that Part B asks them to compare their three tests and Part C asks them to write a CER about which test made a new substance. Read the CER claim and reasoning starters aloud.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;">📐 Part A — Data Table &amp; Graph</p>
+  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Take a clear photo of your completed data table AND your bar graph from your notebook.</p>
+
+  <div class="pq">
+    <span class="pq-num" style="background:#E8636B;">1</span>
+    <span class="pq-text"><strong>Data summary:</strong> In the box below, type your six measurements as three before/after pairs. (Example: "Trial 1 — paper: 5 g → 5 g. Trial 2 — ice: 30 g → 30 g. Trial 3 — salt water: 105 g → 105 g.")</span>
+  </div>
+  <div class="response-q">
+    <textarea class="response-textarea ta-sm" id="parta-1"
+      data-label="Part A — Data summary"
+      placeholder="Trial 1 — paper: ___ g → ___ g. Trial 2 — ice: ___ g → ___ g. Trial 3 — salt water: ___ g → ___ g."
+      oninput="autoSave(this,'dot-parta-1')"></textarea>
+    <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+      Your answer<span class="response-save-dot" id="dot-parta-1"></span>
+    </span>
+  </div>
+
+  <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;margin-top:20px;">📊 Part B — Evidence Questions</p>
+  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Answer in complete sentences using YOUR real data from the lab.</p>
+
+  <div class="pq">
+    <span class="pq-num" style="background:#D4772C;">2</span>
+    <span class="pq-text">Look at your three test sketches. Which sketch was the most different from "before" to "after"? What does that tell you about what kind of change happened?</span>
+  </div>
+  <div class="response-q">
+    <textarea class="response-textarea ta-sm" id="partb-1"
+      data-label="Part B — Q1: Bar graph"
+      placeholder="My before and after bars are... This tells me..."
+      oninput="autoSave(this,'dot-partb-1')"></textarea>
+    <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+      Your answer<span class="response-save-dot" id="dot-partb-1"></span>
+    </span>
+  </div>
+
+  <div class="pq">
+    <span class="pq-num" style="background:#D4772C;">3</span>
+    <span class="pq-text">If one of your trials had a difference of more than 5 grams, what likely went wrong? Suggest a specific change you'd make if you ran it again.</span>
+  </div>
+  <div class="response-q">
+    <textarea class="response-textarea ta-sm" id="partb-2"
+      data-label="Part B — Q2: Troubleshooting"
+      placeholder="If a trial had a big difference, it probably meant... Next time I would..."
+      oninput="autoSave(this,'dot-partb-2')"></textarea>
+    <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+      Your answer<span class="response-save-dot" id="dot-partb-2"></span>
+    </span>
+  </div>
+
+  <div class="pq">
+    <span class="pq-num" style="background:#D4772C;">4</span>
+    <span class="pq-text">Imagine running Trial 2 (ice) again but WITHOUT sealing the bag. What would you predict the scale would show, and why?</span>
+  </div>
+  <div class="response-q">
+    <textarea class="response-textarea ta-sm" id="partb-3"
+      data-label="Part B — Q3: Open bag prediction"
+      placeholder="Without sealing the bag, the after-mass would be ___ because..."
+      oninput="autoSave(this,'dot-partb-3')"></textarea>
+    <span style="font-size:12px;color:#9A8E82;font-weight:600;">
+      Your answer<span class="response-save-dot" id="dot-partb-3"></span>
+    </span>
+  </div>
+
+  <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;margin-top:20px;">✍️ Part C — Claim · Evidence · Reasoning</p>
+  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Aim for 4–6 sentences total.</p>
+
+  <div class="cer-block">
+    <div class="cer-header">
+      <span class="cer-icon">📊</span>
+      <div class="cer-header-text">
+        <div class="cer-label">Claim · Evidence · Reasoning</div>
+        <div class="cer-question">Does your lab data prove that mass is conserved during physical changes? Defend your answer using your numbers.</div>
+      </div>
+    </div>
+
+    <div class="cer-section">
+      <div class="cer-badge cer-badge-claim">C</div>
+      <div class="cer-section-body">
+        <div class="cer-section-title">Claim <span class="cer-section-hint">— Which test made a new substance?</span></div>
+        <div class="cer-write-box">
+          <p class="cer-starter">💡 Start with: <em>"My data shows that mass ___ conserved during physical changes."</em></p>
+          <textarea class="response-textarea ta-sm" id="cer-claim"
+            data-label="Part C — Claim"
+            placeholder="My data shows that mass ___ conserved during physical changes."
+            oninput="autoSave(this,'dot-cer-claim')"></textarea>
+          <span style="font-size:12px;color:#9A8E82;font-weight:600;display:block;margin-top:4px;">
+            Your claim<span class="response-save-dot" id="dot-cer-claim"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cer-section">
+      <div class="cer-badge cer-badge-evidence">E</div>
+      <div class="cer-section-body">
+        <div class="cer-section-title">Evidence <span class="cer-section-hint">— What did you observe?</span></div>
+        <div class="cer-write-box">
+          <p class="cer-starter">💡 Start with: <em>"In my three trials, the before masses were ___ and the after masses were…"</em></p>
+          <textarea class="response-textarea ta-sm" id="cer-evidence"
+            data-label="Part C — Evidence"
+            placeholder="In my three trials, the before masses were ___ and the after masses were..."
+            oninput="autoSave(this,'dot-cer-evidence')"></textarea>
+          <span style="font-size:12px;color:#9A8E82;font-weight:600;display:block;margin-top:4px;">
+            Your evidence<span class="response-save-dot" id="dot-cer-evidence"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cer-section">
+      <div class="cer-badge cer-badge-reason">R</div>
+      <div class="cer-section-body">
+        <div class="cer-section-title">Reasoning <span class="cer-section-hint">— Why does this fit a chemical change?</span></div>
+        <div class="cer-write-box">
+          <p class="cer-starter">💡 Start with: <em>"This makes sense because in a chemical change, the particles…"</em></p>
+          <textarea class="response-textarea ta-sm" id="cer-reasoning"
+            data-label="Part C — Reasoning"
+            placeholder="This makes sense because in a chemical change, the particles..."
+            oninput="autoSave(this,'dot-cer-reasoning')"></textarea>
+          <span style="font-size:12px;color:#9A8E82;font-weight:600;display:block;margin-top:4px;">
+            Your reasoning<span class="response-save-dot" id="dot-cer-reasoning"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cer-vocab-check">
+      📚 <strong>Vocab check:</strong> Use at least two of these words: <strong>chemical change</strong>, <strong>physical change</strong>, <strong>particles</strong>, <strong>substance</strong>, <strong>evidence</strong>
+    </div>
+  </div>
+
+  <div class="revise-block">
+    <div class="revise-header">
+      <span class="revise-icon">🔄</span>
+      <div>
+        <div class="revise-label">Revise Your Thinking</div>
+        <div class="revise-question">Look back at your prediction from the Vocabulary tab.</div>
+      </div>
+    </div>
+    <div class="revise-prompts">
+      <p>Write 3–4 sentences answering these:</p>
+      <ul>
+        <li>What did you predict for each trial — up, down, or same?</li>
+        <li>Did your real data match your predictions?</li>
+        <li>What's the most convincing piece of evidence you collected today?</li>
+      </ul>
+    </div>
+    <div class="cer-write-box" style="margin-top:14px;">
+      <textarea class="response-textarea ta-lg" id="revise-1"
+        data-label="Revise Your Thinking"
+        placeholder="I predicted... My real data... The most convincing evidence was..."
+        oninput="autoSave(this,'dot-revise-1')"></textarea>
+      <span style="font-size:12px;color:#9A8E82;font-weight:600;display:block;margin-top:4px;">
+        Your reflection<span class="response-save-dot" id="dot-revise-1"></span>
+      </span>
+    </div>
+  </div>
+
+  <div class="gathered-card">
+    <div class="gathered-header">
+      <div class="gathered-header-icon">📋</div>
+      <div>
+        <div class="gathered-header-label">Lesson 9.02 · Submission Packet</div>
+        <div class="gathered-header-title">Gathered Answers</div>
+      </div>
+    </div>
+    <div class="gathered-body">
+      <div class="gathered-intro">All of your written responses — gathered in one place so you can copy or download them for Canvas turn-in.</div>
+      <div class="gathered-name-row">
+        <span class="gathered-name-label">Your name:</span>
+        <input type="text" class="gathered-name-input" id="student-name" placeholder="Type your name here" oninput="refreshGathered()" />
+      </div>
+      <textarea class="gathered-output" id="gatheredOutput" readonly></textarea>
+      <div class="gathered-actions">
+        <button class="gathered-btn" onclick="copyGathered()">📋 Copy to Clipboard</button>
+        <button class="gathered-btn gathered-btn-download" onclick="downloadGathered()">⬇ Download as Text</button>
+      </div>
+      <div class="gathered-copied" id="copiedMsg">Copied! Paste into your Canvas text box to turn in.</div>
+    </div>
+  </div>
+
+  <div style="background:#fff;border:2px solid #55C8E8;border-radius:18px;margin-top:20px;overflow:hidden;">
+    <div style="display:flex;align-items:center;gap:10px;padding:14px 20px;background:#EAF8FD;border-bottom:2px solid #B8E2F0;">
+      <div style="width:42px;height:42px;border-radius:50%;background:#55C8E8;color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">📬</div>
+      <div>
+        <div style="font-size:10px;color:#9A8E82;text-transform:uppercase;letter-spacing:0.8px;font-weight:700;">Time to Submit</div>
+        <div style="font-size:20px;color:#0E1C42;font-weight:800;line-height:1.2;">What to Turn In</div>
+      </div>
+    </div>
+    <div style="padding:18px 22px;">
+      <p style="font-size:16px;color:#5A4D3E;line-height:1.65;margin-bottom:14px;">When you've finished, copy your gathered answers into Canvas (plus a photo of your data table and bar graph). Use this checklist before you submit.</p>
+
+      <div class="turn-in-checklist">
+
+        <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
+          <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part A — Data table &amp; graph:</strong> All 6 measurements recorded, bar graph drawn with 6 bars (3 pairs).</span>
+        </div>
+
+        <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
+          <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part B — Evidence Questions:</strong> All three answered using your real data.</span>
+        </div>
+
+        <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
+          <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part C — CER:</strong> Claim, evidence with all six measurements, and reasoning.</span>
+        </div>
+
+        <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
+          <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Revise Your Thinking:</strong> 3–4 sentences comparing your predictions to your real data.</span>
+        </div>
+
+        <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
+          <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Vocab Check:</strong> At least two lesson words used accurately.</span>
+        </div>
+
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px;">
+        <div style="background:#EEF8F0;border:1.5px solid #C4E5CC;border-radius:12px;padding:12px;text-align:center;">
+          <div style="font-size:22px;margin-bottom:4px;">⌨️</div>
+          <div style="font-size:14px;color:#0E1C42;font-weight:700;">Type It</div>
+          <div style="font-size:12px;color:#5A4D3E;">Type your answers directly into Canvas</div>
+        </div>
+        <div style="background:#EAF8FD;border:1.5px solid #D6F2FB;border-radius:12px;padding:12px;text-align:center;">
+          <div style="font-size:22px;margin-bottom:4px;">📸</div>
+          <div style="font-size:14px;color:#0E1C42;font-weight:700;">Photo It</div>
+          <div style="font-size:12px;color:#5A4D3E;">Take a clear photo of your data table and graph</div>
+        </div>
+        <div style="background:#FFF7EE;border:1.5px solid #F0DCC4;border-radius:12px;padding:12px;text-align:center;">
+          <div style="font-size:22px;margin-bottom:4px;">🎥</div>
+          <div style="font-size:14px;color:#0E1C42;font-weight:700;">Record It</div>
+          <div style="font-size:12px;color:#5A4D3E;">Record yourself doing one trial</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="video-wrap" style="margin-top:20px;">
+    <div class="video-wrap-header">
+      <span style="font-size:20px;">👋</span>
+      <div>
+        <div class="video-wrap-type">Wrap-Up · Closing Video</div>
+        <div class="video-wrap-title">You just measured a law of nature.</div>
+      </div>
+    </div>
+    <div class="video-ratio">
+      <div class="video-placeholder">
+        <div class="video-placeholder-icon">🌟</div>
+        <div class="video-placeholder-text">Closing video coming soon</div>
+        <div class="video-placeholder-id"><!-- slot: 9-02-closing --></div>
+        <div class="video-placeholder-desc">
+          <span class="video-placeholder-desc-label">📹 Suggested content (30–60 sec)</span>
+          End on a triumphant note. Recap the result: "You just did real chemistry. You mixed three things and used your own eyes to figure out which one made something brand new." Mention this is the close of Unit 2 (Matter and Its Properties). Tease Module 10: "Next we shift to energy — the thing that makes everything move, glow, and warm up. Bring your curiosity."
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-assignment -->
+
+
+<footer class="footer">
+  <div class="footer-line1">Optima Academy Online &mdash; <span>5th Grade Science</span></div>
+  <div class="footer-line2">Module 9 · Lesson 9.02 — Investigation: Did a New Substance Form? · SC.5.P.9.1 · 5-PS1-4 / 5-PS1-2</div>
+  <div class="footer-line3">© Optima Academy Online. All rights reserved.</div>
+</footer>
+
+<button class="back-to-top" id="backToTop" type="button">📊 Back to Top</button>
+<canvas id="confettiCanvas"></canvas>
+
+</div><!-- /page-wrap -->
+
+<script>
+var LESSON_EMOJI = '📊';
+var TAB_COUNT = 5;
+var tabProgress = { vocab: false, lesson: false, explore: false, quiz: false, assignment: false };
+function switchTab(id) {
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelector('[data-tab="' + id + '"]').classList.add('active');
+  document.querySelector('[data-tab="' + id + '"]').classList.add('visited');
+  document.getElementById('tab-' + id).classList.add('active');
+  tabProgress[id] = true;
+  updateProgress();
+  var inIframe = (function(){ try { return window.self !== window.top; } catch(e){ return true; } })();
+  if (inIframe) { try { window.parent.scrollTo(0, 0); } catch(e){} try { document.getElementById('pageTop').scrollIntoView(); } catch(e){} }
+  else { window.scrollTo(0, 0); }
+}
+function updateProgress() {
+  var visited = Object.values(tabProgress).filter(Boolean).length;
+  var pct = Math.round((visited / TAB_COUNT) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+}
+(function(){
+  var panel = document.getElementById('diagramPanel'); if (!panel) return;
+  var wordEl = document.getElementById('diagramWord');
+  var infoEl = document.getElementById('diagramInfo');
+  var hotspots = document.querySelectorAll('.diagram-interactive .hotspot');
+  hotspots.forEach(function(hs){
+    hs.addEventListener('click', function(e){
+      e.stopPropagation();
+      hotspots.forEach(function(h){ h.classList.remove('active'); });
+      hs.classList.add('active');
+      var raw = hs.getAttribute('data-info') || '';
+      var parts = raw.split('|');
+      wordEl.textContent = parts[0] ? parts[0].trim() : '';
+      infoEl.textContent = parts[1] ? parts[1].trim() : raw;
+      panel.classList.add('visible');
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+  document.addEventListener('click', function(e){
+    if (!e.target.classList.contains('hotspot')) {
+      panel.classList.remove('visible');
+      hotspots.forEach(function(h){ h.classList.remove('active'); });
+    }
+  });
+})();
+var quizAnswered = 0, quizCorrect = 0;
+function checkQuiz(optEl) {
+  var q = optEl.closest('.quiz-q'); if (q.classList.contains('answered')) return;
+  q.classList.add('answered'); quizAnswered++;
+  var correct = q.getAttribute('data-answer');
+  var chosen = optEl.getAttribute('data-val');
+  var opts = q.querySelectorAll('.quiz-opt');
+  opts.forEach(function(o){ if (o.getAttribute('data-val') === correct) o.classList.add('correct'); else o.classList.add('disabled'); });
+  var fbCorrect = q.querySelector('.fb-correct'); var fbWrong = q.querySelector('.fb-wrong');
+  if (chosen === correct) { quizCorrect++; optEl.classList.add('correct'); if (fbCorrect) fbCorrect.classList.add('show'); }
+  else { optEl.classList.add('wrong'); if (fbWrong) fbWrong.classList.add('show'); }
+  if (quizAnswered === 3) {
+    var scoreBox = document.getElementById('quizScore');
+    var scoreNum = document.getElementById('quizScoreNum');
+    var scoreMsg = document.getElementById('quizScoreMsg');
+    scoreNum.textContent = quizCorrect;
+    if (quizCorrect === 3) { scoreMsg.textContent = '🎉 Perfect score! You\'ve nailed the chemical change clues.'; setTimeout(window.launchConfetti, 300); var vp = document.getElementById('quizVideoPerfect'); if (vp) vp.classList.add('show'); }
+    else if (quizCorrect === 2) { scoreMsg.textContent = '🌟 Great work! Review the one you missed.'; var vr = document.getElementById('quizVideoReview'); if (vr) vr.classList.add('show'); }
+    else { scoreMsg.textContent = '👍 Good effort! Re-read the sealed-container rule.'; var vr2 = document.getElementById('quizVideoReview'); if (vr2) vr2.classList.add('show'); }
+    scoreBox.classList.add('show');
+  }
+}
+document.querySelectorAll('.vtip').forEach(function(tip){
+  var box = tip.querySelector('.vtip-box'); if (!box) return;
+  tip.addEventListener('mouseenter', function(){
+    var rect = tip.getBoundingClientRect(); var bw = 250;
+    var left = rect.left + rect.width / 2 - bw / 2;
+    if (left < 8) left = 8;
+    if (left + bw > window.innerWidth - 8) left = window.innerWidth - bw - 8;
+    box.style.left = left + 'px';
+    var topPos = rect.top - 140;
+    if (topPos < 8) topPos = rect.bottom + 10;
+    box.style.top = topPos + 'px';
+  });
+});
+function toggleCheck(item) {
+  item.classList.toggle('checked');
+  var icon = item.querySelector('.check-icon');
+  if (icon) icon.textContent = item.classList.contains('checked') ? LESSON_EMOJI : '';
+  var checklist = item.closest('.turn-in-checklist'); if (!checklist) return;
+  var items = checklist.querySelectorAll('.turn-in-item'); if (items.length === 0) return;
+  var allChecked = Array.prototype.every.call(items, function(it){ return it.classList.contains('checked'); });
+  if (allChecked) setTimeout(window.launchConfetti, 200);
+}
+(function(){
+  var btn = document.getElementById('backToTop'); if (!btn) return;
+  btn.textContent = LESSON_EMOJI + ' Back to Top';
+  var inIframe = (function(){ try { return window.self !== window.top; } catch(e){ return true; } })();
+  btn.addEventListener('click', function() {
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch(e) {}
+    document.documentElement.scrollTop = 0; document.body.scrollTop = 0;
+    var top = document.getElementById('pageTop');
+    if (top && top.scrollIntoView) { try { top.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch(e) {} }
+    try { if (window.frameElement && window.frameElement.scrollIntoView) window.frameElement.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch(e) {}
+    if (inIframe) { try { window.parent.postMessage({ type: 'optima-lesson:scroll-to-top' }, '*'); } catch(e) {} }
+  });
+  if (inIframe) setTimeout(function() { btn.classList.add('show'); }, 1500);
+  else window.addEventListener('scroll', function() { btn.classList.toggle('show', window.pageYOffset > 400); });
+})();
+(function(){
+  var canvas = document.getElementById('confettiCanvas');
+  var ctx = canvas.getContext('2d');
+  var particles = [], animating = false;
+  var colors = ['#55C8E8','#34B76F','#F5A623','#FFD700','#8B6FC0','#E8636B','#1A6FA8','#D4772C'];
+  function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  window.addEventListener('resize', resize); resize();
+  function Particle(x,y){ this.x=x; this.y=y; this.vx=(Math.random()-.5)*16; this.vy=Math.random()*-18-4; this.gravity=.45; this.drag=.98; this.size=Math.random()*8+4; this.color=colors[Math.floor(Math.random()*colors.length)]; this.rotation=Math.random()*360; this.rotSpeed=(Math.random()-.5)*12; this.opacity=1; this.shape=Math.random()>.5?'rect':'circle'; }
+  function burst(x,y,count){ for(var i=0;i<count;i++) particles.push(new Particle(x,y)); if(!animating){animating=true;animate();} }
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(function(p,i){
+      p.vy+=p.gravity; p.vx*=p.drag; p.x+=p.vx; p.y+=p.vy;
+      p.rotation+=p.rotSpeed; p.opacity-=.008;
+      if(p.opacity<=0){particles.splice(i,1);return;}
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rotation*Math.PI/180);
+      ctx.globalAlpha=p.opacity; ctx.fillStyle=p.color;
+      if(p.shape==='rect')ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*.6);
+      else{ctx.beginPath();ctx.arc(0,0,p.size/2,0,Math.PI*2);ctx.fill();}
+      ctx.restore();
+    });
+    if(particles.length>0)requestAnimationFrame(animate); else{animating=false;ctx.clearRect(0,0,canvas.width,canvas.height);}
+  }
+  window.launchConfetti = function(){
+    var cx = window.innerWidth/2;
+    burst(cx-100, window.innerHeight*.4, 50);
+    burst(cx, window.innerHeight*.3, 60);
+    burst(cx+100, window.innerHeight*.4, 50);
+  };
+})();
+document.querySelector('[data-tab="vocab"]').classList.add('visited');
+tabProgress.vocab = true; updateProgress();
+(function(){
+  var progressBar = document.querySelector('.progress-wrap');
+  var tabBar = document.querySelector('.tab-bar');
+  if (!progressBar || !tabBar) return;
+  function alignTabBar() { tabBar.style.top = progressBar.offsetHeight + 'px'; }
+  alignTabBar();
+  window.addEventListener('resize', alignTabBar);
+})();
+(function(){
+  document.querySelectorAll('.quiz-q').forEach(function(q){
+    var container = q.querySelector('.quiz-options'); if (!container) return;
+    var opts = Array.prototype.slice.call(container.querySelectorAll('.quiz-opt'));
+    for (var i = opts.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      container.appendChild(opts[j]);
+      var tmp = opts[i]; opts[i] = opts[j]; opts[j] = tmp;
+    }
+  });
+})();
+(function(){
+  var cards = document.querySelectorAll('.intro-2col .card');
+  cards.forEach(function(card){
+    card.querySelector('.card-head').addEventListener('click', function(){
+      cards.forEach(function(c){ c.classList.toggle('collapsed'); });
+    });
+  });
+})();
+function autoSave(el, dotId) { var dot = document.getElementById(dotId); if (!dot) return; if (el.value.trim().length > 0) dot.classList.add('saved'); else dot.classList.remove('saved'); }
+function refreshGathered() {
+  var out = document.getElementById('gatheredOutput'); if (!out) return;
+  var lines = [];
+  var nameEl = document.getElementById('student-name'); var name = nameEl ? nameEl.value.trim() : '';
+  lines.push('═══════════════════════════════════════════════');
+  lines.push('  OPTIMA ACADEMY ONLINE — 5TH GRADE SCIENCE');
+  lines.push('  Lesson 9.02 · Investigation: Did a New Substance Form?');
+  lines.push('  Unit 2 — Matter and Its Properties');
+  lines.push('  Student: ' + (name || '(add your name above)'));
+  lines.push('═══════════════════════════════════════════════');
+  lines.push('');
+  function grab(id, label) {
+    var el = document.getElementById(id); var val = el ? el.value.trim() : '';
+    lines.push('--- ' + label + ' ---');
+    lines.push(val || '(not yet answered)');
+    lines.push('');
+  }
+  grab('pred-1',        'PREDICTION');
+  grab('ryt-1',         'INVESTIGATE — Q1: SIX MEASUREMENTS');
+  grab('ryt-2',         'INVESTIGATE — Q2: WHY SEALED');
+  grab('ryt-3',         'INVESTIGATE — Q3: SMALL DIFFERENCES');
+  grab('parta-1',       'PART A — DATA SUMMARY');
+  grab('partb-1',       'PART B — Q1: BAR GRAPH');
+  grab('partb-2',       'PART B — Q2: TROUBLESHOOTING');
+  grab('partb-3',       'PART B — Q3: OPEN BAG PREDICTION');
+  grab('cer-claim',     'PART C — CLAIM');
+  grab('cer-evidence',  'PART C — EVIDENCE');
+  grab('cer-reasoning', 'PART C — REASONING');
+  grab('revise-1',      'REVISE YOUR THINKING');
+  out.value = lines.join('\n');
+}
+function copyGathered() {
+  refreshGathered();
+  var out = document.getElementById('gatheredOutput'); out.select();
+  try { document.execCommand('copy'); } catch(e) {}
+  var msg = document.getElementById('copiedMsg');
+  if (msg) { msg.classList.add('show'); setTimeout(function(){ msg.classList.remove('show'); }, 2400); }
+}
+function downloadGathered() {
+  refreshGathered();
+  var text = document.getElementById('gatheredOutput').value;
+  var blob = new Blob([text], {type: 'text/plain'});
+  var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'lesson-9-02-investigation-did-a-new-substance-form.txt';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+document.addEventListener('input', function(e) {
+  if (e.target.classList.contains('response-textarea') || e.target.id === 'student-name') {
+    var panel = document.getElementById('tab-assignment');
+    if (panel && panel.classList.contains('active')) refreshGathered();
+  }
+});
+(function(){
+  var origSwitch = window.switchTab;
+  window.switchTab = function(id) { origSwitch(id); if (id === 'assignment') setTimeout(refreshGathered, 50); };
+})();
+</script>
+</body>
+</html>
