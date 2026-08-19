@@ -1752,7 +1752,50 @@ tabProgress.vocab = true; updateProgress();
     });
   });
 })();
-function autoSave(el, dotId) { var dot = document.getElementById(dotId); if (!dot) return; if (el.value.trim().length > 0) dot.classList.add('saved'); else dot.classList.remove('saved'); }
+/* ───── AUTO-SAVE ───── */
+/* Unique key derived from the page title so each lesson's data stays separate */
+var _lessonKey = (document.title || 'ela-lesson').replace(/[^a-zA-Z0-9]+/g,'-').toLowerCase();
+
+function autoSave(el,dotId){
+  var dot=document.getElementById(dotId);
+  if(dot&&el.value.trim().length>0){dot.classList.add('saved');}
+  else if(dot){dot.classList.remove('saved');}
+  /* Actually persist to localStorage */
+  try{ localStorage.setItem(_lessonKey+'-'+el.id, el.value); }catch(e){}
+}
+
+/* Restore every saved textarea on page load */
+function restoreJournals(){
+  document.querySelectorAll('textarea.journal-box').forEach(function(t){
+    if(!t.id) return;
+    try{
+      var v = localStorage.getItem(_lessonKey+'-'+t.id);
+      if(v){ t.value = v; }
+    }catch(e){}
+    /* Re-trigger the saved dot if there's content */
+    var dotId = t.getAttribute('oninput');
+    if(dotId){
+      var m = dotId.match(/'(dot-[^']+)'/);
+      if(m){
+        var dot = document.getElementById(m[1]);
+        if(dot && t.value.trim().length>0){ dot.classList.add('saved'); }
+      }
+    }
+  });
+}
+restoreJournals();
+
+/* Warn before leaving if student has typed anything */
+window.addEventListener('beforeunload', function(e){
+  var hasWork = false;
+  document.querySelectorAll('textarea.journal-box').forEach(function(t){
+    if(t.value && t.value.trim().length > 0){ hasWork = true; }
+  });
+  if(hasWork){
+    e.preventDefault();
+    e.returnValue = '';
+  }
+});
 function refreshGathered() {
   var out = document.getElementById('gatheredOutput'); if (!out) return;
   var lines = [];
