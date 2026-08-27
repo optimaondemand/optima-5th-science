@@ -17,7 +17,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-.page-wrap { max-width: 920px; margin: 0 auto; background: #FAF7F3; box-shadow: 0 0 40px rgba(0,0,0,0.07); }
+.page-wrap { max-width: 920px; margin: 0 auto; background: #FAF7F3; padding: 0 18px; box-shadow: 0 0 40px rgba(0,0,0,0.07); }
 
 /* ── Header ── */
 .header {
@@ -399,6 +399,34 @@ em { color: #5A4D3E; }
   .tab-btn { min-width: 100px; font-size: 11px; padding: 10px 4px; }
   .vocab-grid { grid-template-columns: 1fr 1fr; }
 }
+
+/* ═══ VIDEO PLACEHOLDER ═══ */
+.video-placeholder-wrap {
+  border-radius: 14px; overflow: hidden; margin: 0 0 18px;
+  border: 2px dashed rgba(52, 183, 111, 0.4);
+  background: linear-gradient(135deg, #0E1C42, #1A2D5A);
+}
+.video-placeholder-inner {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 28px 20px;
+}
+.video-placeholder-inner .vp-icon { font-size: 34px; margin-bottom: 6px; }
+.video-placeholder-inner .vp-label {
+  font-size: 10px; color: #55C8E8; text-transform: uppercase;
+  letter-spacing: 2px; font-weight: 800; margin-bottom: 4px;
+}
+.video-placeholder-inner .vp-title {
+  font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 8px;
+}
+.video-placeholder-inner .vp-slot {
+  font-family: monospace; font-size: 11px; color: #34B76F;
+  background: rgba(52,183,111,0.15); padding: 3px 10px; border-radius: 4px;
+}
+.video-placeholder-inner .vp-notes {
+  font-size: 12px; color: rgba(255,255,255,0.8); font-style: italic;
+  margin-top: 10px; text-align: left; padding: 10px 12px;
+  background: rgba(0,0,0,0.25); border-radius: 6px; border-left: 3px solid #34B76F;
+}
 </style>
 </head>
 <body>
@@ -770,6 +798,20 @@ em { color: #5A4D3E; }
 <div class="tab-panel active" id="tab-vocab">
 
 
+
+<!-- ═══ INTRODUCTION VIDEO ═══ -->
+<div class="video-placeholder-wrap">
+<!-- slot: 22-01-intro -->
+<div class="video-placeholder-inner">
+  <span class="vp-icon">🎬</span>
+  <div class="vp-label">Introduction Video</div>
+  <div class="vp-title">How Do Adaptations Help Plants and Animals Survive?</div>
+  <div class="vp-slot">22-01-intro</div>
+  <div class="vp-notes">
+    <strong>Teacher recording notes:</strong> Introduce three types of adaptations. Preview vocabulary: adaptation, physical, behavioral, life cycle, environment, survive. Physical adaptations are body structures (thick fur, long roots). Behavioral adaptations are actions (migration, hibernation, hunting in packs). Life cycle adaptations are timing strategies (seeds that only sprout after fire, insects with short life cycles). All three types help organisms survive in their specific environment. Students will classify real examples. ~90-120 seconds.
+  </div>
+</div>
+</div>
   <!-- Activity 1: Notice, Wonder, and Predict -->
   <div class="activity-card act-warmup scroll-reveal">
     <div class="act-head">
@@ -2007,6 +2049,33 @@ document.addEventListener('input', function(e) {
     if (id === 'assignment') { setTimeout(refreshGathered, 50); }
   };
 })();
+</script>
+<!-- Video Manifest Loader -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('https://raw.githubusercontent.com/bbirchum1/optima-5th-science/main/video-manifest.json?v=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var manifest = data.videos || data;
+      document.querySelectorAll('.video-placeholder-wrap').forEach(function(wrap) {
+        var m = wrap.innerHTML.match(/<!--\s*slot:\s*([\w-]+)\s*-->/);
+        if (!m) return;
+        var entry = manifest[m[1]];
+        if (!entry || entry.status !== 'ready' || !entry.embed) return;
+        var temp = document.createElement('div');
+        temp.innerHTML = entry.embed;
+        var iframe = temp.querySelector('iframe');
+        if (!iframe) return;
+        iframe.removeAttribute('width');
+        iframe.removeAttribute('height');
+        iframe.style.cssText = 'display:block;width:100%;aspect-ratio:16/9;border:none;';
+        wrap.innerHTML = '';
+        wrap.style.cssText = 'border:none;background:#000;border-radius:14px;overflow:hidden;margin:0 0 18px;';
+        wrap.appendChild(iframe);
+      });
+    })
+    .catch(function(err) { console.warn('Video manifest load failed:', err); });
+});
 </script>
 </body>
 </html>
