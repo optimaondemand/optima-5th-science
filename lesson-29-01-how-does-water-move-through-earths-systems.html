@@ -2086,5 +2086,190 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(function(err) { console.warn('Video manifest load failed:', err); });
 });
 </script>
+
+<!-- OAO-GATHERED-FIX v1 — clipboard + storage resilience (cross-origin iframe safe) -->
+<script>
+(function(){
+  /* ── 1. Storage probe ─────────────────────────────────────────── */
+  var _store = null, _durable = false;
+  try { var _t = '__oao_probe_' + Math.random();
+        localStorage.setItem(_t, '1'); localStorage.removeItem(_t);
+        _store = localStorage; _durable = true;
+  } catch(e) {
+    try { var _t2 = '__oao_probe_' + Math.random();
+          sessionStorage.setItem(_t2, '1'); sessionStorage.removeItem(_t2);
+          _store = sessionStorage;
+    } catch(e2) {
+      _store = { _m:{}, getItem:function(k){return this._m[k]||null;},
+                 setItem:function(k,v){this._m[k]=v;},
+                 removeItem:function(k){delete this._m[k];} };
+    }
+  }
+
+  /* ── 2. Lesson key (match existing convention) ────────────────── */
+  var _lessonKey = (typeof window._lessonKey !== 'undefined') ? window._lessonKey
+                 : document.title.replace(/[^a-zA-Z0-9]/g,'').substring(0,40);
+
+  /* ── 3. Save + restore for textareas / .cell-input ────────────── */
+  function saveField(el){
+    if(!el||!el.id) return;
+    try{ _store.setItem(_lessonKey+'-'+el.id, el.value); }catch(e){}
+  }
+  function restoreField(el){
+    if(!el||!el.id) return;
+    try{
+      var v = _store.getItem(_lessonKey+'-'+el.id);
+      if(v && !el.value){ el.value = v; }
+    }catch(e){}
+  }
+
+  var fields = document.querySelectorAll('textarea, .cell-input, input[type="text"]');
+  fields.forEach(function(el){
+    restoreField(el);
+    el.addEventListener('input', function(){ saveField(this); });
+  });
+
+  /* Student-name field */
+  var nameEl = document.getElementById('student-name');
+  if(nameEl){
+    restoreField(nameEl);
+    nameEl.addEventListener('input', function(){ saveField(this); });
+  }
+
+  /* Periodic sweep every 5 s */
+  setInterval(function(){
+    document.querySelectorAll('textarea, .cell-input, input[type="text"]').forEach(saveField);
+  }, 5000);
+
+  /* ── 4. Detect gathered-output element ────────────────────────── */
+  var _gEl = document.getElementById('gatheredOutput')
+          || document.getElementById('gathered-output')
+          || document.getElementById('gatherBox')
+          || document.getElementById('answersDisplay');
+
+  /* ── 5. Robust copy ───────────────────────────────────────────── */
+  function _getGatheredText(){
+    if(!_gEl) return '';
+    return _gEl.value !== undefined ? _gEl.value : _gEl.textContent;
+  }
+
+  function _robustCopy(){
+    var txt = _getGatheredText();
+    if(!txt || !txt.trim()){
+      alert('Gather your answers first before copying.');
+      return;
+    }
+
+    /* Strategy A: execCommand (works in cross-origin iframes) */
+    if(_gEl && _gEl.select){
+      try{
+        _gEl.select();
+        if(document.execCommand('copy')){
+          _showCopyOK(); return;
+        }
+      }catch(e){}
+    } else {
+      /* For non-textarea elements, use a temp textarea */
+      try{
+        var ta = document.createElement('textarea');
+        ta.value = txt; ta.style.cssText='position:fixed;left:-9999px;';
+        document.body.appendChild(ta); ta.select();
+        var ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        if(ok){ _showCopyOK(); return; }
+      }catch(e){}
+    }
+
+    /* Strategy B: Clipboard API (may work if permissions granted) */
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){
+        _showCopyOK();
+      }).catch(function(){
+        _showManualCopy();
+      });
+      return;
+    }
+
+    /* Strategy C: Tell the student to copy manually */
+    _showManualCopy();
+  }
+
+  function _showCopyOK(){
+    /* Try all known success indicators */
+    var m = document.getElementById('copiedMsg')
+         || document.getElementById('copied-msg')
+         || document.getElementById('copyToast')
+         || document.getElementById('gatheredCopied');
+    if(m){
+      if(m.classList) m.classList.add('show');
+      m.style.display = 'block';
+      setTimeout(function(){
+        if(m.classList) m.classList.remove('show');
+        m.style.display = '';
+      }, 2500);
+    } else {
+      /* No existing indicator — make a temp one */
+      var d = document.createElement('div');
+      d.textContent = '✓ Copied! Paste into Canvas now.';
+      d.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);'
+        + 'background:#27ae60;color:#fff;padding:12px 24px;border-radius:8px;'
+        + 'font:bold 15px/1.4 sans-serif;z-index:99999;box-shadow:0 4px 16px rgba(0,0,0,.25);';
+      document.body.appendChild(d);
+      setTimeout(function(){ document.body.removeChild(d); }, 3000);
+    }
+  }
+
+  function _showManualCopy(){
+    /* Select the text so Ctrl+C works */
+    if(_gEl && _gEl.select) _gEl.select();
+    var d = document.createElement('div');
+    d.innerHTML = '<strong style="color:#c0392b;">✗ Auto-copy didn’t work.</strong><br>'
+      + 'Click in the answers box, press <kbd>Ctrl+A</kbd> then <kbd>Ctrl+C</kbd> '
+      + '(or <kbd>⌘+A</kbd> then <kbd>⌘+C</kbd> on Mac).';
+    d.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);'
+      + 'background:#ffeaa7;color:#2d3436;padding:14px 24px;border-radius:8px;'
+      + 'font:14px/1.5 sans-serif;z-index:99999;box-shadow:0 4px 16px rgba(0,0,0,.25);'
+      + 'max-width:420px;text-align:center;';
+    document.body.appendChild(d);
+    setTimeout(function(){ document.body.removeChild(d); }, 8000);
+  }
+
+  /* Override all known copy function names */
+  if(typeof window.copyGathered !== 'undefined' || _gEl){
+    window.copyGathered = _robustCopy;
+  }
+  if(typeof window.copyAnswers !== 'undefined'){
+    window.copyAnswers = _robustCopy;
+  }
+  /* Wire up any copy button that calls these */
+  document.querySelectorAll('[onclick*="copyGathered"],[onclick*="copyAnswers"]').forEach(function(btn){
+    btn.setAttribute('onclick','');
+    btn.addEventListener('click', _robustCopy);
+  });
+
+  /* ── 6. Refresh gathered on load + on typing ──────────────────── */
+  function _triggerGather(){
+    if(typeof window.gatherAnswers === 'function') try{ window.gatherAnswers(); }catch(e){}
+    if(typeof window.refreshGathered === 'function') try{ window.refreshGathered(); }catch(e){}
+  }
+  _triggerGather();
+  document.addEventListener('input', function(e){
+    if(e.target.matches('textarea, .cell-input, input[type="text"], select')){
+      setTimeout(_triggerGather, 50);
+    }
+  });
+
+  /* ── 7. Warning banner when storage isn't durable ─────────────── */
+  if(!_durable && _gEl){
+    var warn = document.createElement('div');
+    warn.innerHTML = '⚠️ <strong>Your answers may not save</strong> between visits. '
+      + 'Copy or download your answers before leaving this page.';
+    warn.style.cssText = 'background:#fff3cd;color:#856404;border:1px solid #ffc107;'
+      + 'border-radius:8px;padding:10px 16px;margin:10px 0;font:14px/1.5 sans-serif;text-align:center;';
+    if(_gEl.parentNode) _gEl.parentNode.insertBefore(warn, _gEl);
+  }
+})();
+</script>
+
 </body>
 </html>
