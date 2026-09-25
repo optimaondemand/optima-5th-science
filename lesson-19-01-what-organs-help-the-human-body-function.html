@@ -402,6 +402,7 @@ em { color: #5A4D3E; }
 
 /* ═══ VIDEO PLACEHOLDER ═══ */
 .video-placeholder-wrap {
+  display: none;
   border-radius: 14px; overflow: hidden; margin: 0 0 18px;
   border: 2px dashed rgba(52, 183, 111, 0.4);
   background: linear-gradient(135deg, #0E1C42, #1A2D5A);
@@ -817,6 +818,22 @@ em { color: #5A4D3E; }
      TAB 1: VOCABULARY
 ══════════════════════════════════════════ -->
 <div class="tab-panel active" id="tab-vocab">
+
+
+<!-- ═══ INTRODUCTION VIDEO ═══ -->
+<div class="video-placeholder-wrap">
+<!-- slot: 19-01-intro -->
+<div class="video-placeholder-inner">
+  <span class="vp-icon">🎬</span>
+  <div class="vp-label">Introduction Video</div>
+  <div class="vp-title">What Organs Help the Human Body Function?</div>
+  <div class="vp-slot">19-01-intro</div>
+  <div class="vp-notes">
+    <strong>Teacher recording notes:</strong> Introduce major organs and their functions. Preview vocabulary: organ, function, brain, heart, lungs, skeleton. Each organ in the human body has a specific job that keeps the whole body running. The brain controls everything, the heart pumps blood, the lungs exchange oxygen and carbon dioxide, the stomach breaks down food, and the skeleton provides support and protection. Students will identify which organ is at work in three real-life scenarios. ~90-120 seconds.
+  </div>
+</div>
+</div>
+
 
 </div>
   <!-- Activity 1: Notice, Wonder, and Predict -->
@@ -2067,7 +2084,7 @@ document.addEventListener('DOMContentLoaded', function() {
         iframe.removeAttribute('height');
         iframe.style.cssText = 'display:block;width:100%;aspect-ratio:16/9;border:none;';
         wrap.innerHTML = '';
-        wrap.style.cssText = 'border:none;background:#000;border-radius:14px;overflow:hidden;margin:0 0 18px;';
+        wrap.style.cssText = 'display:block;border:none;background:#000;border-radius:14px;overflow:hidden;margin:0 0 18px;';
         wrap.appendChild(iframe);
       });
     })

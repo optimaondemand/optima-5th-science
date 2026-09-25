@@ -292,6 +292,7 @@ em { color: #5A4D3E; }
 
 /* ═══ VIDEO PLACEHOLDER ═══ */
 .video-placeholder-wrap {
+  display: none;
   border-radius: 14px; overflow: hidden; margin: 0 0 18px;
   border: 2px dashed rgba(52, 183, 111, 0.4);
   background: linear-gradient(135deg, #0E1C42, #1A2D5A);
@@ -744,6 +745,20 @@ em { color: #5A4D3E; }
 
 <!-- TAB 1: VOCAB -->
 <div class="tab-panel active" id="tab-vocab">
+<!-- ═══ INTRODUCTION VIDEO ═══ -->
+<div class="video-placeholder-wrap">
+<!-- slot: 3-02-intro -->
+<div class="video-placeholder-inner">
+  <span class="vp-icon">&#x1F3AC;</span>
+  <div class="vp-label">Introduction Video</div>
+  <div class="vp-title">Optima Academy Online – Model: Matter Made of Particles</div>
+  <div class="vp-slot">3-02-intro</div>
+  <div class="vp-notes">
+    <strong>Teacher recording notes:</strong> Introduction video for this lesson.
+  </div>
+</div>
+</div>
+
 
 
 
@@ -1844,7 +1859,7 @@ document.addEventListener('DOMContentLoaded', function() {
         iframe.removeAttribute('height');
         iframe.style.cssText = 'display:block;width:100%;aspect-ratio:16/9;border:none;';
         wrap.innerHTML = '';
-        wrap.style.cssText = 'border:none;background:#000;border-radius:14px;overflow:hidden;margin:0 0 18px;';
+        wrap.style.cssText = 'display:block;border:none;background:#000;border-radius:14px;overflow:hidden;margin:0 0 18px;';
         wrap.appendChild(iframe);
       });
     })
