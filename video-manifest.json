@@ -8,8 +8,8 @@
     "embed": ""
   },
   "10-01-intro": {
-    "status": "pending",
-    "embed": ""
+    "status": "ready",
+    "embed": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/o3HrUYgaoyw?si=GPM-pK7o-A-dCBHN\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
   },
   "10-02-intro": {
     "status": "pending",
@@ -225,15 +225,15 @@
   },
   "8-01-intro": {
     "status": "ready",
-    "embed": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/-UaghnKdTrA?si=aShahcS8VrXg2hEp\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+    "embed": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/SF6_dGf5gcM?si=hERbJuC3si66OlYT\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
   },
   "8-02-intro": {
     "status": "pending",
     "embed": ""
   },
   "9-01-intro": {
-    "status": "pending",
-    "embed": ""
+    "status": "ready",
+    "embed": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/8Xkot6WfQtI?si=08KfV4R-AAlVvmCm\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
   },
   "9-02-intro": {
     "status": "pending",
