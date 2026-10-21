@@ -1609,7 +1609,7 @@ em { color: #5A4D3E; }
         <div style="background:#FFF7EE;border:1.5px solid #F0DCC4;border-radius:12px;padding:12px;text-align:center;">
           <div style="font-size:22px;margin-bottom:4px;">🎥</div>
           <div style="font-size:14px;color:#0E1C42;font-weight:700;">Record It</div>
-          <div style="font-size:12px;color:#5A4D3E;">Record yourself explaining your Milky Way model</div>
+          <div style="font-size:12px;color:#5A4D3E;">Record yourself explaining your work</div>
         </div>
       </div>
 
@@ -1942,7 +1942,7 @@ function refreshGathered() {
   function grab(id, label) {
     var el = document.getElementById(id);
     var val = el ? el.value.trim() : '';
-    lines.push('--- ' + label + ' ---');
+    lines.push('--- ' + ((el && el.getAttribute('data-label')) ? el.getAttribute('data-label').toUpperCase() : label) + ' ---');
     lines.push(val || '(not yet answered)');
     lines.push('');
   }

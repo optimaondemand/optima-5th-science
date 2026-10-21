@@ -1710,7 +1710,7 @@ function refreshGathered() {
   lines.push('');
   function grab(id, label) {
     var el = document.getElementById(id); var val = el ? el.value.trim() : '';
-    lines.push('--- ' + label + ' ---');
+    lines.push('--- ' + ((el && el.getAttribute('data-label')) ? el.getAttribute('data-label').toUpperCase() : label) + ' ---');
     lines.push(val || '(not yet answered)');
     lines.push('');
   }
