@@ -672,18 +672,18 @@ em { color: #5A4D3E; }
     <!-- Axis -->
     <line x1="-12" y1="-65" x2="12" y2="65" stroke="#FFD700" stroke-width="2" stroke-dasharray="3,2"/>
     <!-- Day side -->
-    <path d="M -3 -55 A 55 55 0 0 1 -3 55 Z" fill="#1976D2" stroke="#fff" stroke-width="1.5"/>
+    <path d="M 3 -55 A 55 55 0 0 0 3 55 Z" fill="#1976D2" stroke="#fff" stroke-width="1.5"/>
     <!-- Night side -->
-    <path d="M -3 -55 A 55 55 0 0 0 -3 55 Z" fill="#0a0a2a" stroke="#fff" stroke-width="1.5"/>
+    <path d="M 3 -55 A 55 55 0 0 1 3 55 Z" fill="#0a0a2a" stroke="#fff" stroke-width="1.5"/>
     <!-- Continents (day side) -->
-    <ellipse cx="15" cy="-15" rx="12" ry="7" fill="#2E7D32" opacity="0.8"/>
-    <ellipse cx="10" cy="20" rx="10" ry="6" fill="#2E7D32" opacity="0.8"/>
+    <ellipse cx="-15" cy="-15" rx="12" ry="7" fill="#2E7D32" opacity="0.8"/>
+    <ellipse cx="-10" cy="20" rx="10" ry="6" fill="#2E7D32" opacity="0.8"/>
     <!-- Stars on night side -->
-    <circle cx="-25" cy="-15" r="1" fill="#FFD700"/>
-    <circle cx="-30" cy="10" r="1.2" fill="#FFD700"/>
+    <circle cx="25" cy="-15" r="1" fill="#FFD700"/>
+    <circle cx="30" cy="10" r="1.2" fill="#FFD700"/>
 
-    <text x="22" y="-70" font-family="Nunito,sans-serif" font-size="10" fill="#FFD700" font-weight="800">☀️ DAY</text>
-    <text x="-55" y="-70" font-family="Nunito,sans-serif" font-size="10" fill="#D6BFEC" font-weight="800">🌙 NIGHT</text>
+    <text x="-55" y="-70" font-family="Nunito,sans-serif" font-size="10" fill="#FFD700" font-weight="800">☀️ DAY</text>
+    <text x="42" y="-50" font-family="Nunito,sans-serif" font-size="10" fill="#D6BFEC" font-weight="800">🌙 NIGHT</text>
     <text x="0" y="80" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" fill="#fff" font-weight="800">Earth</text>
 
     <!-- Rotation arrow -->
@@ -703,7 +703,7 @@ em { color: #5A4D3E; }
     <div>
       <div class="info-label">Quarter / Unit</div>
       <div class="info-value">Q3 · Unit 5</div>
-      <div class="info-detail">Practice of Science</div>
+      <div class="info-detail">Rotation &amp; shadows</div>
     </div>
   </div>
   <div class="info-item">
@@ -719,7 +719,7 @@ em { color: #5A4D3E; }
     <div>
       <div class="info-label">Science Focus</div>
       <div class="info-value">Rotation Model</div>
-      <div class="info-detail">Building a Milky Way map</div>
+      <div class="info-detail">Shadow model + shadow stick</div>
     </div>
   </div>
   <div class="info-item">
@@ -743,7 +743,7 @@ em { color: #5A4D3E; }
       </div>
     </div>
     <div class="card-body">
-      <p>What can you discover about something ordinary when you observe it the way a scientist would?</p>
+      <p>Your shadow changes all day long. How does Earth&#39;s spin control where your shadow points and how long it is?</p>
       <p style="font-size:14px;color:#9A8E82;">Keep this question in mind while you work today.</p>
     </div>
   </div>
@@ -757,7 +757,7 @@ em { color: #5A4D3E; }
     </div>
     <div class="card-body">
       <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#E8636B;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">1</span>build a model of Earth's rotation using a labeled globe and a light source.</p>
-      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#D4772C;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">2</span>label the center, spiral arms, and our solar system’s location.</p>
+      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#D4772C;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">2</span>track how a shadow changes from morning to afternoon.</p>
       <p style="margin-bottom:0;"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#34B76F;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">3</span>use my model to explain why people see the Sun rise and set.</p>
     </div>
   </div>
@@ -768,9 +768,8 @@ em { color: #5A4D3E; }
   <span class="need-strip-label">You'll need:</span>
   <span class="need-chip">📓 Science notebook</span>
   <span class="need-chip">✏️ Pencil &amp; colored pencils</span>
-  <span class="need-chip">✏️ Paper for your model</span>
-  <span class="need-chip">📏 A ruler (cm marks helpful)</span>
-  <span class="need-chip">🔍 Magnifier (if you have one)</span>
+  <span class="need-chip">🔦 Flashlight, ball, clay, and a toothpick</span>
+  <span class="need-chip">📏 A ruler and a pencil</span>
 </div>
 
 <!-- TAB BAR -->
@@ -808,31 +807,31 @@ em { color: #5A4D3E; }
       <div class="act-num" style="background:#E8636B;">1</div>
       <div style="flex:1;">
         <div class="act-title">🔍 Notice, Wonder, and Predict</div>
-        <div class="act-subtitle">What makes a Milky Way model complete?</div>
+        <div class="act-subtitle">Watch your shadow. It&#39;s a clock.</div>
       </div>
       <div class="act-time" style="background:#E8636B;">⏱ 5 min</div>
     </div>
     <div class="act-body">
-      <p>Look up at the night sky and you can see a few thousand stars. Look at the Milky Way as a band of light, and you're seeing OUR galaxy from the inside. Today's lesson: how to build a model showing exactly where Earth sits in that giant spiral.</p>
-      <p>Building a good model takes attention to detail. Today, you'll learn what every Milky Way model needs.</p>
+      <p>On a sunny morning your shadow stretches out long. At lunchtime it shrinks to a stubby puddle at your feet. By late afternoon it's long again, but pointing the other way.</p>
+      <p>Your shadow changes because Earth is turning. Today you'll build a model to show how, then track a real shadow.</p>
 
       <div class="socratic-q">
         <span class="sq-icon">👀</span>
         <div>
           <div class="label">In Your Science Notebook</div>
-          <div class="question">"How many parts do you think your Milky Way model needs? Where would you put Earth? What labels should you include?"</div>
+          <div class="question">"Why do you think your shadow is longer in the morning than at lunchtime?"</div>
         </div>
       </div>
 
       <div class="callout callout-sky">
         <span class="callout-icon">🔭</span>
-        <p><strong>Write your prediction below.</strong> Use at least two sentences. Predict what parts your Milky Way model will need, and explain why labels matter for a good model.</p>
+        <p><strong>Write your prediction below.</strong> Use at least two sentences. Predict how a shadow&#39;s length and direction will change from morning to afternoon. Explain why.</p>
       </div>
 
       <div class="response-q">
         <textarea class="response-textarea" id="pred-1"
           data-label="Prediction"
-          placeholder="I predict my model will need ___ parts because..."
+          placeholder="I predict the shadow will be ___ in the morning and ___ at noon because..."
           oninput="autoSave(this,'dot-pred-1')"></textarea>
         <span style="font-size:12px;color:#9A8E82;font-weight:600;">
           Your prediction<span class="response-save-dot" id="dot-pred-1"></span>
@@ -851,42 +850,42 @@ em { color: #5A4D3E; }
       </div>
     </div>
     <div class="card-body">
-      <p>You met these words yesterday. Today you'll use them. <strong>Tap each card to flip it</strong> if you need a quick refresher.</p>
+      <p>Tap each card to flip it. You'll use these words in your model. <strong>Tap each card to flip it</strong> if you need a quick refresher.</p>
 
       <div class="vocab-grid">
 
         <div class="flip-card fc-color-1" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
             <div class="flip-card-front"><div class="fc-emoji">📐</div><div class="fc-word">model</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">model</div><div class="fc-def">A diagram that shows how something works. Today: where Earth is in the galaxy.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">model</div><div class="fc-def">A small, simple version of something real. Today: a ball and flashlight stand for Earth and the Sun.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-2" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">🌌</div><div class="fc-word">galaxy</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">galaxy</div><div class="fc-def">A huge group of stars, gas, and dust held together by gravity.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🌀</div><div class="fc-word">rotation</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">rotation</div><div class="fc-def">One full spin of Earth on its axis. It takes about 24 hours.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-3" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">🌀</div><div class="fc-word">spiral arm</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">spiral arm</div><div class="fc-def">One of the curved arms of stars that wrap around a spiral galaxy's center.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">👤</div><div class="fc-word">shadow</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">shadow</div><div class="fc-def">A dark area made when an object blocks light. It points away from the light.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-4" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">💫</div><div class="fc-word">galactic center</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">galactic center</div><div class="fc-def">The bright middle of a galaxy — where stars are most crowded.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🌅</div><div class="fc-word">sunrise</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">sunrise</div><div class="fc-def">The moment your part of Earth turns into sunlight. The Sun appears in the east.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-5" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">📍</div><div class="fc-word">location</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">location</div><div class="fc-def">Where something is. Our Sun is about two-thirds out from the galactic center.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">👀</div><div class="fc-word">apparent motion</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">apparent motion</div><div class="fc-def">Motion that only seems to happen. The Sun seems to cross the sky because Earth spins.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
@@ -901,7 +900,7 @@ em { color: #5A4D3E; }
 
       <div class="callout callout-tip" style="margin-top:16px;">
         <span class="callout-icon">🌱</span>
-        <p><strong>Quick reminder:</strong> Two senses are off-limits today — taste and smell from anything outdoors. Stick to looking, feeling (gently), and measuring.</p>
+        <p><strong>Safety first:</strong> Never look straight at the Sun, even for a second. Look at the shadow on the ground instead.</p>
       </div>
 
     </div>
@@ -923,7 +922,7 @@ em { color: #5A4D3E; }
       <div class="act-num" style="background:#D4772C;">2</div>
       <div style="flex:1;">
         <div class="act-title">📖 Before You Investigate</div>
-        <div class="act-subtitle">A short refresher before you head outside</div>
+        <div class="act-subtitle">Models, shadows, and a spinning Earth</div>
       </div>
       <div class="act-time" style="background:#D4772C;">⏱ 8 min</div>
     </div>
@@ -935,17 +934,17 @@ em { color: #5A4D3E; }
           <div class="card-head-icon">👁️</div>
           <div>
             <div class="card-head-label">Section 1</div>
-            <div class="card-head-title">What a Good Galaxy Model Shows</div>
+            <div class="card-head-title">Why Use a Model?</div>
           </div>
         </div>
         <div class="card-body">
-          <p>A model of the Milky Way should show three things: <strong>shape</strong> (a flat spiral with curved arms), <strong>center</strong> (a bright bulge of stars in the middle), and <strong>location</strong> (where our Sun lives — in one of the spiral arms, two-thirds out from the center).</p>
-          <p>The top-down view is the most useful. Looking “down” on the Milky Way, you can see the spiral shape clearly: a glowing center with four big arms curving outward. From the side, it would look like a thin disk — you couldn’t see the spiral.</p>
+          <p>You can&#39;t float in space and watch Earth spin. So scientists use <span class="vtip">models<span class="vtip-box"><span class="vtip-word">model</span>A small, simple version of something real.</span></span>. A ball and a flashlight can show in two minutes what takes Earth a whole day.</p>
+          <p>In the model, the flashlight is the Sun and stays still. The ball is Earth and spins. That matches real life: the Sun stays put while Earth turns.</p>
           <div class="socratic-q">
             <span class="sq-icon">🤔</span>
             <div>
               <div class="label">Stop and Think</div>
-              <div class="question">"Why is the TOP-DOWN view of a galaxy more useful for a model than the side view?"</div>
+              <div class="question">"What could you use at home to stand in for the Sun? What could stand in for Earth?"</div>
             </div>
           </div>
         </div>
@@ -957,17 +956,17 @@ em { color: #5A4D3E; }
           <div class="card-head-icon">📓</div>
           <div>
             <div class="card-head-label">Section 2</div>
-            <div class="card-head-title">Where Our Sun Lives</div>
+            <div class="card-head-title">Shadows Follow the Sun</div>
           </div>
         </div>
         <div class="card-body">
-          <p>Our Sun is NOT in the center of the Milky Way. It sits about two-thirds of the way out from the galactic center, in a spiral arm called the <strong>Orion Arm</strong>. From there, our solar system orbits the center of the galaxy — one full lap takes about 250 million years.</p>
-          <p>The center of the Milky Way is crowded with stars and contains a huge black hole. The outer arms are spread out, with stars much farther apart. Our spot — in a quiet spiral arm — is one reason Earth has been a stable home for life.</p>
+          <p>A <span class="vtip">shadow<span class="vtip-box"><span class="vtip-word">shadow</span>A dark area made when an object blocks light.</span></span> forms when something blocks light. Shadows always point away from the light.</p>
+          <p>When the Sun is low in the sky, shadows are long. When the Sun is high, shadows are short. As Earth turns, the Sun&#39;s place in the sky changes, so shadows change too.</p>
           <div class="socratic-q">
             <span class="sq-icon">🧪</span>
             <div>
               <div class="label">Stop and Reason</div>
-              <div class="question">"Why might it be safer to live in a quiet spiral arm than near the crowded galactic center?"</div>
+              <div class="question">"If your shadow points west, where in the sky is the Sun? How do you know?"</div>
             </div>
           </div>
         </div>
@@ -983,15 +982,15 @@ em { color: #5A4D3E; }
           </div>
         </div>
         <div class="card-body">
-          <p>Don't worry if you can't draw well. Scientific sketches are about <em>accuracy</em>, not beauty. A simple drawing with labels and arrows can carry more information than three sentences of writing.</p>
-          <p><strong>Real-World Connection:</strong> Field biologists who study plants, animals, or rocks still sketch in their notebooks every single day. A photo can miss what matters. A sketch shows what the scientist <em>chose</em> to focus on — and that's evidence too.</p>
+          <p>A desk model can&#39;t show size and distance correctly. If Earth were the size of a ball, the real Sun would be bigger than a house and more than a mile away.</p>
+          <p><strong>Real-World Connection:</strong> Sundials use shadows to tell time. People used them for thousands of years before clocks were invented.</p>
         </div>
       </div>
 
       <!-- Key Concept -->
       <div class="key-concept">
         <div class="kc-label">🔑 Key Concept</div>
-        <p>A careful Milky Way model is the start of understanding our place in the universe. The clearer your model, the easier it is to see where Earth sits — and how vast our galaxy really is.</p>
+        <p>Earth&#39;s rotation makes the Sun seem to move from east to west. As the Sun&#39;s place in the sky changes, shadows change length and direction in a pattern you can predict.</p>
       </div>
 
       <div style="background:#EAF8FD;border:2px solid #B8E0F8;border-radius:14px;padding:16px 20px;margin:16px 0;">
@@ -1006,78 +1005,47 @@ em { color: #5A4D3E; }
       <!-- Interactive Diagram: Lesson parts -->
       <div class="diagram-wrap scroll-reveal">
         <div style="font-size:13px;color:#9A8E82;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">
-          🗺 Tap each part to learn what a Milky Way model needs
+          🗺 Tap each time of day
         </div>
-        <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;line-height:1.65;">A complete Milky Way model has three key features. Tap each labeled part to find out what to include in yours.</p>
+        <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;line-height:1.65;">The same stick at three times of day. Tap each scene to see where the Sun is and why the shadow looks the way it does.</p>
         <div class="diagram-interactive">
-          <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="font-family:Nunito,Arial,sans-serif;max-width:100%;height:auto;" role="img" aria-label="A labeled diagram showing the lesson parts">
-            <defs>
-              <linearGradient id="leafG2" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#7ad8a8"/>
-                <stop offset="100%" stop-color="#2a8a55"/>
-              </linearGradient>
-            </defs>
-            <rect width="720" height="360" fill="#fdf9ec" rx="12" stroke="#c8b896" stroke-width="2"/>
-
-            <!-- Stem -->
-            <path d="M 100 250 Q 180 240 240 220" fill="none" stroke="#5a3a1a" stroke-width="6"/>
-            <!-- Leaf -->
-            <path d="M 240 220 Q 340 100 520 130 Q 580 200 540 290 Q 380 320 280 280 Q 240 260 240 220 Z" fill="url(#leafG2)" stroke="#1f7d4a" stroke-width="2.5"/>
-            <!-- Midrib -->
-            <path d="M 240 220 Q 380 215 560 210" fill="none" stroke="#1f7d4a" stroke-width="3"/>
-            <!-- Veins -->
-            <line x1="290" y1="220" x2="330" y2="155" stroke="#1f7d4a" stroke-width="2"/>
-            <line x1="340" y1="218" x2="380" y2="135" stroke="#1f7d4a" stroke-width="2"/>
-            <line x1="400" y1="216" x2="445" y2="140" stroke="#1f7d4a" stroke-width="2"/>
-            <line x1="460" y1="214" x2="500" y2="150" stroke="#1f7d4a" stroke-width="2"/>
-            <line x1="290" y1="220" x2="320" y2="285" stroke="#1f7d4a" stroke-width="2"/>
-            <line x1="340" y1="220" x2="380" y2="300" stroke="#1f7d4a" stroke-width="2"/>
-            <line x1="400" y1="218" x2="440" y2="305" stroke="#1f7d4a" stroke-width="2"/>
-            <line x1="460" y1="216" x2="500" y2="295" stroke="#1f7d4a" stroke-width="2"/>
-
-            <!-- Labels and connector lines -->
-            <line x1="120" y1="262" x2="120" y2="320" stroke="#0E1C42" stroke-width="1.5" stroke-dasharray="3,3"/>
-            <rect x="60" y="320" width="100" height="28" rx="6" fill="#E8636B"/>
-            <text x="110" y="338" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">stem</text>
-
-            <line x1="380" y1="115" x2="380" y2="60" stroke="#0E1C42" stroke-width="1.5" stroke-dasharray="3,3"/>
-            <rect x="330" y="30" width="100" height="28" rx="6" fill="#D4772C"/>
-            <text x="380" y="48" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">edge</text>
-
-            <line x1="420" y1="220" x2="500" y2="60" stroke="#0E1C42" stroke-width="1.5" stroke-dasharray="3,3"/>
-            <rect x="455" y="30" width="100" height="28" rx="6" fill="#34B76F"/>
-            <text x="505" y="48" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">veins</text>
-
-            <line x1="560" y1="200" x2="640" y2="170" stroke="#0E1C42" stroke-width="1.5" stroke-dasharray="3,3"/>
-            <rect x="600" y="155" width="100" height="28" rx="6" fill="#55C8E8"/>
-            <text x="650" y="173" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">tip</text>
-
-            <line x1="380" y1="305" x2="380" y2="338" stroke="#0E1C42" stroke-width="1.5" stroke-dasharray="3,3"/>
-            <rect x="330" y="320" width="100" height="28" rx="6" fill="#8B6FC0"/>
-            <text x="380" y="338" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">color</text>
-
-            <line x1="540" y1="270" x2="650" y2="295" stroke="#0E1C42" stroke-width="1.5" stroke-dasharray="3,3"/>
-            <rect x="600" y="320" width="100" height="28" rx="6" fill="#C7922C"/>
-            <text x="650" y="338" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">texture</text>
-
-            <!-- Hotspots over each label -->
-            <rect class="hotspot" data-part="center" data-info="Galactic Center | The bright bulge in the middle of the Milky Way. Crowded with stars. Has a huge black hole at its very center. About 26,000 light-years from Earth." x="60" y="320" width="100" height="28" rx="6" fill="#E8636B"/>
-            <rect class="hotspot" data-part="edge" data-info="Edge | The edge can be smooth, wavy, or toothed (with little points like a saw). Run your finger gently along it. How would you describe what you feel? Are the teeth even, or different sizes?" x="330" y="30" width="100" height="28" rx="6" fill="#D4772C"/>
-            <rect class="hotspot" data-part="arms" data-info="Spiral Arms | Curved arms of stars that wrap around the galactic center. Our Sun lives in one called the Orion Arm. The arms have new stars being born, gas clouds, and dust." x="455" y="30" width="100" height="28" rx="6" fill="#34B76F"/>
-            <rect class="hotspot" data-part="tip" data-info="Tip | The tip is the very end of the leaf, opposite the stem. Is it pointy, rounded, or notched? Is it a different color than the rest? Sometimes the tip is dried out or torn." x="600" y="155" width="100" height="28" rx="6" fill="#55C8E8"/>
-            <rect class="hotspot" data-part="you" data-info="YOU ARE HERE | Earth's spot in the Milky Way. About two-thirds of the way out from the galactic center, in a spiral arm. Our solar system orbits the center once every 250 million years." x="330" y="320" width="100" height="28" rx="6" fill="#8B6FC0"/>
-            <rect class="hotspot" data-part="texture" data-info="Texture | Gently touch the leaf with one finger. Does it feel waxy, fuzzy, smooth, sticky, or bumpy? Does the top feel different from the bottom? Texture is something only you can feel — that's why it matters." x="600" y="320" width="100" height="28" rx="6" fill="#C7922C"/>
+          <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="font-family:Nunito,Arial,sans-serif;max-width:100%;height:auto;" role="img" aria-label="A stick and its shadow at 9 AM, noon, and 3 PM, with the Sun low in the east, high overhead, and low in the west">
+          <rect width="720" height="360" fill="#fdf9ec" rx="12" stroke="#c8b896" stroke-width="2"/>
+          <rect x="20" y="20" width="220" height="280" rx="12" fill="#EAF8FD" stroke="#55C8E8" stroke-width="2"/>
+          <text x="130" y="44" text-anchor="middle" font-size="16" fill="#0E1C42" font-weight="800">9 AM</text>
+          <circle cx="210" cy="140" r="16" fill="#FFE89A" stroke="#D4772C" stroke-width="2"/>
+          <rect x="30" y="240" width="200" height="50" fill="#C8E6A0"/>
+          <polygon points="130,240 40,246 130,250" fill="#555"/>
+          <rect x="127" y="180" width="6" height="62" fill="#8B5A2B"/>
+          <rect x="250" y="20" width="220" height="280" rx="12" fill="#EAF8FD" stroke="#55C8E8" stroke-width="2"/>
+          <text x="360" y="44" text-anchor="middle" font-size="16" fill="#0E1C42" font-weight="800">Noon</text>
+          <circle cx="365" cy="82" r="16" fill="#FFD23F" stroke="#D4772C" stroke-width="2"/>
+          <rect x="260" y="240" width="200" height="50" fill="#C8E6A0"/>
+          <ellipse cx="360" cy="244" rx="15" ry="5" fill="#555"/>
+          <rect x="357" y="180" width="6" height="62" fill="#8B5A2B"/>
+          <rect x="480" y="20" width="220" height="280" rx="12" fill="#EAF8FD" stroke="#55C8E8" stroke-width="2"/>
+          <text x="590" y="44" text-anchor="middle" font-size="16" fill="#0E1C42" font-weight="800">3 PM</text>
+          <circle cx="520" cy="140" r="16" fill="#FFB347" stroke="#D4772C" stroke-width="2"/>
+          <rect x="490" y="240" width="200" height="50" fill="#C8E6A0"/>
+          <polygon points="590,240 680,246 590,250" fill="#555"/>
+          <rect x="587" y="180" width="6" height="62" fill="#8B5A2B"/>
+          <text x="30" y="330" font-size="14" fill="#0E1C42" font-weight="800">◀ WEST</text>
+          <text x="690" y="330" text-anchor="end" font-size="14" fill="#0E1C42" font-weight="800">EAST ▶</text>
+          <text x="360" y="330" text-anchor="middle" font-size="12" fill="#5A4D3E" font-weight="700">Shadows point away from the Sun</text>
+          <rect class="hotspot" data-part="morning" data-info="Morning | The Sun is low in the east. Light hits the stick from the side, so the shadow is long and points west." x="20" y="20" width="220" height="280" rx="12" fill="#55C8E8"/>
+          <rect class="hotspot" data-part="noon" data-info="Noon | The Sun is at its highest point. Light comes from above, so the shadow is short." x="250" y="20" width="220" height="280" rx="12" fill="#55C8E8"/>
+          <rect class="hotspot" data-part="afternoon" data-info="Afternoon | The Sun is low in the west. The shadow is long again, but now it points east." x="480" y="20" width="220" height="280" rx="12" fill="#55C8E8"/>
           </svg>
           <div style="background:linear-gradient(135deg,#EEF8F0,#D6F5DE);border:2px solid #B8E8CF;border-radius:14px;padding:12px 18px;margin-top:10px;display:flex;align-items:center;gap:12px;">
             <span style="font-size:28px;flex-shrink:0;animation:mind-blow-bounce 2s ease-in-out infinite;">👆</span>
-            <p style="font-size:15px;color:#0E1C42;line-height:1.55;margin:0;font-weight:600;">Tap each label to learn what to look for during your investigation.</p>
+            <p style="font-size:15px;color:#0E1C42;line-height:1.55;margin:0;font-weight:600;">Tap each scene to see where the Sun is.</p>
           </div>
           <div class="diagram-info-panel" id="diagramPanel">
             <span class="dip-word" id="diagramWord"></span>
             <span id="diagramInfo"></span>
           </div>
         </div>
-        <div class="diagram-caption">Six things a scientist always notices on a leaf: stem, edge, veins, tip, color, and texture.</div>
+        <div class="diagram-caption">Long shadow in the morning, short at noon, long again in the afternoon, pointing the opposite way.</div>
       </div>
 
       <!-- Mind-blow -->
@@ -1085,7 +1053,7 @@ em { color: #5A4D3E; }
         <div class="mind-blow-icon">🤯</div>
         <div class="mind-blow-content">
           <div class="mind-blow-label">Mind-Blowing Fact</div>
-          <div class="mind-blow-text">A single galaxy can contain HUNDREDS of billions of stars — yet most of a galaxy is empty space. If the Sun were the size of a basketball, the next nearest star would be 4,000 miles away.</div>
+          <div class="mind-blow-text">The world&#39;s biggest sundial, in Jaipur, India, is about <strong>90 feet tall</strong>. Its shadow creeps about 6 centimeters every minute, fast enough to watch it move.</div>
         </div>
       </div>
 
@@ -1103,107 +1071,79 @@ em { color: #5A4D3E; }
 ══════════════════════════════════════════ -->
 <div class="tab-panel" id="tab-explore">
 
+  <!-- ACTIVITY 3: Investigate -->
   <div class="activity-card act-explore scroll-reveal">
     <div class="act-head">
       <div class="act-num" style="background:#55C8E8;">3</div>
       <div style="flex:1;">
-        <div class="act-title">🔬 Your Investigation</div>
-        <div class="act-subtitle">Spiral arms. Galactic center. Earth's location. Label every part.</div>
+        <div class="act-title">🔬 Shadow Model and Shadow Stick</div>
+        <div class="act-subtitle">Spin the Earth. Watch the shadow. Then track the real thing.</div>
       </div>
       <div class="act-time" style="background:#55C8E8;">⏱ 25 min</div>
     </div>
     <div class="act-body">
 
-      <p>Today you’re the cosmic cartographer. You’ll draw a top-down model of the Milky Way galaxy — with a glowing center, four spiral arms, and a clearly labeled YOU ARE HERE marker showing where our Sun lives. Every label has to be right.</p>
+      <p>First you&#39;ll model how Earth&#39;s spin changes a shadow. Then you&#39;ll track a real shadow outside.</p>
 
-      <!-- Image suggestion: a leaf, rock, and shell side by side -->
       <div class="lesson-figure">
-        <div class="lesson-figure-label">📷 Reference · Build Your Milky Way Model</div>
+        <div class="lesson-figure-label">📷 Reference · A rotation model</div>
         <img
-          src="images/24-02-milky-way-topdown.png"
-          alt="A top-down illustration of a spiral galaxy with four curved arms, a glowing yellow center, and a small marker labeled YOU ARE HERE in one of the outer arms."
+          src="images/26-02-globe-flashlight.png"
+          alt="A desk lamp shining on a classroom globe, lighting the half of the globe that faces it."
           onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; this.parentElement.querySelector('.lesson-figure-label').style.display='none';"
         />
         <div class="image-suggestion" style="display:none;">
           <div class="image-suggestion-icon">🖼️</div>
           <div class="image-suggestion-label">Suggested Image — Generate This</div>
           <div class="image-suggestion-desc">
-            Clear top-down illustration of the Milky Way galaxy. A glowing yellow-white center surrounded by four curved spiral arms made of stars. A bright yellow dot labeled YOU ARE HERE sits about two-thirds out in one of the arms. Dark background, bright stars. No text labels except YOU ARE HERE.
+            Photo of a desk lamp shining on a classroom globe, lighting the half that faces the lamp.
           </div>
-          <div class="image-suggestion-file">Save as: images/24-02-milky-way-topdown.jpg</div>
+          <div class="image-suggestion-file">Save as: images/26-02-globe-flashlight.png</div>
         </div>
         <div class="lesson-figure-caption">
-          A top-down model of the Milky Way. Notice how our Sun lives in a spiral arm — not at the center.
+          The lamp is the Sun and the globe is Earth. Only the half facing the light has daytime. Spin the globe, not the lamp.
         </div>
       </div>
-
-      <!-- Step 1 -->
       <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
         <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Set up your model</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Find something small from outside or from a window box — a leaf, a pebble, a shell, a piece of bark, a seed pod. Place it on a flat surface where you can see it clearly. Write what you chose at the top of your notebook page.</p>
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Build the model</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Press a small ball of clay onto a ball or orange and stand a toothpick in it. The toothpick is a person standing on Earth. Set a flashlight on a table in a dark room, shining at the ball.</p>
         </div>
       </div>
-
-      <!-- Step 2 -->
-      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
+      <div style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
         <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Sketch what you see</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Draw the Milky Way as clearly as you can. It doesn't have to be pretty. Add a glowing center, four curved spiral arms, and a YOU ARE HERE dot in one of the arms — about two-thirds out from the center.</p>
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Spin and watch</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Slowly turn the ball so the toothpick moves into the light, faces it, then moves out of it. Keep the flashlight still. Watch the toothpick&#39;s shadow on the ball.</p>
         </div>
       </div>
-
-      <!-- Step 3 -->
-      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
-        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
-        <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Draw the galaxy shape</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Draw a bright oval in the middle of your paper — that's the galactic center. Then add FOUR curved arms swirling outward from the center. Make them about the same length, all spiraling the same direction.</p>
-        </div>
-      </div>
-
-      <!-- Model Checklist -->
       <div class="student-chart-wrap">
-        <div class="student-chart-label">📋 Your Milky Way model checklist</div>
+        <div class="student-chart-label">📋 Shadow model — copy into your notebook</div>
         <table class="student-chart">
-          <thead>
-            <tr>
-              <th style="width:170px;">What I'm observing</th>
-              <th>What to label</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td class="row-label">Size (length, cm)</td><td></td></tr>
-            <tr><td class="row-label">Size (width, cm)</td><td></td></tr>
-            <tr><td class="row-label">Color(s)</td><td></td></tr>
-            <tr><td class="row-label">Shape</td><td></td></tr>
-            <tr><td class="row-label">Edge (smooth, toothed, wavy…)</td><td></td></tr>
-            <tr><td class="row-label">Texture (touch)</td><td></td></tr>
-            <tr><td class="row-label">Smell (only if safe indoors)</td><td></td></tr>
-            <tr><td class="row-label">Anything unusual?</td><td></td></tr>
-            <tr><td class="row-label">One detail others might miss</td><td></td></tr>
-            <tr><td class="row-label">One thing that surprised you</td><td></td></tr>
-          </tbody>
+          <thead><tr><th style="width:24%;">Where the toothpick is</th><th>Shadow length (long or short)</th><th>Which way the shadow points</th></tr></thead>
+          <tbody><tr><td class="row-label">Turning into the light (sunrise)</td><td></td><td></td></tr><tr><td class="row-label">Facing the light (noon)</td><td></td><td></td></tr><tr><td class="row-label">Turning out of the light (sunset)</td><td></td><td></td></tr></tbody>
         </table>
       </div>
-
-      <!-- Step 4 -->
-      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
-        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div>
+      <div style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Spot a question</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Place a dot in one of the spiral arms, about two-thirds of the way from the center to the outer edge. Label it YOU ARE HERE. That's where our Sun (and Earth) lives.</p>
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Track a real shadow</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">On a sunny day, stand a pencil upright in clay on a sheet of paper outside. At 9 AM, noon, and 3 PM, trace the shadow and measure it. If it&#39;s cloudy, use this sample data: 9 AM = 60 cm pointing west, noon = 20 cm pointing north, 3 PM = 55 cm pointing east.</p>
         </div>
       </div>
-
-      <!-- Step 5 -->
+      <div class="student-chart-wrap">
+        <div class="student-chart-label">📋 Shadow stick data — copy into your notebook</div>
+        <table class="student-chart">
+          <thead><tr><th style="width:24%;">Time</th><th>Shadow length (cm)</th><th>Shadow points toward</th></tr></thead>
+          <tbody><tr><td class="row-label">9 AM</td><td></td><td></td></tr><tr><td class="row-label">Noon</td><td></td><td></td></tr><tr><td class="row-label">3 PM</td><td></td><td></td></tr></tbody>
+        </table>
+      </div>
       <div style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
-        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">5</div>
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Compare and check</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Add labels: GALACTIC CENTER on the bulge, SPIRAL ARM on one of the arms, and YOU ARE HERE next to your dot. Without labels your model isn't complete.</p>
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Make a claim</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Write one sentence: &quot;Shadows change during the day because ___.&quot; You&#39;ll use it in your CER.</p>
         </div>
       </div>
 
@@ -1217,44 +1157,42 @@ em { color: #5A4D3E; }
           </div>
         </div>
         <div class="card-body">
-          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Answer these in complete sentences, using what you wrote in your table.</p>
+          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Answer in complete sentences. Use both of your data tables.</p>
 
           <div class="pq">
             <span class="pq-num" style="background:#D4772C;">1</span>
-            <span class="pq-text">What parts did you include in your Milky Way model? Describe them in 1–2 sentences using the labels from your model.</span>
+            <span class="pq-text">In your model, when was the toothpick&#39;s shadow shortest? Where was the &quot;Sun&quot; then?</span>
           </div>
           <div class="response-q">
             <textarea class="response-textarea ta-sm" id="ryt-1"
-              data-label="Investigate — Q1: Model parts"
-              placeholder="My model includes... The labeled parts are..."
+              data-label="Investigate — Q1: Shortest shadow"
+              placeholder="The shadow was shortest when... The flashlight was..."
               oninput="autoSave(this,'dot-ryt-1')"></textarea>
             <span style="font-size:12px;color:#9A8E82;font-weight:600;">
               Your answer<span class="response-save-dot" id="dot-ryt-1"></span>
             </span>
           </div>
-
           <div class="pq" style="margin-top:14px;">
             <span class="pq-num" style="background:#D4772C;">2</span>
-            <span class="pq-text">Where in the Milky Way should the YOU ARE HERE marker go? Describe both the distance from center and the arm.</span>
+            <span class="pq-text">Use your shadow stick data. How did the shadow&#39;s length and direction change from 9 AM to 3 PM?</span>
           </div>
           <div class="response-q">
             <textarea class="response-textarea ta-sm" id="ryt-2"
-              data-label="Investigate — Q2: Surprise"
-              placeholder="The YOU ARE HERE marker should go..."
+              data-label="Investigate — Q2: Shadow data"
+              placeholder="At 9 AM the shadow was... At noon... At 3 PM..."
               oninput="autoSave(this,'dot-ryt-2')"></textarea>
             <span style="font-size:12px;color:#9A8E82;font-weight:600;">
               Your answer<span class="response-save-dot" id="dot-ryt-2"></span>
             </span>
           </div>
-
           <div class="pq" style="margin-top:14px;">
             <span class="pq-num" style="background:#D4772C;">3</span>
-            <span class="pq-text">Look at your model. What’s ONE thing it shows well, and ONE thing it leaves out?</span>
+            <span class="pq-text">Explain how Earth&#39;s rotation causes the shadow pattern you saw.</span>
           </div>
           <div class="response-q">
             <textarea class="response-textarea ta-sm" id="ryt-3"
-              data-label="Investigate — Q3: Testable question"
-              placeholder="My model shows ___ well. It leaves out..."
+              data-label="Investigate — Q3: Rotation and shadows"
+              placeholder="As Earth rotates, the Sun seems to... so the shadow..."
               oninput="autoSave(this,'dot-ryt-3')"></textarea>
             <span style="font-size:12px;color:#9A8E82;font-weight:600;">
               Your answer<span class="response-save-dot" id="dot-ryt-3"></span>
@@ -1263,7 +1201,7 @@ em { color: #5A4D3E; }
         </div>
       </div>
 
-      <!-- Discuss & Defend -->
+      <!-- Discuss and Defend -->
       <div class="card theme-rock scroll-reveal" style="margin-top:10px;">
         <div class="card-head">
           <div class="card-head-icon">💬</div>
@@ -1273,13 +1211,13 @@ em { color: #5A4D3E; }
           </div>
         </div>
         <div class="card-body">
-          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Think about these. Be ready to explain your reasoning.</p>
+          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Think about these. Be ready to explain your reasoning out loud or in your notebook.</p>
 
           <div class="socratic-q">
             <span class="sq-icon">⚔️</span>
             <div>
               <div class="label">Defend Your Thinking</div>
-              <div class="question">"If a classmate's model shows the Sun at the center of the galaxy, what's wrong? Use the words ‘spiral arm’ in your answer."</div>
+              <div class="question">"A friend says, 'Shadows change because the Sun travels across the sky.' How would you correct them?"</div>
             </div>
           </div>
 
@@ -1287,14 +1225,14 @@ em { color: #5A4D3E; }
             <span class="sq-icon">🔍</span>
             <div>
               <div class="label">Compare the Evidence</div>
-              <div class="question">"Why does your model need to show CURVED arms, not straight lines coming out of the center?"</div>
+              <div class="question">"Which taught you more: the model or the real shadow stick? Why?"</div>
             </div>
           </div>
         </div>
       </div>
 
     </div>
-  </div>
+  </div><!-- /act-explore -->
 
   <div class="tab-next-wrap">
     <button class="tab-next-btn" onclick="switchTab('quiz')">Continue to 🧠 Self-Check →</button>
@@ -1373,17 +1311,17 @@ em { color: #5A4D3E; }
 <div class="tab-panel" id="tab-assignment">
 
   <!-- Part A -->
-  <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;">📐 Part A — Field Notebook Sketch</p>
-  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Take a photo (or scan) of your Milky Way model from the Investigate tab. Make sure it has the galactic center, four spiral arms, and a YOU ARE HERE dot in the correct spot. Below your model, write one sentence describing where Earth is.</p>
+  <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;">📐 Part A — Shadow Diagram</p>
+  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Use your shadow data from the Investigate tab. Open your notebook to a clean page.</p>
 
   <div class="pq">
     <span class="pq-num" style="background:#E8636B;">1</span>
-    <span class="pq-text"><strong>Model &amp; Caption:</strong> In the box below, type what your Milky Way model shows and what each label points to. (For example: "Milky Way galaxy. Labels: galactic center, spiral arm, YOU ARE HERE.")</span>
+    <span class="pq-text"><strong>Draw and Label:</strong> Draw a stick and its shadow at 9 AM, noon, and 3 PM. Show where the Sun is in the sky each time, and label east and west. In the box below, describe how the shadow changed.</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="parta-1"
-      data-label="Part A — Model &amp; Labels"
-      placeholder="My Milky Way model showed... The labels I used were..."
+      data-label="Part A — Shadow diagram"
+      placeholder="At 9 AM the shadow... At noon... At 3 PM..."
       oninput="autoSave(this,'dot-parta-1')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-parta-1"></span>
@@ -1392,16 +1330,16 @@ em { color: #5A4D3E; }
 
   <!-- Part B -->
   <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;margin-top:20px;">📊 Part B — Evidence Questions</p>
-  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Answer in complete sentences about the model you drew.</p>
+  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Answer in complete sentences using your model and shadow data.</p>
 
   <div class="pq">
     <span class="pq-num" style="background:#D4772C;">2</span>
-    <span class="pq-text">Look at your model. Describe what each labeled part represents (galactic center, spiral arm, YOU ARE HERE).</span>
+    <span class="pq-text">Predict the shadow&#39;s length and direction at 6 PM. Explain your prediction using your data.</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="partb-1"
-      data-label="Part B — Q1: Labeled parts"
-      placeholder="Part 1: ... Part 2: ... Part 3: ..."
+      data-label="Part B — Q1: Shadow at 6 PM"
+      placeholder="At 6 PM the shadow will be ___ and point ___ because..."
       oninput="autoSave(this,'dot-partb-1')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-partb-1"></span>
@@ -1410,12 +1348,12 @@ em { color: #5A4D3E; }
 
   <div class="pq">
     <span class="pq-num" style="background:#D4772C;">3</span>
-    <span class="pq-text">Look at your model. What's ONE thing it shows well, and ONE thing it leaves out?</span>
+    <span class="pq-text">How could you use a shadow stick to tell the time without a clock?</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="partb-2"
-      data-label="Part B — Q2: Strengths and limits"
-      placeholder="My model shows ___ well. It leaves out..."
+      data-label="Part B — Q2: Shadow clock"
+      placeholder="I could tell the time by..."
       oninput="autoSave(this,'dot-partb-2')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-partb-2"></span>
@@ -1424,12 +1362,12 @@ em { color: #5A4D3E; }
 
   <div class="pq">
     <span class="pq-num" style="background:#D4772C;">4</span>
-    <span class="pq-text">A friend’s model shows the Sun at the center of the galaxy. Why is that wrong? Use evidence from this lesson.</span>
+    <span class="pq-text">Why does a toothpick on a spinning ball make a good model of a person standing on Earth?</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="partb-3"
-      data-label="Part B — Q3: Testable question &amp; tools"
-      placeholder="Their model is wrong because..."
+      data-label="Part B — Q3: The toothpick person"
+      placeholder="The toothpick is like a person because..."
       oninput="autoSave(this,'dot-partb-3')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-partb-3"></span>
@@ -1471,7 +1409,7 @@ em { color: #5A4D3E; }
     <div class="cer-section">
       <div class="cer-badge cer-badge-evidence">E</div>
       <div class="cer-section-body">
-        <div class="cer-section-title">Evidence <span class="cer-section-hint">— Which parts of your model support your claim?</span></div>
+        <div class="cer-section-title">Evidence <span class="cer-section-hint">— Which parts of your model and data support your claim?</span></div>
         <div class="cer-write-box">
           <p class="cer-starter" style="color:#9A6420;font-style:normal;font-weight:700;">📋 Cite at least two parts of your model as evidence. No starter.</p>
           <textarea class="response-textarea ta-sm" id="cer-evidence"
@@ -1489,7 +1427,7 @@ em { color: #5A4D3E; }
     <div class="cer-section">
       <div class="cer-badge cer-badge-reason">R</div>
       <div class="cer-section-body">
-        <div class="cer-section-title">Reasoning <span class="cer-section-hint">— Why does this evidence work better than guesses or general descriptions?</span></div>
+        <div class="cer-section-title">Reasoning <span class="cer-section-hint">— Why does this evidence prove your claim?</span></div>
         <div class="cer-write-box">
           <p class="cer-starter" style="color:#9A6420;font-style:normal;font-weight:700;">📋 Explain how the model proves the claim. No starter.</p>
           <textarea class="response-textarea ta-sm" id="cer-reasoning"
@@ -1504,7 +1442,7 @@ em { color: #5A4D3E; }
     </div>
 
     <div class="cer-vocab-check">
-      📚 <strong>Vocab check:</strong> Try to use at least two of these words: <strong>model</strong>, <strong>galaxy</strong>, <strong>spiral arm</strong>, <strong>galactic center</strong>, <strong>location</strong>
+      📚 <strong>Vocab check:</strong> Try to use at least two of these words: <strong>model</strong>, <strong>rotation</strong>, <strong>shadow</strong>, <strong>sunrise</strong>, <strong>apparent motion</strong>
     </div>
   </div>
 
@@ -1520,15 +1458,15 @@ em { color: #5A4D3E; }
     <div class="revise-prompts">
       <p>Write 3–4 sentences answering these:</p>
       <ul>
-        <li>What did your Milky Way model show clearly? What did it leave out?</li>
-        <li>What surprised you about how much there was to see?</li>
-        <li>What would change about how you observe something next time?</li>
+        <li>What did you predict about the shadow? Were you right?</li>
+        <li>What surprised you in your model or your data?</li>
+        <li>How does your model explain the real shadow you tracked?</li>
       </ul>
     </div>
     <div class="cer-write-box" style="margin-top:14px;">
       <textarea class="response-textarea ta-lg" id="revise-1"
         data-label="Revise Your Thinking"
-        placeholder="I predicted... I actually wrote... The thing that surprised me most was..."
+        placeholder="I predicted... My data showed... My model explains it because..."
         oninput="autoSave(this,'dot-revise-1')"></textarea>
       <span style="font-size:12px;color:#9A8E82;font-weight:600;display:block;margin-top:4px;">
         Your reflection<span class="response-save-dot" id="dot-revise-1"></span>
@@ -1570,33 +1508,33 @@ em { color: #5A4D3E; }
       </div>
     </div>
     <div style="padding:18px 22px;">
-      <p style="font-size:16px;color:#5A4D3E;line-height:1.65;margin-bottom:14px;">When you've finished, copy your gathered answers into Canvas — and add a photo of your notebook sketch and table. Use this checklist before you submit.</p>
+      <p style="font-size:16px;color:#5A4D3E;line-height:1.65;margin-bottom:14px;">When you've finished, copy your gathered answers into Canvas — and add a photo of your shadow diagram and data tables. Use this checklist before you submit.</p>
 
       <div class="turn-in-checklist">
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
           <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
-          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part A — Model:</strong> Drawing of the Milky Way with a labeled galactic center, four spiral arms, and a YOU ARE HERE dot two-thirds out from the center, plus a caption explaining what each label represents.</span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part A — Shadow diagram:</strong> A stick and its shadow at three times, with the Sun and east/west labeled, plus a typed description.</span>
         </div>
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
           <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
-          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Milky Way model:</strong> Galactic center, four spiral arms, and a YOU ARE HERE dot all labeled correctly.</span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Data tables:</strong> Your shadow model table and your shadow stick data, all filled in.</span>
         </div>
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
           <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
-          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part B — Evidence Questions:</strong> All three answered in complete sentences using specific words or numbers from your table.</span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part B — Evidence Questions:</strong> All three answered in complete sentences.</span>
         </div>
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
           <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
-          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part C — CER Response:</strong> Claim, at least one piece of evidence from your model, and reasoning explaining where Earth sits in the galaxy.</span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part C — CER Response:</strong> Claim, at least two parts of your model or data as evidence, and reasoning.</span>
         </div>
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
           <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
-          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Revise Your Thinking:</strong> 3–4 sentences comparing your prediction to what actually happened.</span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Revise Your Thinking:</strong> 3–4 sentences comparing your prediction to your results.</span>
         </div>
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
@@ -1729,7 +1667,7 @@ function checkQuiz(optEl) {
     var scoreMsg = document.getElementById('quizScoreMsg');
     scoreNum.textContent = quizCorrect;
     if (quizCorrect === 3) {
-      scoreMsg.textContent = '🎉 Perfect score! You\'ve got a scientist\'s eye.';
+      scoreMsg.textContent = '🎉 Perfect score! You know how Earth\'s spin works.';
       setTimeout(window.launchConfetti, 300);
       var vp = document.getElementById('quizVideoPerfect');
       if (vp) vp.classList.add('show');
@@ -1738,7 +1676,7 @@ function checkQuiz(optEl) {
       var vr = document.getElementById('quizVideoReview');
       if (vr) vr.classList.add('show');
     } else {
-      scoreMsg.textContent = '👍 Good effort! Re-read the lesson — strong evidence uses specifics.';
+      scoreMsg.textContent = '👍 Good effort! Re-read the model section, then try again.';
       var vr2 = document.getElementById('quizVideoReview');
       if (vr2) vr2.classList.add('show');
     }

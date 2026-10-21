@@ -673,7 +673,7 @@ em { color: #5A4D3E; }
       <stop offset="0%" stop-color="#FFEB3B"/>
       <stop offset="100%" stop-color="rgba(255,235,59,0)"/>
     </radialGradient>
-    <linearGradient id="earthDay" x1="0" y1="0" x2="1" y2="0">
+    <linearGradient id="earthDay" x1="1" y1="0" x2="0" y2="0">
       <stop offset="0%" stop-color="#1976D2"/>
       <stop offset="50%" stop-color="#43A047"/>
       <stop offset="100%" stop-color="#0D47A1"/>
@@ -695,7 +695,7 @@ em { color: #5A4D3E; }
     <circle cx="0" cy="0" r="80" fill="url(#sunRayG)"/>
     <circle cx="0" cy="0" r="45" fill="#FFB300"/>
     <circle cx="0" cy="0" r="32" fill="#FFEB3B"/>
-    <text x="0" y="115" text-anchor="middle" font-family="Nunito,sans-serif" font-size="12" fill="#FFD700" font-weight="800">Sun</text>
+    <text x="0" y="98" text-anchor="middle" font-family="Nunito,sans-serif" font-size="12" fill="#FFD700" font-weight="800">Sun</text>
   </g>
 
   <!-- Sun ray going right -->
@@ -704,19 +704,19 @@ em { color: #5A4D3E; }
   <!-- Earth on right -->
   <g transform="translate(640,150)">
     <!-- Day side -->
-    <path d="M 0 -55 A 55 55 0 0 1 0 55 Z" fill="url(#earthDay)" stroke="#fff" stroke-width="2"/>
+    <path d="M 0 -55 A 55 55 0 0 0 0 55 Z" fill="url(#earthDay)" stroke="#fff" stroke-width="2"/>
     <!-- Night side -->
-    <path d="M 0 -55 A 55 55 0 0 0 0 55 Z" fill="#0a0a2a" stroke="#fff" stroke-width="2"/>
+    <path d="M 0 -55 A 55 55 0 0 1 0 55 Z" fill="#0a0a2a" stroke="#fff" stroke-width="2"/>
     <!-- Continent hint on day side -->
-    <ellipse cx="20" cy="-15" rx="14" ry="8" fill="#2E7D32" opacity="0.7"/>
-    <ellipse cx="15" cy="20" rx="10" ry="6" fill="#2E7D32" opacity="0.7"/>
+    <ellipse cx="-20" cy="-15" rx="14" ry="8" fill="#2E7D32" opacity="0.7"/>
+    <ellipse cx="-15" cy="20" rx="10" ry="6" fill="#2E7D32" opacity="0.7"/>
     <!-- Stars on night side -->
-    <circle cx="-25" cy="-25" r="1" fill="#FFD700"/>
-    <circle cx="-30" cy="0" r="1.2" fill="#FFD700"/>
-    <circle cx="-22" cy="25" r="1" fill="#FFD700"/>
+    <circle cx="25" cy="-25" r="1" fill="#FFD700"/>
+    <circle cx="30" cy="0" r="1.2" fill="#FFD700"/>
+    <circle cx="22" cy="25" r="1" fill="#FFD700"/>
 
-    <text x="22" y="-65" font-family="Nunito,sans-serif" font-size="10" fill="#FFD700" font-weight="800">☀️ DAY</text>
-    <text x="-50" y="-65" font-family="Nunito,sans-serif" font-size="10" fill="#D6BFEC" font-weight="800">🌙 NIGHT</text>
+    <text x="-48" y="-65" font-family="Nunito,sans-serif" font-size="10" fill="#FFD700" font-weight="800">☀️ DAY</text>
+    <text x="12" y="-65" font-family="Nunito,sans-serif" font-size="10" fill="#D6BFEC" font-weight="800">🌙 NIGHT</text>
   </g>
 
   <!-- Rotation arrow -->
@@ -752,7 +752,7 @@ em { color: #5A4D3E; }
     <div class="info-icon" style="background:#F3E5F5;">🌍</div>
     <div>
       <div class="info-label">Science Focus</div>
-      <div class="info-value">Scientific Thinking</div>
+      <div class="info-value">Day &amp; Night</div>
       <div class="info-detail">Earth's rotation</div>
     </div>
   </div>
@@ -777,7 +777,7 @@ em { color: #5A4D3E; }
       </div>
     </div>
     <div class="card-body">
-      <p>How do scientists tell the difference between what they <em>see</em> and what they <em>think it means</em>?</p>
+      <p>Why does the Sun seem to rise, cross the sky, and set every single day?</p>
       <p style="font-size:14px;color:#9A8E82;">Keep this question in mind as you work through the lesson today.</p>
     </div>
   </div>
@@ -790,9 +790,9 @@ em { color: #5A4D3E; }
       </div>
     </div>
     <div class="card-body">
-      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#E8636B;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">1</span>describe what a galaxy is made of.</p>
-      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#D4772C;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">2</span>identify the Milky Way as our home galaxy.</p>
-      <p style="margin-bottom:0;"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#34B76F;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">3</span>compare the size of stars, solar systems, and galaxies.</p>
+      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#E8636B;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">1</span>explain that Earth spins on its axis once every 24 hours.</p>
+      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#D4772C;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">2</span>describe why one half of Earth has day while the other half has night.</p>
+      <p style="margin-bottom:0;"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#34B76F;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">3</span>explain why the Sun only seems to move across the sky.</p>
     </div>
   </div>
 </div>
@@ -802,7 +802,7 @@ em { color: #5A4D3E; }
   <span class="need-strip-label">You'll need:</span>
   <span class="need-chip">📓 Science notebook</span>
   <span class="need-chip">✏️ Pencil &amp; colored pencils</span>
-  <span class="need-chip">🔍 Something small to look at closely</span>
+  <span class="need-chip">🔦 A flashlight and a ball or orange</span>
 </div>
 
 <!-- TAB BAR -->
@@ -842,19 +842,19 @@ em { color: #5A4D3E; }
       <div class="act-num" style="background:#E8636B;">1</div>
       <div style="flex:1;">
         <div class="act-title">🔍 Notice, Wonder, and Predict</div>
-        <div class="act-subtitle">Step way back. Find Earth on the cosmic map.</div>
+        <div class="act-subtitle">The Sun seems to move. Does it really?</div>
       </div>
       <div class="act-time" style="background:#E8636B;">⏱ 5 min</div>
     </div>
     <div class="act-body">
-      <p>Stand outside on a clear, dark night and look up. You see stars. Lots of them. Maybe you spot the Big Dipper, or notice a bright planet. What you can't see — but what's actually there — is one of the most amazing things in the universe: a vast, spinning collection of more than 200 billion stars called the Milky Way Galaxy.</p>
-      <p>Every single star you can see with your eyes is in OUR galaxy. Our Sun is one of those stars. So is Polaris (the North Star). And Sirius (the brightest one). All 4,000 stars you can see — and 200 BILLION more you can't — are all neighbors in the same galaxy. Today we explore what a galaxy actually is.</p>
+      <p>Every morning the Sun peeks over the horizon. By lunchtime it's high overhead. By evening it sinks out of sight. It sure looks like the Sun is traveling across the sky.</p>
+      <p>For thousands of years, people believed exactly that. But the Sun isn't the one moving. You are, riding on a spinning Earth.</p>
 
       <div class="socratic-q">
         <span class="sq-icon">👀</span>
         <div>
           <div class="label">In Your Science Notebook</div>
-          <div class="question">"What's the biggest thing you've ever seen with your own eyes? Now imagine something that's 100,000 light-years across. That's our galaxy."</div>
+          <div class="question">"When you ride in a car, trees seem to rush past the window. Are the trees moving? How might that be like the Sun?"</div>
         </div>
       </div>
 
@@ -892,43 +892,43 @@ em { color: #5A4D3E; }
 
         <div class="flip-card fc-color-1" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">🌌</div><div class="fc-word">galaxy</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">galaxy</div><div class="fc-def">A huge group of stars, gas, dust, and orbiting objects — held together by gravity. Galaxies hold billions of stars.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🌀</div><div class="fc-word">rotation</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">rotation</div><div class="fc-def">One full spin of an object. Earth makes one rotation about every 24 hours.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-2" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">🌠</div><div class="fc-word">Milky Way</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">Milky Way</div><div class="fc-def">Our home galaxy. Has a spiral shape and contains over 200 billion stars, including our Sun.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">📍</div><div class="fc-word">axis</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">axis</div><div class="fc-def">An imaginary line through the North and South Poles that Earth spins around.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-3" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">⭐</div><div class="fc-word">star</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">star</div><div class="fc-def">A giant ball of hot, glowing gas. The Sun is a star. So is every twinkling light you see at night.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🌞</div><div class="fc-word">day</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">day</div><div class="fc-def">The time when your side of Earth faces the Sun.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-4" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">☀️</div><div class="fc-word">solar system</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">solar system</div><div class="fc-def">A star plus everything that orbits it — planets, moons, asteroids, comets. Our solar system has the Sun in the middle.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🌙</div><div class="fc-word">night</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">night</div><div class="fc-def">The time when your side of Earth faces away from the Sun.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-5" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">🪐</div><div class="fc-word">planet</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">planet</div><div class="fc-def">A large object that orbits a star. Earth is a planet. So are Mars, Jupiter, and Saturn.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🌅</div><div class="fc-word">horizon</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">horizon</div><div class="fc-def">The line where the land or sea seems to meet the sky. The Sun rises and sets at the horizon.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-6" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">🔄</div><div class="fc-word">orbit</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">orbit</div><div class="fc-def">A curved path one object travels around another. Planets orbit the Sun. The Sun orbits the center of the Milky Way.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🔁</div><div class="fc-word">orbit</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">orbit</div><div class="fc-def">The path Earth travels around the Sun. One orbit takes a year, not a day.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
@@ -937,7 +937,7 @@ em { color: #5A4D3E; }
       <!-- Copywork -->
       <div class="callout callout-think" style="margin-top:16px;">
         <span class="callout-icon">📓</span>
-        <p>Copy this sentence carefully into your science notebook:<br><strong>"A galaxy is a huge group of stars, gas, and dust. The Milky Way is our home galaxy."</strong><br>Then write one sentence about something you find amazing about space.</p>
+        <p>Copy this sentence carefully into your science notebook:<br><strong>"Earth spins on its axis once every 24 hours. The side facing the Sun has day."</strong><br>Then draw Earth with a day side and a night side.</p>
       </div>
 
     </div>
@@ -956,22 +956,22 @@ em { color: #5A4D3E; }
 
   <!-- Suggested image: lesson topic scene -->
   <div class="lesson-figure">
-    <div class="lesson-figure-label">📷 Reference · Sort the Cosmic Objects</div>
+    <div class="lesson-figure-label">📷 Reference · Earth from space</div>
         <img
-          src="images/24-01-milky-way-night.png"
-          alt="A nighttime photograph of the Milky Way galaxy as a bright band of stars stretching across a dark sky, with a silhouetted mountain landscape below."
+          src="images/26-01-earth-from-space.jpg"
+          alt="The curved edge of Earth seen from space, with sunlight glowing along the horizon and darkness above."
           onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; this.parentElement.querySelector('.lesson-figure-label').style.display='none';"
         />
         <div class="image-suggestion" style="display:none;">
           <div class="image-suggestion-icon">🖼️</div>
           <div class="image-suggestion-label">Suggested Image — Generate This</div>
           <div class="image-suggestion-desc">
-            Photorealistic nighttime landscape photo of the Milky Way galaxy. The bright band of stars curves across the upper sky. A silhouette of mountains or trees lines the bottom. Sharp focus on the stars. No people, no text, no cartoons.
+            Photo of Earth&#39;s curved horizon taken from orbit, with sunlight glowing on part of the planet.
           </div>
-          <div class="image-suggestion-file">Save as: images/24-01-milky-way-night.jpg</div>
+          <div class="image-suggestion-file">Save as: images/26-01-earth-from-space.jpg</div>
         </div>
         <div class="lesson-figure-caption">
-          The Milky Way seen from Earth. That bright band of light IS our home galaxy — seen from the inside.
+          Earth seen from space. Sunlight lights up part of the planet while the rest slides into darkness.
         </div>
   </div>
 
@@ -981,7 +981,7 @@ em { color: #5A4D3E; }
       <div class="act-num" style="background:#D4772C;">2</div>
       <div style="flex:1;">
         <div class="act-title">📖 The Lesson</div>
-        <div class="act-subtitle">Stars, solar systems, and our home galaxy</div>
+        <div class="act-subtitle">Earth spins, and the Sun only seems to move</div>
       </div>
       <div class="act-time" style="background:#D4772C;">⏱ 15 min</div>
     </div>
@@ -993,17 +993,17 @@ em { color: #5A4D3E; }
           <div class="card-head-icon">👁️</div>
           <div>
             <div class="card-head-label">Section 1</div>
-            <div class="card-head-title">What a Galaxy Actually Is</div>
+            <div class="card-head-title">Earth Spins on Its Axis</div>
           </div>
         </div>
         <div class="card-body">
-          <p>A <strong>galaxy</strong> is an enormous collection of stars, gas, dust, and other things — all held together by gravity. The smallest galaxies have millions of stars. The biggest have trillions. The number of stars in galaxies is so big it’s hard to imagine.</p>
-          <p>Galaxies come in different shapes. Some are SPIRAL (curved arms wrapping around a center). Some are ELLIPTICAL (egg-shaped). Some are IRREGULAR (no special shape). Our galaxy — the Milky Way — is a spiral galaxy with about 200 billion stars.</p>
+          <p>Earth spins like a top. It turns around an imaginary line called its <span class="vtip">axis<span class="vtip-box"><span class="vtip-word">axis</span>An imaginary line through the North and South Poles.</span></span>, which runs through the North and South Poles. One full spin is called a <strong>rotation</strong>, and it takes about 24 hours.</p>
+          <p>Earth spins from west to east. That&#39;s why the Sun always seems to rise in the east and set in the west.</p>
           <div class="socratic-q">
             <span class="sq-icon">🤔</span>
             <div>
               <div class="label">Stop and Think</div>
-              <div class="question">"If you tried to count to 200 billion at one number per second, how long would it take?"</div>
+              <div class="question">"If Earth spun twice as fast, how long would one day and night last?"</div>
             </div>
           </div>
         </div>
@@ -1015,17 +1015,17 @@ em { color: #5A4D3E; }
           <div class="card-head-icon">🧾</div>
           <div>
             <div class="card-head-label">Section 2</div>
-            <div class="card-head-title">Our Place in the Milky Way</div>
+            <div class="card-head-title">Day Side, Night Side</div>
           </div>
         </div>
         <div class="card-body">
-          <p>Our Sun is just one of 200 billion stars in the Milky Way. Earth is one of 8 planets that orbit the Sun. Together, the Sun and its planets make up our <strong>solar system</strong>. Our solar system sits in one of the Milky Way’s spiral arms — about two-thirds of the way out from the center.</p>
-          <p>Layered structure: Earth orbits the Sun. The Sun and its planets orbit the center of the Milky Way. The Milky Way is one of trillions of galaxies in the universe. We live on a tiny rocky world, in a small solar system, in a vast galaxy, in an even vaster cosmos.</p>
+          <p>Only half of Earth can face the Sun at one time. That half has day. The other half faces dark space and has night.</p>
+          <p>As Earth turns, your town slides from the day side into the night side and back again. Sunrise is the moment you rotate into sunlight. Sunset is when you rotate out of it.</p>
           <div class="socratic-q">
             <span class="sq-icon">🧪</span>
             <div>
               <div class="label">Stop and Reason</div>
-              <div class="question">"What’s the difference between a solar system and a galaxy? Which is bigger, and by how much?"</div>
+              <div class="question">"Why can't the whole Earth have daytime at the same moment?"</div>
             </div>
           </div>
         </div>
@@ -1037,12 +1037,12 @@ em { color: #5A4D3E; }
           <div class="card-head-icon">❓</div>
           <div>
             <div class="card-head-label">Section 3</div>
-            <div class="card-head-title">Why the Milky Way Looks Like a Band</div>
+            <div class="card-head-title">The Sun Only Seems to Move</div>
           </div>
         </div>
         <div class="card-body">
-          <p>Scientists don't ask just any question — they ask <span class="vtip">testable questions<span class="vtip-box"><span class="vtip-word">testable question</span>A question you can answer by observing, measuring, or testing.</span></span>. "Why are clouds beautiful?" isn't testable. But "Do clouds form more often in the morning or the afternoon?" — that's something you could actually find out by watching the sky for a week.</p>
-          <p><strong>Real-World Connection:</strong> Telescopes have shown us thousands of other galaxies. Some are very far away — so far that the light traveling from them took billions of years to reach Earth. When you look at a faraway galaxy through a telescope, you're actually seeing what it looked like in the distant past.</p>
+          <p>The Sun stays put. When it seems to climb up and sink down, you&#39;re seeing Earth&#39;s spin. It&#39;s like riding a merry-go-round: the playground seems to slide past you, but you&#39;re the one moving.</p>
+          <p><strong>Real-World Connection:</strong> Time zones exist because Earth spins. When it&#39;s morning in Florida, it&#39;s already afternoon in London and nighttime in Japan.</p>
         </div>
       </div>
 
@@ -1055,9 +1055,9 @@ em { color: #5A4D3E; }
       <!-- Interactive Diagram -->
       <div class="diagram-wrap scroll-reveal">
         <div style="font-size:13px;color:#9A8E82;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">
-          🗺 Tap each side to compare
+          🗺 Tap each moment
         </div>
-        <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;line-height:1.65;">Six things that exist in space — from smallest to largest. Tap each one to see how they fit together.</p>
+        <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;line-height:1.65;">Six parts of Earth&#39;s 24-hour spin. Tap each one to see what&#39;s happening where you live.</p>
         <div class="diagram-interactive">
           <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="font-family:Nunito,Arial,sans-serif;max-width:100%;height:auto;" role="img" aria-label="Earth rotation diagram showing the 24-hour cycle of day and night">
             <rect width="720" height="360" fill="#FAF7F3" rx="12" stroke="#c8b896" stroke-width="2"/>
@@ -1119,7 +1119,7 @@ em { color: #5A4D3E; }
           </svg>
           <div style="background:linear-gradient(135deg,#EEF8F0,#D6F5DE);border:2px solid #B8E8CF;border-radius:14px;padding:12px 18px;margin-top:10px;display:flex;align-items:center;gap:12px;">
             <span style="font-size:28px;flex-shrink:0;animation:mind-blow-bounce 2s ease-in-out infinite;">👆</span>
-            <p style="font-size:15px;color:#0E1C42;line-height:1.55;margin:0;font-weight:600;">Tap each box to see how the cosmic scale fits together.</p>
+            <p style="font-size:15px;color:#0E1C42;line-height:1.55;margin:0;font-weight:600;">Tap each box to follow one full rotation.</p>
           </div>
           <div class="diagram-info-panel" id="diagramPanel">
             <span class="dip-word" id="diagramWord"></span>
@@ -1134,16 +1134,16 @@ em { color: #5A4D3E; }
         <div class="mind-blow-icon">🤯</div>
         <div class="mind-blow-content">
           <div class="mind-blow-label">Mind-Blowing Fact</div>
-          <div class="mind-blow-text">If you could shrink the Sun to the size of a basketball, Earth would be the size of a peppercorn — and the next nearest star would be <strong>4,000 miles</strong> away. Galaxies are mostly empty space, with islands of stars far apart.</div>
+          <div class="mind-blow-text">At the equator, Earth&#39;s surface spins at about <strong>1,000 miles per hour</strong>. You don&#39;t feel it because everything around you, even the air, moves with you.</div>
         </div>
       </div>
 
       <!-- Go Deeper -->
       <details class="go-deeper">
-        <summary>Go Deeper — Why galaxies have shapes</summary>
+        <summary>Go Deeper — Days on other planets</summary>
         <div class="gd-body">
-          <p>Galaxies don't all look the same. Some are SPIRAL like the Milky Way — flat disks with curved arms. Some are ELLIPTICAL — egg-shaped balls of older stars. A few are IRREGULAR — no special shape at all, often because they were pulled apart by a passing neighbor.</p>
-          <p>What gives a galaxy its shape? Gravity, mostly. Spiral galaxies rotate, and the spinning pulls stars and gas into long arms. Elliptical galaxies are older and have stopped making new stars. Astronomers can guess a galaxy's age just from its shape.</p>
+          <p>Every planet spins at its own speed. Jupiter, the biggest planet, spins so fast that its day lasts only about 10 hours.</p>
+          <p>Venus spins so slowly that one day there lasts longer than its whole year. And Venus spins backward, so the Sun rises in the west!</p>
         </div>
       </details>
 
@@ -1166,91 +1166,55 @@ em { color: #5A4D3E; }
     <div class="act-head">
       <div class="act-num" style="background:#55C8E8;">3</div>
       <div style="flex:1;">
-        <div class="act-title">🔬 Sort the Cosmic Objects</div>
-        <div class="act-subtitle">Planet, star, solar system, or galaxy? You decide.</div>
+        <div class="act-title">🔬 Flashlight Earth</div>
+        <div class="act-subtitle">One spin. One day. One night.</div>
       </div>
-      <div class="act-time" style="background:#55C8E8;">⏱ 10 min</div>
+      <div class="act-time" style="background:#55C8E8;">⏱ 15 min</div>
     </div>
     <div class="act-body">
 
-      <p>Astronomers have a strict order for space objects: planet → star → solar system → galaxy → universe. Each one is bigger than the last. Today you’ll sort six space objects into the right category — and notice how the universe is built in layers.</p>
+      <p>Time to build your own Earth and Sun. A flashlight will be the Sun, and a ball or orange will be Earth. A small sticker on the ball will be you.</p>
 
-      <!-- Scenario image suggestion -->
-      <div class="lesson-figure">
-        <div class="lesson-figure-label">📷 Reference · The Milky Way at Night</div>
-        <img
-          src="images/24-01-galaxy-objects-scenario.jpg"
-          alt="A nighttime photograph of the Milky Way galaxy as a bright band of stars stretching across a dark sky, with a silhouetted mountain landscape below."
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; this.parentElement.querySelector('.lesson-figure-label').style.display='none';"
-        />
-        <div class="image-suggestion" style="display:none;">
-          <div class="image-suggestion-icon">🖼️</div>
-          <div class="image-suggestion-label">Suggested Image — Generate This</div>
-          <div class="image-suggestion-desc">
-            Photorealistic nighttime landscape photo of the Milky Way galaxy. The bright band of stars curves across the upper sky. A silhouette of mountains or trees lines the bottom. Sharp focus on the stars. No people, no text, no cartoons.
-          </div>
-          <div class="image-suggestion-file">Save as: images/24-01-milky-way-night.jpg</div>
-        </div>
-        <div class="lesson-figure-caption">
-          The Milky Way seen from Earth. That bright band of light IS our home galaxy — seen from the inside.
-        </div>
-      </div>
-
-      <!-- Step 1 -->
       <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
         <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Read the list of cosmic objects</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Below are six space objects. For each one, decide which category it belongs to: planet, star, solar system, galaxy, or universe. Don’t rush — look at the clues each row gives you.</p>
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Set up</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">In a dark room, set a flashlight on a table so it shines sideways. Put a small sticker or pen dot on the middle of a ball or orange. That&#39;s your town.</p>
         </div>
       </div>
-
-      <!-- Scenario table -->
-      <div class="student-chart-wrap">
-        <div class="student-chart-label">📋 Cosmic objects — sort each one</div>
-        <table class="student-chart">
-          <thead>
-            <tr>
-              <th style="width:42px;">#</th>
-              <th>Description</th>
-              <th style="width:200px;">Category</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td class="row-label">1</td><td>Earth — a rocky world about 8,000 miles across, orbits the Sun.</td><td></td></tr>
-            <tr><td class="row-label">2</td><td>The Sun — a ball of hot, glowing gas, 109 times wider than Earth.</td><td></td></tr>
-            <tr><td class="row-label">3</td><td>Our Solar System — the Sun, 8 planets, plus moons and asteroids.</td><td></td></tr>
-            <tr><td class="row-label">4</td><td>The Milky Way — a spiral with 200 billion stars, 100,000 light-years wide.</td><td></td></tr>
-            <tr><td class="row-label">5</td><td>Andromeda — our nearest large galaxy neighbor, 2.5 million light-years away.</td><td></td></tr>
-            <tr><td class="row-label">6</td><td>The observable universe — trillions of galaxies, unimaginably vast.</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Step 2 -->
       <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
         <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Look for the pattern</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Notice how each cosmic object is part of something LARGER. Planets are part of solar systems. Solar systems are part of galaxies. Galaxies are part of the universe. Layers inside layers.</p>
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Spin slowly</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Hold the ball in the beam. Turn it slowly in the direction shown by the arrow on a globe, counterclockwise when you look down at the top.</p>
         </div>
       </div>
-
-      <!-- Step 3 -->
-      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
+      <div style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
         <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Find the boundary</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">For each object you sorted, ask: what is it INSIDE of? Earth is inside the solar system. The solar system is inside the Milky Way. Trace each one up to its bigger group.</p>
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Watch your town</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Stop at four spots: facing the light, turning into the light, facing away, and turning out of the light. Fill in the table at each stop.</p>
         </div>
       </div>
-
-      <!-- Step 4 -->
-      <div style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
+      <div class="student-chart-wrap">
+        <div class="student-chart-label">📋 Flashlight Earth — copy into your notebook</div>
+        <table class="student-chart">
+          <thead><tr><th style="width:24%;">Where the sticker is</th><th>In light or dark?</th><th>Time of day for &quot;you&quot;</th></tr></thead>
+          <tbody><tr><td class="row-label">Facing the flashlight</td><td></td><td></td></tr><tr><td class="row-label">Just turning into the light</td><td></td><td></td></tr><tr><td class="row-label">Facing away from the flashlight</td><td></td><td></td></tr><tr><td class="row-label">Just turning out of the light</td><td></td><td></td></tr></tbody>
+        </table>
+      </div>
+      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
         <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Count the spin</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">One full turn of the ball is one rotation. How many times did &quot;you&quot; see sunrise in one turn?</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">5</div>
+        <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
           <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Make a claim</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Write a one-sentence claim about how the universe is organized — from smallest object to biggest. You'll use this idea in your CER later.</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Write one sentence: &quot;Day and night happen because ___.&quot; You&#39;ll use it in your CER.</p>
         </div>
       </div>
 
@@ -1264,44 +1228,42 @@ em { color: #5A4D3E; }
           </div>
         </div>
         <div class="card-body">
-          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Answer these in complete sentences. Use the cosmic objects you sorted.</p>
+          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Answer in complete sentences. Use your flashlight Earth table.</p>
 
           <div class="pq">
             <span class="pq-num" style="background:#D4772C;">1</span>
-            <span class="pq-text">List one example each of a planet, a star, a solar system, and a galaxy. Use the objects from the lesson.</span>
+            <span class="pq-text">When the sticker faced the flashlight, what time of day was it for &quot;you&quot;? When did it face away?</span>
           </div>
           <div class="response-q">
             <textarea class="response-textarea ta-sm" id="ryt-1"
-              data-label="Investigate — Q1: Lesson concept"
-              placeholder="A planet is... A star is... A solar system is... A galaxy is..."
+              data-label="Investigate — Q1: Facing toward and away"
+              placeholder="When the sticker faced the light, it was... When it faced away, it was..."
               oninput="autoSave(this,'dot-ryt-1')"></textarea>
             <span style="font-size:12px;color:#9A8E82;font-weight:600;">
               Your answer<span class="response-save-dot" id="dot-ryt-1"></span>
             </span>
           </div>
-
           <div class="pq" style="margin-top:14px;">
             <span class="pq-num" style="background:#D4772C;">2</span>
-            <span class="pq-text">What is a galaxy made of? Use the words “stars” and “gravity” in your answer.</span>
+            <span class="pq-text">The flashlight never moved. So what made the sticker go from light to dark? Use the word &quot;rotation.&quot;</span>
           </div>
           <div class="response-q">
             <textarea class="response-textarea ta-sm" id="ryt-2"
-              data-label="Investigate — Q2: Application"
-              placeholder="A galaxy is made of..."
+              data-label="Investigate — Q2: What made it dark"
+              placeholder="The sticker went dark because..."
               oninput="autoSave(this,'dot-ryt-2')"></textarea>
             <span style="font-size:12px;color:#9A8E82;font-weight:600;">
               Your answer<span class="response-save-dot" id="dot-ryt-2"></span>
             </span>
           </div>
-
           <div class="pq" style="margin-top:14px;">
             <span class="pq-num" style="background:#D4772C;">3</span>
-            <span class="pq-text">How is a solar system different from a galaxy? Use specific numbers if you can.</span>
+            <span class="pq-text">Why does the Sun seem to rise in the east and set in the west?</span>
           </div>
           <div class="response-q">
             <textarea class="response-textarea ta-sm" id="ryt-3"
-              data-label="Investigate — Q3: Testable question"
-              placeholder="A solar system has ___ , but a galaxy has..."
+              data-label="Investigate — Q3: East and west"
+              placeholder="The Sun seems to rise in the east because Earth..."
               oninput="autoSave(this,'dot-ryt-3')"></textarea>
             <span style="font-size:12px;color:#9A8E82;font-weight:600;">
               Your answer<span class="response-save-dot" id="dot-ryt-3"></span>
@@ -1326,7 +1288,7 @@ em { color: #5A4D3E; }
             <span class="sq-icon">⚔️</span>
             <div>
               <div class="label">Defend Your Thinking</div>
-              <div class="question">"A classmate says, 'The Sun is the biggest thing in the universe.' What would you say back? Use what you know about galaxies as your evidence."</div>
+              <div class="question">"A friend says, 'The Sun goes around Earth every day. I can see it move!' Use your model to explain what's really happening."</div>
             </div>
           </div>
 
@@ -1334,7 +1296,7 @@ em { color: #5A4D3E; }
             <span class="sq-icon">🔍</span>
             <div>
               <div class="label">Compare the Evidence</div>
-              <div class="question">"Which is bigger by the largest factor — going from a planet to a star, or from a galaxy to the universe? Why is each step so much larger?"</div>
+              <div class="question">"How is your flashlight model like the real Earth and Sun? How is it different?"</div>
             </div>
           </div>
         </div>
@@ -1424,17 +1386,17 @@ em { color: #5A4D3E; }
 <div class="tab-panel" id="tab-assignment">
 
   <!-- Part A -->
-  <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;">📐 Part A — Model the Difference</p>
+  <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;">📐 Part A — Day and Night Diagram</p>
   <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Add "Lesson 26.01 — Day and Night" to your notebook. Open to a clean page.</p>
 
   <div class="pq">
     <span class="pq-num" style="background:#E8636B;">1</span>
-    <span class="pq-text"><strong>Draw and Explain:</strong> Sketch a layered diagram with FIVE concentric circles: Earth (smallest) in the center, then the Sun, then the solar system, then the Milky Way, then the universe (largest). Label each layer. Below your sketch, write one sentence explaining how the layers fit together.</span>
+    <span class="pq-text"><strong>Draw and Explain:</strong> Draw the Sun on one side of your page and Earth on the other. Shade Earth&#39;s night side. Mark where it is noon, midnight, sunrise, and sunset. Add an arrow showing which way Earth spins.</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="parta-1"
-      data-label="Part A — Object &amp; Explanation"
-      placeholder="I drew five layers showing... The layers fit together because..."
+      data-label="Part A — Day and night diagram"
+      placeholder="My diagram shows... Noon is where... Midnight is where..."
       oninput="autoSave(this,'dot-parta-1')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-parta-1"></span>
@@ -1443,16 +1405,16 @@ em { color: #5A4D3E; }
 
   <!-- Part B -->
   <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;margin-top:20px;">📊 Part B — Evidence Questions</p>
-  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Answer in complete sentences using your sketch and the lesson.</p>
+  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Answer in complete sentences using your model and the lesson.</p>
 
   <div class="pq">
     <span class="pq-num" style="background:#D4772C;">2</span>
-    <span class="pq-text">How is a solar system different from a galaxy? Use specific numbers if you can.</span>
+    <span class="pq-text">Earth takes about 24 hours to spin once. About how many of those hours is your town usually on the night side? Explain your thinking.</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="partb-1"
-      data-label="Part B — Q1"
-      placeholder="A solar system has ___ , but a galaxy has..."
+      data-label="Part B — Q1: Hours of night"
+      placeholder="My town is on the night side for about ___ hours because..."
       oninput="autoSave(this,'dot-partb-1')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-partb-1"></span>
@@ -1461,12 +1423,12 @@ em { color: #5A4D3E; }
 
   <div class="pq">
     <span class="pq-num" style="background:#D4772C;">3</span>
-    <span class="pq-text">Where in the Milky Way is our Sun located? Describe its position in two sentences.</span>
+    <span class="pq-text">Explain the difference between a rotation and an orbit. Which one causes day and night?</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="partb-2"
-      data-label="Part B — Q2"
-      placeholder="Our Sun is located..."
+      data-label="Part B — Q2: Rotation vs. orbit"
+      placeholder="A rotation is... An orbit is... Day and night come from..."
       oninput="autoSave(this,'dot-partb-2')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-partb-2"></span>
@@ -1475,12 +1437,12 @@ em { color: #5A4D3E; }
 
   <div class="pq">
     <span class="pq-num" style="background:#D4772C;">4</span>
-    <span class="pq-text">Where in the Milky Way is our Sun located? Describe its position.</span>
+    <span class="pq-text">If Earth suddenly stopped spinning, what would happen to day and night where you live?</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="partb-3"
-      data-label="Part B — Q3"
-      placeholder="Our Sun is located..."
+      data-label="Part B — Q3: If Earth stopped"
+      placeholder="If Earth stopped spinning, my town would..."
       oninput="autoSave(this,'dot-partb-3')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-partb-3"></span>
@@ -1556,7 +1518,7 @@ em { color: #5A4D3E; }
 
     <!-- Vocab check -->
     <div class="cer-vocab-check">
-      📚 <strong>Vocab check:</strong> Try to use at least two of these words: <strong>galaxy</strong>, <strong>Milky Way</strong>, <strong>star</strong>, <strong>solar system</strong>, <strong>orbit</strong>
+      📚 <strong>Vocab check:</strong> Try to use at least two of these words: <strong>rotation</strong>, <strong>axis</strong>, <strong>day</strong>, <strong>night</strong>, <strong>horizon</strong>
     </div>
   </div><!-- /cer-block -->
 
@@ -1628,17 +1590,17 @@ em { color: #5A4D3E; }
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
           <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
-          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part A — Cosmic Layers Sketch:</strong> Drawing of five concentric circles (Earth, Sun, solar system, Milky Way, universe), each labeled, plus a one-sentence explanation underneath.</span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part A — Day and night diagram:</strong> Sun and Earth with the night side shaded, noon, midnight, sunrise, and sunset marked, and a spin arrow.</span>
         </div>
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
           <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
-          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part B — Evidence Questions:</strong> All three questions answered in complete sentences, using terms from the lesson.</span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part B — Evidence Questions:</strong> All three questions answered in complete sentences.</span>
         </div>
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
           <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
-          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part C — CER Response:</strong> Claim, at least one piece of evidence from the lesson, and reasoning explaining the cosmic scale.</span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part C — CER Response:</strong> Claim, at least two pieces of evidence, and reasoning that explains how rotation causes day and night.</span>
         </div>
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
@@ -1781,7 +1743,7 @@ function checkQuiz(optEl) {
     var scoreMsg = document.getElementById('quizScoreMsg');
     scoreNum.textContent = quizCorrect;
     if (quizCorrect === 3) {
-      scoreMsg.textContent = '🎉 Perfect score! You\'re already thinking like a scientist.';
+      scoreMsg.textContent = '🎉 Perfect score! You know what really makes day and night.';
       setTimeout(window.launchConfetti, 300);
       var vp = document.getElementById('quizVideoPerfect');
       if (vp) vp.classList.add('show');
