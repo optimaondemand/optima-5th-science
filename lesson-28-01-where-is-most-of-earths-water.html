@@ -693,14 +693,14 @@ em { color: #5A4D3E; }
   <!-- Pie chart-ish breakdown on right -->
   <g transform="translate(580,140)">
     <!-- Big circle representing all water -->
-    <circle cx="0" cy="0" r="55" fill="#1976D2"/>
-    <!-- Salt water slice (97%) -->
-    <path d="M 0 -55 A 55 55 0 1 1 -5 55 L 0 0 Z" fill="#0D47A1"/>
-    <!-- Fresh water slice (3%) -->
-    <path d="M 0 -55 A 55 55 0 0 1 -5 55 L 0 0 Z" fill="#90CAF9"/>
-    <text x="20" y="-25" font-family="Nunito,sans-serif" font-size="11" fill="#fff" font-weight="800">97% Salt</text>
-    <text x="20" y="-10" font-family="Nunito,sans-serif" font-size="9" fill="#fff">(oceans)</text>
-    <text x="-90" y="5" font-family="Nunito,sans-serif" font-size="11" fill="#90CAF9" font-weight="800">3% Fresh</text>
+    <!-- Salt water (97%) -->
+    <circle cx="0" cy="0" r="55" fill="#0D47A1" stroke="#90CAF9" stroke-width="1"/>
+    <!-- Fresh water slice (3% = about 11 degrees) -->
+    <path d="M 0 0 L 0 -55 A 55 55 0 0 1 10.3 -54 Z" fill="#90CAF9"/>
+    <text x="0" y="0" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" fill="#fff" font-weight="800">97% Salt</text>
+    <text x="0" y="14" text-anchor="middle" font-family="Nunito,sans-serif" font-size="9" fill="#fff">(oceans)</text>
+    <line x1="8" y1="-58" x2="40" y2="-70" stroke="#90CAF9" stroke-width="1.5"/>
+    <text x="44" y="-66" font-family="Nunito,sans-serif" font-size="11" fill="#90CAF9" font-weight="800">3% Fresh</text>
     <text x="0" y="80" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" fill="#fff" font-weight="800">All water on Earth</text>
     <text x="0" y="98" text-anchor="middle" font-family="Nunito,sans-serif" font-size="10" fill="#90CAF9">Only 3% is fresh</text>
   </g>
@@ -731,7 +731,7 @@ em { color: #5A4D3E; }
     <div class="info-icon" style="background:#F3E5F5;">💧</div>
     <div>
       <div class="info-label">Science Focus</div>
-      <div class="info-value">Scientific Thinking</div>
+      <div class="info-value">Earth&#39;s Water</div>
       <div class="info-detail">Salt, fresh, ice</div>
     </div>
   </div>
@@ -756,7 +756,7 @@ em { color: #5A4D3E; }
       </div>
     </div>
     <div class="card-body">
-      <p>How do scientists tell the difference between what they <em>see</em> and what they <em>think it means</em>?</p>
+      <p>Earth looks blue from space. So why do people ever run short of water to drink?</p>
       <p style="font-size:14px;color:#9A8E82;">Keep this question in mind as you work through the lesson today.</p>
     </div>
   </div>
@@ -769,9 +769,9 @@ em { color: #5A4D3E; }
       </div>
     </div>
     <div class="card-body">
-      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#E8636B;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">1</span>describe what a galaxy is made of.</p>
-      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#D4772C;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">2</span>identify the Milky Way as our home galaxy.</p>
-      <p style="margin-bottom:0;"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#34B76F;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">3</span>compare the size of stars, solar systems, and galaxies.</p>
+      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#E8636B;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">1</span>describe where Earth&#39;s water is found.</p>
+      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#D4772C;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">2</span>compare how much of Earth&#39;s water is salt and how much is fresh.</p>
+      <p style="margin-bottom:0;"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#34B76F;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">3</span>explain why fresh water is so valuable.</p>
     </div>
   </div>
 </div>
@@ -781,7 +781,7 @@ em { color: #5A4D3E; }
   <span class="need-strip-label">You'll need:</span>
   <span class="need-chip">📓 Science notebook</span>
   <span class="need-chip">✏️ Pencil &amp; colored pencils</span>
-  <span class="need-chip">🔍 Something small to look at closely</span>
+  <span class="need-chip">🫘 100 dry beans (or pennies) and 3 cups</span>
 </div>
 
 <!-- TAB BAR -->
@@ -805,7 +805,7 @@ em { color: #5A4D3E; }
 <div class="video-placeholder-inner">
   <span class="vp-icon">🎬</span>
   <div class="vp-label">Introduction Video</div>
-  <div class="vp-title">Where Is Most of Earth Water?</div>
+  <div class="vp-title">Where Is Most of Earth&#39;s Water?</div>
   <div class="vp-slot">28-01-intro</div>
   <div class="vp-notes">
     <strong>Teacher recording notes:</strong> Introduce the distribution of water on Earth. Preview vocabulary: freshwater, saltwater, ocean, glacier, groundwater, distribution. The surprising truth: 97% of Earth water is saltwater in the oceans. Of the remaining 3% freshwater, most is locked in glaciers and ice caps. Less than 1% of all Earth water is available as liquid freshwater for drinking, farming, and daily use. Students will explore why this distribution matters for every living thing. ~90-120 seconds.
@@ -821,19 +821,19 @@ em { color: #5A4D3E; }
       <div class="act-num" style="background:#E8636B;">1</div>
       <div style="flex:1;">
         <div class="act-title">🔍 Notice, Wonder, and Predict</div>
-        <div class="act-subtitle">Step way back. Find Earth on the cosmic map.</div>
+        <div class="act-subtitle">A blue planet, with a catch.</div>
       </div>
       <div class="act-time" style="background:#E8636B;">⏱ 5 min</div>
     </div>
     <div class="act-body">
-      <p>Stand outside on a clear, dark night and look up. You see stars. Lots of them. Maybe you spot the Big Dipper, or notice a bright planet. What you can't see — but what's actually there — is one of the most amazing things in the universe: a vast, spinning collection of more than 200 billion stars called the Milky Way Galaxy.</p>
-      <p>Every single star you can see with your eyes is in OUR galaxy. Our Sun is one of those stars. So is Polaris (the North Star). And Sirius (the brightest one). All 4,000 stars you can see — and 200 BILLION more you can't — are all neighbors in the same galaxy. Today we explore what a galaxy actually is.</p>
+      <p>From space, Earth looks like a giant blue marble. Water covers about 70% of its surface. With that much water, you'd think we could never run out.</p>
+      <p>But most of that water is salty, and much of the rest is frozen. Today you'll find out where Earth's water really is.</p>
 
       <div class="socratic-q">
         <span class="sq-icon">👀</span>
         <div>
           <div class="label">In Your Science Notebook</div>
-          <div class="question">"What's the biggest thing you've ever seen with your own eyes? Now imagine something that's 100,000 light-years across. That's our galaxy."</div>
+          <div class="question">"If you were stuck on a raft in the middle of the ocean, surrounded by water, why couldn't you drink it?"</div>
         </div>
       </div>
 
@@ -871,43 +871,43 @@ em { color: #5A4D3E; }
 
         <div class="flip-card fc-color-1" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">🌌</div><div class="fc-word">galaxy</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">galaxy</div><div class="fc-def">A huge group of stars, gas, dust, and orbiting objects — held together by gravity. Galaxies hold billions of stars.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🌊</div><div class="fc-word">salt water</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">salt water</div><div class="fc-def">Water with a lot of salt in it, like ocean water. People can&#39;t drink it safely.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-2" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">🌠</div><div class="fc-word">Milky Way</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">Milky Way</div><div class="fc-def">Our home galaxy. Has a spiral shape and contains over 200 billion stars, including our Sun.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🚰</div><div class="fc-word">fresh water</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">fresh water</div><div class="fc-def">Water with very little salt. People, plants, and most animals need it to live.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-3" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">⭐</div><div class="fc-word">star</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">star</div><div class="fc-def">A giant ball of hot, glowing gas. The Sun is a star. So is every twinkling light you see at night.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🧊</div><div class="fc-word">glacier</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">glacier</div><div class="fc-def">A huge, slow-moving body of ice on land. Glaciers hold most of Earth&#39;s fresh water.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-4" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">☀️</div><div class="fc-word">solar system</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">solar system</div><div class="fc-def">A star plus everything that orbits it — planets, moons, asteroids, comets. Our solar system has the Sun in the middle.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">💧</div><div class="fc-word">groundwater</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">groundwater</div><div class="fc-def">Fresh water stored underground in the spaces between soil and rock.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-5" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">🪐</div><div class="fc-word">planet</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">planet</div><div class="fc-def">A large object that orbits a star. Earth is a planet. So are Mars, Jupiter, and Saturn.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">📊</div><div class="fc-word">percent</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">percent</div><div class="fc-def">A part out of 100. 97 percent means 97 out of every 100.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-6" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">🔄</div><div class="fc-word">orbit</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">orbit</div><div class="fc-def">A curved path one object travels around another. Planets orbit the Sun. The Sun orbits the center of the Milky Way.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🗺️</div><div class="fc-word">distribution</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">distribution</div><div class="fc-def">How something is spread out or divided up, like where Earth&#39;s water is found.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
@@ -916,7 +916,7 @@ em { color: #5A4D3E; }
       <!-- Copywork -->
       <div class="callout callout-think" style="margin-top:16px;">
         <span class="callout-icon">📓</span>
-        <p>Copy this sentence carefully into your science notebook:<br><strong>"A galaxy is a huge group of stars, gas, and dust. The Milky Way is our home galaxy."</strong><br>Then write one sentence about something you find amazing about space.</p>
+        <p>Copy this sentence carefully into your science notebook:<br><strong>"About 97% of Earth&#39;s water is salt water. Only about 3% is fresh, and most of that is frozen."</strong><br>Then name one place you get fresh water from.</p>
       </div>
 
     </div>
@@ -935,22 +935,22 @@ em { color: #5A4D3E; }
 
   <!-- Suggested image: lesson topic scene -->
   <div class="lesson-figure">
-    <div class="lesson-figure-label">📷 Reference · Sort the Cosmic Objects</div>
+    <div class="lesson-figure-label">📷 Reference · The blue planet</div>
         <img
-          src="images/24-01-milky-way-night.png"
-          alt="A nighttime photograph of the Milky Way galaxy as a bright band of stars stretching across a dark sky, with a silhouetted mountain landscape below."
+          src="images/28-01-earth-blue-water.png"
+          alt="Earth seen from space, mostly covered in deep blue ocean with swirling white clouds and patches of land."
           onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; this.parentElement.querySelector('.lesson-figure-label').style.display='none';"
         />
         <div class="image-suggestion" style="display:none;">
           <div class="image-suggestion-icon">🖼️</div>
           <div class="image-suggestion-label">Suggested Image — Generate This</div>
           <div class="image-suggestion-desc">
-            Photorealistic nighttime landscape photo of the Milky Way galaxy. The bright band of stars curves across the upper sky. A silhouette of mountains or trees lines the bottom. Sharp focus on the stars. No people, no text, no cartoons.
+            Photo of Earth from space showing mostly blue ocean, white clouds, and some land.
           </div>
-          <div class="image-suggestion-file">Save as: images/24-01-milky-way-night.jpg</div>
+          <div class="image-suggestion-file">Save as: images/28-01-earth-blue-water.png</div>
         </div>
         <div class="lesson-figure-caption">
-          The Milky Way seen from Earth. That bright band of light IS our home galaxy — seen from the inside.
+          Earth from space. Oceans cover about 70% of the surface, but almost all of that water is too salty to drink.
         </div>
   </div>
 
@@ -960,7 +960,7 @@ em { color: #5A4D3E; }
       <div class="act-num" style="background:#D4772C;">2</div>
       <div style="flex:1;">
         <div class="act-title">📖 The Lesson</div>
-        <div class="act-subtitle">Stars, solar systems, and our home galaxy</div>
+        <div class="act-subtitle">Salt water, fresh water, and frozen water</div>
       </div>
       <div class="act-time" style="background:#D4772C;">⏱ 15 min</div>
     </div>
@@ -972,17 +972,17 @@ em { color: #5A4D3E; }
           <div class="card-head-icon">👁️</div>
           <div>
             <div class="card-head-label">Section 1</div>
-            <div class="card-head-title">What a Galaxy Actually Is</div>
+            <div class="card-head-title">Salt Water Everywhere</div>
           </div>
         </div>
         <div class="card-body">
-          <p>A <strong>galaxy</strong> is an enormous collection of stars, gas, dust, and other things — all held together by gravity. The smallest galaxies have millions of stars. The biggest have trillions. The number of stars in galaxies is so big it’s hard to imagine.</p>
-          <p>Galaxies come in different shapes. Some are SPIRAL (curved arms wrapping around a center). Some are ELLIPTICAL (egg-shaped). Some are IRREGULAR (no special shape). Our galaxy — the Milky Way — is a spiral galaxy with about 200 billion stars.</p>
+          <p>About 97% of all the water on Earth is in the oceans, and it&#39;s salty. Ocean water has so much salt that drinking it would make you thirstier, not less.</p>
+          <p>Ocean water still matters a lot. It&#39;s home to millions of kinds of living things, and it helps control weather all over the world.</p>
           <div class="socratic-q">
             <span class="sq-icon">🤔</span>
             <div>
               <div class="label">Stop and Think</div>
-              <div class="question">"If you tried to count to 200 billion at one number per second, how long would it take?"</div>
+              <div class="question">"If oceans cover most of Earth, why do ships carry their own drinking water?"</div>
             </div>
           </div>
         </div>
@@ -994,17 +994,17 @@ em { color: #5A4D3E; }
           <div class="card-head-icon">🧾</div>
           <div>
             <div class="card-head-label">Section 2</div>
-            <div class="card-head-title">Our Place in the Milky Way</div>
+            <div class="card-head-title">Where Is the Fresh Water?</div>
           </div>
         </div>
         <div class="card-body">
-          <p>Our Sun is just one of 200 billion stars in the Milky Way. Earth is one of 8 planets that orbit the Sun. Together, the Sun and its planets make up our <strong>solar system</strong>. Our solar system sits in one of the Milky Way’s spiral arms — about two-thirds of the way out from the center.</p>
-          <p>Layered structure: Earth orbits the Sun. The Sun and its planets orbit the center of the Milky Way. The Milky Way is one of trillions of galaxies in the universe. We live on a tiny rocky world, in a small solar system, in a vast galaxy, in an even vaster cosmos.</p>
+          <p>Only about 3% of Earth&#39;s water is fresh. Most of that fresh water is frozen in <span class="vtip">glaciers<span class="vtip-box"><span class="vtip-word">glacier</span>A huge, slow-moving body of ice on land.</span></span> and ice caps. Most of the rest hides underground as <strong>groundwater</strong>, filling tiny spaces between grains of soil and rock.</p>
+          <p>The fresh water in lakes, rivers, and streams is less than 1% of all Earth&#39;s water. That tiny slice is where most people, plants, and animals get the water they use.</p>
           <div class="socratic-q">
             <span class="sq-icon">🧪</span>
             <div>
               <div class="label">Stop and Reason</div>
-              <div class="question">"What’s the difference between a solar system and a galaxy? Which is bigger, and by how much?"</div>
+              <div class="question">"Groundwater is hidden underground. How do you think people get it out?"</div>
             </div>
           </div>
         </div>
@@ -1016,12 +1016,12 @@ em { color: #5A4D3E; }
           <div class="card-head-icon">❓</div>
           <div>
             <div class="card-head-label">Section 3</div>
-            <div class="card-head-title">Why the Milky Way Looks Like a Band</div>
+            <div class="card-head-title">Why Fresh Water Matters</div>
           </div>
         </div>
         <div class="card-body">
-          <p>Scientists don't ask just any question — they ask <span class="vtip">testable questions<span class="vtip-box"><span class="vtip-word">testable question</span>A question you can answer by observing, measuring, or testing.</span></span>. "Why are clouds beautiful?" isn't testable. But "Do clouds form more often in the morning or the afternoon?" — that's something you could actually find out by watching the sky for a week.</p>
-          <p><strong>Real-World Connection:</strong> Telescopes have shown us thousands of other galaxies. Some are very far away — so far that the light traveling from them took billions of years to reach Earth. When you look at a faraway galaxy through a telescope, you're actually seeing what it looked like in the distant past.</p>
+          <p>Every living thing needs fresh water. People use it to drink, cook, grow food, and clean. When fresh water gets polluted or used up, it can take a very long time to replace.</p>
+          <p><strong>Real-World Connection:</strong> In Florida, most people get their drinking water from groundwater stored in underground layers of rock called aquifers.</p>
         </div>
       </div>
 
@@ -1034,9 +1034,9 @@ em { color: #5A4D3E; }
       <!-- Interactive Diagram -->
       <div class="diagram-wrap scroll-reveal">
         <div style="font-size:13px;color:#9A8E82;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">
-          🗺 Tap each side to compare
+          🗺 Tap each place water is found
         </div>
-        <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;line-height:1.65;">Six things that exist in space — from smallest to largest. Tap each one to see how they fit together.</p>
+        <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;line-height:1.65;">Six places Earth&#39;s water is stored. Tap each one to see how much water it holds.</p>
         <div class="diagram-interactive">
           <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="font-family:Nunito,Arial,sans-serif;max-width:100%;height:auto;" role="img" aria-label="Earth water distribution diagram">
             <rect width="720" height="360" fill="#FAF7F3" rx="12" stroke="#c8b896" stroke-width="2"/>
@@ -1094,7 +1094,7 @@ em { color: #5A4D3E; }
           </svg>
           <div style="background:linear-gradient(135deg,#EEF8F0,#D6F5DE);border:2px solid #B8E8CF;border-radius:14px;padding:12px 18px;margin-top:10px;display:flex;align-items:center;gap:12px;">
             <span style="font-size:28px;flex-shrink:0;animation:mind-blow-bounce 2s ease-in-out infinite;">👆</span>
-            <p style="font-size:15px;color:#0E1C42;line-height:1.55;margin:0;font-weight:600;">Tap each box to see how the cosmic scale fits together.</p>
+            <p style="font-size:15px;color:#0E1C42;line-height:1.55;margin:0;font-weight:600;">Tap each box to see how much of Earth&#39;s water is there.</p>
           </div>
           <div class="diagram-info-panel" id="diagramPanel">
             <span class="dip-word" id="diagramWord"></span>
@@ -1109,16 +1109,16 @@ em { color: #5A4D3E; }
         <div class="mind-blow-icon">🤯</div>
         <div class="mind-blow-content">
           <div class="mind-blow-label">Mind-Blowing Fact</div>
-          <div class="mind-blow-text">If you could shrink the Sun to the size of a basketball, Earth would be the size of a peppercorn — and the next nearest star would be <strong>4,000 miles</strong> away. Galaxies are mostly empty space, with islands of stars far apart.</div>
+          <div class="mind-blow-text">If all of Earth&#39;s water fit in a one-gallon jug, the fresh water in all the lakes and rivers would be <strong>just a few drops</strong>.</div>
         </div>
       </div>
 
       <!-- Go Deeper -->
       <details class="go-deeper">
-        <summary>Go Deeper — Why galaxies have shapes</summary>
+        <summary>Go Deeper — Turning salt water into fresh water</summary>
         <div class="gd-body">
-          <p>Galaxies don't all look the same. Some are SPIRAL like the Milky Way — flat disks with curved arms. Some are ELLIPTICAL — egg-shaped balls of older stars. A few are IRREGULAR — no special shape at all, often because they were pulled apart by a passing neighbor.</p>
-          <p>What gives a galaxy its shape? Gravity, mostly. Spiral galaxies rotate, and the spinning pulls stars and gas into long arms. Elliptical galaxies are older and have stopped making new stars. Astronomers can guess a galaxy's age just from its shape.</p>
+          <p>Some dry places use desalination plants. These plants remove salt from ocean water so people can drink it.</p>
+          <p>Desalination works, but it takes a lot of energy and money. That&#39;s why saving the fresh water we already have matters so much.</p>
         </div>
       </details>
 
@@ -1141,91 +1141,55 @@ em { color: #5A4D3E; }
     <div class="act-head">
       <div class="act-num" style="background:#55C8E8;">3</div>
       <div style="flex:1;">
-        <div class="act-title">🔬 Sort the Cosmic Objects</div>
-        <div class="act-subtitle">Planet, star, solar system, or galaxy? You decide.</div>
+        <div class="act-title">🔬 Model Earth&#39;s Water</div>
+        <div class="act-subtitle">100 beans. All of Earth&#39;s water.</div>
       </div>
-      <div class="act-time" style="background:#55C8E8;">⏱ 10 min</div>
+      <div class="act-time" style="background:#55C8E8;">⏱ 15 min</div>
     </div>
     <div class="act-body">
 
-      <p>Astronomers have a strict order for space objects: planet → star → solar system → galaxy → universe. Each one is bigger than the last. Today you’ll sort six space objects into the right category — and notice how the universe is built in layers.</p>
+      <p>Earth&#39;s water is hard to picture, so you&#39;ll build a model. Your 100 beans stand for ALL the water on Earth.</p>
 
-      <!-- Scenario image suggestion -->
-      <div class="lesson-figure">
-        <div class="lesson-figure-label">📷 Reference · The Milky Way at Night</div>
-        <img
-          src="images/24-01-galaxy-objects-scenario.jpg"
-          alt="A nighttime photograph of the Milky Way galaxy as a bright band of stars stretching across a dark sky, with a silhouetted mountain landscape below."
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; this.parentElement.querySelector('.lesson-figure-label').style.display='none';"
-        />
-        <div class="image-suggestion" style="display:none;">
-          <div class="image-suggestion-icon">🖼️</div>
-          <div class="image-suggestion-label">Suggested Image — Generate This</div>
-          <div class="image-suggestion-desc">
-            Photorealistic nighttime landscape photo of the Milky Way galaxy. The bright band of stars curves across the upper sky. A silhouette of mountains or trees lines the bottom. Sharp focus on the stars. No people, no text, no cartoons.
-          </div>
-          <div class="image-suggestion-file">Save as: images/24-01-milky-way-night.jpg</div>
-        </div>
-        <div class="lesson-figure-caption">
-          The Milky Way seen from Earth. That bright band of light IS our home galaxy — seen from the inside.
-        </div>
-      </div>
-
-      <!-- Step 1 -->
       <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
         <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Read the list of cosmic objects</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Below are six space objects. For each one, decide which category it belongs to: planet, star, solar system, galaxy, or universe. Don’t rush — look at the clues each row gives you.</p>
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Count your beans</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Count out exactly 100 beans (or pennies). Label three cups: OCEAN, ICE, and EVERYTHING ELSE.</p>
         </div>
       </div>
-
-      <!-- Scenario table -->
-      <div class="student-chart-wrap">
-        <div class="student-chart-label">📋 Cosmic objects — sort each one</div>
-        <table class="student-chart">
-          <thead>
-            <tr>
-              <th style="width:42px;">#</th>
-              <th>Description</th>
-              <th style="width:200px;">Category</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td class="row-label">1</td><td>Earth — a rocky world about 8,000 miles across, orbits the Sun.</td><td></td></tr>
-            <tr><td class="row-label">2</td><td>The Sun — a ball of hot, glowing gas, 109 times wider than Earth.</td><td></td></tr>
-            <tr><td class="row-label">3</td><td>Our Solar System — the Sun, 8 planets, plus moons and asteroids.</td><td></td></tr>
-            <tr><td class="row-label">4</td><td>The Milky Way — a spiral with 200 billion stars, 100,000 light-years wide.</td><td></td></tr>
-            <tr><td class="row-label">5</td><td>Andromeda — our nearest large galaxy neighbor, 2.5 million light-years away.</td><td></td></tr>
-            <tr><td class="row-label">6</td><td>The observable universe — trillions of galaxies, unimaginably vast.</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Step 2 -->
       <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
         <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Look for the pattern</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Notice how each cosmic object is part of something LARGER. Planets are part of solar systems. Solar systems are part of galaxies. Galaxies are part of the universe. Layers inside layers.</p>
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Fill the ocean</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Put 97 beans in the OCEAN cup. That&#39;s the salt water.</p>
         </div>
       </div>
-
-      <!-- Step 3 -->
       <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
         <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Find the boundary</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">For each object you sorted, ask: what is it INSIDE of? Earth is inside the solar system. The solar system is inside the Milky Way. Trace each one up to its bigger group.</p>
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Freeze some fresh water</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Put 2 beans in the ICE cup. That&#39;s the fresh water frozen in glaciers and ice caps.</p>
         </div>
       </div>
-
-      <!-- Step 4 -->
       <div style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
         <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Look at the last bean</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Put the last bean in the EVERYTHING ELSE cup. That one bean stands for groundwater, lakes, rivers, the air, and living things all together. Most of it is groundwater. Lakes and rivers would be just a tiny crumb of that bean.</p>
+        </div>
+      </div>
+      <div class="student-chart-wrap">
+        <div class="student-chart-label">📋 Bean model — copy into your notebook</div>
+        <table class="student-chart">
+          <thead><tr><th style="width:24%;">Cup</th><th>Number of beans</th><th>What it stands for</th><th>Can people easily use it?</th></tr></thead>
+          <tbody><tr><td class="row-label">🌊 Ocean</td><td></td><td></td><td></td></tr><tr><td class="row-label">🧊 Ice</td><td></td><td></td><td></td></tr><tr><td class="row-label">💧 Everything else</td><td></td><td></td><td></td></tr></tbody>
+        </table>
+      </div>
+      <div style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">5</div>
+        <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
           <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Make a claim</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Write a one-sentence claim about how the universe is organized — from smallest object to biggest. You'll use this idea in your CER later.</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Write one sentence about how much of Earth&#39;s water people can easily use. You&#39;ll use it in your CER.</p>
         </div>
       </div>
 
@@ -1239,44 +1203,42 @@ em { color: #5A4D3E; }
           </div>
         </div>
         <div class="card-body">
-          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Answer these in complete sentences. Use the cosmic objects you sorted.</p>
+          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Answer in complete sentences. Use your bean model table.</p>
 
           <div class="pq">
             <span class="pq-num" style="background:#D4772C;">1</span>
-            <span class="pq-text">List one example each of a planet, a star, a solar system, and a galaxy. Use the objects from the lesson.</span>
+            <span class="pq-text">How many beans went in each cup? Which cup surprised you most?</span>
           </div>
           <div class="response-q">
             <textarea class="response-textarea ta-sm" id="ryt-1"
-              data-label="Investigate — Q1: Lesson concept"
-              placeholder="A planet is... A star is... A solar system is... A galaxy is..."
+              data-label="Investigate — Q1: Bean counts"
+              placeholder="Ocean: ___. Ice: ___. Everything else: ___. I was surprised that..."
               oninput="autoSave(this,'dot-ryt-1')"></textarea>
             <span style="font-size:12px;color:#9A8E82;font-weight:600;">
               Your answer<span class="response-save-dot" id="dot-ryt-1"></span>
             </span>
           </div>
-
           <div class="pq" style="margin-top:14px;">
             <span class="pq-num" style="background:#D4772C;">2</span>
-            <span class="pq-text">What is a galaxy made of? Use the words “stars” and “gravity” in your answer.</span>
+            <span class="pq-text">Look at your last bean. Explain why such a tiny amount matters so much to living things.</span>
           </div>
           <div class="response-q">
             <textarea class="response-textarea ta-sm" id="ryt-2"
-              data-label="Investigate — Q2: Application"
-              placeholder="A galaxy is made of..."
+              data-label="Investigate — Q2: The last bean"
+              placeholder="That one bean matters because..."
               oninput="autoSave(this,'dot-ryt-2')"></textarea>
             <span style="font-size:12px;color:#9A8E82;font-weight:600;">
               Your answer<span class="response-save-dot" id="dot-ryt-2"></span>
             </span>
           </div>
-
           <div class="pq" style="margin-top:14px;">
             <span class="pq-num" style="background:#D4772C;">3</span>
-            <span class="pq-text">How is a solar system different from a galaxy? Use specific numbers if you can.</span>
+            <span class="pq-text">The ice is fresh water. Why is it still hard for people to use?</span>
           </div>
           <div class="response-q">
             <textarea class="response-textarea ta-sm" id="ryt-3"
-              data-label="Investigate — Q3: Testable question"
-              placeholder="A solar system has ___ , but a galaxy has..."
+              data-label="Investigate — Q3: Frozen fresh water"
+              placeholder="The ice is hard to use because..."
               oninput="autoSave(this,'dot-ryt-3')"></textarea>
             <span style="font-size:12px;color:#9A8E82;font-weight:600;">
               Your answer<span class="response-save-dot" id="dot-ryt-3"></span>
@@ -1301,7 +1263,7 @@ em { color: #5A4D3E; }
             <span class="sq-icon">⚔️</span>
             <div>
               <div class="label">Defend Your Thinking</div>
-              <div class="question">"A classmate says, 'The Sun is the biggest thing in the universe.' What would you say back? Use what you know about galaxies as your evidence."</div>
+              <div class="question">"A friend says, 'Earth is covered in water, so we can never run out.' Use your bean model to answer."</div>
             </div>
           </div>
 
@@ -1309,7 +1271,7 @@ em { color: #5A4D3E; }
             <span class="sq-icon">🔍</span>
             <div>
               <div class="label">Compare the Evidence</div>
-              <div class="question">"Which is bigger by the largest factor — going from a planet to a star, or from a galaxy to the universe? Why is each step so much larger?"</div>
+              <div class="question">"If you used only 10 beans instead of 100, which part would be impossible to show? Why?"</div>
             </div>
           </div>
         </div>
@@ -1399,17 +1361,17 @@ em { color: #5A4D3E; }
 <div class="tab-panel" id="tab-assignment">
 
   <!-- Part A -->
-  <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;">📐 Part A — Model the Difference</p>
+  <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;">📐 Part A — Water Bar Model</p>
   <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Add "Lesson 28.01 — Earth's Water" to your notebook. Open to a clean page.</p>
 
   <div class="pq">
     <span class="pq-num" style="background:#E8636B;">1</span>
-    <span class="pq-text"><strong>Draw and Explain:</strong> Sketch a layered diagram with FIVE concentric circles: Earth (smallest) in the center, then the Sun, then the solar system, then the Milky Way, then the universe (largest). Label each layer. Below your sketch, write one sentence explaining how the layers fit together.</span>
+    <span class="pq-text"><strong>Draw and Label:</strong> Draw a long bar and divide it to show Earth&#39;s water: oceans, ice, and everything else. Label each part with its percent. In the box below, explain which part people use most.</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="parta-1"
-      data-label="Part A — Object &amp; Explanation"
-      placeholder="I drew five layers showing... The layers fit together because..."
+      data-label="Part A — Water bar model"
+      placeholder="My bar shows... People use the ___ part most because..."
       oninput="autoSave(this,'dot-parta-1')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-parta-1"></span>
@@ -1418,16 +1380,16 @@ em { color: #5A4D3E; }
 
   <!-- Part B -->
   <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;margin-top:20px;">📊 Part B — Evidence Questions</p>
-  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Answer in complete sentences using your sketch and the lesson.</p>
+  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Answer in complete sentences using your bean model and the lesson.</p>
 
   <div class="pq">
     <span class="pq-num" style="background:#D4772C;">2</span>
-    <span class="pq-text">How is a solar system different from a galaxy? Use specific numbers if you can.</span>
+    <span class="pq-text">About what percent of Earth&#39;s water is fresh? Where is most of that fresh water?</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="partb-1"
-      data-label="Part B — Q1"
-      placeholder="A solar system has ___ , but a galaxy has..."
+      data-label="Part B — Q1: Fresh water"
+      placeholder="About ___% is fresh. Most of it is..."
       oninput="autoSave(this,'dot-partb-1')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-partb-1"></span>
@@ -1436,12 +1398,12 @@ em { color: #5A4D3E; }
 
   <div class="pq">
     <span class="pq-num" style="background:#D4772C;">3</span>
-    <span class="pq-text">Where in the Milky Way is our Sun located? Describe its position in two sentences.</span>
+    <span class="pq-text">Name two ways people in your home or town use fresh water every day.</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="partb-2"
-      data-label="Part B — Q2"
-      placeholder="Our Sun is located..."
+      data-label="Part B — Q2: Using fresh water"
+      placeholder="Two ways we use fresh water are..."
       oninput="autoSave(this,'dot-partb-2')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-partb-2"></span>
@@ -1450,12 +1412,12 @@ em { color: #5A4D3E; }
 
   <div class="pq">
     <span class="pq-num" style="background:#D4772C;">4</span>
-    <span class="pq-text">Where in the Milky Way is our Sun located? Describe its position.</span>
+    <span class="pq-text">Groundwater is fresh water hidden underground. Why is it important to keep pollution out of the ground?</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="partb-3"
-      data-label="Part B — Q3"
-      placeholder="Our Sun is located..."
+      data-label="Part B — Q3: Protecting groundwater"
+      placeholder="It is important because..."
       oninput="autoSave(this,'dot-partb-3')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-partb-3"></span>
@@ -1531,7 +1493,7 @@ em { color: #5A4D3E; }
 
     <!-- Vocab check -->
     <div class="cer-vocab-check">
-      📚 <strong>Vocab check:</strong> Try to use at least two of these words: <strong>galaxy</strong>, <strong>Milky Way</strong>, <strong>star</strong>, <strong>solar system</strong>, <strong>orbit</strong>
+      📚 <strong>Vocab check:</strong> Try to use at least two of these words: <strong>salt water</strong>, <strong>fresh water</strong>, <strong>glacier</strong>, <strong>groundwater</strong>, <strong>percent</strong>
     </div>
   </div><!-- /cer-block -->
 
@@ -1603,17 +1565,17 @@ em { color: #5A4D3E; }
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
           <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
-          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part A — Cosmic Layers Sketch:</strong> Drawing of five concentric circles (Earth, Sun, solar system, Milky Way, universe), each labeled, plus a one-sentence explanation underneath.</span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part A — Water bar model:</strong> A bar divided into oceans, ice, and everything else, labeled with percents.</span>
         </div>
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
           <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
-          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part B — Evidence Questions:</strong> All three questions answered in complete sentences, using terms from the lesson.</span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part B — Evidence Questions:</strong> All three questions answered in complete sentences.</span>
         </div>
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
           <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
-          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part C — CER Response:</strong> Claim, at least one piece of evidence from the lesson, and reasoning explaining the cosmic scale.</span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part C — CER Response:</strong> Claim, at least two percentages or examples as evidence, and reasoning about why fresh water matters.</span>
         </div>
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
@@ -1756,7 +1718,7 @@ function checkQuiz(optEl) {
     var scoreMsg = document.getElementById('quizScoreMsg');
     scoreNum.textContent = quizCorrect;
     if (quizCorrect === 3) {
-      scoreMsg.textContent = '🎉 Perfect score! You\'re already thinking like a scientist.';
+      scoreMsg.textContent = '🎉 Perfect score! You know where Earth\'s water really is.';
       setTimeout(window.launchConfetti, 300);
       var vp = document.getElementById('quizVideoPerfect');
       if (vp) vp.classList.add('show');
