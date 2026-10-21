@@ -1604,7 +1604,7 @@ function checkQuiz(optEl) {
     scoreNum.textContent = quizCorrect;
     if (quizCorrect === 3) { scoreMsg.textContent = '🎉 Perfect score! You\'ve mastered electrical transformations.'; setTimeout(window.launchConfetti, 300); var vp = document.getElementById('quizVideoPerfect'); if (vp) vp.classList.add('show'); }
     else if (quizCorrect === 2) { scoreMsg.textContent = '🌟 Great work! Review the one you missed.'; var vr = document.getElementById('quizVideoReview'); if (vr) vr.classList.add('show'); }
-    else { scoreMsg.textContent = '👍 Good effort! Look back at the three-row diagram.'; var vr2 = document.getElementById('quizVideoReview'); if (vr2) vr2.classList.add('show'); }
+    else { scoreMsg.textContent = '👍 Good effort! Look back at the diagram in The Lesson tab.'; var vr2 = document.getElementById('quizVideoReview'); if (vr2) vr2.classList.add('show'); }
     scoreBox.classList.add('show');
   }
 }
