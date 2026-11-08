@@ -423,6 +423,7 @@
     n.querySelector('button').addEventListener('click', function () { n.remove(); });
     noteBox.appendChild(n);
     while (noteBox.children.length > 3) noteBox.firstChild.remove();
+    return n;
   }
 
   /* ───────────── The Keeper: a clip card with Spotlight ───────────── */
@@ -1044,10 +1045,14 @@
     dock.innerHTML = '<button type="button" class="nc-tool nc-t-hl" aria-pressed="false"><span>🖍</span><b>Highlight</b></button><button type="button" class="nc-tool nc-t-sk"><span>✏️</span><b>Sketch</b></button><button type="button" class="nc-tool nc-t-sn"><span>📷</span><b>Snap</b></button>';
     document.body.appendChild(dock);
     // Highlight: select words, they turn yellow; tap a highlight to remove it
-    var hlOn = false, hlB = dock.querySelector('.nc-t-hl');
+    var hlOn = false, hlNote = null, hlB = dock.querySelector('.nc-t-hl');
     hlB.addEventListener('click', function () {
       hlOn = !hlOn; hlB.setAttribute('aria-pressed', String(hlOn)); document.documentElement.classList.toggle('nc-hl-on', hlOn);
-      if (hlOn && !store.hlTip) { store.hlTip = 1; save(); note('🖍 <b>Highlighter on.</b> Drag across words to highlight them. Tap a highlight to remove it. Tap 🖍 again to turn it off.'); }
+      if (hlNote) { hlNote.remove(); hlNote = null; }
+      if (hlOn) {
+        hlNote = note(store.hlTip ? '🖍 <b>Highlighter on.</b> Tap 🖍 again to turn it off.' : '🖍 <b>Highlighter on.</b> Drag across words to highlight them. Tap a highlight to remove it. Tap 🖍 again to turn it off.');
+        if (!store.hlTip) { store.hlTip = 1; save(); }
+      }
     });
     document.addEventListener('mouseup', function () { if (hlOn) setTimeout(markSel, 10); });
     document.addEventListener('touchend', function () { if (hlOn) setTimeout(markSel, 300); });
