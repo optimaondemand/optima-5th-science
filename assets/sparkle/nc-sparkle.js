@@ -23,7 +23,7 @@
   function lerp(a, b, t) { return a + (b - a) * t; }
   document.documentElement.classList.add('nc-on');
 
-  /* ───────────── Sound: a soft synthesized score (no files; only after the student turns it on) ───────────── */
+  /* ───────────── Sound: short whooshes and an end chime (no files, no background hum; only after the student turns it on) ───────────── */
   var Snd = (function () {
     var ctx = null, master = null, pad = [], on = false, air = null;
     function ensure() {
@@ -33,21 +33,11 @@
       ctx = new AC();
       master = ctx.createGain(); master.gain.value = 0; master.connect(ctx.destination);
       var lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 700; lp.connect(master);
-      [55, 82.41, 110.0, 164.81].forEach(function (f, i) {
-        var o = ctx.createOscillator(); o.type = i < 2 ? 'triangle' : 'sine'; o.frequency.value = f;
-        o.detune.value = (i % 2 ? 6 : -6);
-        var g = ctx.createGain(); g.gain.value = [0.22, 0.16, 0.07, 0.04][i];
-        var lfo = ctx.createOscillator(); lfo.frequency.value = 0.07 + i * 0.03;
-        var lg = ctx.createGain(); lg.gain.value = 0.03; lfo.connect(lg); lg.connect(g.gain); lfo.start();
-        o.connect(g); g.connect(lp); o.start(); pad.push(o);
-      });
-      // a breath of air
+      // No background drone or room tone (Bethany, 9 Nov 2026: "keeps playing this low humming").
+      // Only short one-off sounds: a soft whoosh between pictures and a chime at the end.
       var len = ctx.sampleRate * 2, buf = ctx.createBuffer(1, len, ctx.sampleRate), d = buf.getChannelData(0);
       for (var i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
       air = { buf: buf };
-      var src = ctx.createBufferSource(); src.buffer = buf; src.loop = true;
-      var bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 900; bp.Q.value = 0.6;
-      var ag = ctx.createGain(); ag.gain.value = 0.018; src.connect(bp); bp.connect(ag); ag.connect(master); src.start();
       return true;
     }
     function set(v) {
@@ -71,7 +61,7 @@
     function chime() {
       if (!on || !ctx) return;
       var t = ctx.currentTime;
-      [[55, 0.35, 3.5, 'sine'], [659.25, 0.07, 3, 'sine'], [987.77, 0.05, 3.4, 'sine'], [1318.5, 0.035, 3.8, 'sine']].forEach(function (n, i) {
+      [[523.25, 0.08, 2.6, 'sine'], [659.25, 0.07, 3, 'sine'], [987.77, 0.05, 3.4, 'sine'], [1318.5, 0.035, 3.8, 'sine']].forEach(function (n, i) {
         var o = ctx.createOscillator(); o.type = n[3]; o.frequency.value = n[0];
         var g = ctx.createGain(); g.gain.setValueAtTime(0, t + i * 0.12); g.gain.linearRampToValueAtTime(n[1], t + i * 0.12 + 0.04);
         g.gain.exponentialRampToValueAtTime(0.0001, t + i * 0.12 + n[2]);
