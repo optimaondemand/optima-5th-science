@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 3 Family Guide · Plant Growth · 5th Grade Science · Optima Academy Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0E1C42; --navy2:#1A2D5A; --green:#34B76F; --green-d:#1F7A4A; --mint:#7fe0a8;
+  --ink:#2B1D12; --soft:#5A4D3E; --brown:#7a5a2c; --edge:#E8DDD2; --rule:#dfe9f3; --margin:#f2a7a7;
+  --paper:#FFFDF8; --page:#F4F0EB; --gold:#C9A54A; --gold-bg:#FFF6DF; --red:#C8553D; --blue:#2F6FB5; --sky-bg:#EEF4FB;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:var(--page);color:var(--ink);font-family:"Nunito",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:900px;margin:0 auto;padding:0 0 40px;}
+img{max-width:100%;display:block;}
+h1,h2,h3{margin:0;color:var(--navy);}
+p{margin:0 0 10px;color:var(--soft);}
+p:last-child{margin-bottom:0;}
+b,strong{color:var(--navy);}
+ul{margin:0;padding-left:22px;}
+li{margin:4px 0;color:var(--soft);}
+.serif{font-family:"Cormorant Garamond",Georgia,serif;}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,#0E1C42 0%,#1A2D5A 60%,#243868 100%);border-bottom:6px solid var(--green);display:grid;grid-template-columns:1.3fr 1fr;color:#fff;}
+.hero-text{padding:24px 26px 24px;}
+.brand{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);margin-bottom:14px;}
+.brand span.logo{width:42px;height:42px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex:none;}
+.brand span.logo img{width:38px;height:30px;}
+.hero h1{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:40px;line-height:1.05;color:#fff;margin-bottom:8px;}
+.hero .sub{font-size:17px;color:#DCE6F7;margin-bottom:14px;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{background:rgba(52,183,111,.15);border:1.5px solid rgba(52,183,111,.4);border-radius:999px;padding:4px 13px;font-size:15px;font-weight:800;color:#fff;}
+.print-btn{margin-top:14px;background:var(--mint);color:var(--navy);border:0;border-radius:999px;padding:8px 18px;font:900 15px "Nunito",sans-serif;cursor:pointer;}
+.hero-art{position:relative;min-height:250px;background:#22331f;}
+.hero-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.hero-art .cap{position:absolute;left:0;right:0;bottom:0;padding:16px 12px 8px;font-size:12.5px;line-height:1.3;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.7));}
+
+main{padding:4px 20px 0;}
+.note{display:flex;gap:14px;align-items:flex-start;background:var(--navy);color:#fff;border-radius:16px;padding:16px 18px;margin:20px 0 0;box-shadow:0 6px 18px rgba(14,28,66,.18);}
+.note .ico{flex:none;width:44px;height:44px;border-radius:50%;background:rgba(127,224,168,.18);display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 0 0 3px rgba(127,224,168,.35);}
+.note p{color:#E6EEFA;margin:0;}
+.note b{color:#fff;}
+
+.card{background:var(--paper);border:2px solid var(--edge);border-radius:18px;box-shadow:0 2px 12px rgba(43,29,18,.06);margin-top:20px;padding:20px 22px;}
+.card-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+.card-head .ico{font-size:24px;line-height:1;}
+.card-head h2{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:29px;line-height:1.1;}
+.card-head .tag{margin-left:auto;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--green-d);}
+.kicker{display:block;font-size:12px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--brown);}
+.small{font-size:15px;color:#7a6d5e;}
+
+/* How the pages work */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:4px 0 14px;}
+.steps div{background:#fff;border:1px solid var(--edge);border-radius:12px;padding:10px 12px;font-size:15px;line-height:1.4;color:var(--soft);}
+.steps b{display:block;font-size:16px;margin-bottom:2px;}
+.howto{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;}
+.howto li{display:flex;gap:10px;margin:0;font-size:16px;line-height:1.5;}
+.howto li>span{flex:none;font-size:20px;line-height:1.3;}
+
+/* Notebook paper */
+.paper{background-color:#fffef9;background-image:repeating-linear-gradient(transparent 0,transparent 27px,var(--rule) 27px,var(--rule) 28px);border:1px solid var(--edge);border-radius:10px;padding:14px 18px 14px 52px;position:relative;line-height:28px;}
+.paper::before{content:"";position:absolute;top:0;bottom:0;left:36px;width:1.5px;background:var(--margin);}
+.paper p{line-height:28px;}
+
+/* Chain strip */
+.chain{display:flex;align-items:stretch;gap:0;margin:14px 0 4px;overflow-x:auto;padding:4px 2px 8px;}
+.link{flex:1 0 150px;background:#fff;border:1.5px solid var(--edge);border-radius:12px;padding:10px 12px;position:relative;}
+.link+.link{margin-left:22px;}
+.link+.link::before{content:"";position:absolute;left:-22px;top:50%;width:22px;height:0;border-top:3px dotted var(--gold);}
+.link .pg{font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--brown);}
+.link .who{font-weight:900;color:var(--navy);font-size:15px;line-height:1.3;margin-top:2px;}
+.link .what{font-size:14px;color:var(--soft);line-height:1.35;}
+.link.you{border-color:var(--green);background:#F1FBF5;}
+.link.you .pg{color:var(--green-d);}
+.link.next{border-style:dashed;}
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px;}
+.tools div{background:#fff;border:1px solid var(--edge);border-radius:12px;padding:10px 12px;font-size:15px;line-height:1.45;color:var(--soft);}
+.tools b{display:block;font-size:16px;}
+
+/* CER */
+.cer{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:6px 0 14px;}
+.cer div{border-radius:12px;padding:12px 14px;font-size:15.5px;line-height:1.45;color:var(--soft);border:1px solid var(--edge);background:#fff;}
+.cer .L{display:flex;align-items:center;gap:8px;font-weight:900;color:var(--navy);font-size:17px;margin-bottom:4px;}
+.cer .L i{font-style:normal;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;flex:none;}
+.cer .c i{background:var(--blue);} .cer .e i{background:var(--green);} .cer .r i{background:var(--gold);}
+.example{margin:4px 0 14px;}
+.example p{margin:0;}
+.example .t{font-weight:900;color:var(--navy);}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.box{background:#fff;border:1px solid var(--edge);border-radius:12px;padding:12px 14px;}
+.box h3{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--green-d);margin:0 0 6px;font-family:"Nunito",sans-serif;font-weight:900;}
+.box p,.box li{font-size:15.5px;line-height:1.5;}
+.b-gold{background:var(--gold-bg);border-color:#EED9A5;}
+.b-sky{background:var(--sky-bg);border-color:#CFE0F3;}
+.b-green{background:#EEF8F0;border-color:#CDE9D6;}
+
+/* Lesson cards */
+.lesson{background:var(--paper);border:2px solid var(--edge);border-radius:18px;overflow:hidden;margin-top:20px;box-shadow:0 2px 12px rgba(43,29,18,.06);}
+.lesson .head{background:var(--navy);color:#fff;padding:14px 20px;}
+.lesson .head .k{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mint);font-weight:900;}
+.lesson .head h2{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:30px;line-height:1.1;color:#fff;margin-top:4px;}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--navy);padding:0 4px 4px;}
+.strip figure{margin:0;}
+.strip img{width:100%;aspect-ratio:4/3;object-fit:cover;background:#1A2D5A;}
+.strip figcaption{font-size:12.5px;line-height:1.3;color:#DCE6F7;padding:5px 6px 3px;}
+.lesson .body{padding:16px 20px 20px;}
+.bq{background:#fff;border:1px solid var(--edge);border-left:5px solid var(--green);border-radius:10px;padding:10px 14px;margin:0 0 14px;font-family:"Cormorant Garamond",Georgia,serif;font-size:21px;line-height:1.3;color:var(--navy);font-weight:600;}
+.bq b{display:block;font-family:"Nunito",sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--green-d);font-weight:900;margin-bottom:2px;}
+.lesson h3{font-family:"Nunito",sans-serif;font-size:13.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--green-d);font-weight:900;margin:16px 0 6px;}
+.games{list-style:none;padding:0;}
+.games li{margin:6px 0;padding-left:0;}
+.games b{color:var(--navy);}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none;}
+.words li{background:#fff;border:1px solid var(--edge);border-radius:999px;padding:3px 12px;font-size:15px;margin:0;font-weight:800;color:var(--green-d);}
+.turnin{list-style:none;padding:0;}
+.turnin li{display:flex;gap:8px;margin:5px 0;font-size:16px;}
+.turnin li::before{content:"☐";color:var(--green-d);font-weight:900;flex:none;}
+.optional{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+.optional span{background:var(--sky-bg);border:1px solid #CFE0F3;border-radius:10px;padding:5px 10px;font-size:14.5px;color:var(--navy);font-weight:700;}
+
+/* VR */
+.vr-two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;}
+.vr-opt{border-radius:14px;padding:14px 16px;border:2px solid var(--edge);background:#fff;}
+.vr-opt.field{border-color:var(--gold);background:#FFFBEF;}
+.vr-opt h3{font-family:"Cormorant Garamond",Georgia,serif;font-size:24px;font-weight:700;margin-bottom:2px;}
+.vr-opt .time{font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--brown);margin-bottom:8px;display:block;}
+.vr-opt li{font-size:15.5px;line-height:1.5;}
+.vr-opt .pts{margin-top:10px;font-size:14.5px;background:var(--gold-bg);border-radius:10px;padding:8px 10px;color:var(--soft);}
+.plate{display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:start;}
+.plate img{width:100%;border:1px solid var(--edge);border-radius:6px;background:#fff;}
+.plate .cap{font-size:12px;color:#7a6d5e;margin-top:4px;line-height:1.3;}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
+.legend span{font-size:14px;font-weight:800;border-radius:999px;padding:3px 10px;}
+.legend .in{background:#FBE9E5;color:#9A3A26;} .legend .out{background:#E5EEFA;color:#1F4F8A;}
+
+/* Words */
+.wordgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.word{background:#fff;border:1px solid var(--edge);border-radius:12px;padding:10px 14px;font-size:15.5px;line-height:1.45;color:var(--soft);}
+.word b{display:block;font-size:17px;color:var(--navy);}
+.word b small{font-size:12px;font-weight:800;color:var(--brown);letter-spacing:.06em;margin-left:6px;}
+
+.foot{text-align:center;margin:26px 20px 0;font-size:15px;color:#7a6d5e;}
+.foot b{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-size:22px;color:var(--navy);}
+.credits{margin:18px 20px 0;font-size:13px;color:#7a6d5e;}
+.credits summary{cursor:pointer;font-weight:800;}
+.credits li{font-size:13px;margin:2px 0;color:#7a6d5e;}
+
+@media (max-width:720px){
+  .hero{grid-template-columns:1fr;}
+  .hero-art{min-height:190px;order:-1;}
+  .hero h1{font-size:33px;}
+  main{padding:4px 12px 0;}
+  .card{padding:16px 16px;}
+  .steps{grid-template-columns:1fr 1fr;}
+  .howto,.tools,.cer,.twocol,.vr-two,.wordgrid{grid-template-columns:1fr;}
+  .plate{grid-template-columns:96px 1fr;gap:12px;}
+  .lesson .body{padding:14px 16px 18px;}
+  .lesson .head h2{font-size:26px;}
+  .strip figcaption{font-size:11px;}
+  .card-head .tag{margin-left:0;width:100%;}
+  .credits,.foot{margin-left:12px;margin-right:12px;}
+}
+@media print{
+  body{background:#fff;font-size:14.5px;}
+  .print-btn{display:none;}
+  .card,.lesson,.box,.vr-opt{break-inside:avoid;}
+  .hero,.lesson .head,.strip,.note{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .credits[open] summary{display:none;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="hero-text">
+    <div class="brand"><span class="logo"><img src="https://raw.githubusercontent.com/optimaondemand/optima-assets/eeb0b335630058906d52f478028361d352253a93/images/Optima%20Final%20Circle%20-%20Owl%20Only.png" alt="Optima Academy Online logo"></span>Family Guide · 5th Grade Science</div>
+    <h1>Unit 3 Family Guide: Plant Growth</h1>
+    <div class="sub">The Notebook Chain · Page 17 · Lessons 17.01 and 17.02 · Week 17</div>
+    <div class="chips"><span class="chip">2 lessons</span><span class="chip">1 VR plate</span><span class="chip">3 real experiments</span></div>
+    <button class="print-btn" type="button" onclick="window.print()">🖨️ Print this guide</button>
+  </div>
+  <div class="hero-art">
+    <img src="images/nc/17-01-willow-young.jpg" alt="A young, leafy willow tree a few years old.">
+    <div class="cap">A young willow. In 1648, a willow in a pot started this week’s question.</div>
+  </div>
+</header>
+
+<main>
+
+<div class="note"><div class="ico">📓</div><p><b>Hello, families!</b> This week your child takes on one of the oldest questions in plant science: a tiny seed grows into a giant tree, so where does all of that wood come from? Most people guess the soil. Your child will read the real notebooks of scientists who tested it, run their experiments on the page, and then argue the answer with evidence.</p></div>
+
+<!-- HOW THE PAGES WORK -->
+<section class="card">
+  <div class="card-head"><span class="ico">🧭</span><h2>How the Lesson Pages Work</h2></div>
+  <p>Each lesson page has four steps, in order. A button at the bottom of each one moves to the next.</p>
+  <div class="steps">
+    <div><b>🌅 Warm-Up</b>A prediction game and the day’s six words</div>
+    <div><b>📖 The Lesson</b>Four short parts, each with a game</div>
+    <div><b>🧠 Self-Check</b>Three quick questions, not graded</div>
+    <div><b>✍️ Assignment</b>Written answers, then turn in on Canvas</div>
+  </div>
+  <ul class="howto">
+    <li><span>🎬</span><div><b>An opening film.</b> Each lesson starts with a short film (about a minute, sound on) that zooms through real photos, from space down to a leaf, and ends on the lesson’s question.</div></li>
+    <li><span>🔊</span><div><b>Listen buttons.</b> A narrator reads short “Listen” cards that explain each game. There is also a Listen button at the top that reads the page aloud, with a speed control.</div></li>
+    <li><span>🎮</span><div><b>A game in every part.</b> Your child taps, sorts, slides and predicts. The games use real data from real experiments.</div></li>
+    <li><span>🔎</span><div><b>Optional extras.</b> Some parts have a fold-out box marked Optional: real NASA footage, real carbon dioxide data, or a 3D museum fossil. They’re for curiosity, not for a grade.</div></li>
+    <li><span>📋</span><div><b>Everything is gathered at the end.</b> The Assignment collects your child’s typed answers in one box. Copy it into Canvas to turn it in.</div></li>
+    <li><span>📓</span><div><b>A notebook page to keep.</b> The “Download my notebook page” button makes a printable page with your child’s answers, photos and sketch.</div></li>
+  </ul>
+  <p class="small" style="margin-top:12px">Handy to have nearby: a science notebook, a pencil and colored pencils. A houseplant or a leaf to look at is optional.</p>
+</section>
+
+<!-- NOTEBOOK CHAIN -->
+<section class="card">
+  <div class="card-head"><span class="ico">🔗</span><h2>The Notebook Chain</h2><span class="tag">How 5th Grade Science works this year</span></div>
+  <div class="paper">
+    <p>Every page in the Notebook Chain was written by a scientist who tested an idea. Scientists build on each other’s notebooks: one writes a page, and the next one picks up where it left off. Each week your child reads a real page, checks the evidence, and then <b>adds a page of their own</b>. Over the year the chain grows to 30 pages.</p>
+  </div>
+  <div class="chain" aria-label="The Notebook Chain around this week">
+    <div class="link"><div class="pg">Page 16</div><div class="who">Last week</div><div class="what">Balanced forces</div></div>
+    <div class="link you"><div class="pg">Page 17 · Day 1</div><div class="who">1648 · Van Helmont</div><div class="what">Where does a tree come from?</div></div>
+    <div class="link you"><div class="pg">Page 17 · Day 2</div><div class="who">1772 · Priestley</div><div class="what">Can a plant fix the air?</div></div>
+    <div class="link next"><div class="pg">Page 18 · Next</div><div class="who">1779 · Jan Ingenhousz</div><div class="what">Does a plant need light to do its work?</div></div>
+  </div>
+  <p>In Part C of each Assignment, your child writes the next page: what the scientist did well, what they missed, and a question they would ask. The chain at the bottom of the page shows where your child’s page fits.</p>
+  <div class="tools">
+    <div><b>🖍 Highlight</b>Select words on the page and they turn yellow.</div>
+    <div><b>✏️ Sketch</b>Draw a quick sketch. It prints on the notebook page.</div>
+    <div><b>📷 Snap</b>Drag a box around part of the page to “photograph” it. Each lesson has a photo hunt of four things to snap.</div>
+  </div>
+</section>
+
+<!-- LESSON 17.01 -->
+<section class="lesson">
+  <div class="head"><span class="k">Page 17 · Lesson 17.01 · Day 1</span><h2>What Materials Do Plants Need to Grow?</h2></div>
+  <div class="strip">
+    <figure><img src="images/nc/17-01-ortus-willow.jpg" alt="A printed page in Latin from 1648" style="object-position:50% 30%"><figcaption>Van Helmont’s real page, printed in 1648</figcaption></figure>
+    <figure><img src="images/nc/17-01-trunk-slice.jpg" alt="A slice of a tree trunk showing growth rings"><figcaption>The tree slice your child fills in</figcaption></figure>
+    <figure><img src="images/nc/17-01-seedling.jpg" alt="A bean seed growing into a seedling in seven stages"><figcaption>One bean seed, seven stages</figcaption></figure>
+  </div>
+  <div class="body">
+    <p class="bq"><b>The lesson’s big question</b>A tiny seed grows into a giant tree. Where does all of that wood come from?</p>
+
+    <h3>The scientist on this page</h3>
+    <p>Jan Baptist van Helmont, who lived near what is now Brussels, Belgium. He planted a 5-pound willow in 200 pounds of dried soil and gave it only rainwater for five years. The tree grew to 169 pounds. The soil lost only about 2 ounces. He decided the tree came from <i>water alone</i>. His numbers were careful and correct. His idea missed the air.</p>
+
+    <h3>What your child does</h3>
+    <ul class="games">
+      <li><b>Warm-Up · Slice the tree.</b> A real tree-trunk slice is cut into 10 pieces. Your child fills each piece with Soil, Water, Air or Sunlight to predict where the willow’s 164 new pounds came from, and writes one reason.</li>
+      <li><b>Part 1 · Van Helmont’s own words.</b> The real 1648 page, in Latin. Tapping a line reads it in plain English. Your child hunts for the line where he admits what he didn’t weigh (the leaves that fell each autumn) and the line where he says what the tree was made of.</li>
+      <li><b>Part 2 · Can air have mass?</b> Pump air into a ball on a kitchen scale and watch the number go up. Air is matter, so it has mass, and so does the carbon dioxide in it.</li>
+      <li><b>Part 3 · Is fertilizer really plant food?</b> Read a “plant food” label. A 20-pound bag holds only about 6 pounds of nutrients. Nutrients are like vitamins for a plant, not the main meal.</li>
+      <li><b>Part 4 · Run the five years.</b> Drag a slider through van Helmont’s experiment, read his scales, and work out the changes (164 pounds gained, about 2 ounces lost). Then your child compares their prediction with the evidence: about half the new weight came from water, about half from carbon dioxide in the air, a pinch from soil, and none from sunlight. Sunlight is energy, not matter.</li>
+    </ul>
+
+    <h3>What your child learns</h3>
+    <ul>
+      <li>Plants get most of their material from air (carbon dioxide) and water, not from the soil.</li>
+      <li>Leaves take in carbon dioxide through tiny openings called stomata. Roots take in water. Sunlight gives the energy to join them into sugar, and the plant builds its body from that sugar.</li>
+      <li>Soil still matters: it holds the plant up and supplies small amounts of nutrients.</li>
+      <li>Plants are producers: they make their own food. Animals can’t.</li>
+      <li>Good scientists can measure carefully and still miss something. That’s why the chain keeps going.</li>
+    </ul>
+
+    <h3>Optional extras</h3>
+    <div class="optional"><span>🎬 A year of Earth’s carbon dioxide (NASA)</span><span>📈 Watch Earth breathe (Mauna Loa data)</span><span>🗄️ A 300-million-year-old fossil tree (Smithsonian 3D)</span></div>
+
+    <h3>Words</h3>
+    <ul class="words"><li>organism</li><li>carbon dioxide</li><li>water</li><li>leaves</li><li>roots</li><li>producer</li></ul>
+
+    <h3>What to turn in</h3>
+    <ul class="turnin">
+      <li>Warm-Up: the tree prediction and one reason.</li>
+      <li>Part B: two questions in complete sentences (what fertilizer really does, and why plants are called producers).</li>
+      <li>Part C: the notebook page: what van Helmont did well, and what he missed.</li>
+      <li>C-E-R: a claim, at least two pieces of evidence, and reasoning.</li>
+    </ul>
+
+    <div class="twocol" style="margin-top:14px">
+      <div class="box b-gold"><h3>Ask at dinner</h3><p>“If a tree doesn’t eat dirt, what is it made of?” (Listen for: mostly carbon dioxide from the air and water. Van Helmont’s tree gained 164 pounds while the soil lost only about 2 ounces.)</p></div>
+      <div class="box b-green"><h3>Try at home</h3><p>If you have a bag of fertilizer or “plant food,” find the three numbers on the label together. Add them up. That’s how many parts out of 100 are nutrients. Is it the plant’s main meal, or more like vitamins?</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 17.02 -->
+<section class="lesson">
+  <div class="head"><span class="k">Page 17 · Lesson 17.02 · Day 2</span><h2>Argument from Evidence: Plant Growth Materials</h2></div>
+  <div class="strip">
+    <figure><img src="images/nc/17-02-priestley-plate.jpg" alt="An old engraving of glass jars standing in a tub of water"><figcaption>Priestley’s own drawing of his equipment (1774)</figcaption></figure>
+    <figure><img src="images/nc/17-02-lettuce-roots.jpg" alt="Lettuce lifted out of a water tray with long white roots"><figcaption>Lettuce grown in water, with no soil</figcaption></figure>
+    <figure><img src="images/nc/17-02-dark-bluebells.jpg" alt="Pale leaves grown under a cover next to green leaves"><figcaption>Pale leaves grown with no light</figcaption></figure>
+  </div>
+  <div class="body">
+    <p class="bq"><b>The lesson’s big question</b>Three different experiments, done in three different ways. Can they all point to the same answer about where a plant’s mass comes from?</p>
+
+    <h3>The scientist on this page</h3>
+    <p>Joseph Priestley, an English scientist. On August 17, 1771, he put a sprig of mint into a jar of air where a candle had burned out. On August 27, a new candle burned perfectly well in it. A jar of the same air with no plant stayed spoiled for months. He read his report to the Royal Society in London in 1772. His page never says whether the jars sat in the light, and that becomes next week’s question.</p>
+
+    <h3>What your child does</h3>
+    <ul class="games">
+      <li><b>Warm-Up · Be the judge.</b> A full-grown lettuce: how many cups of soil did it use up? Your child predicts with a slider and writes a reason. (The answer, in Part 3: none. It grew in water.)</li>
+      <li><b>Part 1 · Priestley’s own words.</b> The real 1772 page, read in plain English. Your child sorts four of his sentences into Claim or Evidence, then picks the reasoning he never wrote down.</li>
+      <li><b>Part 2 · Run Priestley’s jars.</b> Predict, then test: burn out the candle, add the mint to one jar, wait ten days, and test both jars.</li>
+      <li><b>Part 3 · Hear the other side.</b> Three things people really say, like “Plants eat soil.” Your child answers each one with the evidence card that fits.</li>
+      <li><b>Part 4 · Test the last two witnesses.</b> A plant sealed in a jar with a carbon dioxide meter: in the light, the carbon dioxide drops; in the dark, it stops falling and slowly creeps back up. Then two trays of bean seedlings, one in sunlight and one in a dark box. The dark ones turn pale and stop gaining mass, even with water.</li>
+    </ul>
+
+    <h3>The three witnesses</h3>
+    <div class="twocol">
+      <div class="box b-sky"><p><b>A · Van Helmont’s willow.</b> Gained about 164 pounds; the soil lost about 2 ounces.<br><b>B · The dark box.</b> Plants in the dark stop gaining mass.<br><b>C · The sealed jar.</b> In the light, a plant pulls the carbon dioxide way down.</p></div>
+      <div class="box"><p>One experiment can be wrong. When three experiments, done three different ways, all point to the same answer, the argument gets much stronger. The lesson calls it “three witnesses telling the same story.”</p></div>
+    </div>
+
+    <h3>Optional extras</h3>
+    <div class="optional"><span>🎬 The whole planet’s plants, from space (NASA)</span><span>📈 Two places, two witnesses: Alaska vs. the South Pole</span></div>
+
+    <h3>Words</h3>
+    <ul class="words"><li>claim</li><li>evidence</li><li>reasoning</li><li>misconception</li><li>carbon dioxide</li><li>photosynthesis</li></ul>
+
+    <h3>What to turn in</h3>
+    <ul class="turnin">
+      <li>Warm-Up: the soil-cup prediction and one reason.</li>
+      <li>Part B: two questions in complete sentences (how Evidence A and C support each other, and what light does for a plant).</li>
+      <li>Part C: the notebook page: how van Helmont’s and Priestley’s pages agree, and a question for Priestley.</li>
+      <li>C-E-R: a claim, at least two pieces of evidence, and reasoning that answers the soil misconception.</li>
+    </ul>
+
+    <div class="twocol" style="margin-top:14px">
+      <div class="box b-gold"><h3>Ask at dinner</h3><p>Say, “Plants eat soil to get bigger,” and ask your child to change your mind. (Listen for evidence, not just “you’re wrong,” like the lettuce that grew full size in water with no soil, or the willow that gained 164 pounds while its soil lost about 2 ounces.)</p></div>
+      <div class="box b-green"><h3>Try at home</h3><p>Build a three-part argument together, like the lesson’s example: <i>Claim:</i> plants need water to stay firm. <i>Evidence:</i> a basil plant drooped after four dry days, then stood back up an hour after watering. <i>Reasoning:</i> water was the only thing that changed. Can you make one about something in your home?</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CER -->
+<section class="card">
+  <div class="card-head"><span class="ico">⚖️</span><h2>Claim, Evidence, Reasoning in Plain Words</h2><span class="tag">The writing task in both lessons</span></div>
+  <p>Both lessons end the same way: your child writes a short scientific argument, 4 to 6 sentences. In science, an argument isn’t a fight. It’s a claim backed by evidence that anyone can check. It has three parts:</p>
+  <div class="cer">
+    <div class="c"><span class="L"><i>C</i>Claim</span>What you think is true. One clear sentence that answers the question.</div>
+    <div class="e"><span class="L"><i>E</i>Evidence</span>The facts that support it: data or observations anyone could check. At least two pieces.</div>
+    <div class="r"><span class="L"><i>R</i>Reasoning</span>Why the evidence proves the claim. It connects the dots.</div>
+  </div>
+  <div class="twocol">
+    <div class="box"><h3>Lesson 17.01 asks</h3><p>“Where do plants get the materials they need to grow?”</p></div>
+    <div class="box"><h3>Lesson 17.02 asks</h3><p>“Does most of the material a plant needs to grow come from the soil, or from air and water?” Your child uses at least two of the three experiments, adds numbers where they can, and explains why soil can’t explain the growth.</p></div>
+  </div>
+  <p style="margin-top:12px">A <b>“Plan before you write”</b> box helps: your child taps evidence cards (like “The soil lost only about 2 ounces”) to add them to the Evidence box, then writes the claim and reasoning in their own words. There are no sentence starters.</p>
+  <p class="small">A helpful question at home: “What’s your evidence?” The lesson’s Self-Check makes the same point. Answering “Plants eat soil” with “You’re wrong” isn’t an argument. Answering with van Helmont’s numbers is.</p>
+</section>
+
+<!-- VR -->
+<section class="card">
+  <div class="card-head"><span class="ico">🥽</span><h2>VR Day: Finish Hales’s Sunflower</h2><span class="tag">17.01 VR · Plate 17</span></div>
+  <div class="plate">
+    <div><img src="images/vr/17-hales-plate.jpg" alt="An old engraving of a sunflower growing in a sealed pot"><div class="cap">Plate 1 from Stephen Hales’s book <i>Vegetable Staticks</i> (1727)</div></div>
+    <div>
+      <p>Old science books had <b>plates</b>: full pages of pictures that showed an experiment. In 1724, the English scientist Stephen Hales grew a sunflower about 3½ feet tall in a pot. He covered the soil with a sheet of lead so water could leave only through the plant, and he weighed the whole thing every morning and every evening. On a sunny day it lost about 1¼ pounds of water.</p>
+      <p>Hales knew water went in. He wondered if air went in too. His plate shows the pot, but not what your child learned this week. Your child’s plate will. When it’s done, Plate 17 is bound into their Notebook Chain.</p>
+    </div>
+  </div>
+  <div class="vr-two">
+    <div class="vr-opt field">
+      <h3>🥽 Field Plate (VR)</h3><span class="time">With a headset · about 15 minutes</span>
+      <ul>
+        <li>In the On-Demand app, your child opens the <b>Classical Outdoor Classroom</b> map and builds the plate with 3D models: a sunflower in a planter, the Sun, carbon dioxide and water molecules, a water barrel, oxygen, and glucose (a sugar the plant makes).</li>
+        <li>Red rays point <b>in</b>: from the Sun, the carbon dioxide and the water. A blue ray points <b>out</b>: oxygen leaving the leaves. Glucose sits against the stem.</li>
+        <li>They walk around it and explain out loud what comes in at the leaves, what the roots take in, and what the plant does with the glucose.</li>
+        <li>They take a photo in the headset and submit it straight to Canvas. The photo is the turn-in, and it earns a gold frame.</li>
+      </ul>
+      <div class="legend"><span class="in">Red = in</span><span class="out">Blue = out</span></div>
+      <div class="pts">⭐ Full points: the photo shows the sunflower in its planter, carbon dioxide at the leaves, water at the roots, the Sun, oxygen going out, and glucose by the stem.</div>
+    </div>
+    <div class="vr-opt">
+      <h3>🖥️ Desk Plate</h3><span class="time">No headset · about 20 minutes</span>
+      <ul>
+        <li><b>Follow the atom.</b> On the computer, your child follows one carbon atom and one bit of water into Hales’s sunflower. At each fork they pick which way it goes next.</li>
+        <li><b>Carbon route:</b> in the air → in through a leaf pore → made into sugar using sunlight’s energy → through the stem → built into new stem, leaves and seeds.</li>
+        <li><b>Water route:</b> in the soil → in through root hairs → up the stem → mostly out through the leaf pores as water vapor (a little stays to help make sugar).</li>
+        <li>Then a short C-E-R: where does a sunflower get the material it builds its body from? Evidence comes from their route map and Hales’s numbers.</li>
+        <li>They download their answers as a PDF and upload it to the Canvas assignment.</li>
+      </ul>
+      <div class="pts">⭐ Full points: both routes finished; Claim 8+ words, Evidence 25+ words, Reasoning 20+ words.</div>
+    </div>
+  </div>
+  <p class="small" style="margin-top:12px">No headset that day? The Desk Plate is the alternate. The first time your child uses VR with Canvas, they connect it once at xr.optimaed.com on the computer. The VR page has picture-by-picture help, a how-to video, and two backup ways to turn in the photo.</p>
+  <div class="box b-gold" style="margin-top:12px"><h3>Ask after VR day</h3><p>“Walk me through your plate. What do the red arrows mean? What does the blue one mean?” (Listen for: carbon dioxide, water and sunlight go in; oxygen comes out; the plant builds with the glucose it makes.)</p></div>
+</section>
+
+<!-- WORDS -->
+<section class="card">
+  <div class="card-head"><span class="ico">🔤</span><h2>The Week’s Words</h2></div>
+  <div class="wordgrid">
+    <div class="word"><b>Organism<small>17.01</small></b>A living thing. Plants, animals, and even tiny bacteria are organisms.</div>
+    <div class="word"><b>Carbon dioxide<small>17.01 · 17.02</small></b>A gas in the air (CO₂). Plants take it in through their leaves and use it to build sugar.</div>
+    <div class="word"><b>Water<small>17.01</small></b>H₂O. Plants take it in through their roots from the soil.</div>
+    <div class="word"><b>Leaves<small>17.01</small></b>The plant structures that catch sunlight and pull in air for making food.</div>
+    <div class="word"><b>Roots<small>17.01</small></b>The plant structures underground. They pull water and nutrients out of the soil.</div>
+    <div class="word"><b>Producer<small>17.01</small></b>A living thing that makes its own food. Plants are producers. They don’t eat other things.</div>
+    <div class="word"><b>Claim<small>17.02</small></b>A sentence that answers the question. It says what you think is true.</div>
+    <div class="word"><b>Evidence<small>17.02</small></b>Data or observations that support a claim. Anyone should be able to check it.</div>
+    <div class="word"><b>Reasoning<small>17.02</small></b>The explanation of why your evidence proves your claim. It connects the dots.</div>
+    <div class="word"><b>Misconception<small>17.02</small></b>An idea many people believe that the evidence does not support.</div>
+    <div class="word"><b>Photosynthesis<small>17.02</small></b>How plants use sunlight to turn carbon dioxide and water into sugar for growing.</div>
+    <div class="word"><b>Stomata<small>also used</small></b>The tiny openings in a leaf. Air moves in and out here.</div>
+  </div>
+</section>
+
+<!-- HOW TO HELP -->
+<section class="card">
+  <div class="card-head"><span class="ico">🤝</span><h2>How to Help (Without Doing It for Them)</h2></div>
+  <div class="twocol">
+    <div class="box b-green"><h3>Try this</h3><ul>
+      <li>Ask “What’s your evidence?” or “What in the lesson shows that?”</li>
+      <li>Have your child explain a game out loud before writing about it.</li>
+      <li>Use the dinner questions above. Talking first makes the writing easier.</li>
+      <li>Let them make the Warm-Up prediction on their own. A wrong guess is fine. They check it against the evidence later.</li>
+    </ul></div>
+    <div class="box"><h3>Try to avoid</h3><ul>
+      <li>Wording answers for them. Teachers need to see your child’s own thinking.</li>
+      <li>Looking up answers online. The questions ask for evidence from the lesson.</li>
+      <li>Skipping the submit step. Work isn’t turned in until it’s in Canvas.</li>
+    </ul></div>
+  </div>
+</section>
+
+<p class="foot"><b>Next week: Page 18</b>1779 · Jan Ingenhousz: Does a plant need light to do its work?<br>Optima Academy Online · 5th Grade Science · Unit 3 Family Guide · Questions? Reach out to your child’s teacher anytime.</p>
+
+<details class="credits"><summary>Photo credits</summary><ul>
+  <li>Young willow: Юрий Д.К., Wikimedia Commons, CC BY 4.0.</li>
+  <li>Van Helmont’s page: Ortus Medicinae (1648), page 109, Wellcome Collection via Internet Archive, public domain.</li>
+  <li>Tree-trunk slice: Kelsey Todd, Wikimedia Commons, CC BY-SA 4.0.</li>
+  <li>Bean seed stages: B. Domangue, Wikimedia Commons, CC BY-SA 4.0.</li>
+  <li>Priestley’s drawing of his equipment (1774): Wellcome Collection, CC BY 4.0.</li>
+  <li>Lettuce grown in water: Preston Keres, USDA, public domain.</li>
+  <li>Pale leaves grown under a cover: Chiswick Chap, Wikimedia Commons, CC BY-SA 3.0.</li>
+  <li>Hales’s Plate 1, Vegetable Staticks (1727): Wellcome Collection, CC BY 4.0.</li>
+</ul></details>
+
+</main>
+</div>
+</body>
+</html>
