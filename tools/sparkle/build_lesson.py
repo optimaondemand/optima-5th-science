@@ -32,6 +32,8 @@ def main(key):
     import re
     a = html.find('<div class="video-placeholder-wrap">')
     b = html.find('<!-- Activity 1', a)
+    if b == -1:  # some pages label the first activity differently: stop at the first activity card instead
+        b = html.find('<div class="activity-card', a)
     if a > -1 and b > -1:
         seg = html[a:b]
         extra = len(re.findall(r'</div>', seg)) - len(re.findall(r'<div[\s>]', seg))

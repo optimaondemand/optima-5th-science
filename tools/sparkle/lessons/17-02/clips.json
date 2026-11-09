@@ -1,0 +1,41 @@
+{
+  "voice": "Gdj2QBsAjgQnu3rwg2ZN",
+  "model": "eleven_v4",
+  "clips": {
+    "op-0": "These green dots are chloroplasts, packed inside the cells of a leaf. This is where a plant builds its food.",
+    "op-1": "Zoom out. A lettuce leaf, made of millions of those cells.",
+    "op-2": "This lettuce is being lifted out of its tray. Look at its long white roots. There is no soil anywhere.",
+    "op-3": "Some farms grow lettuce like this, in rows of pipes filled with water.",
+    "op-4": "Farther out. Farm fields, seen from space. Every green circle is a crop, growing bigger every day.",
+    "op-5": "And all of it on one planet, wrapped in a thin layer of air.",
+    "op-6": "Three different experiments, done in three different ways. Can they all point to the same answer about where a plant's mass comes from?",
+
+    "k-warmup": "Today you are the judge. Look at the lettuce in this photo. It grew to full size. Slide to show how many cups of soil you think it used up as it grew. Then write one reason. Your prediction is saved, and you'll find out the real answer in Part 3.",
+    "k-words": "These six words are the tools of a scientific argument. Tap a word sticker. You'll hear it, and the card shows what it means. Try to tap all six.",
+    "k-part1": "This is a real page from seventeen seventy-two, by Joseph Priestley. Tap a yellow line to hear it in plain English. Then sort his sentences. Which one is his claim? Which ones are evidence? Then look for the reasoning. Priestley left that part out, so you'll pick it.",
+    "k-part2": "Now run Priestley's jars yourself. Before each step, make a prediction. A candle burns until it goes out. Then the mint goes in. Wait the days, and test both jars with a lit candle.",
+    "k-part3": "Here comes the other side. Press play on each quote. Then tap the evidence card that answers it best. One card is true, but it doesn't answer any of them.",
+    "k-part4": "Two more witnesses. First, predict what the carbon dioxide number will do in a sealed jar. Then run the jar in the light, and switch the light off. Watch the meter. After that, predict which tray of seedlings gains more mass.",
+    "k-wow": "Priestley's page never says whether his jars sat in the light. Later, his test did not always work, and he could not tell why. The missing piece was light. Careful scientists can still leave something out. That's why the chain keeps going.",
+    "k-assign": "Now add your page to the chain. Answer the two Part B questions. In Part C, explain how Priestley's page and van Helmont's page agree, and what you would ask Priestley. Then use the planner to build your C-E-R.",
+
+    "w-1": "Claim. A sentence that answers the question. It says what you think is true. For example: plants need light to grow.",
+    "w-2": "Evidence. Data or observations that support a claim. Anyone should be able to check it. For example: the willow gained one hundred sixty-four pounds.",
+    "w-3": "Reasoning. The explanation of why your evidence proves your claim. It connects the dots.",
+    "w-4": "Misconception. An idea many people believe that the evidence does not support. For example: plants eat soil.",
+    "w-5": "Carbon dioxide. A gas in the air. Plants take it in through their leaves and use it to build sugar.",
+    "w-6": "Photosynthesis. How plants use sunlight to turn carbon dioxide and water into sugar for growing.",
+
+    "l-1": "I found that candles burn very well in air where plants have grown for a long time. So I wondered if plants could also fix air that a burning candle had spoiled.",
+    "l-2": "So on August seventeenth, seventeen seventy-one, I put a sprig of mint into air in which a wax candle had burned out.",
+    "l-3": "On the twenty-seventh of the same month, another candle burned perfectly well in it.",
+    "l-4": "I did this eight or ten times in the rest of the summer, and it worked every time.",
+    "l-5": "Many times I split the spoiled air into two jars. I put the plant in one and left the other the same way, but with no plant. A candle always burned in the jar with the plant, and never in the other one.",
+    "l-6": "When the plant was healthy, five or six days were usually enough to fix the air. Without a plant, I kept this air for many months, and it did not change at all.",
+    "l-7": "Experiments in seventeen seventy-two strongly confirmed my conclusion: growing plants fix air in which candles have burned out.",
+
+    "q-1": "Someone says: Plants eat soil. That's why their roots grow down into the dirt.",
+    "q-2": "Someone says: A tree gets its wood from the soil. Where else could all that wood come from?",
+    "q-3": "Someone says: Farmers add fertilizer, so fertilizer must be the plant's food."
+  }
+}

@@ -1,0 +1,17 @@
+[
+ {"kind":"fix","why":"The willow experiment was published in 1648, after van Helmont died in 1644 (same fix as 17.01).",
+  "find":"In 1648, Jan van Helmont planted a 5-pound willow in 200 pounds of soil.","replace":"In a book published in 1648, Jan van Helmont described how he planted a 5-pound willow in 200 pounds of soil."},
+ {"kind":"fix","why":"A tree is not mostly carbon: about half of its DRY wood is carbon (matches the 17.01 fix).",
+  "find":"Most of the wood in a big tree is built from carbon, and nearly all of that carbon came out of the air","replace":"About half of a tree's dry wood is carbon, and nearly all of that carbon came out of the air"},
+ {"kind":"fix","why":"Anchor the 2,000 years: Aristotle (about 350 BC) to the 1640s.",
+  "find":"For about 2,000 years, people believed plants ate soil.","replace":"For about 2,000 years, since the ancient Greek thinker Aristotle, people believed plants took their food from the soil."},
+ {"kind":"fix","why":"Weeks 16 to 19 are Unit 3 (assessment-unit-3 covers Modules 16 to 19).",
+  "find":"<div class=\"info-value\">Q3 · Unit 4</div>","replace":"<div class=\"info-value\">Q3 · Unit 3</div>"},
+ {"kind":"fix","why":"The lettuce photo was hot-linked from Wikimedia; it is now a local copy of the same public-domain USDA photo.",
+  "find":"src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Hydroponic_farming%2C_USA_%289386%29.jpg/960px-Hydroponic_farming%2C_USA_%289386%29.jpg\"","replace":"src=\"images/nc/17-02-lettuce-roots.jpg\""},
+ {"kind":"plain","why":"The Vocabulary tab is the Warm-Up now.",
+  "find":"Look back at your prediction from the Vocabulary tab.","replace":"Look back at your prediction from the Warm-Up."},
+ {"kind":"plain","why":"Sections become Parts 1 to 3 to match Part 4 (lean shape).","find":"<div class=\"card-head-label\">Section 1</div>","replace":"<div class=\"card-head-label\">Part 1</div>"},
+ {"kind":"plain","why":"Sections become Parts.","find":"<div class=\"card-head-label\">Section 2</div>","replace":"<div class=\"card-head-label\">Part 2</div>"},
+ {"kind":"plain","why":"Sections become Parts.","find":"<div class=\"card-head-label\">Section 3</div>","replace":"<div class=\"card-head-label\">Part 3</div>"}
+]

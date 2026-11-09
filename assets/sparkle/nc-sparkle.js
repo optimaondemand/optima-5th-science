@@ -110,7 +110,7 @@
     if (!O || !O.frames || !O.frames.length) return;
     var hero = document.querySelector('.hero-visual') || document.querySelector('.tab-bar');
     if (!hero) return;
-    var F = O.frames, N = F.length, R = O.zoom || 6, STEP = O.step || 3.9, PRE = 1.6, TITLE_AT = (N - 1) + 0.0;
+    var F = O.frames, N = F.length, OUT = !!O.out, G = OUT ? F.slice().reverse() : F, R = O.zoom || 6, STEP = O.step || 3.9, PRE = 1.6, TITLE_AT = (N - 1) + 0.0;
     var voiceOn = true, lastFront = -1;
     function stepFor(i) { var d = (F[i] && F[i].dur) || 0; return Math.max(STEP, d / 0.68 + 0.4); }
     function frontAt(zz) { var i = Math.floor(zz), t = zz - i; if (zz < 0) return 0; if (i >= N - 1) return N - 1; return t > 0.9 ? i + 1 : i; }
@@ -156,7 +156,9 @@
     }).join('') + '</ol><h3>What the film says</h3><p>' + F.map(function (f) { return esc(f.line); }).join(' ') + ' ' + esc(O.question) + '</p>';
 
     // frames
-    var els = F.map(function (f) {
+    // OUT (near to far): the frames are listed in playing order, smallest first; G holds them biggest first,
+    // and each frame's fx/fy says where the frame played just before it sits inside it.
+    var els = G.map(function (f) {
       var e;
       if (f.type === 'air') { e = mk('canvas', 'nc-op-f nc-op-air'); }
       else { e = mk('img', 'nc-op-f'); e.alt = ''; e.decoding = 'async'; e.src = f.img; e.draggable = false; }
@@ -168,7 +170,7 @@
     var Sw = 0, Sh = 0, base = [];
     function layout() {
       Sw = stage.clientWidth; Sh = stage.clientHeight;
-      base = F.map(function (f, i) {
+      base = G.map(function (f, i) {
         var w = f.w || Sw, h = f.h || Sh;
         if (f.type === 'air') { w = Sw; h = Sh; sizeAir(els[i]); }
         var c = f.fit === 'contain' ? Math.min(Sw / w, Sh / h) : Math.max(Sw / w, Sh / h);
@@ -227,13 +229,18 @@
     var z = -1, playing = false, last = 0, held = 0, ended = false, lastStep = -2, subI = -1;
     function ease(u) { return u - Math.sin(u * 6.2832) / 6.2832 * 0.55; } // lingers at each picture
     function render(zz) {
-      var i = Math.floor(zz), t = zz - i;
-      if (zz < 0) { i = 0; t = 0; }
+      var gz = OUT ? (zz < 0 ? N - 1 : (N - 1) - zz) : zz;
+      var i = Math.floor(gz), t = gz - i;
+      if (gz < 0) { i = 0; t = 0; }
       if (i >= N - 1) { i = N - 1; t = 0; }
+      // captions follow the playing order
+      var iL = Math.floor(zz), tL = zz - iL;
+      if (zz < 0) { iL = 0; tL = 0; }
+      if (iL >= N - 1) { iL = N - 1; tL = 0; }
       for (var k = 0; k < N; k++) {
         var e = els[k];
         if (k !== i && k !== i + 1) { if (e.style.opacity !== '0') e.style.opacity = '0'; continue; }
-        var f = F[k], b = base[k];
+        var f = G[k], b = base[k];
         var s, cx, cy, op = 1;
         if (k === i) {
           var tz = zz < 0 ? 0 : t;
@@ -263,21 +270,21 @@
         }
       }
       // captions belong to the picture in front
-      var front = zz < 0 ? 0 : (t > 0.9 && i < N - 1 ? i + 1 : i);
+      var front = zz < 0 ? 0 : (tL > 0.9 && iL < N - 1 ? iL + 1 : iL);
       var cOp;
       if (zz < 0) cOp = smooth(-0.45, 0, zz);
-      else if (i >= N - 1) cOp = 1;
-      else if (t < 0.62) cOp = 1;
-      else if (t < 0.9) cOp = 1 - smooth(0.62, 0.8, t);
-      else cOp = smooth(0.9, 1, t);
+      else if (iL >= N - 1) cOp = 1;
+      else if (tL < 0.62) cOp = 1;
+      else if (tL < 0.9) cOp = 1 - smooth(0.62, 0.8, tL);
+      else cOp = smooth(0.9, 1, tL);
       if (cap._i !== front) { cap._i = front; capT.textContent = F[front].label; capS.textContent = F[front].scale; for (var q = 0; q < ticks.length; q++) ticks[q].classList.toggle('on', q <= front); }
       cap.style.opacity = String(ended ? 0 : cOp);
-      var subOp = zz < -0.2 ? 0 : (i >= N - 1 ? 1 : (t < 0.7 ? 1 : 1 - smooth(0.7, 0.86, t)));
-      if (t > 0.92 && i < N - 1) subOp = 0;
-      var sI = (t > 0.92 && i < N - 1) ? -1 : (zz < -0.2 ? -1 : i);
+      var subOp = zz < -0.2 ? 0 : (iL >= N - 1 ? 1 : (tL < 0.7 ? 1 : 1 - smooth(0.7, 0.86, tL)));
+      if (tL > 0.92 && iL < N - 1) subOp = 0;
+      var sI = (tL > 0.92 && iL < N - 1) ? -1 : (zz < -0.2 ? -1 : iL);
       if (sI !== subI) { subI = sI; sub.textContent = sI < 0 ? '' : F[sI].line; }
       sub.style.opacity = String(ended ? 0 : subOp);
-      if (i !== lastStep && zz >= 0 && t > 0.35 && i < N - 1) { lastStep = i; Snd.whoosh(); }
+      if (iL !== lastStep && zz >= 0 && tL > 0.35 && iL < N - 1) { lastStep = iL; Snd.whoosh(); }
     }
 
     var rafId = 0;
@@ -288,7 +295,7 @@
       if (els[N - 1].style.opacity !== '0' || ended) drawAir(dt * 4);
       if (!playing) return;
       // wait for the next picture to load before zooming into it
-      var nextI = Math.min(N - 1, Math.floor(z) + 1), ne = els[nextI];
+      var nextI = Math.min(N - 1, Math.floor(z) + 1), ne = els[OUT ? N - 1 - nextI : nextI];
       if (ne.tagName === 'IMG' && !ne.complete && z - Math.floor(z) > 0.3) { return; }
       var fr = frontAt(z);
       if (fr !== lastFront) { lastFront = fr; if (voiceOn && F[fr].clip) Voice.play(F[fr].clip); }
@@ -480,8 +487,15 @@
   /* ───────────── The year-long notebook (bound pages across lessons) ───────────── */
   var BOOK = 'oao.nc.g5sci.notebook';
   function book() { try { return JSON.parse(localStorage.getItem(BOOK) || '{}') || {}; } catch (e) { return {}; } }
+  // a week can have two lessons on one page: D.part (2 = day 2) keeps day 2's work beside day 1's instead of over it
+  function slot(b) { var s = b[D.page] = b[D.page] || {}; s.page = D.page; if (!D.part) return s; return (s['part' + D.part] = s['part' + D.part] || {}); }
+  function cabinetCount(bk) {
+    var n = 0;
+    Object.keys(bk).forEach(function (k) { var p = bk[k] || {}; if (p.cabinet) n++; Object.keys(p).forEach(function (q) { if (/^part\d/.test(q) && p[q] && p[q].cabinet) n++; }); });
+    return n;
+  }
   function bind(extra) {
-    var b = book(); b[D.page] = Object.assign(b[D.page] || {}, { page: D.page, title: D.title, lesson: D.lesson, at: Date.now() }, extra || {});
+    var b = book(); Object.assign(slot(b), { title: D.title, lesson: D.lesson, at: Date.now() }, extra || {});
     try { localStorage.setItem(BOOK, JSON.stringify(b)); } catch (e) {}
     renderRibbon();
   }
@@ -541,6 +555,7 @@
   }
 
   /* ───────────── Warm-Up: Build the tree (a prediction) ───────────── */
+  var PRED_LINE = null; // set by a warm-up module that is not the tree: returns [heading, summary]
   var PRED_COL = { soil: '#8d6e63', water: '#3498db', air: '#a6dcef', sun: '#f5b041' };
   function buildBets() {
     var W = D.warmup; if (!W || !W.predict) return;
@@ -651,8 +666,8 @@
     }).join('');
     card.innerHTML = gameHead(S.kicker, S.title) + '<p class="nc-p">' + esc(S.intro) + '</p>' + job(S.job) +
       '<div class="nc-src-grid">' +
-        '<div class="nc-src-page"><div class="nc-src-paper"><img src="' + esc(S.img) + '" alt="A printed page in Latin from 1648, describing the willow experiment." width="' + S.w + '" height="' + S.h + '">' + rows + '</div>' +
-          '<div class="nc-src-tag">Real source from 1648</div></div>' +
+        '<div class="nc-src-page"><div class="nc-src-paper"><img src="' + esc(S.img) + '" alt="' + esc(S.alt || 'A printed page in Latin from 1648, describing the willow experiment.') + '" width="' + S.w + '" height="' + S.h + '">' + rows + '</div>' +
+          '<div class="nc-src-tag">' + esc(S.tag || 'Real source from 1648') + '</div></div>' +
         '<div class="nc-src-side">' +
           '<div class="nc-src-en" aria-live="polite"><div class="nc-src-en-k">Plain English</div><div class="nc-src-en-t">Tap a yellow line on the page.</div></div>' +
           '<div class="nc-src-read"><span class="nc-src-count">0</span> of ' + S.lines.length + ' lines read</div>' +
@@ -673,12 +688,13 @@
         return '<div class="nc-ask' + (done ? ' nc-ask-done' : ' nc-ask-now') + '"><div class="nc-ask-q">' + (done ? '✅ ' : '🔎 ') + esc(a.q) + '</div>' +
           '<div class="nc-ask-fb">' + (done ? esc(a.yes) : (msg ? '<span class="nc-ask-no">🤔 ' + esc(msg) + '</span>' : '')) + '</div></div>';
       }).join('');
-      card.classList.toggle('nc-done', now >= asks.length);
+      if (asks.length) card.classList.toggle('nc-done', now >= asks.length);
     }
     function mark() {
       var n = 0;
       $$('.nc-src-hl', card).forEach(function (b) { var r = !!read[b.dataset.i]; b.classList.toggle('nc-read', r); if (r) n++; });
       cnt.textContent = n;
+      if (!asks.length) card.classList.toggle('nc-done', n >= S.lines.length); // no hunts: done when every line is read
     }
     $$('.nc-src-hl', card).forEach(function (b) {
       b.addEventListener('click', function () {
@@ -949,6 +965,431 @@
     if (store.revealed) reveal(false);
   }
 
+  /* ───────────── Warm-Up: the soil-cup slider (a prediction on a real photo) ───────────── */
+  function cupSVG(full) {
+    // a glass measuring cup, filled with soil when "full"
+    return '<svg class="nc-cup' + (full ? ' on' : '') + '" viewBox="0 0 40 46" aria-hidden="true">' +
+      '<path d="M6 6 h26 l-3 34 a4 4 0 0 1 -4 4 h-12 a4 4 0 0 1 -4 -4 z" fill="url(#ncCupGlass)" stroke="#8aa0b4" stroke-width="1.4"/>' +
+      (full ? '<path d="M7.4 14 h23.2 l-2.4 26 a3 3 0 0 1 -3 3 h-12.4 a3 3 0 0 1 -3 -3 z" fill="url(#ncCupSoil)"/><ellipse cx="19" cy="14.5" rx="11.4" ry="2" fill="#7b5a40"/>' : '') +
+      '<path d="M32 12 q7 1 6 9 q-1 7 -8 8" fill="none" stroke="#8aa0b4" stroke-width="2.4" stroke-linecap="round"/>' +
+      '<path d="M10 10 v26" stroke="#fff" stroke-opacity=".7" stroke-width="2" stroke-linecap="round"/>' +
+      '<path d="M26 20 h4 M26 27 h3.5 M26 34 h3" stroke="#6d8296" stroke-width="1.2"/></svg>';
+  }
+  function buildCups() {
+    var C = D.cups; if (!C) return;
+    var pred = $('#pred-1'); if (!pred) throw new Error('pred-1 missing');
+    var host = pred.closest('.response-q') || pred.parentNode;
+    var card = host.closest('.activity-card') || host.parentNode;
+    $$('.callout, .socratic-q', card).forEach(hide);
+    var MAX = C.max || 10;
+    var g = mk('div', 'nc-g nc-cups');
+    g.innerHTML = '<div class="nc-g-k">Warm-Up game</div><h4 class="nc-g-t nc-cup-title">' + esc(C.title) + '</h4><p class="nc-p">' + esc(C.intro) + '</p>' + job(C.job) +
+      '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>' +
+        '<linearGradient id="ncCupGlass" x1="0" x2="1"><stop offset="0" stop-color="#eef6fb" stop-opacity=".9"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".55"/><stop offset="1" stop-color="#d5e4ee" stop-opacity=".9"/></linearGradient>' +
+        '<linearGradient id="ncCupSoil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a6448"/><stop offset="1" stop-color="#4e3626"/></linearGradient></defs></svg>' +
+      '<div class="nc-cup-stage">' +
+        '<figure class="nc-cup-fig"><img src="' + esc(C.img) + '" alt="' + esc(C.imgAlt) + '"><figcaption class="nc-credit">' + esc(C.credit) + '</figcaption></figure>' +
+        '<div class="nc-cup-side">' +
+          '<div class="nc-cup-read" aria-live="polite"><b class="nc-cup-n">0</b><span class="nc-cup-u">cups of soil</span></div>' +
+          '<div class="nc-cup-row"></div>' +
+          '<div class="nc-cup-ctl"><button type="button" class="nc-cup-b nc-cup-minus" aria-label="One cup fewer">−</button>' +
+            '<input class="nc-cup-sl" type="range" min="0" max="' + MAX + '" step="1" value="0" aria-label="Cups of soil the lettuce used up, from 0 to ' + MAX + '">' +
+            '<button type="button" class="nc-cup-b nc-cup-plus" aria-label="One cup more">+</button></div>' +
+          '<div class="nc-cup-scale"><span>0</span><span>' + MAX + ' cups</span></div>' +
+          '<button type="button" class="nc-btn nc-cup-save">🔒 Save my prediction</button>' +
+          '<button type="button" class="nc-cup-edit" hidden>✎ Change my prediction</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="nc-bet-seal nc-cup-seal" hidden></div>' +
+      '<label class="nc-np-l" for="pred-1" style="margin-top:12px">' + esc(C.reasonPrompt) + '</label>';
+    before(host, g);
+    pred.placeholder = C.placeholder || 'I think the lettuce used up ___ cups of soil because…';
+    var sl = g.querySelector('.nc-cup-sl'), nEl = g.querySelector('.nc-cup-n'), row = g.querySelector('.nc-cup-row'), saveB = g.querySelector('.nc-cup-save'), editB = g.querySelector('.nc-cup-edit'), seal = g.querySelector('.nc-cup-seal');
+    store.cups = store.cups == null ? null : store.cups;
+    var cur = store.cups == null ? 0 : store.cups;
+    PRED_LINE = function () { return ['--- WARM-UP: MY PREDICTION ---', 'Cups of soil I predicted the lettuce used up: ' + (store.cups == null ? '(not saved yet)' : store.cups)]; };
+    function draw() {
+      sl.value = cur; nEl.textContent = cur;
+      g.querySelector('.nc-cup-u').textContent = cur === 1 ? 'cup of soil' : 'cups of soil';
+      var h = ''; for (var i = 0; i < MAX; i++) h += cupSVG(i < cur); row.innerHTML = h;
+      var saved = store.cups != null, locked = !!store.cupsRevealed;
+      [sl, g.querySelector('.nc-cup-minus'), g.querySelector('.nc-cup-plus')].forEach(function (e) { e.disabled = saved; });
+      saveB.hidden = saved; editB.hidden = !saved || locked;
+      seal.hidden = !saved;
+      seal.textContent = !saved ? '' : (locked ? (C.lockedNote || '') .replace('{n}', store.cups) : C.saved.replace('{n}', store.cups));
+      g.classList.toggle('nc-done', saved);
+      refresh();
+    }
+    function set(v) { if (store.cups != null) return; cur = clamp(v, 0, MAX); draw(); }
+    sl.addEventListener('input', function () { set(+sl.value); });
+    g.querySelector('.nc-cup-minus').addEventListener('click', function () { set(cur - 1); });
+    g.querySelector('.nc-cup-plus').addEventListener('click', function () { set(cur + 1); });
+    saveB.addEventListener('click', function () { store.cups = cur; save(); ping(); bind({ prediction: { cups: cur } }); draw(); });
+    editB.addEventListener('click', function () { if (store.cupsRevealed) return; store.cups = null; save(); draw(); });
+    document.addEventListener('nc:cups', draw);
+    draw();
+    putKeeper('k-warmup', g.querySelector('.nc-job'), 'after');
+  }
+
+  /* ───────────── Part 1 game: sort the scientist's sentences (claim / evidence), then pick the reasoning ───────────── */
+  function buildSort() {
+    var S = D.sort; if (!S) return;
+    var src = $('.nc-src'), body = src ? src.parentNode : null;
+    if (!body) { var p1 = $$('#tab-lesson .card-head-label').filter(function (e) { return /Part 1|Section 1/.test(e.textContent); })[0]; body = p1 && p1.closest('.card').querySelector('.card-body'); }
+    if (!body) throw new Error('Part 1 card missing');
+    var g = mk('div', 'nc-g nc-sort');
+    g.innerHTML = gameHead(S.kicker, S.title) + '<p class="nc-p">' + esc(S.intro) + '</p>' + job(S.job) +
+      '<div class="nc-sort-pile" aria-label="Sentences to sort"></div>' +
+      '<div class="nc-sort-bins">' + S.bins.map(function (b) {
+        return '<div class="nc-sort-bin" data-k="' + b.k + '" role="button" tabindex="0" aria-label="Put the chosen sentence in ' + esc(b.label) + '"><div class="nc-sort-bh"><b>' + esc(b.label) + '</b><span>' + esc(b.sub) + '</span></div><div class="nc-sort-in"></div></div>';
+      }).join('') + '</div>' +
+      '<div class="nc-fb nc-sort-fb" aria-live="polite"></div>' +
+      '<div class="nc-sort-reason" hidden><div class="nc-q">' + esc(S.reason.q) + '</div><div class="nc-opts">' + S.reason.opts.map(function (o, i) { return '<button type="button" class="nc-opt" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div><div class="nc-fb nc-sort-rfb" aria-live="polite"></div></div>' +
+      '<button type="button" class="nc-cup-edit nc-sort-again" hidden>↺ Sort them again</button>';
+    after(src || body.lastChild, g);
+    var pile = g.querySelector('.nc-sort-pile'), fb = g.querySelector('.nc-sort-fb'), rs = g.querySelector('.nc-sort-reason'), rfb = g.querySelector('.nc-sort-rfb');
+    store.sort = store.sort || {}; var placed = store.sort.placed || (store.sort.placed = {});
+    var sel = null;
+    function cardEl(i) {
+      var c = S.cards[i], e = mk('button', 'nc-sort-c', '<span class="nc-sort-ln">Line ' + c.line + '</span>' + esc(c.t));
+      e.type = 'button'; e.dataset.i = i; return e;
+    }
+    function draw() {
+      pile.innerHTML = ''; $$('.nc-sort-in', g).forEach(function (b) { b.innerHTML = ''; });
+      S.cards.forEach(function (c, i) {
+        var e = cardEl(i);
+        if (placed[i]) { e.classList.add('nc-sort-placed'); e.disabled = true; g.querySelector('.nc-sort-bin[data-k="' + c.k + '"] .nc-sort-in').appendChild(e); }
+        else { if (sel === i) e.classList.add('sel'); pile.appendChild(e); wire(e); }
+      });
+      var left = S.cards.filter(function (c, i) { return !placed[i]; }).length;
+      if (!left) { pile.innerHTML = '<div class="nc-sort-empty">' + esc(S.sortedNote) + '</div>'; rs.hidden = false; }
+      else rs.hidden = true;
+      g.querySelector('.nc-sort-again').hidden = !store.sort.done;
+      g.classList.toggle('nc-done', !!store.sort.done);
+      if (store.sort.done) { var ok = $$('.nc-opt', rs).filter(function (b) { return S.reason.opts[+b.dataset.i].ok; })[0]; if (ok) ok.classList.add('ok'); rfb.innerHTML = '✅ ' + esc(S.reason.win); }
+    }
+    function drop(i, k) {
+      var c = S.cards[i];
+      if (c.k === k) { placed[i] = k; save(); ping(); fb.innerHTML = '✅ ' + esc(c.yes); sel = null; draw(); }
+      else {
+        ping(true); fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(S.no[k] || 'Read the line again.') + '</span>';
+        var e = $('.nc-sort-c[data-i="' + i + '"]', pile); if (e && !RM) { e.classList.remove('no'); void e.offsetWidth; e.classList.add('no'); }
+      }
+    }
+    // tap a sentence, then tap a box; or drag the sentence onto a box
+    function wire(e) {
+      var i = +e.dataset.i, sx = 0, sy = 0, ghost = null, moved = false;
+      e.addEventListener('click', function () { if (moved) { moved = false; return; } sel = sel === i ? null : i; draw(); if (sel != null) fb.textContent = 'Now tap Claim or Evidence.'; });
+      e.addEventListener('pointerdown', function (ev) { if (ev.button) return; sx = ev.clientX; sy = ev.clientY; moved = false; e.setPointerCapture(ev.pointerId); });
+      e.addEventListener('pointermove', function (ev) {
+        if (!e.hasPointerCapture(ev.pointerId)) return;
+        if (!ghost && Math.abs(ev.clientX - sx) + Math.abs(ev.clientY - sy) > 8) { ghost = e.cloneNode(true); ghost.className = 'nc-sort-c nc-sort-ghost'; ghost.style.width = e.offsetWidth + 'px'; document.body.appendChild(ghost); moved = true; }
+        if (ghost) { ghost.style.left = (ev.clientX - 20) + 'px'; ghost.style.top = (ev.clientY - 16) + 'px'; $$('.nc-sort-bin', g).forEach(function (b) { var r = b.getBoundingClientRect(); b.classList.toggle('over', ev.clientX > r.left && ev.clientX < r.right && ev.clientY > r.top && ev.clientY < r.bottom); }); }
+      });
+      e.addEventListener('pointerup', function (ev) {
+        if (!ghost) return;
+        ghost.remove(); ghost = null;
+        var over = $$('.nc-sort-bin', g).filter(function (b) { return b.classList.contains('over'); })[0];
+        $$('.nc-sort-bin', g).forEach(function (b) { b.classList.remove('over'); });
+        if (over) drop(i, over.dataset.k);
+      });
+    }
+    $$('.nc-sort-bin', g).forEach(function (b) {
+      function go() { if (sel == null) { fb.textContent = 'First tap a sentence above.'; return; } drop(sel, b.dataset.k); }
+      b.addEventListener('click', go); b.addEventListener('keyup', function (e) { if (e.key === 'Enter' || e.key === ' ') go(); });
+    });
+    $$('.nc-opt', rs).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var o = S.reason.opts[+b.dataset.i];
+        if (o.ok) { b.classList.add('ok'); rfb.innerHTML = '✅ ' + esc(S.reason.win); if (!store.sort.done) { store.sort.done = 1; save(); ping(); note('📜 Part 1 done: claim, evidence, and the reasoning Priestley left out.'); } draw(); }
+        else { b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 700); rfb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(o.hint) + '</span>'; ping(true); }
+      });
+    });
+    g.querySelector('.nc-sort-again').addEventListener('click', function () { store.sort = { placed: {} }; placed = store.sort.placed; save(); sel = null; fb.textContent = ''; rfb.textContent = ''; $$('.nc-opt', rs).forEach(function (b) { b.classList.remove('ok'); }); draw(); });
+    draw();
+  }
+
+  /* ───────────── Part 2 game: run Priestley's jars, day by day ───────────── */
+  function buildJars() {
+    var J = D.jars; if (!J) return;
+    var p2 = $$('#tab-lesson .card-head-label').filter(function (e) { return /Part 2|Section 2/.test(e.textContent); })[0];
+    var body = p2 && p2.closest('.card').querySelector('.card-body'); if (!body) throw new Error('Part 2 card missing');
+    var g = mk('div', 'nc-g nc-jar');
+    function jarSVG(id, x, label) {
+      return '<g class="nc-jar-j nc-jar-' + id + '" transform="translate(' + x + ',0)">' +
+        '<rect x="22" y="186" width="96" height="10" rx="3" fill="#6b4f36"/>' +                                     // stand
+        '<rect class="nc-jar-wax" x="64" y="146" width="12" height="40" rx="2" fill="url(#ncWax)"/>' +              // candle
+        '<line x1="70" y1="146" x2="70" y2="139" stroke="#2b1d12" stroke-width="1.6"/>' +
+        '<g class="nc-jar-flame"><path d="M70 112 C 62 126, 63 138, 70 140 C 77 138, 78 126, 70 112 Z" fill="url(#ncFlame)"/><path d="M70 124 C 67 131, 68 137, 70 138 C 72 137, 73 131, 70 124 Z" fill="#fff6c8"/></g>' +
+        '<g class="nc-jar-smoke"><path d="M70 136 q-6 -12 0 -22 q6 -10 0 -20" fill="none" stroke="#9aa4ad" stroke-width="2.4" stroke-linecap="round" opacity=".7"/></g>' +
+        (id === 'a' ? '<g class="nc-jar-mint">' +
+          '<path d="M44 186 C 46 160, 44 132, 48 102" fill="none" stroke="#3f7d3a" stroke-width="3" stroke-linecap="round"/>' +
+          ['M48 104 c -14 -6 -18 6 -6 10 z', 'M48 104 c 12 -10 18 2 6 8 z', 'M47 124 c -15 -4 -17 9 -4 10 z', 'M47 124 c 13 -8 18 5 5 9 z', 'M46 146 c -14 -3 -15 10 -3 10 z', 'M46 146 c 13 -6 16 6 4 9 z', 'M45 166 c -12 -2 -12 9 -2 8 z'].map(function (d) { return '<path d="' + d + '" fill="url(#ncMint)" stroke="#2f6a2b" stroke-width=".8"/>'; }).join('') +
+          '</g>' : '') +
+        '<path d="M14 196 V58 C14 30 126 30 126 58 V196" fill="url(#ncGlass)" stroke="#9fb6c7" stroke-width="2"/>' +        // bell jar
+        '<path d="M26 182 V64 C26 46 44 40 54 40" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="4" stroke-linecap="round"/>' +
+        '<ellipse cx="70" cy="32" rx="12" ry="5" fill="#cfe0ea" stroke="#9fb6c7"/>' +
+        '<text x="70" y="226" text-anchor="middle" font-size="13" font-weight="800" fill="#2B1D12">' + esc(label) + '</text>' +
+        '</g>';
+    }
+    g.innerHTML = gameHead(J.kicker, J.title) + '<div class="nc-why">' + esc(J.why) + '</div>' + job(J.job) +
+      '<figure class="nc-jar-plate"><img src="' + esc(J.plate.img) + '" alt="' + esc(J.plate.alt) + '"><figcaption>' + esc(J.plate.caption) + ' <span class="nc-credit">' + esc(J.plate.credit) + '</span></figcaption></figure>' +
+      '<div class="nc-jar-stage">' +
+        '<div class="nc-jar-date"><span class="nc-jar-day">' + esc(J.dates[0]) + '</span><small>Day <b class="nc-jar-dn">0</b></small></div>' +
+        '<svg class="nc-jar-svg" viewBox="0 0 330 236" role="img" aria-label="A model of Priestley\'s two glass jars over water, each with a candle inside. Jar A can hold a sprig of mint.">' +
+          '<defs><linearGradient id="ncGlass" x1="0" x2="1"><stop offset="0" stop-color="#e3f1f8" stop-opacity=".55"/><stop offset=".45" stop-color="#ffffff" stop-opacity=".18"/><stop offset="1" stop-color="#cfe2ee" stop-opacity=".6"/></linearGradient>' +
+            '<linearGradient id="ncWax" x1="0" x2="1"><stop offset="0" stop-color="#f6ecd2"/><stop offset=".5" stop-color="#fffaf0"/><stop offset="1" stop-color="#d9c9a3"/></linearGradient>' +
+            '<radialGradient id="ncFlame" cx="50%" cy="70%" r="60%"><stop offset="0" stop-color="#fff3a6"/><stop offset=".55" stop-color="#ffb43a"/><stop offset="1" stop-color="#e2541c"/></radialGradient>' +
+            '<linearGradient id="ncMint" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fd06f"/><stop offset="1" stop-color="#3f8f3a"/></linearGradient>' +
+            '<linearGradient id="ncTrough" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9d9ea"/><stop offset="1" stop-color="#6f9fbd"/></linearGradient></defs>' +
+          '<rect x="0" y="190" width="330" height="22" rx="4" fill="url(#ncTrough)"/><rect x="0" y="190" width="330" height="3" fill="#e9f6fc" opacity=".8"/>' +
+          jarSVG('a', 14, 'Jar A') + jarSVG('b', 176, 'Jar B') +
+        '</svg>' +
+        '<div class="nc-jar-model">Model of Priestley\'s jars</div>' +
+      '</div>' +
+      '<div class="nc-jar-panel" aria-live="polite"></div>';
+    body.appendChild(g);
+    putKeeper('k-part2', g.querySelector('.nc-jar-stage'), 'before');
+    var panel = g.querySelector('.nc-jar-panel'), dayEl = g.querySelector('.nc-jar-day'), dn = g.querySelector('.nc-jar-dn');
+    store.jar = store.jar || { step: 0, day: 0, picks: {} };
+    var st = store.jar;
+    function setScene() {
+      g.classList.toggle('nc-jar-mintin', st.step >= 2);
+      var a = g.querySelector('.nc-jar-a'), b = g.querySelector('.nc-jar-b');
+      // flames: step 0 burning in A only (the first candle); 1 both out; 4 test: A burns, B out
+      a.classList.toggle('lit', st.step === 0 || st.step >= 4); a.classList.toggle('out', st.step >= 1 && st.step < 4);
+      b.classList.toggle('out', st.step >= 1 && st.step < 4); b.classList.toggle('fail', st.step >= 4);
+      b.classList.toggle('hidejar', st.step < 1);
+      a.classList.toggle('grow', st.step >= 3);
+      dn.textContent = st.day; dayEl.textContent = J.dates[Math.min(st.day, J.dates.length - 1)] || J.dates[0];
+    }
+    function predBlock(k) {
+      var P = J.predict[k], picked = st.picks[k];
+      return '<div class="nc-q">' + esc(P.q) + '</div><div class="nc-opts nc-jar-opts" data-k="' + k + '">' + P.opts.map(function (o, i) {
+        return '<button type="button" class="nc-opt' + (picked === i ? ' sel' : '') + '" data-i="' + i + '"' + (picked != null ? ' disabled' : '') + '>' + esc(o) + '</button>';
+      }).join('') + '</div>';
+    }
+    function verdict(k) { var P = J.predict[k], p = st.picks[k]; return p == null ? '' : '<p class="nc-jar-you">You predicted: <b>' + esc(P.opts[p]) + '</b> ' + (p === P.ans ? '✅' : '· ' + esc(P.miss)) + '</p>'; }
+    function draw() {
+      setScene();
+      var h = '';
+      if (st.step === 0) {
+        h = '<p class="nc-p">' + esc(J.text[0]) + '</p><button type="button" class="nc-btn nc-jar-go" data-a="burn">🕯️ Let the candle burn out</button>';
+      } else if (st.step === 1) {
+        h = '<p class="nc-p">' + esc(J.text[1]) + '</p>' + predBlock('relight') +
+          (st.picks.relight != null ? verdict('relight') + '<p class="nc-p">' + esc(J.text[2]) + '</p><button type="button" class="nc-btn nc-jar-go" data-a="mint">🌿 Put the mint in Jar A</button>' : '');
+      } else if (st.step === 2) {
+        h = '<p class="nc-p">' + esc(J.text[3]) + '</p>' + predBlock('test') +
+          (st.picks.test != null ? '<p class="nc-p">' + esc(J.text[4]) + '</p><div class="nc-jar-row"><button type="button" class="nc-btn nc-jar-go" data-a="day">⏩ Wait one day</button><button type="button" class="nc-cup-edit nc-jar-go" data-a="skip">⏭ Skip to day 10</button></div>' : '');
+      } else if (st.step === 3) {
+        h = '<p class="nc-p">' + esc(J.text[5]) + '</p><button type="button" class="nc-btn nc-jar-go" data-a="test">🕯️ Lower a lit candle into each jar</button>';
+      } else {
+        h = verdict('test') + '<blockquote class="nc-jar-quote">“' + esc(J.quote) + '” <span>Joseph Priestley, 1772</span></blockquote><p class="nc-p">' + esc(J.win) + '</p>' +
+          '<button type="button" class="nc-cup-edit nc-jar-go" data-a="again">↺ Run it again</button>';
+      }
+      panel.innerHTML = h;
+      g.classList.toggle('nc-done', st.step >= 4);
+      $$('.nc-jar-go', panel).forEach(function (b) { b.addEventListener('click', function () { act(b.dataset.a); }); });
+      $$('.nc-jar-opts .nc-opt', panel).forEach(function (b) {
+        b.addEventListener('click', function () { var k = b.parentNode.dataset.k; if (st.picks[k] != null) return; st.picks[k] = +b.dataset.i; save(); ping(); draw(); });
+      });
+    }
+    function act(a) {
+      if (a === 'burn') {
+        g.querySelector('.nc-jar-a').classList.add('dying'); panel.querySelector('.nc-jar-go').disabled = true; panel.querySelector('.nc-jar-go').textContent = '🕯️ Burning…';
+        setTimeout(function () { g.querySelector('.nc-jar-a').classList.remove('dying'); st.step = 1; save(); draw(); }, RM ? 50 : 2600);
+      }
+      else if (a === 'mint') { st.step = 2; save(); ping(); draw(); }
+      else if (a === 'day' || a === 'skip') { st.day = a === 'skip' ? 10 : st.day + 1; if (st.day >= 10) { st.day = 10; st.step = 3; } save(); draw(); }
+      else if (a === 'test') { st.step = 4; save(); ping(); draw(); bind({ jars: st.picks }); if (!store.jarNote) { store.jarNote = 1; save(); note('🕯️ The candle burned in Jar A. The mint changed the air.'); } }
+      else if (a === 'again') { store.jar = st = { step: 0, day: 0, picks: {} }; save(); draw(); }
+    }
+    draw();
+  }
+
+  /* ───────────── Part 3 game: hear the other side, answer each line with evidence ───────────── */
+  function buildOtherSide() {
+    var O = D.otherside; if (!O) return;
+    var p3 = $$('#tab-lesson .card-head-label').filter(function (e) { return /Part 3|Section 3/.test(e.textContent); })[0];
+    var body = p3 && p3.closest('.card').querySelector('.card-body'); if (!body) throw new Error('Part 3 card missing');
+    var g = mk('div', 'nc-g nc-os');
+    g.innerHTML = gameHead(O.kicker, O.title) + '<div class="nc-why">' + esc(O.why) + '</div>' + job(O.job) +
+      '<div class="nc-os-grid"><div class="nc-os-qs"></div><div class="nc-os-cards">' + O.cards.map(function (c, i) {
+        return '<button type="button" class="nc-os-c" data-i="' + i + '">' + (c.img ? '<img src="' + esc(c.img) + '" alt="' + esc(c.alt || '') + '">' : '<span class="nc-os-ic" aria-hidden="true">' + c.icon + '</span>') + '<b>' + esc(c.title) + '</b><span>' + esc(c.text) + '</span></button>';
+      }).join('') + '</div></div>' +
+      '<div class="nc-fb nc-os-fb" aria-live="polite"></div>' +
+      '<div class="nc-os-reveal" hidden></div>' +
+      '<button type="button" class="nc-cup-edit nc-os-again" hidden>↺ Answer them again</button>' +
+      (O.credit ? '<p class="nc-credit">' + esc(O.credit) + '</p>' : '');
+    body.appendChild(g);
+    putKeeper('k-part3', g.querySelector('.nc-os-grid'), 'before');
+    var qs = g.querySelector('.nc-os-qs'), fb = g.querySelector('.nc-os-fb'), rv = g.querySelector('.nc-os-reveal');
+    store.os = store.os || {}; var got = store.os;
+    function now() { var i = 0; while (i < O.quotes.length && got[i]) i++; return i; }
+    function draw() {
+      var n = now();
+      qs.innerHTML = O.quotes.map(function (q, i) {
+        var state = got[i] ? 'done' : (i === n ? 'now' : 'later');
+        return '<div class="nc-os-q nc-os-' + state + '"><button type="button" class="nc-os-play" data-i="' + i + '" aria-label="Play the quote">▶</button><div><div class="nc-os-qt">“' + esc(q.t) + '”</div>' +
+          (got[i] ? '<div class="nc-os-ans">✅ ' + esc(q.yes) + '</div>' : (i === n ? '<div class="nc-os-hint">Tap the evidence card that answers this.</div>' : '')) + '</div></div>';
+      }).join('');
+      $$('.nc-os-play', qs).forEach(function (b) { b.addEventListener('click', function () { var q = O.quotes[+b.dataset.i]; if (q.clip) Voice.play(q.clip); }); });
+      $$('.nc-os-c', g).forEach(function (b) { var c = O.cards[+b.dataset.i]; b.classList.toggle('used', O.quotes.some(function (q, i) { return got[i] && q.ans === c.k; })); });
+      var all = n >= O.quotes.length;
+      g.classList.toggle('nc-done', all); g.querySelector('.nc-os-again').hidden = !all;
+      if (store.cupsRevealed) showCups();
+    }
+    function showCups() {
+      var R = O.cupsReveal; if (!R) return;
+      var me = store.cups;
+      rv.hidden = false;
+      rv.innerHTML = '<div class="nc-os-rk">' + esc(R.kicker) + '</div><div class="nc-os-rrow"><div><small>You predicted</small><b>' + (me == null ? '—' : me + (me === 1 ? ' cup' : ' cups')) + '</b></div><div class="nc-os-real"><small>The evidence</small><b>0 cups</b></div></div><p>' + esc(R.text) + '</p>';
+    }
+    $$('.nc-os-c', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var n = now(); if (n >= O.quotes.length) return;
+        var c = O.cards[+b.dataset.i], q = O.quotes[n];
+        if (c.k === q.ans) {
+          got[n] = 1; save(); ping(); fb.innerHTML = '';
+          if (q.reveal && !store.cupsRevealed) { store.cupsRevealed = 1; save(); document.dispatchEvent(new Event('nc:cups')); }
+          if (now() >= O.quotes.length && !store.osNote) { store.osNote = 1; save(); note('⚖️ All three answered with evidence.'); }
+          draw();
+        } else {
+          ping(true); b.classList.remove('no'); void b.offsetWidth; b.classList.add('no');
+          fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(c.decoy ? c.hint : O.wrong) + '</span>';
+        }
+      });
+    });
+    g.querySelector('.nc-os-again').addEventListener('click', function () { store.os = got = {}; save(); fb.textContent = ''; draw(); });
+    draw();
+  }
+
+  /* ───────────── Part 4: the last two witnesses (sealed-jar CO₂ meter, the dark box), then prediction vs evidence ───────────── */
+  function buildMeter() {
+    var M = D.meter; if (!M) return;
+    var act = $('#tab-lesson .act-body'); if (!act) throw new Error('lesson body missing');
+    var sec = mk('div', 'nc-part4');
+    sec.innerHTML = '<div class="card theme-sky nc-p4card"><div class="card-head"><div class="card-head-icon">🔬</div><div><div class="card-head-label">Part 4</div><div class="card-head-title">' + esc(M.cardTitle) + '</div></div></div><div class="card-body"><p>' + esc(M.intro) + '</p><div class="nc-g nc-mt"></div></div></div>';
+    act.appendChild(sec);
+    var g = sec.querySelector('.nc-mt');
+    var J = M.jar, T = M.trays;
+    var GW = 560, GH = 170, GL = 42, GR = 10, GT = 10, GB = 26, HMAX = J.hours, CLO = 0, CHI = 450;
+    function GX(h) { return GL + h * (GW - GL - GR) / HMAX; }
+    function GY(c) { return GT + (CHI - c) * (GH - GT - GB) / (CHI - CLO); }
+    var axis = ''; for (var h = 0; h <= HMAX; h++) axis += '<text x="' + GX(h).toFixed(1) + '" y="' + (GH - 8) + '" font-size="10" fill="#7a6a58" text-anchor="middle">' + h + '</text>';
+    for (var c = 0; c <= 400; c += 100) axis += '<line x1="' + GL + '" x2="' + (GW - GR) + '" y1="' + GY(c).toFixed(1) + '" y2="' + GY(c).toFixed(1) + '" stroke="#f0e8dc"/><text x="' + (GL - 6) + '" y="' + (GY(c) + 3).toFixed(1) + '" font-size="10" fill="#7a6a58" text-anchor="end">' + c + '</text>';
+    g.innerHTML = gameHead(M.kicker, J.title) + job(J.job) +
+      '<div class="nc-mt-pred"></div>' +
+      '<div class="nc-mt-lab" hidden>' +
+        '<div class="nc-mt-rig">' +
+          '<svg class="nc-mt-svg" viewBox="0 0 200 200" role="img" aria-label="A model: a potted plant sealed inside a clear jar with a carbon dioxide sensor, under a lamp.">' +
+            '<defs><radialGradient id="ncLamp" cx="50%" cy="0%" r="90%"><stop offset="0" stop-color="#fff6c4" stop-opacity=".95"/><stop offset="1" stop-color="#fff6c4" stop-opacity="0"/></radialGradient>' +
+              '<linearGradient id="ncPot" x1="0" x2="1"><stop offset="0" stop-color="#b5653c"/><stop offset=".5" stop-color="#d98a5c"/><stop offset="1" stop-color="#97502c"/></linearGradient>' +
+              '<linearGradient id="ncLeaf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7cc95f"/><stop offset="1" stop-color="#2f7d34"/></linearGradient></defs>' +
+            '<rect class="nc-mt-dark" x="0" y="0" width="200" height="200" rx="12" fill="#1b2433"/>' +
+            '<path class="nc-mt-beam" d="M70 22 L130 22 L178 196 L22 196 Z" fill="url(#ncLamp)"/>' +
+            '<path d="M76 6 h48 l-8 18 h-32 z" fill="#3d4a5c"/><rect x="96" y="0" width="8" height="8" fill="#2a3442"/>' +
+            '<path d="M40 192 V74 C40 50 160 50 160 74 V192 Z" fill="url(#ncGlass)" stroke="#9fb6c7" stroke-width="2"/>' +
+            '<rect x="34" y="188" width="132" height="8" rx="3" fill="#7d8a99"/>' +
+            '<path d="M80 188 l-6 -34 h52 l-6 34 z" fill="url(#ncPot)"/><rect x="72" y="150" width="56" height="8" rx="2" fill="#a85a33"/><ellipse cx="100" cy="151" rx="26" ry="3" fill="#4e3626"/>' +
+            '<path d="M100 150 C 99 132, 101 116, 100 98" stroke="#3f7d3a" stroke-width="3" fill="none"/>' +
+            ['M100 104 c -26 -12 -32 10 -6 12 z', 'M100 104 c 24 -16 32 8 6 12 z', 'M100 122 c -28 -6 -28 14 -4 12 z', 'M100 122 c 26 -10 30 10 4 12 z', 'M100 138 c -22 -4 -22 12 -2 10 z', 'M100 138 c 20 -8 24 8 2 10 z'].map(function (d) { return '<path d="' + d + '" fill="url(#ncLeaf)" stroke="#2a6a2c" stroke-width=".8"/>'; }).join('') +
+            '<rect x="132" y="160" width="22" height="26" rx="3" fill="#20262e"/><rect x="135" y="164" width="16" height="9" rx="1.5" fill="#7fe0a8"/><circle cx="143" cy="180" r="2.2" fill="#9aa4ad"/>' +
+          '</svg>' +
+          '<div class="nc-mt-meter"><small>CO₂ sensor</small><b class="nc-mt-ppm">' + J.start + '</b><span>ppm</span><div class="nc-mt-hr">Hour <b>0</b></div></div>' +
+        '</div>' +
+        '<div class="nc-mt-ctl"><button type="button" class="nc-mt-light" aria-pressed="true">💡 Light is ON</button><button type="button" class="nc-btn nc-mt-run">▶ Run</button><button type="button" class="nc-cup-edit nc-mt-reset">↺ Reset the jar</button></div>' +
+        '<svg class="nc-mt-graph" viewBox="0 0 ' + GW + ' ' + GH + '" role="img" aria-label="A graph of the carbon dioxide in the jar, hour by hour.">' + axis +
+          '<g class="nc-mt-bands"></g><polyline class="nc-mt-line" fill="none" stroke="#2e86c1" stroke-width="2.6" stroke-linejoin="round" points=""/>' +
+          '<text x="' + GL + '" y="9" font-size="9.5" fill="#7a6a58">CO₂ in the jar (ppm)</text><text x="' + (GW - GR) + '" y="' + (GH - 8) + '" font-size="9.5" fill="#7a6a58" text-anchor="end">hours</text></svg>' +
+        '<div class="nc-mt-need"></div>' +
+        '<p class="nc-mt-note">' + esc(J.note) + '</p>' +
+        '<div class="nc-mt-q" hidden><div class="nc-q">' + esc(J.q) + '</div><div class="nc-opts">' + J.opts.map(function (o, i) { return '<button type="button" class="nc-opt" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div><div class="nc-fb nc-mt-fb" aria-live="polite"></div></div>' +
+      '</div>' +
+      '<div class="nc-mt-trays" hidden><h4 class="nc-g-t">' + esc(T.title) + '</h4><p class="nc-p">' + esc(T.intro) + '</p><div class="nc-mt-tpred"></div>' +
+        '<div class="nc-mt-box"><button type="button" class="nc-btn nc-mt-open" disabled>📦 Open the dark box</button></div>' +
+        '<div class="nc-mt-treveal" hidden><figure class="nc-mt-photo"><img src="' + esc(T.img) + '" alt="' + esc(T.alt) + '"><figcaption>' + esc(T.caption) + ' <span class="nc-credit">' + esc(T.credit) + '</span></figcaption></figure><p class="nc-p nc-mt-tres"></p><p class="nc-mt-light-note">' + esc(T.lightNote) + '</p></div>' +
+      '</div>' +
+      '<div class="nc-reveal nc-mt-cmp" hidden><h5>' + esc(M.compareTitle) + '</h5><div class="nc-mt-rows"></div></div>' +
+      '<div class="nc-wow nc-mt-wow" hidden><div class="nc-wow-k">The twist</div><blockquote class="nc-wow-q">“' + esc(M.twist.quote) + '”</blockquote><p class="nc-wow-nums">' + esc(M.twist.line) + '</p><p class="nc-wow-chain">' + esc(M.twist.chain) + '</p></div>';
+    putKeeper('k-part4', g.querySelector('.nc-job'), 'after');
+    store.mt = store.mt || {}; var S = store.mt;
+    if (!S.pts) S.pts = [[0, J.start, 1]];
+    var predBox = g.querySelector('.nc-mt-pred'), lab = g.querySelector('.nc-mt-lab'), lightB = g.querySelector('.nc-mt-light'), runB = g.querySelector('.nc-mt-run');
+    var ppm = g.querySelector('.nc-mt-ppm'), hrEl = g.querySelector('.nc-mt-hr b'), line = g.querySelector('.nc-mt-line'), bands = g.querySelector('.nc-mt-bands'), need = g.querySelector('.nc-mt-need');
+    var light = S.light == null ? true : !!S.light, timer = null;
+    function opts(P, k, cls) {
+      var picked = S[k];
+      return '<div class="nc-q">' + esc(P.q) + '</div><div class="nc-opts ' + cls + '">' + P.opts.map(function (o, i) { return '<button type="button" class="nc-opt' + (picked === i ? ' sel' : '') + '" data-i="' + i + '"' + (picked != null ? ' disabled' : '') + '>' + esc(o) + '</button>'; }).join('') + '</div>' +
+        (picked != null ? '<p class="nc-jar-you">Your prediction is saved: <b>' + esc(P.opts[picked]) + '</b></p>' : '');
+    }
+    function lightH() { var t = 0; for (var i = 1; i < S.pts.length; i++) if (S.pts[i][2]) t += S.pts[i][0] - S.pts[i - 1][0]; return t; }
+    function darkH() { var t = 0; for (var i = 1; i < S.pts.length; i++) if (!S.pts[i][2]) t += S.pts[i][0] - S.pts[i - 1][0]; return t; }
+    function drawGraph() {
+      var last = S.pts[S.pts.length - 1];
+      line.setAttribute('points', S.pts.map(function (p) { return GX(p[0]).toFixed(1) + ',' + GY(p[1]).toFixed(1); }).join(' '));
+      var b = ''; for (var i = 1; i < S.pts.length; i++) if (!S.pts[i][2]) b += '<rect x="' + GX(S.pts[i - 1][0]).toFixed(1) + '" y="' + GT + '" width="' + (GX(S.pts[i][0]) - GX(S.pts[i - 1][0])).toFixed(1) + '" height="' + (GH - GT - GB) + '" fill="#1b2433" opacity=".12"/>';
+      bands.innerHTML = b;
+      ppm.textContent = Math.round(last[1]); hrEl.textContent = last[0].toFixed(1).replace('.0', '');
+      lightB.textContent = light ? '💡 Light is ON' : '🌑 Light is OFF'; lightB.setAttribute('aria-pressed', String(light));
+      g.querySelector('.nc-mt-rig').classList.toggle('dark', !light);
+      var full = last[0] >= HMAX - 1e-6;
+      runB.disabled = full; runB.textContent = full ? '▶ Run (the 8 hours are up)' : (timer ? '❚❚ Pause' : '▶ Run');
+      var lh = lightH(), dh = darkH(), ready = lh >= J.needLight && dh >= J.needDark;
+      need.innerHTML = '<span class="' + (lh >= J.needLight ? 'ok' : '') + '">💡 In the light: ' + lh.toFixed(1).replace('.0', '') + ' of ' + J.needLight + ' hours</span><span class="' + (dh >= J.needDark ? 'ok' : '') + '">🌑 In the dark: ' + dh.toFixed(1).replace('.0', '') + ' of ' + J.needDark + ' hours</span>' +
+        (full && !ready ? '<span class="nc-ask-no">Reset the jar and try again: you need time in the light and in the dark.</span>' : '');
+      g.querySelector('.nc-mt-q').hidden = !(ready || S.jarDone);
+    }
+    function step() {
+      var last = S.pts[S.pts.length - 1]; if (last[0] >= HMAX) { stop(); return; }
+      var dt = 0.25, cN = light ? last[1] - (last[1] - J.floor) * J.k * dt : Math.min(J.start + 40, last[1] + J.rise * dt);
+      S.pts.push([+(last[0] + dt).toFixed(2), +cN.toFixed(1), light ? 1 : 0]); save(); drawGraph();
+    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } drawGraph(); }
+    runB.addEventListener('click', function () { if (timer) { stop(); return; } timer = setInterval(step, RM ? 60 : 280); drawGraph(); });
+    lightB.addEventListener('click', function () { light = !light; S.light = light; save(); drawGraph(); });
+    g.querySelector('.nc-mt-reset').addEventListener('click', function () { stop(); S.pts = [[0, J.start, 1]]; light = true; S.light = true; save(); drawGraph(); });
+    var fb = g.querySelector('.nc-mt-fb');
+    $$('.nc-mt-q .nc-opt', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var o = J.opts[+b.dataset.i];
+        if (o.ok) { b.classList.add('ok'); fb.innerHTML = '✅ ' + esc(J.win); if (!S.jarDone) { S.jarDone = 1; save(); ping(); } drawAll(); }
+        else { b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 700); fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(o.hint) + '</span>'; ping(true); }
+      });
+    });
+    var tpred = g.querySelector('.nc-mt-tpred'), openB = g.querySelector('.nc-mt-open');
+    openB.addEventListener('click', function () { S.trayOpen = 1; save(); ping(); drawAll(); });
+    function drawAll() {
+      predBox.innerHTML = opts(J.predict, 'jarPred', 'nc-mt-p1');
+      $$('.nc-mt-p1 .nc-opt', predBox).forEach(function (b) { b.addEventListener('click', function () { if (S.jarPred != null) return; S.jarPred = +b.dataset.i; save(); ping(); drawAll(); }); });
+      lab.hidden = S.jarPred == null;
+      if (S.jarDone) { var ok = $$('.nc-mt-q .nc-opt', g).filter(function (b) { return J.opts[+b.dataset.i].ok; })[0]; if (ok) ok.classList.add('ok'); fb.innerHTML = '✅ ' + esc(J.win); }
+      g.querySelector('.nc-mt-trays').hidden = !S.jarDone;
+      tpred.innerHTML = opts(T.predict, 'trayPred', 'nc-mt-p2');
+      $$('.nc-mt-p2 .nc-opt', tpred).forEach(function (b) { b.addEventListener('click', function () { if (S.trayPred != null) return; S.trayPred = +b.dataset.i; save(); ping(); drawAll(); }); });
+      openB.disabled = S.trayPred == null || !!S.trayOpen;
+      openB.textContent = S.trayOpen ? '📦 The box is open' : (S.trayPred == null ? '📦 Open the dark box (predict first)' : '📦 Open the dark box');
+      var tr = g.querySelector('.nc-mt-treveal'); tr.hidden = !S.trayOpen;
+      if (S.trayOpen) g.querySelector('.nc-mt-tres').innerHTML = (S.trayPred === T.predict.ans ? '✅ ' : '') + esc(T.result);
+      var cmp = g.querySelector('.nc-mt-cmp'), wow = g.querySelector('.nc-mt-wow');
+      var done = S.jarDone && S.trayOpen;
+      cmp.hidden = !done; wow.hidden = !done;
+      g.classList.toggle('nc-done', !!done);
+      if (done) {
+        var rows = [
+          [M.rows[0], store.cups == null ? '(not saved)' : store.cups + (store.cups === 1 ? ' cup' : ' cups'), M.rows[0 + 3]],
+          [M.rows[1], S.jarPred == null ? '—' : J.predict.opts[S.jarPred], M.rows[1 + 3]],
+          [M.rows[2], S.trayPred == null ? '—' : T.predict.opts[S.trayPred], M.rows[2 + 3]]
+        ];
+        g.querySelector('.nc-mt-rows').innerHTML = '<div class="nc-mt-r nc-mt-rh"><span></span><span>You predicted</span><span>The evidence</span></div>' + rows.map(function (r) { return '<div class="nc-mt-r"><b>' + esc(r[0]) + '</b><span>' + esc(r[1]) + '</span><span class="nc-mt-ev">' + esc(r[2]) + '</span></div>'; }).join('');
+        if (!wow.querySelector('.nc-k')) putKeeper('k-wow', wow, 'prepend');
+        if (!S.bound) { S.bound = 1; save(); bind({ jar: S.jarPred, trays: S.trayPred, revealed: 1 }); note('🔬 All the witnesses are in. Read the twist below.'); }
+      }
+      drawGraph();
+    }
+    drawAll();
+  }
+
   /* ───────────── Assignment: Part B trim, Part C notebook page, CER planner, checklist ───────────── */
   function buildAssignment() {
     var A = D.assignment || {}, tab = $('#tab-assignment'); if (!tab) return;
@@ -1029,9 +1470,11 @@
       var nm = (document.getElementById('student-name') || {}).value || '';
       var L = ['═══════════════════════════════════════════════', '  OPTIMA ACADEMY ONLINE — 5TH GRADE SCIENCE', '  Lesson ' + D.lesson + ' · ' + D.title, '  The Notebook Chain · Page ' + D.page, '  Student: ' + (nm.trim() || '(add your name above)'), '═══════════════════════════════════════════════', ''];
       function v(id) { var e = document.getElementById(id); return e && e.value.trim() ? e.value.trim() : '(not yet answered)'; }
+      // the warm-up module that is on says how to write its prediction (PRED_LINE); 17.01's tree is the default
       var b = store.bets || {};
-      L.push('--- WARM-UP: MY PREDICTION (10 PIECES OF THE TREE) ---', 'Soil ' + (b.soil || 0) + ' · Water ' + (b.water || 0) + ' · Air ' + (b.air || 0) + ' · Sunlight ' + (b.sun || 0), 'My reason: ' + v('pred-1'), '');
-      L.push('--- PART B — QUESTION 1 ---', v('partb-2'), '', '--- PART B — QUESTION 2 ---', v('partb-3'), '');
+      var pl = PRED_LINE ? PRED_LINE() : ['--- WARM-UP: MY PREDICTION (10 PIECES OF THE TREE) ---', 'Soil ' + (b.soil || 0) + ' · Water ' + (b.water || 0) + ' · Air ' + (b.air || 0) + ' · Sunlight ' + (b.sun || 0)];
+      L.push(pl[0], pl[1], 'My reason: ' + v('pred-1'), '');
+      (A.keep || ['partb-2', 'partb-3']).forEach(function (id, k) { L.push('--- PART B — QUESTION ' + (k + 1) + ' ---', v(id), ''); });
       (D.nextPage ? D.nextPage.boxes : []).forEach(function (bx) { L.push('--- PART C — ' + bx.label.toUpperCase() + ' ---', v(bx.id), ''); });
       L.push('--- CLAIM ---', v('cer-claim'), '', '--- EVIDENCE ---', v('cer-evidence'), '', '--- REASONING ---', v('cer-reasoning'), '');
       out.value = L.join('\n');
@@ -1156,7 +1599,7 @@
     var Wd = D.wonder; if (!Wd) return;
     // 1. Real footage (Part 2: air is real stuff that moves around the planet)
     if (Wd.footage) {
-      var F2 = Wd.footage, host = $('.nc-air');
+      var F2 = Wd.footage, host = $(F2.after || '.nc-air');
       if (host) {
         var b1 = wonderBox('🎬', 'Real footage', F2.title, 1);
         b1.querySelector('.nc-wx-body').innerHTML = '<p class="nc-p">' + esc(F2.intro) + '</p>' +
@@ -1167,36 +1610,40 @@
     }
     // 2. Real data (Part 4, after the twist)
     if (Wd.data) {
-      var R = Wd.data, h4 = $('.nc-tl');
+      var R = Wd.data, h4 = $(R.host || '.nc-tl');
       if (h4) {
         var b2 = wonderBox('📈', 'Real data', R.title, 3);
-        var V = R.values, n = V.length, lo = Math.floor(Math.min.apply(null, V) - 1), hi = Math.ceil(Math.max.apply(null, V) + 1);
+        // one line (R.values) or several (R.series: [{name, values, color}]) on the same axes
+        var SER = R.series || [{ name: '', values: R.values, color: '#2e86c1' }], V = SER[0].values, n = V.length;
+        var ALL = [].concat.apply([], SER.map(function (q) { return q.values; }));
+        var lo = Math.floor(Math.min.apply(null, ALL) - 1), hi = Math.ceil(Math.max.apply(null, ALL) + 1);
         var W = 600, H = 220, L = 44, Rr = 10, T = 12, B = 30;
         function X(i) { return L + i * (W - L - Rr) / (n - 1); }
         function Y(v) { return T + (hi - v) * (H - T - B) / (hi - lo); }
-        var path = V.map(function (v, i) { return (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(v).toFixed(1); }).join(' ');
+        function pathOf(vals) { return vals.map(function (v, i) { return (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(v).toFixed(1); }).join(' '); }
         var yrs = '', grid = '';
         for (var yy = 0; yy * 12 < n; yy++) { var xi = X(yy * 12); yrs += '<text x="' + xi.toFixed(1) + '" y="' + (H - 10) + '" font-size="10" fill="#7a6a58" text-anchor="middle">' + (R.start[0] + yy) + '</text>'; grid += '<line x1="' + xi.toFixed(1) + '" y1="' + T + '" x2="' + xi.toFixed(1) + '" y2="' + (H - B) + '" stroke="#efe6d8"/>'; }
         for (var gv = Math.ceil(lo / 5) * 5; gv <= hi; gv += 5) grid += '<line x1="' + L + '" y1="' + Y(gv).toFixed(1) + '" x2="' + (W - Rr) + '" y2="' + Y(gv).toFixed(1) + '" stroke="#f3ece0"/><text x="' + (L - 6) + '" y="' + (Y(gv) + 3).toFixed(1) + '" font-size="10" fill="#7a6a58" text-anchor="end">' + gv + '</text>';
         var MON = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         b2.querySelector('.nc-wx-body').innerHTML = '<p class="nc-p">' + esc(R.intro) + '</p>' + job(R.job) +
+          (SER.length > 1 ? '<div class="nc-dt-key">' + SER.map(function (q) { return '<span><i style="background:' + q.color + '"></i>' + esc(q.name) + '</span>'; }).join('') + '</div>' : '') +
           '<div class="nc-dt-read" aria-live="polite">Drag across the graph.</div>' +
-          '<svg class="nc-dt" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="A line graph of carbon dioxide in the air at Mauna Loa from 2016 to 2026. It zigzags every year and climbs over time.">' + grid +
-            '<path d="' + path + '" fill="none" stroke="#2e86c1" stroke-width="2.4" stroke-linejoin="round" class="nc-dt-line"/>' + yrs +
+          '<svg class="nc-dt" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(R.alt || 'A line graph of carbon dioxide in the air at Mauna Loa from 2016 to 2026. It zigzags every year and climbs over time.') + '">' + grid +
+            SER.map(function (q) { return '<path d="' + pathOf(q.values) + '" fill="none" stroke="' + q.color + '" stroke-width="2.4" stroke-linejoin="round" class="nc-dt-line"/>'; }).join('') + yrs +
             '<text x="' + L + '" y="9" font-size="9.5" fill="#7a6a58">CO₂, ' + esc(R.unit) + '</text>' +
-            '<line class="nc-dt-cur" x1="0" y1="' + T + '" x2="0" y2="' + (H - B) + '" stroke="#0E1C42" stroke-dasharray="3 3" opacity="0"/><circle class="nc-dt-dot" r="5" fill="#c0392b" opacity="0"/>' +
+            '<line class="nc-dt-cur" x1="0" y1="' + T + '" x2="0" y2="' + (H - B) + '" stroke="#0E1C42" stroke-dasharray="3 3" opacity="0"/>' + SER.map(function (q) { return '<circle class="nc-dt-dot" r="5" fill="' + (SER.length > 1 ? q.color : '#c0392b') + '" stroke="#fff" stroke-width="1.5" opacity="0"/>'; }).join('') +
             '<rect class="nc-dt-hit" x="' + L + '" y="0" width="' + (W - L - Rr) + '" height="' + H + '" fill="transparent"/></svg>' +
           '<div class="nc-q">' + esc(R.ask) + '</div><div class="nc-opts">' + R.opts.map(function (o, i) { return '<button type="button" class="nc-opt" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div><div class="nc-fb" aria-live="polite"></div>' +
           '<p class="nc-credit">' + esc(R.credit) + '</p>';
-        var wow = $('.nc-wow'); after(wow || h4, b2);
-        var svg = b2.querySelector('.nc-dt'), cur = b2.querySelector('.nc-dt-cur'), dot = b2.querySelector('.nc-dt-dot'), rd = b2.querySelector('.nc-dt-read');
+        var wow = $(R.after || '.nc-wow'); after(wow || h4, b2);
+        var svg = b2.querySelector('.nc-dt'), cur = b2.querySelector('.nc-dt-cur'), dots = b2.querySelectorAll('.nc-dt-dot'), rd = b2.querySelector('.nc-dt-read');
         function at(e) {
           var r = svg.getBoundingClientRect(), t = e.touches ? e.touches[0] : e, x = (t.clientX - r.left) * W / r.width;
           var i = Math.max(0, Math.min(n - 1, Math.round((x - L) / ((W - L - Rr) / (n - 1)))));
           var m = (R.start[1] - 1 + i) % 12, y = R.start[0] + Math.floor((R.start[1] - 1 + i) / 12);
           cur.setAttribute('x1', X(i)); cur.setAttribute('x2', X(i)); cur.setAttribute('opacity', '1');
-          dot.setAttribute('cx', X(i)); dot.setAttribute('cy', Y(V[i])); dot.setAttribute('opacity', '1');
-          rd.innerHTML = '<b>' + MON[m] + ' ' + y + ':</b> ' + V[i].toFixed(1) + ' ppm';
+          SER.forEach(function (q, k) { dots[k].setAttribute('cx', X(i)); dots[k].setAttribute('cy', Y(q.values[i])); dots[k].setAttribute('opacity', '1'); });
+          rd.innerHTML = '<b>' + MON[m] + ' ' + y + ':</b> ' + SER.map(function (q) { return (q.name ? esc(q.name) + ' ' : '') + q.values[i].toFixed(1) + ' ppm'; }).join(' · ');
         }
         var hit = b2.querySelector('.nc-dt-hit');
         ['mousemove', 'touchmove', 'touchstart', 'click'].forEach(function (ev) { hit.addEventListener(ev, function (e) { if (ev.indexOf('touch') === 0) e.preventDefault(); at(e); }, { passive: false }); });
@@ -1208,7 +1655,7 @@
             else { bt.classList.add('no'); setTimeout(function () { bt.classList.remove('no'); }, 700); fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(o.hint) + '</span>'; ping(true); }
           });
         });
-        if (!RM) b2.addEventListener('toggle', function () { if (b2.open) { var ln = b2.querySelector('.nc-dt-line'), len = ln.getTotalLength(); ln.style.strokeDasharray = len; ln.style.strokeDashoffset = len; ln.getBoundingClientRect(); ln.style.transition = 'stroke-dashoffset 2.4s ease'; ln.style.strokeDashoffset = '0'; } });
+        if (!RM) b2.addEventListener('toggle', function () { if (b2.open && !b2._drawn) { b2._drawn = 1; $$('.nc-dt-line', b2).forEach(function (ln) { var len = ln.getTotalLength(); ln.style.strokeDasharray = len; ln.style.strokeDashoffset = len; ln.getBoundingClientRect(); ln.style.transition = 'stroke-dashoffset 2.4s ease'; ln.style.strokeDashoffset = '0'; }); } });
       }
     }
     // 3. Wonder Cabinet (end of The Lesson): a real museum object in 3D
@@ -1216,11 +1663,10 @@
       var C = Wd.cabinet, endL = $('#tab-lesson .tab-next-wrap');
       if (endL) {
         var b3 = wonderBox('🗄️', 'Wonder Cabinet', C.title, 2);
-        var shelf = book(), filled = Object.keys(shelf).filter(function (k) { return shelf[k].cabinet; }).length;
         b3.querySelector('.nc-wx-body').innerHTML = '<div class="nc-cab"><div class="nc-cab-stage"><div class="nc-cab-load">Loading the 3D model…</div></div><div class="nc-cab-side"><p class="nc-p">' + esc(C.text) + '</p><p class="nc-cab-tip">Drag to spin it. Pinch or scroll to zoom.</p><button type="button" class="nc-btn nc-cab-add">＋ Put it in my cabinet</button><div class="nc-cab-n"></div></div></div><p class="nc-credit">' + esc(C.credit) + '</p>';
         before(endL, b3);
         var stage = b3.querySelector('.nc-cab-stage'), addB = b3.querySelector('.nc-cab-add'), cn = b3.querySelector('.nc-cab-n');
-        function drawN() { var bk = book(), k = Object.keys(bk).filter(function (x) { return bk[x].cabinet; }).length; cn.textContent = k + ' of ' + (D.pages || 30) + ' objects in your cabinet'; if (bk[D.page] && bk[D.page].cabinet) { addB.textContent = '✓ In your cabinet'; addB.disabled = true; } }
+        function drawN() { var bk = book(), k = cabinetCount(bk); cn.textContent = k + (k === 1 ? ' object' : ' objects') + ' in your cabinet'; if (slot(bk).cabinet) { addB.textContent = '✓ In your cabinet'; addB.disabled = true; } }
         addB.addEventListener('click', function () { bind({ cabinet: C.title }); ping(); drawN(); note('🗄️ Added to your Wonder Cabinet.'); });
         drawN();
         var loaded = false;
@@ -1250,11 +1696,16 @@
     guard('tabs', buildTabs);
     guard('opener', buildOpener);
     guard('bets', buildBets);
+    guard('cups', buildCups);
     guard('wordlens', buildWordLens);
     guard('source', buildSource);
+    guard('sort', buildSort);
     guard('air', buildAir);
     guard('bag', buildBag);
     guard('timelapse', buildTimelapse);
+    guard('jars', buildJars);
+    guard('otherside', buildOtherSide);
+    guard('meter', buildMeter);
     guard('assignment', buildAssignment);
     guard('wonder', buildWonder);
     guard('tools', buildTools);
@@ -1262,7 +1713,7 @@
       store: store, voice: Voice,
       teardown: function () {
         Voice.stop();
-        document.querySelectorAll('.nc-wx,.nc-op,.nc-g,.nc-np,.nc-k,.nc-wl,.nc-part4,.nc-plan,.nc-dock,.nc-ribbon,.nc-notes,.nc-tab-n,.nc-journal-btn').forEach(function (e) { e.remove(); });
+        document.querySelectorAll('.nc-wx,.nc-op,.nc-g,.nc-np,.nc-sort-ghost,.nc-k,.nc-wl,.nc-part4,.nc-plan,.nc-dock,.nc-ribbon,.nc-notes,.nc-tab-n,.nc-journal-btn').forEach(function (e) { e.remove(); });
         document.querySelectorAll('.nc-hide').forEach(function (e) { e.classList.remove('nc-hide'); });
         document.querySelectorAll('.tab-btn[hidden]').forEach(function (b) { b.hidden = false; });
         var ex = document.getElementById('tab-explore'); if (ex) ex.classList.remove('nc-merged');
