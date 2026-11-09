@@ -83,9 +83,19 @@
 
   /* ───────────── Voice: one clip at a time (narration, Keeper, Word Lens, 1648 lines) ───────────── */
   var Voice = (function () {
-    var cur = null, curKey = null, onEnd = null;
+    // One shared <audio> element. Safari and iPads only let a page play sound from an element that was first
+    // started inside a tap, so unlock() runs in the Start/Sound/Listen tap and every clip reuses that element.
+    var el = null, seq = 0, cur = null, curKey = null, onEnd = null;
+    var SILENT = 'data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE2LjEwMAAAAAAAAAAAAAAA//NwwAAAAAAAAAAAAEluZm8AAAAPAAAABgAAAykAWlpaWlpaWlpaWlpaWlpaWnt7e3t7e3t7e3t7e3t7e3t7nJycnJycnJycnJycnJycnL29vb29vb29vb29vb29vb293t7e3t7e3t7e3t7e3t7e3t7/////////////////////AAAAAExhdmM2MC4zMQAAAAAAAAAAAAAAACQCowAAAAAAAAMpso+sIAAAAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NCxKMAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NAxKQAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/80LEowAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVU=';
+    function getEl() { if (!el) { el = new Audio(); el.preload = 'auto'; } return el; }
     function src(key) { return (D.audio || '') + D.prefix + '-' + key + '.mp3'; }
+    function unlock() {
+      if (cur) return;
+      var a = getEl(); a.onended = a.ontimeupdate = null; a.src = SILENT;
+      try { var pr = a.play(); if (pr && pr.catch) pr.catch(function () {}); } catch (e) {}
+    }
     function stop() {
+      seq++;
       if (cur) { try { cur.pause(); } catch (e) {} }
       if (onEnd) { var f = onEnd; onEnd = null; f(true); }
       cur = null; curKey = null;
@@ -94,14 +104,15 @@
       opts = opts || {};
       stop();
       try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) {}
-      var a = new Audio(src(key)); a.preload = 'auto';
+      var a = getEl(), my = ++seq;
+      a.onended = function () { if (my === seq) { var f = onEnd; onEnd = null; cur = null; curKey = null; if (f) f(false); } };
+      a.ontimeupdate = opts.onTime ? function () { if (my === seq) opts.onTime(a.currentTime, a.duration || 0); } : null;
+      a.src = src(key);
       cur = a; curKey = key; onEnd = opts.onEnd || null;
-      a.addEventListener('ended', function () { if (cur === a) { var f = onEnd; onEnd = null; cur = null; curKey = null; if (f) f(false); } });
-      if (opts.onTime) a.addEventListener('timeupdate', function () { if (cur === a) opts.onTime(a.currentTime, a.duration || 0); });
-      var pr = a.play(); if (pr && pr.catch) pr.catch(function () { if (cur === a) { var f = onEnd; onEnd = null; cur = null; if (f) f(true); } });
+      var pr = a.play(); if (pr && pr.catch) pr.catch(function () { if (my === seq) { var f = onEnd; onEnd = null; cur = null; curKey = null; if (f) f(true); } });
       return a;
     }
-    return { play: play, stop: stop, key: function () { return curKey; }, src: src };
+    return { play: play, stop: stop, unlock: unlock, key: function () { return curKey; }, src: src };
   })();
 
   /* ───────────── 1. The opener ───────────── */
@@ -338,11 +349,11 @@
       snd.setAttribute('aria-pressed', voiceOn ? 'true' : 'false');
       snd.innerHTML = (voiceOn ? '🔊' : '🔈') + '<span>' + (voiceOn ? 'Sound on' : 'Sound off') + '</span>';
     }
-    function begin() { if (voiceOn) Snd.set(true); soundUI(); if (RM) return stillsStart(); play(true); }
+    function begin() { if (voiceOn) { Snd.set(true); Voice.unlock(); } soundUI(); if (RM) return stillsStart(); play(true); }
     wrap.querySelector('.nc-op-again').addEventListener('click', begin);
     startB.addEventListener('click', begin);
     snd.addEventListener('click', function () {
-      var v = !voiceOn; voiceOn = v; Snd.set(v); if (!v) Voice.stop();
+      var v = !voiceOn; voiceOn = v; Snd.set(v); if (!v) Voice.stop(); else Voice.unlock();
       snd.setAttribute('aria-pressed', v ? 'true' : 'false');
       snd.innerHTML = (v ? '🔊' : '🔈') + '<span>' + (v ? 'Sound on' : 'Sound') + '</span>';
       snd.setAttribute('aria-label', v ? 'Turn sound off' : 'Turn sound on');
