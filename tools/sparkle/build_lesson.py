@@ -1,18 +1,23 @@
 #!/usr/bin/env python3
 """Notebook Chain sparkle: inject the layer into one G5 science lesson.
 
-usage: python3 tools/sparkle/build_lesson.py 17-01
+usage: python3 tools/sparkle/build_lesson.py 17-01 [--check | --absorb | --force]
 
 Reads tools/sparkle/lessons/<WW-LL>/data.json, saves the untouched page as original.html the first
 time, then rebuilds lesson-<W>-<LL>-*.html from that original + the layer links + the DATA block.
+Safety: kit_guard.py refuses to overwrite a page that was edited outside the kit (see its docstring):
+--check shows the differences, --absorb moves them into fixes.json, --force overwrites anyway.
 """
 import glob, hashlib, json, os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.dont_write_bytecode = True
+import kit_guard
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 FONT = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap">'
 
 
-def main(key):
+def main(key, flags=()):
     w, l = key.split('-')
     kit = os.path.join(ROOT, 'tools', 'sparkle', 'lessons', key)
     pages = glob.glob(os.path.join(ROOT, 'lesson-%d-%s-*.html' % (int(w), l)))
@@ -58,14 +63,17 @@ def main(key):
     tail = '<script type="application/json" id="nc-data">\n%s\n</script>\n<script src="%s?v=%s"></script>\n' % (blob, js, ver(js))
 
     assert html.count('</head>') == 1, 'head'
-    html = html.replace('</head>', head + '</head>', 1)
-    i = html.rfind('</body>')
-    assert i > 0, 'body'
-    html = html[:i] + tail + html[i:]
-    with open(page, 'w', encoding='utf-8') as f:
-        f.write(html)
-    print('built', os.path.relpath(page, ROOT))
+
+    def inject(t):
+        t = t.replace('</head>', head + '</head>', 1)
+        i = t.rfind('</body>')
+        assert i > 0, 'body'
+        return t[:i] + tail + t[i:]
+    pre = html
+    html = inject(pre)
+    if kit_guard.write(page, html, kit, 'nc-sparkle', pre, inject, fx, ('find', 'replace'), set(flags)):
+        print('built', os.path.relpath(page, ROOT))
 
 
 if __name__ == '__main__':
-    main(sys.argv[1])
+    main(sys.argv[1], [a for a in sys.argv[2:] if a.startswith('--')])

@@ -22,6 +22,7 @@
   function smooth(a, b, x) { var t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); }
   function lerp(a, b, t) { return a + (b - a) * t; }
   document.documentElement.classList.add('nc-on');
+  document.documentElement.classList.add('nc-boot');   /* the page shows only once the layer has set it up (no re-flow on load) */
 
   /* ───────────── Sound: short whooshes and an end chime (no files, no background hum; only after the student turns it on) ───────────── */
   var Snd = (function () {
@@ -1692,6 +1693,21 @@
     });
   }
 
+
+  /* ───────────── Start here: one how-to video for every lesson, in a drawer at the top of the first tab ───────────── */
+  function buildStartHere() {
+    var first = document.getElementById('tab-vocab') || document.querySelector('.tab-panel'); if (!first || document.querySelector('.nc-start')) return;
+    var base = (D.paths && D.paths.start) || 'assets/video/start-here/g5sci-start-here';
+    var d = document.createElement('details'); d.className = 'nc-start';
+    d.innerHTML = '<summary><span class="nc-start-k">▶ Start here</span><span class="nc-start-t">How your science lessons work</span><span class="nc-start-m">1-minute video</span><span class="nc-start-o">Open ▾</span></summary><div class="nc-start-b"></div>';
+    first.insertBefore(d, first.firstChild);
+    d.addEventListener('toggle', function () {
+      var v = d.querySelector('video'); if (!d.open) { if (v) v.pause(); return; }
+      if (v) return;
+      d.querySelector('.nc-start-b').innerHTML = '<video controls playsinline preload="metadata" poster="' + base + '.jpg"><source src="' + base + '.mp4" type="video/mp4"><track kind="captions" srclang="en" label="English" src="' + base + '.vtt" default></video>' +
+        '<p class="nc-start-n">Captions are on. To turn them off, press CC on the video.</p>';
+    });
+  }
   function boot() {
     guard('lean', buildLean);
     guard('tabs', buildTabs);
@@ -1710,6 +1726,7 @@
     guard('assignment', buildAssignment);
     guard('wonder', buildWonder);
     guard('tools', buildTools);
+    guard('starthere', buildStartHere);
     window.__ncSparkleAPI = {
       store: store, voice: Voice,
       teardown: function () {

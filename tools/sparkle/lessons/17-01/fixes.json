@@ -52,5 +52,10 @@
   "why": "Weeks 16 to 19 are Unit 3 (assessment-unit-3 covers Modules 16 to 19). Bethany ticked this in the 17.02 run.",
   "find": "<div class=\"info-value\">Q3 · Unit 4</div>",
   "replace": "<div class=\"info-value\">Q3 · Unit 3</div>"
+ },
+ {
+  "find": " class=\"info-value\">5-LS1-1 · TEKS 5.12(A), 5.5",
+  "replace": " class=\"info-value\">SC.5.L.14.2 · TEKS 5.12(A), 5.5",
+  "why": "absorbed: page edited outside the kit"
  }
 ]
