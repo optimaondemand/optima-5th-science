@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Optima Academy Online – Engineering Challenge: Conserve Earth's Resources</title>
+<title>Optima Academy Online – Data Task: Comparing Planet Properties</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900&display=swap');
 
@@ -611,7 +611,7 @@ em { color: #5A4D3E; }
 
 <!-- ═══ PROGRESS ═══ -->
 <div class="progress-wrap">
-  <span class="progress-label">🛠️ Lesson Progress</span>
+  <span class="progress-label">🕵️ Lesson Progress</span>
   <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
   <span class="progress-pct" id="progressPct">0%</span>
 </div>
@@ -627,10 +627,10 @@ em { color: #5A4D3E; }
       <div class="header-sub">An Education Experience Company</div>
     </div>
   </div>
-  <div class="header-title">Engineering Challenge: Conserve Earth's Resources</div>
+  <div class="header-title">Data Task: Comparing Planet Properties</div>
   <div class="header-badge">
-    <span>🛠️</span>
-    <span>Lesson 30.02</span>
+    <span>📊</span>
+    <span>Lesson 27.02</span>
   </div>
 </div>
 
@@ -638,70 +638,32 @@ em { color: #5A4D3E; }
 <div class="hero-visual">
 <svg viewBox="0 0 920 260" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="bgGD" cx="0.5" cy="0.5" r="0.9">
-      <stop offset="0%" stop-color="#1a2030"/>
-      <stop offset="100%" stop-color="#0a0a18"/>
-    </radialGradient>
+    <linearGradient id="w272bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#050B1F"/><stop offset="100%" stop-color="#1A2A5C"/></linearGradient>
+    <style>
+      .w272a{animation:w272bob 3s ease-in-out infinite alternate}
+      .w272b{animation:w272glow 2.6s ease-in-out infinite}
+      .w272c{animation:w272drift 8s ease-in-out infinite alternate}
+      @keyframes w272bob{from{transform:translateY(0)}to{transform:translateY(-8px)}}
+      @keyframes w272glow{0%,100%{opacity:.75}50%{opacity:1}}
+      @keyframes w272drift{from{transform:translateX(-18px)}to{transform:translateX(24px)}}
+      @media (prefers-reduced-motion: reduce){.w272a,.w272b,.w272c{animation:none}}
+    </style>
   </defs>
-  <rect width="920" height="260" fill="url(#bgGD)"/>
-
-  <!-- Subtle confetti dots -->
-  <g fill="#FFD700" opacity="0.6">
-    <circle cx="80" cy="60" r="2"/>
-    <circle cx="160" cy="90" r="1.5"/>
-    <circle cx="850" cy="60" r="2"/>
-    <circle cx="780" cy="100" r="1.5"/>
-  </g>
-  <g fill="#43A047" opacity="0.6">
-    <circle cx="120" cy="40" r="1.5"/>
-    <circle cx="820" cy="40" r="1.5"/>
-  </g>
-  <g fill="#E91E63" opacity="0.6">
-    <circle cx="200" cy="70" r="1.5"/>
-    <circle cx="730" cy="70" r="1.5"/>
-  </g>
-
-  <rect x="160" y="15" width="600" height="32" rx="6" fill="rgba(139,111,192,0.25)" stroke="#8B6FC0" stroke-width="1.5"/>
-  <text x="460" y="36" text-anchor="middle" font-family="Nunito,sans-serif" font-size="14" fill="#fff" font-weight="800">The final challenge: design a solution using EVERYTHING you've learned.</text>
-
-  <!-- Gear and lightbulb (engineering icons) -->
-  <g transform="translate(160,150)">
-    <circle cx="0" cy="0" r="50" fill="#FFB300"/>
-    <!-- Gear teeth -->
-    <g transform="translate(0,0)" fill="#FFB300">
-      <rect x="-7" y="-58" width="14" height="14"/>
-      <rect x="-7" y="44" width="14" height="14"/>
-      <rect x="-58" y="-7" width="14" height="14"/>
-      <rect x="44" y="-7" width="14" height="14"/>
-      <rect x="-44" y="-44" width="14" height="14" transform="rotate(45 -37 -37)"/>
-      <rect x="30" y="-44" width="14" height="14" transform="rotate(-45 37 -37)"/>
-      <rect x="-44" y="30" width="14" height="14" transform="rotate(-45 -37 37)"/>
-      <rect x="30" y="30" width="14" height="14" transform="rotate(45 37 37)"/>
-    </g>
-    <circle cx="0" cy="0" r="20" fill="#0a0a18"/>
-    <text x="0" y="6" text-anchor="middle" font-size="24">🛠️</text>
-    <text x="0" y="80" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" fill="#FFD700" font-weight="800">Engineering</text>
-  </g>
-
-  <text x="280" y="130" font-family="Nunito,sans-serif" font-size="18" fill="#fff" font-weight="800">+</text>
-
-  <g transform="translate(370,150)">
-    <text x="0" y="6" text-anchor="middle" font-size="50">💡</text>
-    <text x="0" y="58" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" fill="#FFD700" font-weight="800">Big Ideas</text>
-    <text x="0" y="73" text-anchor="middle" font-family="Nunito,sans-serif" font-size="9" fill="#fff">from all year</text>
-  </g>
-
-  <text x="470" y="130" font-family="Nunito,sans-serif" font-size="18" fill="#fff" font-weight="800">=</text>
-
-  <g transform="translate(620,150)">
-    <circle cx="0" cy="0" r="50" fill="#43A047"/>
-    <text x="0" y="6" text-anchor="middle" font-size="40">🌎</text>
-    <text x="0" y="80" text-anchor="middle" font-family="Nunito,sans-serif" font-size="11" fill="#A5D6A7" font-weight="800">A better Earth</text>
-  </g>
-
-  <text x="800" y="155" font-family="Nunito,sans-serif" font-size="40">🎉</text>
-
-  <line x1="40" y1="245" x2="880" y2="245" stroke="#8B6FC0" stroke-width="1.5" opacity="0.45"/>
+  <rect width="920" height="260" fill="url(#w272bg)"/>
+  <g class="w272b"><circle cx="40" cy="130" r="80" fill="#FFB300"/><circle cx="40" cy="130" r="60" fill="#FFD54F"/></g>
+  <circle class="w272a" cx="150" cy="130" r="8" fill="#9E9E9E"/>
+  <circle class="w272a" cx="245" cy="130" r="14" fill="#E6C07B"/>
+  <circle class="w272a" cx="340" cy="130" r="15" fill="#3E8EDE"/>
+  <circle class="w272a" cx="435" cy="130" r="10" fill="#D2693C"/>
+  <circle class="w272a" cx="530" cy="130" r="40" fill="#D8A56B"/>
+  <circle class="w272a" cx="625" cy="130" r="34" fill="#E3CF92"/>
+  <circle class="w272a" cx="720" cy="130" r="22" fill="#8ED6E0"/>
+  <circle class="w272a" cx="815" cy="130" r="21" fill="#4C6FD8"/>
+  <ellipse cx="625" cy="130" rx="54" ry="10" fill="none" stroke="#C9B37A" stroke-width="4"/>
+  <g fill="#B0A090" class="w272c"><circle cx="490" cy="80" r="3"/><circle cx="505" cy="170" r="2.5"/><circle cx="480" cy="190" r="2"/><circle cx="500" cy="60" r="2"/><circle cx="492" cy="120" r="2.5"/></g>
+  <g class="w272c"><circle cx="840" cy="50" r="6" fill="#E0F7FA"/><path d="M846 52 L900 30" stroke="#B2EBF2" stroke-width="5" opacity=".7"/></g>
+  <g fill="#fff" opacity=".6"><circle cx="300" cy="30" r="1.5"/><circle cx="720" cy="220" r="1.5"/><circle cx="560" cy="25" r="1.2"/><circle cx="200" cy="235" r="1.3"/></g>
+  <line x1="40" y1="252" x2="880" y2="252" stroke="#55C8E8" stroke-width="1.5" opacity="0.5"/>
 </svg>
 </div>
 
@@ -712,31 +674,31 @@ em { color: #5A4D3E; }
     <div>
       <div class="info-label">Quarter / Unit</div>
       <div class="info-value">Q3 · Unit 5</div>
-      <div class="info-detail">Practice of Science</div>
+      <div class="info-detail">Earth and Space</div>
     </div>
   </div>
   <div class="info-item">
     <div class="info-icon" style="background:#EAF8FD;">📖</div>
     <div>
       <div class="info-label">Week / Lesson</div>
-      <div class="info-value">Week 30</div>
-      <div class="info-detail">Lesson 30.02 — 5th Grade Science</div>
+      <div class="info-value">Week 27</div>
+      <div class="info-detail">Lesson 27.02 — 5th Grade Science</div>
     </div>
   </div>
   <div class="info-item">
-    <div class="info-icon" style="background:#FFF7EE;">🔬</div>
+    <div class="info-icon" style="background:#F3E5F5;">📊</div>
     <div>
       <div class="info-label">Science Focus</div>
-      <div class="info-value">Conservation Design</div>
-      <div class="info-detail">Building a Milky Way map</div>
+      <div class="info-value">Planet Data</div>
+      <div class="info-detail">Inner vs. outer planets</div>
     </div>
   </div>
   <div class="info-item">
     <div class="info-icon" style="background:#F0EDF6;">🌎</div>
     <div>
       <div class="info-label">Standards</div>
-      <div class="info-value">5-ESS1-1 · TEKS 5.11(A), 5.4(A), 5.4(B)</div>
-      <div class="info-detail">Engineering Design &amp; STEM Careers</div>
+      <div class="info-value">SC.5.E.5.2, SC.5.N.1.1 · TEKS 5.9(A)</div>
+      <div class="info-detail">Comparing Planets</div>
     </div>
   </div>
 </div>
@@ -752,8 +714,8 @@ em { color: #5A4D3E; }
       </div>
     </div>
     <div class="card-body">
-      <p>What can you discover about something ordinary when you observe it the way a scientist would?</p>
-      <p style="font-size:14px;color:#9A8E82;">Keep this question in mind while you work today.</p>
+      <p>What do all planets have in common, and why are the inner and outer planets so different?</p>
+      <p style="font-size:14px;color:#9A8E82;">Keep this question in mind as you work through the lesson today.</p>
     </div>
   </div>
   <div class="card theme-sky">
@@ -765,9 +727,9 @@ em { color: #5A4D3E; }
       </div>
     </div>
     <div class="card-body">
-      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#E8636B;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">1</span>define a conservation problem clearly.</p>
-      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#D4772C;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">2</span>label the center, spiral arms, and our solar system’s location.</p>
-      <p style="margin-bottom:0;"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#34B76F;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">3</span>explain why my design would help — based on real science.</p>
+      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#E8636B;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">1</span>describe what all eight planets have in common.</p>
+      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#D4772C;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">2</span>use data to compare and contrast the inner and outer planets.</p>
+      <p style="margin-bottom:0;"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#34B76F;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">3</span>find a pattern between a planet's distance from the Sun and the length of its year.</p>
     </div>
   </div>
 </div>
@@ -777,9 +739,7 @@ em { color: #5A4D3E; }
   <span class="need-strip-label">You'll need:</span>
   <span class="need-chip">📓 Science notebook</span>
   <span class="need-chip">✏️ Pencil &amp; colored pencils</span>
-  <span class="need-chip">✏️ Paper for your model</span>
-  <span class="need-chip">📏 A ruler (cm marks helpful)</span>
-  <span class="need-chip">🔍 Magnifier (if you have one)</span>
+  <span class="need-chip">📏 A ruler</span>
 </div>
 
 <!-- TAB BAR -->
@@ -795,51 +755,52 @@ em { color: #5A4D3E; }
      TAB 1: VOCABULARY
 ══════════════════════════════════════════ -->
 <div class="tab-panel active" id="tab-vocab">
+
 <!-- ═══ INTRODUCTION VIDEO ═══ -->
 <div class="video-placeholder-wrap">
-<!-- slot: 30-02-intro -->
+<!-- slot: 27-02-intro -->
 <div class="video-placeholder-inner">
-  <span class="vp-icon">&#x1F3AC;</span>
+  <span class="vp-icon">🎬</span>
   <div class="vp-label">Introduction Video</div>
-  <div class="vp-title">Optima Academy Online – Engineering Challenge: Conserve Earth&#x27;s Resources</div>
-  <div class="vp-slot">30-02-intro</div>
+  <div class="vp-title">Data Task: Comparing Planet Properties</div>
+  <div class="vp-slot">27-02-intro</div>
   <div class="vp-notes">
-    <strong>Teacher recording notes:</strong> Introduction video for this lesson.
+    <strong>Teacher recording notes:</strong> Hold up two very different objects, like a marble and a beach ball, and compare them to Earth and Jupiter. Explain that today students will be planetary scientists and use NASA data to sort the planets into two groups, then explain why. ~60–90 seconds.
   </div>
 </div>
 </div>
 
-  <!-- Notice, Wonder, Predict -->
+  <!-- Activity 1: Notice, Wonder, and Predict -->
   <div class="activity-card act-warmup scroll-reveal">
     <div class="act-head">
       <div class="act-num" style="background:#E8636B;">1</div>
       <div style="flex:1;">
         <div class="act-title">🔍 Notice, Wonder, and Predict</div>
-        <div class="act-subtitle">What makes a Milky Way model complete?</div>
+        <div class="act-subtitle">Two families of planets</div>
       </div>
       <div class="act-time" style="background:#E8636B;">⏱ 5 min</div>
     </div>
     <div class="act-body">
-      <p>Look up at the night sky and you can see a few thousand stars. Look at the Milky Way as a band of light, and you're seeing OUR galaxy from the inside. Today's lesson: how to build a model showing exactly where Earth sits in that giant spiral.</p>
-      <p>Building a good model takes attention to detail. Today, you'll learn what every Milky Way model needs.</p>
+      <p>All eight planets orbit the Sun, and all of them are round. But Jupiter is so big that more than 1,000 Earths could fit inside it, and you could never stand on its surface.</p>
+      <p>Planetary scientists group the planets into two families. Today you'll use real data to find out what makes each family different.</p>
 
       <div class="socratic-q">
         <span class="sq-icon">👀</span>
         <div>
           <div class="label">In Your Science Notebook</div>
-          <div class="question">"How many parts do you think your Milky Way model needs? Where would you put Earth? What labels should you include?"</div>
+          <div class="question">"Name one thing you think all the planets have in common, and one way they are different."</div>
         </div>
       </div>
 
       <div class="callout callout-sky">
         <span class="callout-icon">🔭</span>
-        <p><strong>Write your prediction below.</strong> Use at least two sentences. Predict what parts your Milky Way model will need, and explain why labels matter for a good model.</p>
+        <p><strong>Write your prediction below.</strong> Use at least two sentences. How do you think the inner planets are different from the outer planets? Name two differences.</p>
       </div>
 
       <div class="response-q">
         <textarea class="response-textarea" id="pred-1"
           data-label="Prediction"
-          placeholder="I predict my model will need ___ parts because..."
+          placeholder="I think the inner planets are... and the outer planets are..."
           oninput="autoSave(this,'dot-pred-1')"></textarea>
         <span style="font-size:12px;color:#9A8E82;font-weight:600;">
           Your prediction<span class="response-save-dot" id="dot-pred-1"></span>
@@ -848,7 +809,7 @@ em { color: #5A4D3E; }
     </div>
   </div>
 
-  <!-- Vocab -->
+  <!-- Vocab Flip Cards -->
   <div class="card theme-rock scroll-reveal">
     <div class="card-head">
       <div class="card-head-icon">📚</div>
@@ -858,57 +819,58 @@ em { color: #5A4D3E; }
       </div>
     </div>
     <div class="card-body">
-      <p>You met these words yesterday. Today you'll use them. <strong>Tap each card to flip it</strong> if you need a quick refresher.</p>
+      <p>You'll use these words to compare planets. <strong>Tap each card to flip it</strong> and read the definition.</p>
 
       <div class="vocab-grid">
 
         <div class="flip-card fc-color-1" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">📐</div><div class="fc-word">model</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">model</div><div class="fc-def">A diagram that shows how something works. Today: where Earth is in the galaxy.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🌍</div><div class="fc-word">inner planets</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">inner planets</div><div class="fc-def">Mercury, Venus, Earth, and Mars: small, rocky, and close to the Sun.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-2" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">🌌</div><div class="fc-word">galaxy</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">galaxy</div><div class="fc-def">A huge group of stars, gas, and dust held together by gravity.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🪐</div><div class="fc-word">outer planets</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">outer planets</div><div class="fc-def">Jupiter, Saturn, Uranus, and Neptune: giant planets made mostly of gas and ice.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-3" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">🌀</div><div class="fc-word">spiral arm</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">spiral arm</div><div class="fc-def">One of the curved arms of stars that wrap around a spiral galaxy's center.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🪨</div><div class="fc-word">rocky</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">rocky</div><div class="fc-def">Made mostly of rock and metal, with a solid surface you could stand on.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-4" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">💫</div><div class="fc-word">galactic center</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">galactic center</div><div class="fc-def">The bright middle of a galaxy — where stars are most crowded.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">💨</div><div class="fc-word">gas giant</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">gas giant</div><div class="fc-def">A huge planet made mostly of gas, with no solid surface to stand on.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-5" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">📍</div><div class="fc-word">location</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">location</div><div class="fc-def">Where something is. Our Sun is about two-thirds out from the galactic center.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">📏</div><div class="fc-word">diameter</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">diameter</div><div class="fc-def">The distance straight across a circle or sphere, through its center.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-6" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">🤔</div><div class="fc-word">limit</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">limit</div><div class="fc-def">Something a model leaves out. Every model is a simplification of real life.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🔄</div><div class="fc-word">orbit</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">orbit</div><div class="fc-def">The path a planet takes around the Sun. One full orbit is one year for that planet.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
       </div>
 
-      <div class="callout callout-tip" style="margin-top:16px;">
-        <span class="callout-icon">🌱</span>
-        <p><strong>Quick reminder:</strong> Two senses are off-limits today — taste and smell from anything outdoors. Stick to looking, feeling (gently), and measuring.</p>
+      <!-- Copywork -->
+      <div class="callout callout-think" style="margin-top:16px;">
+        <span class="callout-icon">📓</span>
+        <p>Copy this sentence carefully into your science notebook:<br><strong>"All planets orbit the Sun. The inner planets are small and rocky; the outer planets are giant and made of gas and ice."</strong></p>
       </div>
 
     </div>
@@ -925,181 +887,121 @@ em { color: #5A4D3E; }
 ══════════════════════════════════════════ -->
 <div class="tab-panel" id="tab-lesson">
 
+
+  <!-- ACTIVITY 2: Core Content -->
   <div class="activity-card act-lesson scroll-reveal">
     <div class="act-head">
       <div class="act-num" style="background:#D4772C;">2</div>
       <div style="flex:1;">
-        <div class="act-title">📖 Before You Investigate</div>
-        <div class="act-subtitle">A short refresher before you head outside</div>
+        <div class="act-title">📖 Before You Analyze</div>
+        <div class="act-subtitle">What all planets share</div>
       </div>
       <div class="act-time" style="background:#D4772C;">⏱ 8 min</div>
     </div>
     <div class="act-body">
 
-      <!-- Section 1 -->
       <div class="card theme-forest" style="margin-bottom:18px;">
         <div class="card-head">
-          <div class="card-head-icon">👁️</div>
+          <div class="card-head-icon">🌐</div>
           <div>
             <div class="card-head-label">Section 1</div>
-            <div class="card-head-title">What a Good Galaxy Model Shows</div>
+            <div class="card-head-title">What All Planets Share</div>
           </div>
         </div>
         <div class="card-body">
-          <p>A model of the Milky Way should show three things: <strong>shape</strong> (a flat spiral with curved arms), <strong>center</strong> (a bright bulge of stars in the middle), and <strong>location</strong> (where our Sun lives — in one of the spiral arms, two-thirds out from the center).</p>
-          <p>The top-down view is the most useful. Looking “down” on the Milky Way, you can see the spiral shape clearly: a glowing center with four big arms curving outward. From the side, it would look like a thin disk — you couldn’t see the spiral.</p>
+          <p>Every planet orbits the Sun. Every planet is round, because its own gravity pulls it into a ball. Every planet spins, and every planet shines only by reflecting sunlight.</p>
+          <p>Planets are also big enough to clear their orbits of other large objects. That's one reason Pluto is now called a dwarf planet.</p>
           <div class="socratic-q">
             <span class="sq-icon">🤔</span>
             <div>
               <div class="label">Stop and Think</div>
-              <div class="question">"Why is the TOP-DOWN view of a galaxy more useful for a model than the side view?"</div>
+              <div class="question">"Planets don't make their own light. So why can you see Venus and Jupiter at night?"</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Section 2 -->
       <div class="card theme-sky" style="margin-bottom:18px;">
         <div class="card-head">
-          <div class="card-head-icon">📓</div>
+          <div class="card-head-icon">🪐</div>
           <div>
             <div class="card-head-label">Section 2</div>
-            <div class="card-head-title">Where Our Sun Lives</div>
+            <div class="card-head-title">Inner vs. Outer</div>
           </div>
         </div>
         <div class="card-body">
-          <p>Our Sun is NOT in the center of the Milky Way. It sits about two-thirds of the way out from the galactic center, in a spiral arm called the <strong>Orion Arm</strong>. From there, our solar system orbits the center of the galaxy — one full lap takes about 250 million years.</p>
-          <p>The center of the Milky Way is crowded with stars and contains a huge black hole. The outer arms are spread out, with stars much farther apart. Our spot — in a quiet spiral arm — is one reason Earth has been a stable home for life.</p>
+          <p>The <strong>inner planets</strong> are small, rocky, and close together near the Sun. They have few or no moons and no rings. The <strong>outer planets</strong> are giants made mostly of gas and ice. They are far apart, have rings, and have many moons.</p>
+          <p>The asteroid belt sits between the two groups. Scientists use NASA data, like the table on the Investigate tab, to compare them.</p>
           <div class="socratic-q">
             <span class="sq-icon">🧪</span>
             <div>
               <div class="label">Stop and Reason</div>
-              <div class="question">"Why might it be safer to live in a quiet spiral arm than near the crowded galactic center?"</div>
+              <div class="question">"Jupiter is about 11 times wider than Earth. What does that tell you about how its volume compares?"</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Section 3 -->
-      <div class="card theme-earth" style="margin-bottom:18px;">
-        <div class="card-head">
-          <div class="card-head-icon">✏️</div>
-          <div>
-            <div class="card-head-label">Section 3</div>
-            <div class="card-head-title">What Every Model Leaves Out</div>
-          </div>
-        </div>
-        <div class="card-body">
-          <p>Don't worry if you can't draw well. Scientific sketches are about <em>accuracy</em>, not beauty. A simple drawing with labels and arrows can carry more information than three sentences of writing.</p>
-          <p><strong>Real-World Connection:</strong> Field biologists who study plants, animals, or rocks still sketch in their notebooks every single day. A photo can miss what matters. A sketch shows what the scientist <em>chose</em> to focus on — and that's evidence too.</p>
-        </div>
-      </div>
-
-      <!-- Key Concept -->
+      <!-- Key Concept Box -->
       <div class="key-concept">
         <div class="kc-label">🔑 Key Concept</div>
-        <p>A careful Milky Way model is the start of understanding our place in the universe. The clearer your model, the easier it is to see where Earth sits — and how vast our galaxy really is.</p>
+          <p>All planets orbit the Sun, are round, and reflect sunlight. The inner planets are small, rocky, and close to the Sun with few moons. The outer planets are giant, made of gas and ice, far from the Sun, with rings and many moons. Planets farther from the Sun take longer to orbit it.</p>
       </div>
 
-      <div style="background:#F0EDF6;border:2px solid #D4C0E8;border-radius:14px;padding:16px 20px;margin:16px 0;">
-        <p style="font-size:16px;color:#0E1C42;font-weight:800;margin:0 0 8px;">⚙️ The Engineering Design Process &amp; STEM Careers</p>
-        <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0 0 8px;">Engineers follow a process to solve real-world problems:</p>
-        <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0 0 8px;">1️⃣ <strong>Define the problem</strong> — What needs to be fixed or improved?</p>
-        <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0 0 8px;">2️⃣ <strong>Design a solution</strong> — Brainstorm ideas and pick the best one.</p>
-        <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0 0 8px;">3️⃣ <strong>Build a prototype</strong> — Make a model or first version to test.</p>
-        <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0 0 8px;">4️⃣ <strong>Test and improve</strong> — Try it out, collect data, and make it better!</p>
-        <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0 0 8px;">This cycle repeats until the solution works well. That's exactly what you're doing in this engineering challenge!</p>
-        <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;"><strong>STEM careers</strong> use science, technology, engineering, and math every day. Environmental engineers design cleaner water systems. Conservation biologists protect wildlife habitats. Energy scientists develop solar panels and wind turbines. These careers all help solve problems that affect our planet!</p>
-      </div>
-
-      <!-- Interactive Diagram: Lesson parts -->
+      <!-- Interactive Diagram -->
       <div class="diagram-wrap scroll-reveal">
         <div style="font-size:13px;color:#9A8E82;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">
-          🗺 Tap each part to learn what a Milky Way model needs
+          🗺 Tap each group to compare
         </div>
-        <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;line-height:1.65;">A complete Milky Way model has three key features. Tap each labeled part to find out what to include in yours.</p>
+        <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;line-height:1.65;">The eight planets drawn to show their sizes compared with each other (distances are not to scale). Tap each label.</p>
         <div class="diagram-interactive">
-          <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="font-family:Nunito,Arial,sans-serif;max-width:100%;height:auto;" role="img" aria-label="A labeled diagram showing the lesson parts">
-            <defs>
-              <linearGradient id="leafG2" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#7ad8a8"/>
-                <stop offset="100%" stop-color="#2a8a55"/>
-              </linearGradient>
-            </defs>
-            <rect width="720" height="360" fill="#fdf9ec" rx="12" stroke="#c8b896" stroke-width="2"/>
-
-            <!-- Stem -->
-            <path d="M 100 250 Q 180 240 240 220" fill="none" stroke="#5a3a1a" stroke-width="6"/>
-            <!-- Leaf -->
-            <path d="M 240 220 Q 340 100 520 130 Q 580 200 540 290 Q 380 320 280 280 Q 240 260 240 220 Z" fill="url(#leafG2)" stroke="#1f7d4a" stroke-width="2.5"/>
-            <!-- Midrib -->
-            <path d="M 240 220 Q 380 215 560 210" fill="none" stroke="#1f7d4a" stroke-width="3"/>
-            <!-- Veins -->
-            <line x1="290" y1="220" x2="330" y2="155" stroke="#1f7d4a" stroke-width="2"/>
-            <line x1="340" y1="218" x2="380" y2="135" stroke="#1f7d4a" stroke-width="2"/>
-            <line x1="400" y1="216" x2="445" y2="140" stroke="#1f7d4a" stroke-width="2"/>
-            <line x1="460" y1="214" x2="500" y2="150" stroke="#1f7d4a" stroke-width="2"/>
-            <line x1="290" y1="220" x2="320" y2="285" stroke="#1f7d4a" stroke-width="2"/>
-            <line x1="340" y1="220" x2="380" y2="300" stroke="#1f7d4a" stroke-width="2"/>
-            <line x1="400" y1="218" x2="440" y2="305" stroke="#1f7d4a" stroke-width="2"/>
-            <line x1="460" y1="216" x2="500" y2="295" stroke="#1f7d4a" stroke-width="2"/>
-
-            <!-- Labels and connector lines -->
-            <line x1="120" y1="262" x2="120" y2="320" stroke="#0E1C42" stroke-width="1.5" stroke-dasharray="3,3"/>
-            <rect x="60" y="320" width="100" height="28" rx="6" fill="#E8636B"/>
-            <text x="110" y="338" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">stem</text>
-
-            <line x1="380" y1="115" x2="380" y2="60" stroke="#0E1C42" stroke-width="1.5" stroke-dasharray="3,3"/>
-            <rect x="330" y="30" width="100" height="28" rx="6" fill="#D4772C"/>
-            <text x="380" y="48" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">edge</text>
-
-            <line x1="420" y1="220" x2="500" y2="60" stroke="#0E1C42" stroke-width="1.5" stroke-dasharray="3,3"/>
-            <rect x="455" y="30" width="100" height="28" rx="6" fill="#34B76F"/>
-            <text x="505" y="48" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">veins</text>
-
-            <line x1="560" y1="200" x2="640" y2="170" stroke="#0E1C42" stroke-width="1.5" stroke-dasharray="3,3"/>
-            <rect x="600" y="155" width="100" height="28" rx="6" fill="#55C8E8"/>
-            <text x="650" y="173" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">tip</text>
-
-            <line x1="380" y1="305" x2="380" y2="338" stroke="#0E1C42" stroke-width="1.5" stroke-dasharray="3,3"/>
-            <rect x="330" y="320" width="100" height="28" rx="6" fill="#8B6FC0"/>
-            <text x="380" y="338" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">color</text>
-
-            <line x1="540" y1="270" x2="650" y2="295" stroke="#0E1C42" stroke-width="1.5" stroke-dasharray="3,3"/>
-            <rect x="600" y="320" width="100" height="28" rx="6" fill="#C7922C"/>
-            <text x="650" y="338" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">texture</text>
-
-            <!-- Hotspots over each label -->
-            <rect class="hotspot" data-part="center" data-info="Galactic Center | The bright bulge in the middle of the Milky Way. Crowded with stars. Has a huge black hole at its very center. About 26,000 light-years from Earth." x="60" y="320" width="100" height="28" rx="6" fill="#E8636B"/>
-            <rect class="hotspot" data-part="edge" data-info="Edge | The edge can be smooth, wavy, or toothed (with little points like a saw). Run your finger gently along it. How would you describe what you feel? Are the teeth even, or different sizes?" x="330" y="30" width="100" height="28" rx="6" fill="#D4772C"/>
-            <rect class="hotspot" data-part="arms" data-info="Spiral Arms | Curved arms of stars that wrap around the galactic center. Our Sun lives in one called the Orion Arm. The arms have new stars being born, gas clouds, and dust." x="455" y="30" width="100" height="28" rx="6" fill="#34B76F"/>
-            <rect class="hotspot" data-part="tip" data-info="Tip | The tip is the very end of the leaf, opposite the stem. Is it pointy, rounded, or notched? Is it a different color than the rest? Sometimes the tip is dried out or torn." x="600" y="155" width="100" height="28" rx="6" fill="#55C8E8"/>
-            <rect class="hotspot" data-part="you" data-info="YOU ARE HERE | Earth's spot in the Milky Way. About two-thirds of the way out from the galactic center, in a spiral arm. Our solar system orbits the center once every 250 million years." x="330" y="320" width="100" height="28" rx="6" fill="#8B6FC0"/>
-            <rect class="hotspot" data-part="texture" data-info="Texture | Gently touch the leaf with one finger. Does it feel waxy, fuzzy, smooth, sticky, or bumpy? Does the top feel different from the bottom? Texture is something only you can feel — that's why it matters." x="600" y="320" width="100" height="28" rx="6" fill="#C7922C"/>
+          <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="font-family:Nunito,Arial,sans-serif;max-width:100%;height:auto;" role="img" aria-label="Eight planets shown at relative size, grouped into inner and outer planets">
+<rect width="720" height="360" fill="#F4F9FD" rx="12" stroke="#c8b896" stroke-width="2"/>
+            <rect x="170" y="10" width="380" height="26" rx="6" fill="#0E1C42"/>
+            <text x="360" y="28" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">Planets at Relative Size · Distances Not to Scale</text>
+            <rect x="0" y="40" width="720" height="320" fill="#0B1533" rx="12" opacity=".95"/>
+            <circle cx="60" cy="210" r="2" fill="#9E9E9E"/><circle cx="85" cy="210" r="5" fill="#E6C07B"/><circle cx="110" cy="210" r="5.2" fill="#3E8EDE"/><circle cx="133" cy="210" r="2.8" fill="#D2693C"/>
+            <circle cx="250" cy="210" r="58" fill="#D8A56B"/><path d="M196 200 Q 250 214 304 200" stroke="#B3804A" stroke-width="6" fill="none"/>
+            <circle cx="400" cy="210" r="49" fill="#E3CF92"/><ellipse cx="400" cy="210" rx="82" ry="16" fill="none" stroke="#C9B37A" stroke-width="6"/>
+            <circle cx="530" cy="210" r="21" fill="#8ED6E0"/>
+            <circle cx="620" cy="210" r="20" fill="#4C6FD8"/>
+            <line x1="170" y1="120" x2="170" y2="300" stroke="#A1887F" stroke-width="2" stroke-dasharray="4,4"/>
+            <rect x="30" y="120" width="130" height="26" rx="6" fill="#1E88E5"/><text x="95" y="138" text-anchor="middle" font-size="12" fill="#fff" font-weight="800">🌍 Inner planets</text>
+            <rect x="330" y="120" width="140" height="26" rx="6" fill="#5E35B1"/><text x="400" y="138" text-anchor="middle" font-size="12" fill="#fff" font-weight="800">🪐 Outer planets</text>
+            <rect x="110" y="310" width="120" height="26" rx="6" fill="#8D6E63"/><text x="170" y="328" text-anchor="middle" font-size="12" fill="#fff" font-weight="800">🪨 Rocky</text>
+            <rect x="300" y="310" width="150" height="26" rx="6" fill="#B3804A"/><text x="375" y="328" text-anchor="middle" font-size="12" fill="#fff" font-weight="800">💨 Gas and ice</text>
+            <rect x="480" y="120" width="110" height="26" rx="6" fill="#C9B37A"/><text x="535" y="138" text-anchor="middle" font-size="12" fill="#fff" font-weight="800">💍 Rings</text>
+            <rect x="560" y="310" width="140" height="26" rx="6" fill="#00838F"/><text x="630" y="328" text-anchor="middle" font-size="12" fill="#fff" font-weight="800">🔄 Orbit time</text>
+            <rect class="hotspot" data-part="inner" data-info="Inner Planets | Mercury, Venus, Earth, and Mars. Small and close to the Sun. Earth is the largest of the four, and even it looks tiny next to Jupiter." x="30" y="120" width="130" height="26" rx="6" fill="#55C8E8"/>
+            <rect class="hotspot" data-part="outer" data-info="Outer Planets | Jupiter, Saturn, Uranus, and Neptune. Giant planets, far from the Sun and far from each other. Jupiter is the biggest planet of all." x="330" y="120" width="140" height="26" rx="6" fill="#55C8E8"/>
+            <rect class="hotspot" data-part="rocky" data-info="Rocky Surfaces | The inner planets have solid rocky surfaces with mountains, craters, and valleys. You could land a spacecraft on them." x="110" y="310" width="120" height="26" rx="6" fill="#55C8E8"/>
+            <rect class="hotspot" data-part="gas" data-info="Gas and Ice Giants | The outer planets are made mostly of gas and ice around a small core. They have no solid surface to stand on." x="300" y="310" width="150" height="26" rx="6" fill="#55C8E8"/>
+            <rect class="hotspot" data-part="rings" data-info="Rings and Moons | All four outer planets have rings and many moons. Saturn's rings are the brightest. The inner planets have no rings and only three moons in all." x="480" y="120" width="110" height="26" rx="6" fill="#55C8E8"/>
+            <rect class="hotspot" data-part="orbit" data-info="Orbit Time | Planets farther from the Sun travel a longer path, and travel more slowly. Mercury orbits in 88 days; Neptune takes about 165 Earth years." x="560" y="310" width="140" height="26" rx="6" fill="#55C8E8"/>
           </svg>
           <div style="background:linear-gradient(135deg,#EEF8F0,#D6F5DE);border:2px solid #B8E8CF;border-radius:14px;padding:12px 18px;margin-top:10px;display:flex;align-items:center;gap:12px;">
             <span style="font-size:28px;flex-shrink:0;animation:mind-blow-bounce 2s ease-in-out infinite;">👆</span>
-            <p style="font-size:15px;color:#0E1C42;line-height:1.55;margin:0;font-weight:600;">Tap each label to learn what to look for during your investigation.</p>
+            <p style="font-size:15px;color:#0E1C42;line-height:1.55;margin:0;font-weight:600;">Tap each label. Which group does Earth belong to?</p>
           </div>
           <div class="diagram-info-panel" id="diagramPanel">
             <span class="dip-word" id="diagramWord"></span>
             <span id="diagramInfo"></span>
           </div>
         </div>
-        <div class="diagram-caption">Six things a scientist always notices on a leaf: stem, edge, veins, tip, color, and texture.</div>
+        <div class="diagram-caption">Planet sizes compared with each other. The real distances between them are far too large to draw.</div>
       </div>
 
-      <!-- Mind-blow -->
+      <!-- Mind-Blowing Fact -->
       <div class="mind-blow">
         <div class="mind-blow-icon">🤯</div>
         <div class="mind-blow-content">
           <div class="mind-blow-label">Mind-Blowing Fact</div>
-          <div class="mind-blow-text">A single galaxy can contain HUNDREDS of billions of stars — yet most of a galaxy is empty space. If the Sun were the size of a basketball, the next nearest star would be 4,000 miles away.</div>
+          <div class="mind-blow-text">Neptune takes about <strong>165 Earth years</strong> to orbit the Sun once. Since it was discovered in 1846, it has completed only about one orbit.</div>
         </div>
       </div>
 
     </div>
-  </div>
+  </div><!-- /act-lesson -->
 
   <div class="tab-next-wrap">
     <button class="tab-next-btn" onclick="switchTab('explore')">Continue to 🔬 Investigate →</button>
@@ -1112,107 +1014,71 @@ em { color: #5A4D3E; }
 ══════════════════════════════════════════ -->
 <div class="tab-panel" id="tab-explore">
 
+  <!-- ACTIVITY 3: Investigate -->
   <div class="activity-card act-explore scroll-reveal">
     <div class="act-head">
       <div class="act-num" style="background:#55C8E8;">3</div>
       <div style="flex:1;">
-        <div class="act-title">🔬 Your Investigation</div>
-        <div class="act-subtitle">Spiral arms. Galactic center. Earth's location. Label every part.</div>
+        <div class="act-title">🔬 Planet Data Detective</div>
+        <div class="act-subtitle">Real NASA data for all eight planets</div>
       </div>
       <div class="act-time" style="background:#55C8E8;">⏱ 25 min</div>
     </div>
     <div class="act-body">
 
-      <p>Today you’re the cosmic cartographer. You’ll draw a top-down model of the Milky Way galaxy — with a glowing center, four spiral arms, and a clearly labeled YOU ARE HERE marker showing where our Sun lives. Every label has to be right.</p>
+      <p>Here is real data for the eight planets. Use it to find what the planets have in common and how the inner and outer planets differ.</p>
 
-      <!-- Image suggestion: a leaf, rock, and shell side by side -->
-      <div class="lesson-figure">
-        <div class="lesson-figure-label">📷 Reference · Build Your Milky Way Model</div>
-        <img
-          src="images/24-02-milky-way-topdown.png"
-          alt="A top-down illustration of a spiral galaxy with four curved arms, a glowing yellow center, and a small marker labeled YOU ARE HERE in one of the outer arms."
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; this.parentElement.querySelector('.lesson-figure-label').style.display='none';"
-        />
-        <div class="image-suggestion" style="display:none;">
-          <div class="image-suggestion-icon">🖼️</div>
-          <div class="image-suggestion-label">Suggested Image — Generate This</div>
-          <div class="image-suggestion-desc">
-            Clear top-down illustration of the Milky Way galaxy. A glowing yellow-white center surrounded by four curved spiral arms made of stars. A bright yellow dot labeled YOU ARE HERE sits about two-thirds out in one of the arms. Dark background, bright stars. No text labels except YOU ARE HERE.
-          </div>
-          <div class="image-suggestion-file">Save as: images/24-02-milky-way-topdown.jpg</div>
-        </div>
-        <div class="lesson-figure-caption">
-          A top-down model of the Milky Way. Notice how our Sun lives in a spiral arm — not at the center.
-        </div>
-      </div>
-
-      <!-- Step 1 -->
       <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
         <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Set up your model</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Find something small from outside or from a window box — a leaf, a pebble, a shell, a piece of bark, a seed pod. Place it on a flat surface where you can see it clearly. Write what you chose at the top of your notebook page.</p>
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Read the table</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Read each planet across. Notice the type, size, distance, and year length.</p>
         </div>
       </div>
+      <div class="student-chart-wrap">
+        <div class="student-chart-label">📋 Planet data (NASA)</div>
+        <table class="student-chart">
+          <thead><tr><th>Planet</th><th>Type</th><th>Diameter</th><th>Distance from Sun (Earth = 1)</th><th>Length of one year</th><th>Rings?</th></tr></thead>
+          <tbody>
+            <tr><td class="row-label">Mercury</td><td>rocky</td><td>4,879 km</td><td>0.4</td><td>88 Earth days</td><td>no</td></tr>
+            <tr><td class="row-label">Venus</td><td>rocky</td><td>12,104 km</td><td>0.7</td><td>225 Earth days</td><td>no</td></tr>
+            <tr><td class="row-label">Earth</td><td>rocky</td><td>12,756 km</td><td>1.0</td><td>365 days</td><td>no</td></tr>
+            <tr><td class="row-label">Mars</td><td>rocky</td><td>6,792 km</td><td>1.5</td><td>687 Earth days</td><td>no</td></tr>
+            <tr><td class="row-label">Jupiter</td><td>gas giant</td><td>142,984 km</td><td>5.2</td><td>about 12 Earth years</td><td>yes</td></tr>
+            <tr><td class="row-label">Saturn</td><td>gas giant</td><td>120,536 km</td><td>9.5</td><td>about 29 Earth years</td><td>yes</td></tr>
+            <tr><td class="row-label">Uranus</td><td>ice giant</td><td>51,118 km</td><td>19.2</td><td>about 84 Earth years</td><td>yes</td></tr>
+            <tr><td class="row-label">Neptune</td><td>ice giant</td><td>49,528 km</td><td>30.1</td><td>about 165 Earth years</td><td>yes</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:13px;color:#9A8E82;margin-top:8px;">Source: NASA planetary fact sheets. Distance is shown compared with Earth's distance from the Sun (Earth = 1).</p>
+      </div>
 
-      <!-- Step 2 -->
       <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
         <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Sketch what you see</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Draw the Milky Way as clearly as you can. It doesn't have to be pretty. Add a glowing center, four curved spiral arms, and a YOU ARE HERE dot in one of the arms — about two-thirds out from the center.</p>
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Draw the dividing line</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Draw a line in your notebook between Mars and Jupiter. That's where the asteroid belt is. Compare the two groups.</p>
         </div>
       </div>
-
-      <!-- Step 3 -->
       <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
         <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Draw the galaxy shape</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Draw a bright oval in the middle of your paper — that's the galactic center. Then add FOUR curved arms swirling outward from the center. Make them about the same length, all spiraling the same direction.</p>
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Compare sizes</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Which group has larger diameters? By about how much? Compare Earth and Jupiter.</p>
         </div>
       </div>
-
-      <!-- Model Checklist -->
-      <div class="student-chart-wrap">
-        <div class="student-chart-label">📋 Your Milky Way model checklist</div>
-        <table class="student-chart">
-          <thead>
-            <tr>
-              <th style="width:170px;">What I'm observing</th>
-              <th>What to label</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td class="row-label">Size (length, cm)</td><td></td></tr>
-            <tr><td class="row-label">Size (width, cm)</td><td></td></tr>
-            <tr><td class="row-label">Color(s)</td><td></td></tr>
-            <tr><td class="row-label">Shape</td><td></td></tr>
-            <tr><td class="row-label">Edge (smooth, toothed, wavy…)</td><td></td></tr>
-            <tr><td class="row-label">Texture (touch)</td><td></td></tr>
-            <tr><td class="row-label">Smell (only if safe indoors)</td><td></td></tr>
-            <tr><td class="row-label">Anything unusual?</td><td></td></tr>
-            <tr><td class="row-label">One detail others might miss</td><td></td></tr>
-            <tr><td class="row-label">One thing that surprised you</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Step 4 -->
       <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
         <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Spot a question</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Place a dot in one of the spiral arms, about two-thirds of the way from the center to the outer edge. Label it YOU ARE HERE. That's where our Sun (and Earth) lives.</p>
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Find a pattern</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Look at distance and year length together. As distance from the Sun grows, what happens to the length of a year?</p>
         </div>
       </div>
-
-      <!-- Step 5 -->
-      <div style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
+      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
         <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">5</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Compare and check</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Add labels: GALACTIC CENTER on the bulge, SPIRAL ARM on one of the arms, and YOU ARE HERE next to your dot. Without labels your model isn't complete.</p>
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Write your pattern</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Write one sentence that starts: "The farther a planet is from the Sun..." You'll use it in your CER.</p>
         </div>
       </div>
 
@@ -1226,16 +1092,16 @@ em { color: #5A4D3E; }
           </div>
         </div>
         <div class="card-body">
-          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Answer these in complete sentences, using what you wrote in your table.</p>
+          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Answer these in complete sentences. Use numbers from the table.</p>
 
           <div class="pq">
             <span class="pq-num" style="background:#D4772C;">1</span>
-            <span class="pq-text">What parts did you include in your Milky Way model? Describe them in 1–2 sentences using the labels from your model.</span>
+            <span class="pq-text">Name two ways the inner planets are different from the outer planets. Use data.</span>
           </div>
           <div class="response-q">
             <textarea class="response-textarea ta-sm" id="ryt-1"
-              data-label="Investigate — Q1: Model parts"
-              placeholder="My model includes... The labeled parts are..."
+              data-label="Investigate — Q1: Inner vs outer"
+              placeholder="The inner planets are ___, but the outer planets are... For example..."
               oninput="autoSave(this,'dot-ryt-1')"></textarea>
             <span style="font-size:12px;color:#9A8E82;font-weight:600;">
               Your answer<span class="response-save-dot" id="dot-ryt-1"></span>
@@ -1244,12 +1110,12 @@ em { color: #5A4D3E; }
 
           <div class="pq" style="margin-top:14px;">
             <span class="pq-num" style="background:#D4772C;">2</span>
-            <span class="pq-text">Where in the Milky Way should the YOU ARE HERE marker go? Describe both the distance from center and the arm.</span>
+            <span class="pq-text">About how many times wider is Jupiter than Earth? Show how you estimated.</span>
           </div>
           <div class="response-q">
             <textarea class="response-textarea ta-sm" id="ryt-2"
-              data-label="Investigate — Q2: Surprise"
-              placeholder="The YOU ARE HERE marker should go..."
+              data-label="Investigate — Q2: Earth vs Jupiter"
+              placeholder="Jupiter is about ___ times wider because..."
               oninput="autoSave(this,'dot-ryt-2')"></textarea>
             <span style="font-size:12px;color:#9A8E82;font-weight:600;">
               Your answer<span class="response-save-dot" id="dot-ryt-2"></span>
@@ -1258,12 +1124,12 @@ em { color: #5A4D3E; }
 
           <div class="pq" style="margin-top:14px;">
             <span class="pq-num" style="background:#D4772C;">3</span>
-            <span class="pq-text">Look at your model. What’s ONE thing it shows well, and ONE thing it leaves out?</span>
+            <span class="pq-text">Describe the pattern between distance from the Sun and the length of a year.</span>
           </div>
           <div class="response-q">
             <textarea class="response-textarea ta-sm" id="ryt-3"
-              data-label="Investigate — Q3: Testable question"
-              placeholder="My model shows ___ well. It leaves out..."
+              data-label="Investigate — Q3: Distance pattern"
+              placeholder="The farther a planet is from the Sun, the..."
               oninput="autoSave(this,'dot-ryt-3')"></textarea>
             <span style="font-size:12px;color:#9A8E82;font-weight:600;">
               Your answer<span class="response-save-dot" id="dot-ryt-3"></span>
@@ -1272,7 +1138,7 @@ em { color: #5A4D3E; }
         </div>
       </div>
 
-      <!-- Discuss & Defend -->
+      <!-- Discuss and Defend -->
       <div class="card theme-rock scroll-reveal" style="margin-top:10px;">
         <div class="card-head">
           <div class="card-head-icon">💬</div>
@@ -1282,13 +1148,13 @@ em { color: #5A4D3E; }
           </div>
         </div>
         <div class="card-body">
-          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Think about these. Be ready to explain your reasoning.</p>
+          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Think about these. Be ready to explain your reasoning out loud or in your notebook.</p>
 
           <div class="socratic-q">
             <span class="sq-icon">⚔️</span>
             <div>
               <div class="label">Defend Your Thinking</div>
-              <div class="question">"If a classmate's model shows the Sun at the center of the galaxy, what's wrong? Use the words ‘spiral arm’ in your answer."</div>
+              <div class="question">"Someone says, 'All planets are rocky like Earth.' Use the data table to answer them."</div>
             </div>
           </div>
 
@@ -1296,14 +1162,14 @@ em { color: #5A4D3E; }
             <span class="sq-icon">🔍</span>
             <div>
               <div class="label">Compare the Evidence</div>
-              <div class="question">"Why does your model need to show CURVED arms, not straight lines coming out of the center?"</div>
+              <div class="question">"Mars and Jupiter are next to each other in order, but very different. What sits between them, and how does that help you remember the two groups?"</div>
             </div>
           </div>
         </div>
       </div>
 
     </div>
-  </div>
+  </div><!-- /act-explore -->
 
   <div class="tab-next-wrap">
     <button class="tab-next-btn" onclick="switchTab('quiz')">Continue to 🧠 Self-Check →</button>
@@ -1328,39 +1194,43 @@ em { color: #5A4D3E; }
 
     <div style="padding:22px 24px;">
 
+      <!-- Question 1 -->
       <div class="quiz-q" data-answer="a">
-        <div class="quiz-q-text">In the engineering design process, what's the FIRST step?</div>
+        <div class="quiz-q-text">Which is true of ALL eight planets?</div>
         <div class="quiz-options">
-          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>Define the problem clearly — what needs solving?</div>
-          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>Build a finished product right away</div>
-          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>Test your design before designing it</div>
+          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>They all orbit the Sun and are round</div>
+          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>They all have rings</div>
+          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>They all have solid rocky surfaces</div>
         </div>
-        <div class="quiz-feedback fb-correct">✅ Correct! Engineers always start by understanding the problem. You can't design a good solution if you don't know exactly what you're trying to fix.</div>
-        <div class="quiz-feedback fb-wrong">❌ Not quite. You can't build or test something before you know WHAT you're building. What has to come first?</div>
+        <div class="quiz-feedback fb-correct">✅ Correct! Every planet orbits the Sun and is pulled into a round shape by its own gravity.</div>
+        <div class="quiz-feedback fb-wrong">❌ Not quite. Only the outer planets have rings, and only the inner planets are rocky. What do all eight share?</div>
       </div>
 
-      <div class="quiz-q" data-answer="c">
-        <div class="quiz-q-text">A student designs a "rainwater collector" to reduce water usage. What science from earlier in the year would help DEFEND this solution?</div>
-        <div class="quiz-options">
-          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>Lesson 14 — about gravity and forces</div>
-          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>Lesson 28 — about Earth's water distribution</div>
-          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>BOTH — gravity pulls rain down, and Earth's fresh water is a tiny resource that needs conserving</div>
-        </div>
-        <div class="quiz-feedback fb-correct">✅ Correct! Good designs use MULTIPLE pieces of science. Gravity explains why the rain falls into your collector. The water distribution lesson explains WHY collecting rain matters — fresh water is scarce.</div>
-        <div class="quiz-feedback fb-wrong">❌ Not quite. Both lessons are relevant. Engineering uses ALL the science you know. The more evidence, the stronger the design.</div>
-      </div>
-
+      <!-- Question 2 -->
       <div class="quiz-q" data-answer="b">
-        <div class="quiz-q-text">Why is it important to EXPLAIN how your design would help, not just describe it?</div>
+        <div class="quiz-q-text">Using the data, which statement compares the inner and outer planets correctly?</div>
         <div class="quiz-options">
-          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>You don't need to explain — drawings are enough</div>
-          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>An explanation shows you understand the SCIENCE — which proves your design will actually work, not just look good</div>
-          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>Only the appearance matters</div>
+          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>Inner planets are bigger and made of gas</div>
+          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>Outer planets are bigger, made of gas and ice, and have rings</div>
+          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>There is no difference</div>
         </div>
-        <div class="quiz-feedback fb-correct">✅ Correct! A good engineer can EXPLAIN why their design works using science. Anyone can draw something — connecting it to evidence is what makes it real engineering.</div>
-        <div class="quiz-feedback fb-wrong">❌ Not quite. Drawings and looks aren't enough. A solution has to actually FUNCTION. To prove it will, you need to connect the design to science — to evidence.</div>
+        <div class="quiz-feedback fb-correct">✅ Correct! The outer planets have diameters of about 50,000 km or more, are made of gas and ice, and all have rings.</div>
+        <div class="quiz-feedback fb-wrong">❌ Not quite. Look at the diameter and type columns. Which group has the giant planets?</div>
       </div>
 
+      <!-- Question 3 -->
+      <div class="quiz-q" data-answer="c">
+        <div class="quiz-q-text">Uranus is about 19 times farther from the Sun than Earth. What does the data show about its year?</div>
+        <div class="quiz-options">
+          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>It is shorter than Earth's year</div>
+          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>It is exactly the same as Earth's year</div>
+          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>It is much longer, about 84 Earth years</div>
+        </div>
+        <div class="quiz-feedback fb-correct">✅ Correct! Farther planets travel a longer path, more slowly, so their years are longer. Uranus takes about 84 Earth years.</div>
+        <div class="quiz-feedback fb-wrong">❌ Not quite. Check the pattern: as distance grows, what happens to the length of a year?</div>
+      </div>
+
+      <!-- Score Display -->
       <div class="quiz-score" id="quizScore">
         <div class="quiz-score-num"><span id="quizScoreNum">0</span>/3</div>
         <div class="quiz-score-label">Questions Correct</div>
@@ -1368,7 +1238,7 @@ em { color: #5A4D3E; }
       </div>
 
     </div>
-  </div>
+  </div><!-- /quiz-card -->
 
   <div class="tab-next-wrap">
     <button class="tab-next-btn" onclick="switchTab('assignment')">Continue to ✍️ Assignment →</button>
@@ -1382,17 +1252,17 @@ em { color: #5A4D3E; }
 <div class="tab-panel" id="tab-assignment">
 
   <!-- Part A -->
-  <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;">📐 Part A — Field Notebook Sketch</p>
-  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Take a photo (or scan) of your Milky Way model from the Investigate tab. Make sure it has the galactic center, four spiral arms, and a YOU ARE HERE dot in the correct spot. Below your model, write one sentence describing where Earth is.</p>
+  <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;">📐 Part A — Planet Size Graph</p>
+  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Add "Lesson 27.02 — Planet Data" to your notebook. Use the data table on the Investigate tab.</p>
 
   <div class="pq">
     <span class="pq-num" style="background:#E8636B;">1</span>
-    <span class="pq-text"><strong>Model &amp; Caption:</strong> In the box below, type what your Milky Way model shows and what each label points to. (For example: "Milky Way galaxy. Labels: galactic center, spiral arm, YOU ARE HERE.")</span>
+    <span class="pq-text"><strong>Graph and Explain:</strong> Make a bar graph of the diameter of all eight planets, in order from the Sun. Color the inner planets one color and the outer planets another. Below the graph, write two sentences about what it shows.</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="parta-1"
-      data-label="Part A — Model &amp; Labels"
-      placeholder="My Milky Way model showed... The labels I used were..."
+      data-label="Part A — Planet Size Graph"
+      placeholder="My graph shows that... The inner planets are ___ and the outer planets are..."
       oninput="autoSave(this,'dot-parta-1')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-parta-1"></span>
@@ -1401,16 +1271,16 @@ em { color: #5A4D3E; }
 
   <!-- Part B -->
   <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;margin-top:20px;">📊 Part B — Evidence Questions</p>
-  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Answer in complete sentences about the model you drew.</p>
+  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Answer in complete sentences using numbers from the table.</p>
 
   <div class="pq">
     <span class="pq-num" style="background:#D4772C;">2</span>
-    <span class="pq-text">Look at your model. Describe what each labeled part represents (galactic center, spiral arm, YOU ARE HERE).</span>
+    <span class="pq-text">List three things all planets have in common.</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="partb-1"
-      data-label="Part B — Q1: Labeled parts"
-      placeholder="Part 1: ... Part 2: ... Part 3: ..."
+      data-label="Part B — Q1: Common traits"
+      placeholder="All planets..."
       oninput="autoSave(this,'dot-partb-1')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-partb-1"></span>
@@ -1419,12 +1289,12 @@ em { color: #5A4D3E; }
 
   <div class="pq">
     <span class="pq-num" style="background:#D4772C;">3</span>
-    <span class="pq-text">Look at your model. What's ONE thing it shows well, and ONE thing it leaves out?</span>
+    <span class="pq-text">Compare one inner planet and one outer planet using at least three columns of the table.</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="partb-2"
-      data-label="Part B — Q2: Strengths and limits"
-      placeholder="My model shows ___ well. It leaves out..."
+      data-label="Part B — Q2: Compare two planets"
+      placeholder="I compared ___ and ___..."
       oninput="autoSave(this,'dot-partb-2')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-partb-2"></span>
@@ -1433,28 +1303,28 @@ em { color: #5A4D3E; }
 
   <div class="pq">
     <span class="pq-num" style="background:#D4772C;">4</span>
-    <span class="pq-text">A friend’s model shows the Sun at the center of the galaxy. Why is that wrong? Use evidence from this lesson.</span>
+    <span class="pq-text">Why would it be impossible to land a spacecraft on Saturn like we have on Mars?</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="partb-3"
-      data-label="Part B — Q3: Testable question &amp; tools"
-      placeholder="Their model is wrong because..."
+      data-label="Part B — Q3: Landing"
+      placeholder="You can't land on Saturn because..."
       oninput="autoSave(this,'dot-partb-3')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-partb-3"></span>
     </span>
   </div>
 
-  <!-- Part C: CER -->
+  <!-- Part C -->
   <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;margin-top:20px;">✍️ Part C — Claim · Evidence · Reasoning</p>
-  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Write your scientific explanation. Aim for 4–6 sentences total.</p>
+  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Write your scientific explanation using Claim, Evidence, and Reasoning. Aim for 4–6 sentences total.</p>
 
   <div class="cer-block">
     <div class="cer-header">
-      <span class="cer-icon">🍃</span>
+      <span class="cer-icon">🔬</span>
       <div class="cer-header-text">
         <div class="cer-label">Claim · Evidence · Reasoning</div>
-        <div class="cer-question">Would your design help conserve one of Earth's resources? Use evidence to show why it would work.</div>
+        <div class="cer-question">How are the inner and outer planets alike and different? Use data from at least four planets as evidence.</div>
       </div>
     </div>
 
@@ -1464,7 +1334,7 @@ em { color: #5A4D3E; }
       <div class="cer-section-body">
         <div class="cer-section-title">Claim <span class="cer-section-hint">— What do you think is true?</span></div>
         <div class="cer-write-box">
-          <p class="cer-starter" style="color:#9A6420;font-style:normal;font-weight:700;">📋 Write your own claim — no starter. Describe your design and what problem it solves.</p>
+          <p class="cer-starter" style="color:#9A6420;font-style:normal;font-weight:700;">📋 Write your own claim — no starter. State how the two groups compare.</p>
           <textarea class="response-textarea ta-sm" id="cer-claim"
             data-label="Part C — Claim"
             placeholder="Write your claim here..."
@@ -1480,9 +1350,9 @@ em { color: #5A4D3E; }
     <div class="cer-section">
       <div class="cer-badge cer-badge-evidence">E</div>
       <div class="cer-section-body">
-        <div class="cer-section-title">Evidence <span class="cer-section-hint">— Which parts of your model support your claim?</span></div>
+        <div class="cer-section-title">Evidence <span class="cer-section-hint">— What from the lesson supports your claim?</span></div>
         <div class="cer-write-box">
-          <p class="cer-starter" style="color:#9A6420;font-style:normal;font-weight:700;">📋 Cite at least two pieces of evidence from your design or testing. No starter.</p>
+          <p class="cer-starter" style="color:#9A6420;font-style:normal;font-weight:700;">📋 Use numbers from at least four planets. No starter.</p>
           <textarea class="response-textarea ta-sm" id="cer-evidence"
             data-label="Part C — Evidence"
             placeholder="Write your evidence here..."
@@ -1498,9 +1368,9 @@ em { color: #5A4D3E; }
     <div class="cer-section">
       <div class="cer-badge cer-badge-reason">R</div>
       <div class="cer-section-body">
-        <div class="cer-section-title">Reasoning <span class="cer-section-hint">— Why does this evidence work better than guesses or general descriptions?</span></div>
+        <div class="cer-section-title">Reasoning <span class="cer-section-hint">— Why does the evidence support your claim?</span></div>
         <div class="cer-write-box">
-          <p class="cer-starter" style="color:#9A6420;font-style:normal;font-weight:700;">📋 Explain how the science from your evidence proves your design would work. No starter.</p>
+          <p class="cer-starter" style="color:#9A6420;font-style:normal;font-weight:700;">📋 Explain what the data shows about each group. No starter.</p>
           <textarea class="response-textarea ta-sm" id="cer-reasoning"
             data-label="Part C — Reasoning"
             placeholder="Write your reasoning here..."
@@ -1512,10 +1382,11 @@ em { color: #5A4D3E; }
       </div>
     </div>
 
+    <!-- Vocab check -->
     <div class="cer-vocab-check">
-      📚 <strong>Vocab check:</strong> Try to use at least two of these words: <strong>model</strong>, <strong>galaxy</strong>, <strong>spiral arm</strong>, <strong>galactic center</strong>, <strong>location</strong>
+      📚 <strong>Vocab check:</strong> Try to use at least two of these words: <strong>inner planets</strong>, <strong>outer planets</strong>, <strong>rocky</strong>, <strong>gas giant</strong>, <strong>diameter</strong>, <strong>orbit</strong>
     </div>
-  </div>
+  </div><!-- /cer-block -->
 
   <!-- Revise Your Thinking -->
   <div class="revise-block">
@@ -1529,15 +1400,15 @@ em { color: #5A4D3E; }
     <div class="revise-prompts">
       <p>Write 3–4 sentences answering these:</p>
       <ul>
-        <li>What did your Milky Way model show clearly? What did it leave out?</li>
-        <li>What surprised you about how much there was to see?</li>
-        <li>What would change about how you observe something next time?</li>
+        <li>What did you predict about the inner and outer planets? Were you right?</li>
+        <li>Which number in the data surprised you most?</li>
+        <li>How would you explain the two planet families to a younger student?</li>
       </ul>
     </div>
     <div class="cer-write-box" style="margin-top:14px;">
       <textarea class="response-textarea ta-lg" id="revise-1"
         data-label="Revise Your Thinking"
-        placeholder="I predicted... I actually wrote... The thing that surprised me most was..."
+        placeholder="At first I predicted... Now I think... The biggest thing that changed my thinking was..."
         oninput="autoSave(this,'dot-revise-1')"></textarea>
       <span style="font-size:12px;color:#9A8E82;font-weight:600;display:block;margin-top:4px;">
         Your reflection<span class="response-save-dot" id="dot-revise-1"></span>
@@ -1550,7 +1421,7 @@ em { color: #5A4D3E; }
     <div class="gathered-header">
       <div class="gathered-header-icon">📋</div>
       <div>
-        <div class="gathered-header-label">Lesson 30.02 · Submission Packet</div>
+        <div class="gathered-header-label">Lesson 27.02 · Submission Packet</div>
         <div class="gathered-header-title">Gathered Answers</div>
       </div>
     </div>
@@ -1579,33 +1450,28 @@ em { color: #5A4D3E; }
       </div>
     </div>
     <div style="padding:18px 22px;">
-      <p style="font-size:16px;color:#5A4D3E;line-height:1.65;margin-bottom:14px;">When you've finished, copy your gathered answers into Canvas — and add a photo of your notebook sketch and table. Use this checklist before you submit.</p>
+      <p style="font-size:16px;color:#5A4D3E;line-height:1.65;margin-bottom:14px;">When you've finished all three parts, copy your gathered answers above into Canvas — or take a photo of your notebook. Use this checklist to make sure everything is ready.</p>
 
       <div class="turn-in-checklist">
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
           <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
-          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part A — Model:</strong> Drawing of the Milky Way with a labeled galactic center, four spiral arms, and a YOU ARE HERE dot two-thirds out from the center, plus a caption explaining what each label represents.</span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part A — Planet Size Graph:</strong> Bar graph of all eight diameters in order, colored by group, with two sentences.</span>
         </div>
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
           <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
-          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Milky Way model:</strong> Galactic center, four spiral arms, and a YOU ARE HERE dot all labeled correctly.</span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part B — Evidence Questions:</strong> All three questions answered in complete sentences with numbers from the table.</span>
         </div>
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
           <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
-          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part B — Evidence Questions:</strong> All three answered in complete sentences using specific words or numbers from your table.</span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part C — CER Response:</strong> Claim, data from at least four planets, and reasoning about the two groups.</span>
         </div>
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
           <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
-          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part C — CER Response:</strong> Claim, at least one piece of evidence from your model, and reasoning explaining where Earth sits in the galaxy.</span>
-        </div>
-
-        <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
-          <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
-          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Revise Your Thinking:</strong> 3–4 sentences comparing your prediction to what actually happened.</span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Revise Your Thinking:</strong> 3–4 sentences explaining how your thinking changed from your first prediction.</span>
         </div>
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
@@ -1615,6 +1481,7 @@ em { color: #5A4D3E; }
 
       </div>
 
+      <!-- How to Submit -->
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px;">
         <div style="background:#EEF8F0;border:1.5px solid #C4E5CC;border-radius:12px;padding:12px;text-align:center;">
           <div style="font-size:22px;margin-bottom:4px;">⌨️</div>
@@ -1641,7 +1508,7 @@ em { color: #5A4D3E; }
 <!-- ═══ FOOTER ═══ -->
 <footer class="footer">
   <div class="footer-line1">Optima Academy Online &mdash; <span>5th Grade Science</span></div>
-  <div class="footer-line2">Module 30 · Lesson 30.02 — Engineering Challenge: Conserve Earth's Resources · SC.5.N.2.1, NGSS 5-ESS3-1, 3-5-ETS1-1</div>
+  <div class="footer-line2">Module 27 · Lesson 27.02 — Data Task: Comparing Planet Properties · SC.5.E.5.2, SC.5.N.1.1</div>
   <div class="footer-line3">© Optima Academy Online. All rights reserved.</div>
 </footer>
 
@@ -1738,7 +1605,7 @@ function checkQuiz(optEl) {
     var scoreMsg = document.getElementById('quizScoreMsg');
     scoreNum.textContent = quizCorrect;
     if (quizCorrect === 3) {
-      scoreMsg.textContent = '🎉 Perfect score! You\'ve got a scientist\'s eye.';
+      scoreMsg.textContent = '🎉 Perfect score! You\'re a true sphere detective.';
       setTimeout(window.launchConfetti, 300);
       var vp = document.getElementById('quizVideoPerfect');
       if (vp) vp.classList.add('show');
@@ -1747,7 +1614,7 @@ function checkQuiz(optEl) {
       var vr = document.getElementById('quizVideoReview');
       if (vr) vr.classList.add('show');
     } else {
-      scoreMsg.textContent = '👍 Good effort! Re-read the lesson — strong evidence uses specifics.';
+      scoreMsg.textContent = '👍 Good effort! Re-read the chain of events, then try again.';
       var vr2 = document.getElementById('quizVideoReview');
       if (vr2) vr2.classList.add('show');
     }
@@ -1953,7 +1820,7 @@ function refreshGathered() {
 
   lines.push('═══════════════════════════════════════════════');
   lines.push('  OPTIMA ACADEMY ONLINE — 5TH GRADE SCIENCE');
-  lines.push('  Lesson 30.02 · Engineering Challenge: Conserve Earth\'s Resources');
+  lines.push('  Lesson 27.02 · Data Task: Comparing Planet Properties');
   lines.push('  Unit 5 — Earth and Space Science');
   lines.push('  Student: ' + (name || '(add your name above)'));
   lines.push('═══════════════════════════════════════════════');
@@ -1998,7 +1865,7 @@ function downloadGathered() {
   var blob = new Blob([text], {type: 'text/plain'});
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'lesson-30-02-engineering-challenge-conserve-earths-resources.txt';
+  a.download = 'lesson-27-02-data-task-comparing-planet-properties.txt';
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }
 

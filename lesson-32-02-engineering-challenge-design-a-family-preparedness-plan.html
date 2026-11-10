@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Optima Academy Online – How Do Earth's Four Spheres Interact?</title>
+<title>Optima Academy Online – Engineering Challenge: Design a Family Preparedness Plan</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900&display=swap');
 
@@ -638,7 +638,7 @@ em { color: #5A4D3E; }
 
 <!-- ═══ PROGRESS BAR ═══ -->
 <div class="progress-wrap">
-  <span class="progress-label">🌐 Lesson Progress</span>
+  <span class="progress-label">🌎 Lesson Progress</span>
   <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
   <span class="progress-pct" id="progressPct">0%</span>
 </div>
@@ -654,10 +654,10 @@ em { color: #5A4D3E; }
       <div class="header-sub">An Education Experience Company</div>
     </div>
   </div>
-  <div class="header-title">How Do Earth's Four Spheres Interact?</div>
+  <div class="header-title">Engineering Challenge: Design a Family Preparedness Plan</div>
   <div class="header-badge">
-    <span>🌐</span>
-    <span>Lesson 27.01</span>
+    <span>🛠️</span>
+    <span>Lesson 32.02</span>
   </div>
 </div>
 
@@ -665,50 +665,23 @@ em { color: #5A4D3E; }
 <div class="hero-visual">
 <svg viewBox="0 0 920 260" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="bgG6" cx="0.5" cy="0.5" r="0.9">
-      <stop offset="0%" stop-color="#1a2030"/>
-      <stop offset="100%" stop-color="#0a0a18"/>
-    </radialGradient>
+    <linearGradient id="w322bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1B3B2F"/><stop offset="100%" stop-color="#4F8A6B"/></linearGradient>
+    <style>
+      .w322a{animation:w322bob 3s ease-in-out infinite alternate}
+      .w322b{animation:w322glow 2.6s ease-in-out infinite}
+      .w322c{animation:w322drift 8s ease-in-out infinite alternate}
+      @keyframes w322bob{from{transform:translateY(0)}to{transform:translateY(-8px)}}
+      @keyframes w322glow{0%,100%{opacity:.75}50%{opacity:1}}
+      @keyframes w322drift{from{transform:translateX(-18px)}to{transform:translateX(24px)}}
+      @media (prefers-reduced-motion: reduce){.w322a,.w322b,.w322c{animation:none}}
+    </style>
   </defs>
-  <rect width="920" height="260" fill="url(#bgG6)"/>
-
-  <rect x="190" y="15" width="540" height="28" rx="6" fill="rgba(139,111,192,0.2)" stroke="#8B6FC0" stroke-width="1.5"/>
-  <text x="460" y="34" text-anchor="middle" font-family="Nunito,sans-serif" font-size="13" fill="#fff" font-weight="800">Earth has FOUR connected systems. None of them works alone.</text>
-
-  <!-- Four overlapping circles (Venn-style) -->
-  <g transform="translate(460,150)" opacity="0.85">
-    <!-- Geosphere - brown - bottom left -->
-    <circle cx="-50" cy="30" r="58" fill="#8D6E63" opacity="0.75"/>
-    <!-- Hydrosphere - blue - bottom right -->
-    <circle cx="50" cy="30" r="58" fill="#1976D2" opacity="0.75"/>
-    <!-- Atmosphere - light blue - top left -->
-    <circle cx="-50" cy="-30" r="58" fill="#81D4FA" opacity="0.75"/>
-    <!-- Biosphere - green - top right -->
-    <circle cx="50" cy="-30" r="58" fill="#43A047" opacity="0.75"/>
-  </g>
-
-  <!-- Labels -->
-  <text x="350" y="125" font-family="Nunito,sans-serif" font-size="12" fill="#81D4FA" font-weight="800">☁️ ATMOSPHERE</text>
-  <text x="355" y="143" font-family="Nunito,sans-serif" font-size="9" fill="#B3E5FC">the air</text>
-
-  <text x="520" y="125" font-family="Nunito,sans-serif" font-size="12" fill="#A5D6A7" font-weight="800">🌳 BIOSPHERE</text>
-  <text x="525" y="143" font-family="Nunito,sans-serif" font-size="9" fill="#C8E6C9">all living things</text>
-
-  <text x="345" y="200" font-family="Nunito,sans-serif" font-size="12" fill="#D7CCC8" font-weight="800">🪨 GEOSPHERE</text>
-  <text x="350" y="218" font-family="Nunito,sans-serif" font-size="9" fill="#EFEBE9">rock and land</text>
-
-  <text x="525" y="200" font-family="Nunito,sans-serif" font-size="12" fill="#90CAF9" font-weight="800">💧 HYDROSPHERE</text>
-  <text x="530" y="218" font-family="Nunito,sans-serif" font-size="9" fill="#BBDEFB">all the water</text>
-
-  <text x="50" y="80" font-family="Nunito,sans-serif" font-size="12" fill="#FFD700" font-weight="800">Where they overlap...</text>
-  <text x="50" y="100" font-family="Nunito,sans-serif" font-size="10" fill="#fff">they're INTERACTING</text>
-
-  <text x="700" y="80" font-family="Nunito,sans-serif" font-size="12" fill="#FFD700" font-weight="800">Examples:</text>
-  <text x="700" y="100" font-family="Nunito,sans-serif" font-size="10" fill="#fff">Wind shapes rock</text>
-  <text x="700" y="118" font-family="Nunito,sans-serif" font-size="10" fill="#fff">Plants make oxygen</text>
-  <text x="700" y="136" font-family="Nunito,sans-serif" font-size="10" fill="#fff">Rain fills rivers</text>
-
-  <line x1="40" y1="245" x2="880" y2="245" stroke="#8B6FC0" stroke-width="1.5" opacity="0.45"/>
+  <rect width="920" height="260" fill="url(#w322bg)"/>
+  <g class="w322a"><rect x="160" y="70" width="180" height="130" rx="10" fill="#FFF8E1"/><rect x="180" y="92" width="140" height="10" rx="5" fill="#90A4AE"/><rect x="180" y="116" width="110" height="10" rx="5" fill="#90A4AE"/><rect x="180" y="140" width="130" height="10" rx="5" fill="#90A4AE"/><rect x="180" y="164" width="90" height="10" rx="5" fill="#90A4AE"/></g>
+  <g class="w322b"><circle cx="470" cy="130" r="46" fill="none" stroke="#FFD54F" stroke-width="8"/><path d="M470 84 L470 70 M470 190 L470 176 M424 130 L410 130 M530 130 L516 130" stroke="#FFD54F" stroke-width="8"/></g>
+  <g class="w322a"><rect x="610" y="110" width="100" height="80" rx="10" fill="#E53935"/><rect x="645" y="96" width="30" height="16" rx="4" fill="#E53935"/><rect x="655" y="130" width="10" height="34" fill="#fff"/><rect x="643" y="142" width="34" height="10" fill="#fff"/></g>
+  <g class="w322c" fill="#fff" opacity=".7"><ellipse cx="780" cy="60" rx="50" ry="14"/></g>
+  <line x1="40" y1="252" x2="880" y2="252" stroke="#55C8E8" stroke-width="1.5" opacity="0.5"/>
 </svg>
 </div>
 
@@ -719,31 +692,31 @@ em { color: #5A4D3E; }
     <div>
       <div class="info-label">Quarter / Unit</div>
       <div class="info-value">Q3 · Unit 5</div>
-      <div class="info-detail">Geo, hydro, atmo, bio</div>
+      <div class="info-detail">Water, Weather &amp; Climate</div>
     </div>
   </div>
   <div class="info-item">
     <div class="info-icon" style="background:#EAF8FD;">📖</div>
     <div>
       <div class="info-label">Week / Lesson</div>
-      <div class="info-value">Week 27</div>
-      <div class="info-detail">Lesson 27.01 — 5th Grade Science</div>
+      <div class="info-value">Week 32</div>
+      <div class="info-detail">Lesson 32.02 — 5th Grade Science</div>
     </div>
   </div>
   <div class="info-item">
-    <div class="info-icon" style="background:#F3E5F5;">🌐</div>
+    <div class="info-icon" style="background:#F3E5F5;">🛠️</div>
     <div>
       <div class="info-label">Science Focus</div>
-      <div class="info-value">Earth&#39;s Systems</div>
-      <div class="info-detail">Geo, hydro, atmo, bio</div>
+      <div class="info-value">Engineering Design</div>
+      <div class="info-detail">Design, test, and improve a plan</div>
     </div>
   </div>
   <div class="info-item">
     <div class="info-icon" style="background:#F0EDF6;">🌎</div>
     <div>
       <div class="info-label">Standards</div>
-      <div class="info-value">SC.5.E.7.1 · TEKS 5.10(A), 5.10(B), 5.10(C), 5.5(C)</div>
-      <div class="info-detail">Earth's Spheres, Rocks &amp; Landforms</div>
+      <div class="info-value">SC.5.E.7.7, SC.5.N.1.1 · TEKS 5.4(A)</div>
+      <div class="info-detail">Preparedness Engineering Challenge</div>
     </div>
   </div>
 </div>
@@ -759,7 +732,7 @@ em { color: #5A4D3E; }
       </div>
     </div>
     <div class="card-body">
-      <p>How can rain, rocks, air, and living things all change each other?</p>
+      <p>How can you design a preparedness plan that really works for your family?</p>
       <p style="font-size:14px;color:#9A8E82;">Keep this question in mind as you work through the lesson today.</p>
     </div>
   </div>
@@ -772,9 +745,9 @@ em { color: #5A4D3E; }
       </div>
     </div>
     <div class="card-body">
-      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#E8636B;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">1</span>name Earth&#39;s four spheres.</p>
-      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#D4772C;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">2</span>describe interactions between two or more spheres.</p>
-      <p style="margin-bottom:0;"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#34B76F;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">3</span>explain why Earth works as one connected system.</p>
+      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#E8636B;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">1</span>define a problem with criteria and constraints.</p>
+      <p><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#D4772C;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">2</span>design a family preparedness plan for a natural disaster.</p>
+      <p style="margin-bottom:0;"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#34B76F;color:#fff;font-weight:800;font-size:13px;margin-right:8px;">3</span>test my plan with a drill and improve it using evidence.</p>
     </div>
   </div>
 </div>
@@ -783,8 +756,9 @@ em { color: #5A4D3E; }
 <div class="need-strip">
   <span class="need-strip-label">You'll need:</span>
   <span class="need-chip">📓 Science notebook</span>
-  <span class="need-chip">✏️ Pencil &amp; colored pencils</span>
-  <span class="need-chip">🪟 A window or outdoor view</span>
+  <span class="need-chip">✏️ Pencil &amp; paper</span>
+  <span class="need-chip">⏱️ A timer or clock</span>
+  <span class="need-chip">👨‍👩‍👧 A family member (for the drill, if possible)</span>
 </div>
 
 <!-- TAB BAR -->
@@ -801,17 +775,16 @@ em { color: #5A4D3E; }
 ══════════════════════════════════════════ -->
 <div class="tab-panel active" id="tab-vocab">
 
-
 <!-- ═══ INTRODUCTION VIDEO ═══ -->
 <div class="video-placeholder-wrap">
-<!-- slot: 27-01-intro -->
+<!-- slot: 32-02-intro -->
 <div class="video-placeholder-inner">
   <span class="vp-icon">🎬</span>
   <div class="vp-label">Introduction Video</div>
-  <div class="vp-title">How Do Earth&#39;s Four Spheres Interact?</div>
-  <div class="vp-slot">27-01-intro</div>
+  <div class="vp-title">Engineering Challenge: Design a Family Preparedness Plan</div>
+  <div class="vp-slot">32-02-intro</div>
   <div class="vp-notes">
-    <strong>Teacher recording notes:</strong> Introduce Earth&#39;s four spheres: geosphere (land/rock), hydrosphere (water), atmosphere (air), and biosphere (living things). Preview vocabulary: geosphere, hydrosphere, atmosphere, biosphere, interaction, system. These four spheres constantly interact — rain (hydrosphere) erodes rock (geosphere), plants (biosphere) release oxygen into the air (atmosphere), and rivers carry sediment to the ocean. Students will identify sphere interactions in real scenarios. ~90-120 seconds.
+    <strong>Teacher recording notes:</strong> Frame today as a real engineering challenge: the "product" is a family plan. Walk through criteria (what it must do) and constraints (limits like budget and space). Model timing a short drill: grab the kit, go to the safe spot, check in. Emphasize that every engineer tests and improves, so it is fine if the first drill is slow. ~90 seconds.
   </div>
 </div>
 </div>
@@ -822,32 +795,31 @@ em { color: #5A4D3E; }
       <div class="act-num" style="background:#E8636B;">1</div>
       <div style="flex:1;">
         <div class="act-title">🔍 Notice, Wonder, and Predict</div>
-        <div class="act-subtitle">Four spheres. One planet.</div>
+        <div class="act-subtitle">You are the engineer</div>
       </div>
       <div class="act-time" style="background:#E8636B;">⏱ 5 min</div>
     </div>
     <div class="act-body">
-      <p>Step outside and look around. Rock and dirt under your feet. Air on your face. Maybe a puddle, a cloud, a tree, or a bird.</p>
-      <p>Scientists sort everything on Earth into four big groups called spheres. Today you'll find out what they are and how they push and pull on each other.</p>
+      <p>Engineers solve problems for real people. Today, the problem is keeping your family safe during a natural disaster, and the solution you'll design is a plan.</p>
+      <p>A good engineer doesn't stop at a first idea. They test it, find what goes wrong, and make it better.</p>
 
       <div class="socratic-q">
         <span class="sq-icon">👀</span>
         <div>
           <div class="label">In Your Science Notebook</div>
-          <div class="question">"Look around right now. Can you spot something made of rock, something made of water, something in the air, and something alive?"</div>
+          <div class="question">"Write the one natural disaster your plan will focus on. Why did you choose it?"</div>
         </div>
       </div>
 
-      <!-- Prediction -->
       <div class="callout callout-sky">
         <span class="callout-icon">🔭</span>
-        <p><strong>Write your prediction below.</strong> Use at least two sentences. What do you think Earth's spheres are? How do you think they connect?</p>
+        <p><strong>Write your prediction below.</strong> Use at least two sentences. What do you predict will be the hardest part of your plan to get right? Why?</p>
       </div>
 
       <div class="response-q">
         <textarea class="response-textarea" id="pred-1"
           data-label="Prediction"
-          placeholder="I think a galaxy is made of... I think it's bigger / smaller than..."
+          placeholder="I predict the hardest part will be... because..."
           oninput="autoSave(this,'dot-pred-1')"></textarea>
         <span style="font-size:12px;color:#9A8E82;font-weight:600;">
           Your prediction<span class="response-save-dot" id="dot-pred-1"></span>
@@ -866,49 +838,49 @@ em { color: #5A4D3E; }
       </div>
     </div>
     <div class="card-body">
-      <p>These six words are tools you'll use all year. <strong>Tap each card to flip it</strong> and read the definition. You'll use most of them in your investigation today.</p>
+      <p>Engineers use these words to design and improve solutions. <strong>Tap each card to flip it</strong> and read the definition.</p>
 
       <div class="vocab-grid">
 
         <div class="flip-card fc-color-1" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">🪨</div><div class="fc-word">geosphere</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">geosphere</div><div class="fc-def">All of Earth&#39;s rock, soil, sand, and land, including mountains and the ocean floor.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🎯</div><div class="fc-word">criteria</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">criteria</div><div class="fc-def">The things a design must do to be successful, like "everyone knows the meeting place."</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-2" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">💧</div><div class="fc-word">hydrosphere</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">hydrosphere</div><div class="fc-def">All of Earth&#39;s water: oceans, rivers, lakes, ice, groundwater, and clouds.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🚧</div><div class="fc-word">constraints</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">constraints</div><div class="fc-def">The limits on a design, like money, space, or time.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-3" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">☁️</div><div class="fc-word">atmosphere</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">atmosphere</div><div class="fc-def">The layer of air that surrounds Earth. It holds the oxygen we breathe.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🛠️</div><div class="fc-word">design</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">design</div><div class="fc-def">A plan or model made to solve a problem.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-4" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">🌳</div><div class="fc-word">biosphere</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">biosphere</div><div class="fc-def">Every living thing on Earth: plants, animals, fungi, tiny microbes, and you.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🧪</div><div class="fc-word">test</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">test</div><div class="fc-def">Trying out a design to see how well it meets the criteria.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-5" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">🔗</div><div class="fc-word">interaction</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">interaction</div><div class="fc-def">When one sphere affects another, like rain wearing away rock.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">🔧</div><div class="fc-word">improve</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">improve</div><div class="fc-def">Changing a design to fix problems found in testing.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
         <div class="flip-card fc-color-6" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
-            <div class="flip-card-front"><div class="fc-emoji">⚙️</div><div class="fc-word">system</div><div class="fc-tap">tap to flip</div></div>
-            <div class="flip-card-back"><div class="fc-word-back">system</div><div class="fc-def">A group of parts that work together. Earth&#39;s four spheres make one system.</div><div class="fc-tap-back">tap to flip back</div></div>
+            <div class="flip-card-front"><div class="fc-emoji">⏱️</div><div class="fc-word">drill</div><div class="fc-tap">tap to flip</div></div>
+            <div class="flip-card-back"><div class="fc-word-back">drill</div><div class="fc-def">A practice run of a plan, like a fire drill, to test it safely.</div><div class="fc-tap-back">tap to flip back</div></div>
           </div>
         </div>
 
@@ -917,7 +889,7 @@ em { color: #5A4D3E; }
       <!-- Copywork -->
       <div class="callout callout-think" style="margin-top:16px;">
         <span class="callout-icon">📓</span>
-        <p>Copy this sentence carefully into your science notebook:<br><strong>"Earth has four spheres: geosphere, hydrosphere, atmosphere, and biosphere. They work together as one system."</strong><br>Then list one thing from each sphere that you can see right now.</p>
+        <p>Copy this sentence carefully into your science notebook:<br><strong>"Engineers define the problem, design a solution, test it, and improve it."</strong></p>
       </div>
 
     </div>
@@ -934,182 +906,117 @@ em { color: #5A4D3E; }
 ══════════════════════════════════════════ -->
 <div class="tab-panel" id="tab-lesson">
 
-  <!-- Suggested image: lesson topic scene -->
-  <div class="lesson-figure">
-    <div class="lesson-figure-label">📷 Reference · Four spheres in one place</div>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Olympic_Coast_Sea_Stacks_%28f24a5a69-155d-4519-3e4d-8113c1a7b030%29.JPG/960px-Olympic_Coast_Sea_Stacks_%28f24a5a69-155d-4519-3e4d-8113c1a7b030%29.JPG"
-          alt="Rocky sea stack islands rising from the ocean off a rocky beach, with trees growing on top and a clear sky above."
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; this.parentElement.querySelector('.lesson-figure-label').style.display='none';"
-        />
-        <div class="image-suggestion" style="display:none;">
-          <div class="image-suggestion-icon">🖼️</div>
-          <div class="image-suggestion-label">Suggested Image — Generate This</div>
-          <div class="image-suggestion-desc">
-            Photo of rocky sea stacks in the ocean with trees on top and a blue sky, showing rock, water, air, and life together.
-          </div>
-          <div class="image-suggestion-file">Save as: images/27-01-sea-stacks.jpg</div>
-        </div>
-        <div class="lesson-figure-caption">
-          Sea stacks on the Olympic Coast in Washington. Can you find all four spheres: rock, water, air, and living things? <span style="font-size:12px;color:#9A8E82;">Photo: National Park Service (public domain).</span>
-        </div>
-  </div>
 
   <!-- ACTIVITY 2: Core Content -->
   <div class="activity-card act-lesson scroll-reveal">
     <div class="act-head">
       <div class="act-num" style="background:#D4772C;">2</div>
       <div style="flex:1;">
-        <div class="act-title">📖 The Lesson</div>
-        <div class="act-subtitle">Four spheres, one system</div>
+        <div class="act-title">📖 Before You Design</div>
+        <div class="act-subtitle">The engineering design process</div>
       </div>
-      <div class="act-time" style="background:#D4772C;">⏱ 15 min</div>
+      <div class="act-time" style="background:#D4772C;">⏱ 8 min</div>
     </div>
     <div class="act-body">
 
-      <!-- Section 1 -->
       <div class="card theme-forest" style="margin-bottom:18px;">
         <div class="card-head">
-          <div class="card-head-icon">👁️</div>
+          <div class="card-head-icon">🎯</div>
           <div>
             <div class="card-head-label">Section 1</div>
-            <div class="card-head-title">Earth&#39;s Four Spheres</div>
+            <div class="card-head-title">Criteria and Constraints</div>
           </div>
         </div>
         <div class="card-body">
-          <p>Scientists split Earth into four big parts called spheres. The <strong>geosphere</strong> is rock, soil, and land. The <strong>hydrosphere</strong> is all the water: oceans, rivers, ice, and even clouds. The <strong>atmosphere</strong> is the air. The <strong>biosphere</strong> is every living thing, including you.</p>
-          <p>Each sphere is huge on its own. But none of them works alone.</p>
+          <p>Every engineering problem starts with <strong>criteria</strong> and <strong>constraints</strong>. For a family plan, criteria might be: everyone knows where to shelter, the kit has three days of supplies, and every family member has a way to contact the others.</p>
+          <p>Constraints are the limits. Your family may have a small budget, little storage space, or no car. A good plan works within those limits.</p>
           <div class="socratic-q">
             <span class="sq-icon">🤔</span>
             <div>
               <div class="label">Stop and Think</div>
-              <div class="question">"Which sphere are you touching right now? Can you name more than one?"</div>
+              <div class="question">"Name one criterion and one constraint for YOUR family's plan."</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Section 2 -->
       <div class="card theme-sky" style="margin-bottom:18px;">
         <div class="card-head">
-          <div class="card-head-icon">🧾</div>
+          <div class="card-head-icon">🧪</div>
           <div>
             <div class="card-head-label">Section 2</div>
-            <div class="card-head-title">Spheres Interact</div>
+            <div class="card-head-title">Test, Then Improve</div>
           </div>
         </div>
         <div class="card-body">
-          <p>When one sphere affects another, scientists call it an <span class="vtip">interaction<span class="vtip-box"><span class="vtip-word">interaction</span>When one sphere affects another.</span></span>. Roots (biosphere) crack rocks (geosphere). Wind (atmosphere) pushes ocean waves (hydrosphere). Rain (hydrosphere) soaks into soil (geosphere).</p>
-          <p>Some interactions take seconds, like a breath. Others take thousands of years, like a river carving a canyon.</p>
+          <p>A plan on paper is a design. A <strong>drill</strong> is the test. When you practice, you find the weak spots: the flashlight with dead batteries, the meeting place no one remembered, or the kit that's too heavy to carry.</p>
+          <p>Engineers compare results to the criteria, then <strong>improve</strong> the design. Then they test again. That loop is the heart of engineering.</p>
           <div class="socratic-q">
             <span class="sq-icon">🧪</span>
             <div>
               <div class="label">Stop and Reason</div>
-              <div class="question">"Think about a thunderstorm. How many spheres can you find in it?"</div>
+              <div class="question">"Why is finding a problem during a drill actually a good thing?"</div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- Section 3 -->
-      <div class="card theme-earth" style="margin-bottom:18px;">
-        <div class="card-head">
-          <div class="card-head-icon">❓</div>
-          <div>
-            <div class="card-head-label">Section 3</div>
-            <div class="card-head-title">One Change Leads to Another</div>
-          </div>
-        </div>
-        <div class="card-body">
-          <p>A change in one sphere often causes changes in the others, like a row of dominoes. Cut down a forest (biosphere), and rain washes more soil (geosphere) into rivers (hydrosphere).</p>
-          <p><strong>Real-World Connection:</strong> Scientists use satellites to watch all four spheres at once. They track melting ice, growing forests, and dust storms blowing across oceans.</p>
         </div>
       </div>
 
       <!-- Key Concept Box -->
       <div class="key-concept">
         <div class="kc-label">🔑 Key Concept</div>
-          <p>Earth has four interconnected systems: the geosphere (rock and land), hydrosphere (water), atmosphere (air), and biosphere (living things). They constantly interact — a change in one affects the others.</p>
-      </div>
-
-      <div style="background:#EAF8FD;border:2px solid #B8E0F8;border-radius:14px;padding:16px 20px;margin:16px 0;">
-        <p style="font-size:16px;color:#0E1C42;font-weight:800;margin:0 0 8px;">🪨 Sedimentary Rock, Fossil Fuels, and Landforms</p>
-        <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0 0 8px;">The geosphere is always changing! Over thousands of years, tiny pieces of rock, sand, and shells settle in layers. These layers get pressed together and harden into <strong>sedimentary rock</strong> — like sandstone and limestone. Sometimes the remains of ancient plants and animals get trapped in those layers and become <strong>fossils</strong>.</p>
-        <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0 0 8px;">Ancient organisms buried deep underground were slowly transformed by heat and pressure into <strong>fossil fuels</strong> — coal, oil, and natural gas. These are the energy sources people use today, but they take millions of years to form and can't be replaced quickly.</p>
-        <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">The geosphere is also shaped by <strong>wind, water, and ice</strong>. Rivers carve valleys, wind sculpts rock arches, and glaciers grind mountains flat. These forces create the <strong>landforms</strong> we see — canyons, deltas, sand dunes, and more!</p>
+          <p>The engineering design process helps you build a family preparedness plan: define the problem with criteria and constraints, brainstorm, design the plan, test it with a drill, improve it, and share it.</p>
       </div>
 
       <!-- Interactive Diagram -->
       <div class="diagram-wrap scroll-reveal">
         <div style="font-size:13px;color:#9A8E82;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">
-          🗺 Tap each interaction
+          🗺 Tap each step of the process
         </div>
-        <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;line-height:1.65;">Six everyday sphere interactions. Tap each one to see which spheres are involved.</p>
+        <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;line-height:1.65;">Here is the engineering design process for your challenge. Tap each step to see what to do.</p>
         <div class="diagram-interactive">
-          <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="font-family:Nunito,Arial,sans-serif;max-width:100%;height:auto;" role="img" aria-label="Earth sphere interactions diagram with six examples">
-            <rect width="720" height="360" fill="#FAF7F3" rx="12" stroke="#c8b896" stroke-width="2"/>
-            <rect x="180" y="15" width="360" height="28" rx="6" fill="#0E1C42"/>
-            <text x="360" y="33" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">Sphere Interactions · Tap to Explore</text>
-
-            <rect x="20" y="60" width="220" height="130" rx="10" fill="#E1F5FE" stroke="#0288D1" stroke-width="2.5"/>
-            <text x="130" y="100" text-anchor="middle" font-size="36">🌧️</text>
-            <text x="130" y="135" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="800">Rain falls</text>
-            <text x="130" y="153" text-anchor="middle" font-size="10" fill="#5A4D3E">on a mountain</text>
-            <rect x="40" y="165" width="180" height="20" rx="5" fill="#0288D1"/>
-            <text x="130" y="180" text-anchor="middle" font-size="10" fill="#fff" font-weight="800">HYDRO + GEO</text>
-
-            <rect x="250" y="60" width="220" height="130" rx="10" fill="#E8F5E9" stroke="#43A047" stroke-width="2.5"/>
-            <text x="360" y="100" text-anchor="middle" font-size="36">🌱</text>
-            <text x="360" y="135" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="800">Plant grows</text>
-            <text x="360" y="153" text-anchor="middle" font-size="10" fill="#5A4D3E">in soil with water</text>
-            <rect x="270" y="165" width="180" height="20" rx="5" fill="#43A047"/>
-            <text x="360" y="180" text-anchor="middle" font-size="10" fill="#fff" font-weight="800">BIO + GEO + HYDRO</text>
-
-            <rect x="480" y="60" width="220" height="130" rx="10" fill="#FFFDE7" stroke="#F9A825" stroke-width="2.5"/>
-            <text x="590" y="100" text-anchor="middle" font-size="36">💨</text>
-            <text x="590" y="135" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="800">Wind shapes rock</text>
-            <text x="590" y="153" text-anchor="middle" font-size="10" fill="#5A4D3E">over many years</text>
-            <rect x="500" y="165" width="180" height="20" rx="5" fill="#F9A825"/>
-            <text x="590" y="180" text-anchor="middle" font-size="10" fill="#fff" font-weight="800">ATMO + GEO</text>
-
-            <rect x="20" y="205" width="220" height="130" rx="10" fill="#FFEBEE" stroke="#E53935" stroke-width="2.5"/>
-            <text x="130" y="245" text-anchor="middle" font-size="36">🐦</text>
-            <text x="130" y="280" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="800">Bird breathes</text>
-            <text x="130" y="298" text-anchor="middle" font-size="10" fill="#5A4D3E">air to live</text>
-            <rect x="40" y="310" width="180" height="20" rx="5" fill="#E53935"/>
-            <text x="130" y="325" text-anchor="middle" font-size="10" fill="#fff" font-weight="800">BIO + ATMO</text>
-
-            <rect x="250" y="205" width="220" height="130" rx="10" fill="#E3F2FD" stroke="#1976D2" stroke-width="2.5"/>
-            <text x="360" y="245" text-anchor="middle" font-size="36">🌊</text>
-            <text x="360" y="280" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="800">Wave crashes</text>
-            <text x="360" y="298" text-anchor="middle" font-size="10" fill="#5A4D3E">on a beach</text>
-            <rect x="270" y="310" width="180" height="20" rx="5" fill="#1976D2"/>
-            <text x="360" y="325" text-anchor="middle" font-size="10" fill="#fff" font-weight="800">HYDRO + GEO</text>
-
-            <rect x="480" y="205" width="220" height="130" rx="10" fill="#F3E5F5" stroke="#8B6FC0" stroke-width="2.5"/>
-            <text x="590" y="245" text-anchor="middle" font-size="36">🌳</text>
-            <text x="590" y="280" text-anchor="middle" font-size="13" fill="#0E1C42" font-weight="800">Tree releases</text>
-            <text x="590" y="298" text-anchor="middle" font-size="10" fill="#5A4D3E">oxygen into air</text>
-            <rect x="500" y="310" width="180" height="20" rx="5" fill="#8B6FC0"/>
-            <text x="590" y="325" text-anchor="middle" font-size="10" fill="#fff" font-weight="800">BIO + ATMO</text>
-
-            <rect class="hotspot" data-part="rain" data-info="Rain on a Mountain | Water (hydrosphere) hits rock (geosphere). Over time, the rain slowly wears the rock down — that's erosion. This is how mountains get smaller over millions of years and how soil forms." x="20" y="60" width="220" height="130" rx="10" fill="#0288D1"/>
-            <rect class="hotspot" data-part="plant" data-info="Plant Growing | A plant (biosphere) needs three spheres at once. It pulls water from the soil (hydrosphere), nutrients from the dirt (geosphere), and CO₂ from the air (atmosphere). This is why plants are such important sphere-connectors." x="250" y="60" width="220" height="130" rx="10" fill="#43A047"/>
-            <rect class="hotspot" data-part="wind" data-info="Wind Shapes Rock | Air (atmosphere) carries tiny sand grains that slowly grind down rock (geosphere). The Grand Canyon and the rock arches in the desert were carved partly by wind, partly by water — both over millions of years." x="480" y="60" width="220" height="130" rx="10" fill="#F9A825"/>
-            <rect class="hotspot" data-part="bird" data-info="Bird Breathes | Every animal (biosphere) needs air (atmosphere) to live. You're doing this right now. The oxygen you breathe came from plants — another biosphere–atmosphere connection." x="20" y="205" width="220" height="130" rx="10" fill="#E53935"/>
-            <rect class="hotspot" data-part="wave" data-info="Wave on Beach | Ocean water (hydrosphere) crashes onto sand and rocks (geosphere). The wave moves sand around, breaks rocks into smaller pieces, and shapes coastlines. Every coastline on Earth is a hydro–geo interaction." x="250" y="205" width="220" height="130" rx="10" fill="#1976D2"/>
-            <rect class="hotspot" data-part="tree" data-info="Tree Releases Oxygen | Trees (biosphere) take in CO₂ from the air (atmosphere) and give back oxygen. The air you're breathing right now is being constantly refreshed by plants. Lose the biosphere — lose the breathable atmosphere." x="480" y="205" width="220" height="130" rx="10" fill="#8B6FC0"/>
+          <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="font-family:Nunito,Arial,sans-serif;max-width:100%;height:auto;" role="img" aria-label="Six steps of the engineering design process for a preparedness plan">
+<rect width="720" height="360" fill="#F4F9FD" rx="12" stroke="#c8b896" stroke-width="2"/>
+            <rect x="170" y="10" width="380" height="26" rx="6" fill="#0E1C42"/>
+            <text x="360" y="28" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">Engineering a Family Preparedness Plan</text>
+            <rect x="30" y="70" width="200" height="30" rx="6" fill="#1565C0"/><text x="130" y="90" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">🎯 1 · Define</text>
+            <rect x="30" y="106" width="200" height="70" rx="8" fill="#1565C0" opacity=".12"/>
+            <text x="130" y="132" text-anchor="middle" font-size="12" fill="#0E1C42" font-weight="700">Criteria and</text><text x="130" y="150" text-anchor="middle" font-size="12" fill="#0E1C42" font-weight="700">constraints</text>
+            <rect x="260" y="70" width="200" height="30" rx="6" fill="#2E7D32"/><text x="360" y="90" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">💡 2 · Brainstorm</text>
+            <rect x="260" y="106" width="200" height="70" rx="8" fill="#2E7D32" opacity=".12"/>
+            <text x="360" y="132" text-anchor="middle" font-size="12" fill="#0E1C42" font-weight="700">Many ideas</text><text x="360" y="150" text-anchor="middle" font-size="12" fill="#0E1C42" font-weight="700">before choosing</text>
+            <rect x="490" y="70" width="200" height="30" rx="6" fill="#EF6C00"/><text x="590" y="90" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">📝 3 · Design</text>
+            <rect x="490" y="106" width="200" height="70" rx="8" fill="#EF6C00" opacity=".12"/>
+            <text x="590" y="132" text-anchor="middle" font-size="12" fill="#0E1C42" font-weight="700">Write the</text><text x="590" y="150" text-anchor="middle" font-size="12" fill="#0E1C42" font-weight="700">whole plan</text>
+            <rect x="490" y="220" width="200" height="30" rx="6" fill="#6A1B9A"/><text x="590" y="240" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">🧪 4 · Test</text>
+            <rect x="490" y="256" width="200" height="70" rx="8" fill="#6A1B9A" opacity=".12"/>
+            <text x="590" y="282" text-anchor="middle" font-size="12" fill="#0E1C42" font-weight="700">Run a timed</text><text x="590" y="300" text-anchor="middle" font-size="12" fill="#0E1C42" font-weight="700">practice drill</text>
+            <rect x="260" y="220" width="200" height="30" rx="6" fill="#C62828"/><text x="360" y="240" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">🔧 5 · Improve</text>
+            <rect x="260" y="256" width="200" height="70" rx="8" fill="#C62828" opacity=".12"/>
+            <text x="360" y="282" text-anchor="middle" font-size="12" fill="#0E1C42" font-weight="700">Fix what went</text><text x="360" y="300" text-anchor="middle" font-size="12" fill="#0E1C42" font-weight="700">wrong</text>
+            <rect x="30" y="220" width="200" height="30" rx="6" fill="#00838F"/><text x="130" y="240" text-anchor="middle" font-size="13" fill="#fff" font-weight="800">📣 6 · Share</text>
+            <rect x="30" y="256" width="200" height="70" rx="8" fill="#00838F" opacity=".12"/>
+            <text x="130" y="282" text-anchor="middle" font-size="12" fill="#0E1C42" font-weight="700">Post it for</text><text x="130" y="300" text-anchor="middle" font-size="12" fill="#0E1C42" font-weight="700">the family</text>
+            <path d="M232 130 L256 130" stroke="#0E1C42" stroke-width="3"/><path d="M462 130 L486 130" stroke="#0E1C42" stroke-width="3"/>
+            <path d="M590 178 L590 216" stroke="#0E1C42" stroke-width="3"/><path d="M486 275 L462 275" stroke="#0E1C42" stroke-width="3"/><path d="M256 275 L232 275" stroke="#0E1C42" stroke-width="3"/>
+            <path d="M440 222 Q 470 196 500 178" stroke="#C62828" stroke-width="2.5" stroke-dasharray="6,4" fill="none"/><path d="M492 176 L502 176 L498 186" fill="none" stroke="#C62828" stroke-width="2.5"/>
+            <text x="440" y="196" font-size="11" fill="#C62828" font-weight="800">redesign</text>
+            <rect class="hotspot" data-part="s0" data-info="Define the Problem | Write the problem in one sentence. Then list the CRITERIA (what the plan must do) and CONSTRAINTS (limits, like cost, space, or time)." x="30" y="70" width="200" height="30" rx="6" fill="#55C8E8"/>
+            <rect class="hotspot" data-part="s1" data-info="Brainstorm | Think of many ideas before choosing one: different shelters, routes, meeting places, and ways to contact each other." x="260" y="70" width="200" height="30" rx="6" fill="#55C8E8"/>
+            <rect class="hotspot" data-part="s2" data-info="Design the Plan | Choose the best ideas and write the plan: shelter, evacuation route, meeting place, out-of-town contact, kit list, and special needs." x="490" y="70" width="200" height="30" rx="6" fill="#55C8E8"/>
+            <rect class="hotspot" data-part="s3" data-info="Test It | Test the plan with a pretend drill. Time how long it takes to grab the kit and reach the safe room. Note anything that goes wrong." x="490" y="220" width="200" height="30" rx="6" fill="#55C8E8"/>
+            <rect class="hotspot" data-part="s4" data-info="Improve It | Use what you learned from the test and from feedback to fix weak spots. Engineers always improve their designs." x="260" y="220" width="200" height="30" rx="6" fill="#55C8E8"/>
+            <rect class="hotspot" data-part="s5" data-info="Share It | Share the final plan with your family. Post it where everyone can see it, and plan to update it every year." x="30" y="220" width="200" height="30" rx="6" fill="#55C8E8"/>
           </svg>
           <div style="background:linear-gradient(135deg,#EEF8F0,#D6F5DE);border:2px solid #B8E8CF;border-radius:14px;padding:12px 18px;margin-top:10px;display:flex;align-items:center;gap:12px;">
             <span style="font-size:28px;flex-shrink:0;animation:mind-blow-bounce 2s ease-in-out infinite;">👆</span>
-            <p style="font-size:15px;color:#0E1C42;line-height:1.55;margin:0;font-weight:600;">Tap each box to see which spheres are interacting.</p>
+            <p style="font-size:15px;color:#0E1C42;line-height:1.55;margin:0;font-weight:600;">Tap each step. Notice the arrow that loops back from Improve to Design.</p>
           </div>
           <div class="diagram-info-panel" id="diagramPanel">
             <span class="dip-word" id="diagramWord"></span>
             <span id="diagramInfo"></span>
           </div>
         </div>
-        <div class="diagram-caption">Six everyday interactions between Earth's spheres. Once you start noticing them, you'll see them everywhere.</div>
+        <div class="diagram-caption">Engineers test and improve again and again. The dashed arrow shows the redesign loop.</div>
       </div>
 
       <!-- Mind-Blowing Fact -->
@@ -1117,18 +1024,9 @@ em { color: #5A4D3E; }
         <div class="mind-blow-icon">🤯</div>
         <div class="mind-blow-content">
           <div class="mind-blow-label">Mind-Blowing Fact</div>
-          <div class="mind-blow-text">Dust from the Sahara Desert blows <strong>across the Atlantic Ocean</strong> and helps feed the plants of the Amazon rainforest. That&#39;s the geosphere, atmosphere, and biosphere working together across thousands of miles.</div>
+          <div class="mind-blow-text">Many schools practice fire drills every month. Practicing makes people faster and calmer, because their bodies remember what to do. The same is true for a family preparedness drill.</div>
         </div>
       </div>
-
-      <!-- Go Deeper -->
-      <details class="go-deeper">
-        <summary>Go Deeper — The water in your glass is ancient</summary>
-        <div class="gd-body">
-          <p>Earth has been reusing the same water for billions of years. It moves between the spheres: from oceans to clouds to rain to rivers, and through plants and animals too.</p>
-          <p>The water you drink today may once have been part of a glacier, a cloud over the ocean, or even a drink for a dinosaur.</p>
-        </div>
-      </details>
 
     </div>
   </div><!-- /act-lesson -->
@@ -1149,48 +1047,64 @@ em { color: #5A4D3E; }
     <div class="act-head">
       <div class="act-num" style="background:#55C8E8;">3</div>
       <div style="flex:1;">
-        <div class="act-title">🔬 Sphere Interaction Sort</div>
-        <div class="act-subtitle">Six events. Four spheres. Find the connections.</div>
+        <div class="act-title">🔬 Design, Test, Improve</div>
+        <div class="act-subtitle">Build your plan and run a drill</div>
       </div>
-      <div class="act-time" style="background:#55C8E8;">⏱ 10 min</div>
+      <div class="act-time" style="background:#55C8E8;">⏱ 30 min</div>
     </div>
     <div class="act-body">
 
-      <p>Six events happen on Earth every day. For each one, figure out which spheres are involved and how one affects another.</p>
+      <p>Follow the steps to design your family's preparedness plan, test it with a short drill, and improve it.</p>
 
-      <div style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
+      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
         <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Read the events</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;"><strong>A:</strong> A puddle dries up on a hot, sunny afternoon. <strong>B:</strong> Earthworms tunnel through the soil in a garden. <strong>C:</strong> Smoke from a forest fire drifts across the sky. <strong>D:</strong> Heavy rain causes a mudslide that buries plants. <strong>E:</strong> A farmer waters a field and the crops grow taller. <strong>F:</strong> Snow on a mountain melts and fills a stream in spring.</p>
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Define the problem</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Write the disaster your plan is for. List at least three criteria and two constraints in your notebook.</p>
         </div>
-      </div>
-      <div class="student-chart-wrap">
-        <div class="student-chart-label">📋 Sphere interactions — copy into your notebook</div>
-        <table class="student-chart">
-          <thead><tr><th style="width:24%;">Event</th><th>Spheres involved</th><th>What affects what?</th></tr></thead>
-          <tbody><tr><td class="row-label">A — Puddle dries up</td><td></td><td></td></tr><tr><td class="row-label">B — Earthworms tunnel</td><td></td><td></td></tr><tr><td class="row-label">C — Forest fire smoke</td><td></td><td></td></tr><tr><td class="row-label">D — Mudslide</td><td></td><td></td></tr><tr><td class="row-label">E — Watering crops</td><td></td><td></td></tr><tr><td class="row-label">F — Melting snow</td><td></td><td></td></tr></tbody>
-        </table>
       </div>
       <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
         <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Fill in the table</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">For each event, list every sphere you can find. Then write one short sentence about what affects what.</p>
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Design your plan</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Fill in the plan table below in your notebook: shelter spot, evacuation route, meeting place, out-of-town contact, kit list, and special needs.</p>
         </div>
       </div>
+      <div class="student-chart-wrap">
+        <div class="student-chart-label">📋 My family preparedness plan</div>
+        <table class="student-chart">
+          <thead><tr><th style="width:190px;">Part of the plan</th><th>My design</th><th style="width:170px;">After testing: keep or change?</th></tr></thead>
+          <tbody>
+            <tr><td class="row-label">🏠 Shelter spot</td><td></td><td></td></tr>
+            <tr><td class="row-label">🚗 Evacuation route</td><td></td><td></td></tr>
+            <tr><td class="row-label">📍 Meeting place</td><td></td><td></td></tr>
+            <tr><td class="row-label">📞 Out-of-town contact</td><td></td><td></td></tr>
+            <tr><td class="row-label">🎒 Kit list (at least 6 items)</td><td></td><td></td></tr>
+            <tr><td class="row-label">🐾 Special needs (pets, medicine, babies)</td><td></td><td></td></tr>
+            <tr><td class="row-label">⏱️ Drill time (1st try / 2nd try)</td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+
       <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
         <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Find the big one</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Star the event that involves the most spheres.</p>
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Run a drill</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">With a family member if possible, pretend a warning was just issued. Time how long it takes to gather the kit and reach your shelter spot. Write the time.</p>
         </div>
       </div>
-      <div style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
+      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
         <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div>
         <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
-          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Make a claim</p>
-          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Write one sentence about how Earth&#39;s spheres are connected. You&#39;ll use it in your CER.</p>
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Check the criteria</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Did the plan meet every criterion? Write what worked and what went wrong.</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#55C8E8,#34B76F);border-radius:50%;color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">5</div>
+        <div style="flex:1;background:#EAF8FD;border:2px solid #D6F2FB;border-radius:14px;padding:14px 16px;">
+          <p style="font-size:16px;color:#0E1C42;font-weight:700;margin-bottom:4px;">Improve and retest</p>
+          <p style="font-size:15px;color:#5A4D3E;line-height:1.65;margin:0;">Change at least one part of your plan to fix a problem. If you can, run the drill again and compare the times.</p>
         </div>
       </div>
 
@@ -1204,42 +1118,44 @@ em { color: #5A4D3E; }
           </div>
         </div>
         <div class="card-body">
-          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Answer in complete sentences. Use your sphere interactions table.</p>
+          <p style="font-size:15px;color:#5A4D3E;margin-bottom:10px;">Answer these in complete sentences. Use your plan and your drill results.</p>
 
           <div class="pq">
             <span class="pq-num" style="background:#D4772C;">1</span>
-            <span class="pq-text">Pick one event. Name the spheres involved and explain how one affected the other.</span>
+            <span class="pq-text">List your criteria and constraints. Which constraint was hardest to work around?</span>
           </div>
           <div class="response-q">
             <textarea class="response-textarea ta-sm" id="ryt-1"
-              data-label="Investigate — Q1: One event"
-              placeholder="In event ___, the ___ affected the ___ because..."
+              data-label="Investigate — Q1: Criteria and constraints"
+              placeholder="My criteria were... My constraints were... The hardest was..."
               oninput="autoSave(this,'dot-ryt-1')"></textarea>
             <span style="font-size:12px;color:#9A8E82;font-weight:600;">
               Your answer<span class="response-save-dot" id="dot-ryt-1"></span>
             </span>
           </div>
+
           <div class="pq" style="margin-top:14px;">
             <span class="pq-num" style="background:#D4772C;">2</span>
-            <span class="pq-text">Which event involved the most spheres? List them all.</span>
+            <span class="pq-text">What happened during your drill? Give your time and one problem you found.</span>
           </div>
           <div class="response-q">
             <textarea class="response-textarea ta-sm" id="ryt-2"
-              data-label="Investigate — Q2: Most spheres"
-              placeholder="Event ___ involved the most spheres: ..."
+              data-label="Investigate — Q2: Drill results"
+              placeholder="My drill took ___. One problem was..."
               oninput="autoSave(this,'dot-ryt-2')"></textarea>
             <span style="font-size:12px;color:#9A8E82;font-weight:600;">
               Your answer<span class="response-save-dot" id="dot-ryt-2"></span>
             </span>
           </div>
+
           <div class="pq" style="margin-top:14px;">
             <span class="pq-num" style="background:#D4772C;">3</span>
-            <span class="pq-text">Which sphere showed up in the most events? Why do you think that is?</span>
+            <span class="pq-text">What did you change to improve your plan, and how do you know it is better?</span>
           </div>
           <div class="response-q">
             <textarea class="response-textarea ta-sm" id="ryt-3"
-              data-label="Investigate — Q3: Most common sphere"
-              placeholder="The ___ showed up most because..."
+              data-label="Investigate — Q3: Improvement"
+              placeholder="I changed... I know it is better because..."
               oninput="autoSave(this,'dot-ryt-3')"></textarea>
             <span style="font-size:12px;color:#9A8E82;font-weight:600;">
               Your answer<span class="response-save-dot" id="dot-ryt-3"></span>
@@ -1264,7 +1180,7 @@ em { color: #5A4D3E; }
             <span class="sq-icon">⚔️</span>
             <div>
               <div class="label">Defend Your Thinking</div>
-              <div class="question">"A friend says, 'The atmosphere is just air. It can't change rocks.' Use an example to prove them wrong."</div>
+              <div class="question">"Someone says, 'Our plan is perfect, so we don't need to practice it.' Use your drill as evidence to answer."</div>
             </div>
           </div>
 
@@ -1272,7 +1188,7 @@ em { color: #5A4D3E; }
             <span class="sq-icon">🔍</span>
             <div>
               <div class="label">Compare the Evidence</div>
-              <div class="question">"Which interaction in your table happens fastest? Which takes the longest?"</div>
+              <div class="question">"Compare your plan with a classmate's or a family member's idea. Which plan better meets the criteria? Why?"</div>
             </div>
           </div>
         </div>
@@ -1306,38 +1222,38 @@ em { color: #5A4D3E; }
 
       <!-- Question 1 -->
       <div class="quiz-q" data-answer="b">
-        <div class="quiz-q-text">A wave crashes onto a sandy beach. Which two spheres are interacting?</div>
+        <div class="quiz-q-text">Which of these is a CONSTRAINT for a family preparedness plan?</div>
         <div class="quiz-options">
-          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>Atmosphere and biosphere</div>
-          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>Hydrosphere and geosphere</div>
-          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>Biosphere and atmosphere</div>
+          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>Everyone knows the meeting place</div>
+          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>The family has only $40 to spend on supplies</div>
+          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>The kit has three days of water</div>
         </div>
-        <div class="quiz-feedback fb-correct">✅ Correct! Water (hydrosphere) meets sand and rock (geosphere). Every coastline on Earth is shaped by this kind of interaction over time.</div>
-        <div class="quiz-feedback fb-wrong">❌ Not quite. Think about what a wave is made of, and what a beach is made of. Those are the two spheres at work here.</div>
+        <div class="quiz-feedback fb-correct">✅ Correct! A constraint is a limit on the design. A small budget limits what you can buy.</div>
+        <div class="quiz-feedback fb-wrong">❌ Not quite. "Everyone knows the meeting place" and "three days of water" are criteria: things the plan must do. Which choice is a limit?</div>
       </div>
 
       <!-- Question 2 -->
       <div class="quiz-q" data-answer="a">
-        <div class="quiz-q-text">You take a deep breath. Which TWO spheres are connecting in that moment?</div>
+        <div class="quiz-q-text">During a drill, your family takes 8 minutes to find the flashlight. What should an engineer do next?</div>
         <div class="quiz-options">
-          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>Biosphere (you) and atmosphere (the air)</div>
-          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>Geosphere and hydrosphere</div>
-          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>Just the atmosphere by itself</div>
+          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>Improve the plan, like storing the flashlight in the kit, then test again</div>
+          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>Give up on the plan</div>
+          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>Skip drills from now on</div>
         </div>
-        <div class="quiz-feedback fb-correct">✅ Correct! You're part of the biosphere (you're alive). The air you breathe is the atmosphere. Every breath is a sphere interaction.</div>
-        <div class="quiz-feedback fb-wrong">❌ Not quite. YOU are a living thing — that puts you in the biosphere. The air you breathe is a separate sphere. Which two are touching when you breathe?</div>
+        <div class="quiz-feedback fb-correct">✅ Correct! Engineers use test results to improve the design, then test again to see if it got better.</div>
+        <div class="quiz-feedback fb-wrong">❌ Not quite. A problem found in a drill is useful evidence. What does an engineer do with evidence from a test?</div>
       </div>
 
       <!-- Question 3 -->
-      <div class="quiz-q" data-answer="c">
-        <div class="quiz-q-text">Why do scientists say Earth is ONE big system instead of four separate things?</div>
+      <div class="quiz-q" data-answer="b">
+        <div class="quiz-q-text">Why is it important to update a family plan every year?</div>
         <div class="quiz-options">
-          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>Because the four spheres never actually touch each other</div>
-          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>Because the atmosphere is the only sphere that matters</div>
-          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>Because the spheres constantly interact — change in one affects all the others</div>
+          <div class="quiz-opt" data-val="a" onclick="checkQuiz(this)"><span class="opt-letter">A</span>Plans expire like milk</div>
+          <div class="quiz-opt" data-val="b" onclick="checkQuiz(this)"><span class="opt-letter">B</span>Families, supplies, and needs change over time</div>
+          <div class="quiz-opt" data-val="c" onclick="checkQuiz(this)"><span class="opt-letter">C</span>It is required by law</div>
         </div>
-        <div class="quiz-feedback fb-correct">✅ Correct! That's exactly what a system means. The four spheres are constantly touching and changing each other. You can't change one without changing them all — which is exactly why we have to care about all of them.</div>
-        <div class="quiz-feedback fb-wrong">❌ Not quite. The spheres absolutely DO touch (you breathing right now is proof). And the atmosphere isn't the only sphere that matters — all four matter equally. What makes them work as ONE system?</div>
+        <div class="quiz-feedback fb-correct">✅ Correct! Food and batteries get old, kids grow, families move, and needs change. A plan has to keep up.</div>
+        <div class="quiz-feedback fb-wrong">❌ Not quite. Think about what changes in a family and its supplies over a year.</div>
       </div>
 
       <!-- Score Display -->
@@ -1362,17 +1278,17 @@ em { color: #5A4D3E; }
 <div class="tab-panel" id="tab-assignment">
 
   <!-- Part A -->
-  <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;">📐 Part A — Four Spheres Scene</p>
-  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Add "Lesson 27.01 — Earth's Spheres" to your notebook. Open to a clean page.</p>
+  <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;">📐 Part A — My Final Plan</p>
+  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Take a photo of your final plan table and drill notes from the Investigate tab.</p>
 
   <div class="pq">
     <span class="pq-num" style="background:#E8636B;">1</span>
-    <span class="pq-text"><strong>Draw and Label:</strong> Draw one outdoor scene, like a park, beach, or backyard, that shows all four spheres. Label each sphere. Then draw two arrows showing interactions and write what each arrow means.</span>
+    <span class="pq-text"><strong>Plan Summary:</strong> In the box below, write your final plan: the disaster, your criteria and constraints, and each part of the plan (shelter, route, meeting place, contact, kit, special needs).</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="parta-1"
-      data-label="Part A — Four spheres scene"
-      placeholder="My scene shows... Arrow 1 shows... Arrow 2 shows..."
+      data-label="Part A — My Final Plan"
+      placeholder="Disaster: ... Criteria: ... Constraints: ... Shelter: ... Route: ... Meeting place: ... Contact: ... Kit: ... Special needs: ..."
       oninput="autoSave(this,'dot-parta-1')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-parta-1"></span>
@@ -1381,16 +1297,16 @@ em { color: #5A4D3E; }
 
   <!-- Part B -->
   <p style="font-size:18px;color:#0E1C42;font-weight:800;margin-bottom:6px;margin-top:20px;">📊 Part B — Evidence Questions</p>
-  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Answer in complete sentences using the lesson and your table.</p>
+  <p style="font-size:15px;color:#9A8E82;margin-bottom:14px;">Answer in complete sentences about your design, test, and improvement.</p>
 
   <div class="pq">
     <span class="pq-num" style="background:#D4772C;">2</span>
-    <span class="pq-text">Describe one way the biosphere changes the geosphere.</span>
+    <span class="pq-text">Explain how your plan meets each of your criteria.</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="partb-1"
-      data-label="Part B — Q1: Biosphere and geosphere"
-      placeholder="One way living things change the geosphere is..."
+      data-label="Part B — Q1: Meeting criteria"
+      placeholder="My plan meets the criterion ___ by..."
       oninput="autoSave(this,'dot-partb-1')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-partb-1"></span>
@@ -1399,12 +1315,12 @@ em { color: #5A4D3E; }
 
   <div class="pq">
     <span class="pq-num" style="background:#D4772C;">3</span>
-    <span class="pq-text">Rain is part of the hydrosphere, but it falls from the atmosphere. Explain how water moves between these two spheres.</span>
+    <span class="pq-text">Compare your first drill to your improved plan. What changed, and what evidence shows it worked better?</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="partb-2"
-      data-label="Part B — Q2: Water and air"
-      placeholder="Water moves into the atmosphere when... It comes back down when..."
+      data-label="Part B — Q2: Before and after"
+      placeholder="At first... After I improved it... The evidence is..."
       oninput="autoSave(this,'dot-partb-2')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-partb-2"></span>
@@ -1413,12 +1329,12 @@ em { color: #5A4D3E; }
 
   <div class="pq">
     <span class="pq-num" style="background:#D4772C;">4</span>
-    <span class="pq-text">Fossil fuels formed from ancient living things buried in rock. Which spheres were involved in making them? Explain.</span>
+    <span class="pq-text">Why is a preparedness plan a good example of engineering?</span>
   </div>
   <div class="response-q">
     <textarea class="response-textarea ta-sm" id="partb-3"
-      data-label="Part B — Q3: Fossil fuels"
-      placeholder="The spheres involved were... because..."
+      data-label="Part B — Q3: Plan as engineering"
+      placeholder="A preparedness plan is engineering because..."
       oninput="autoSave(this,'dot-partb-3')"></textarea>
     <span style="font-size:12px;color:#9A8E82;font-weight:600;">
       Your answer<span class="response-save-dot" id="dot-partb-3"></span>
@@ -1434,7 +1350,7 @@ em { color: #5A4D3E; }
       <span class="cer-icon">🔬</span>
       <div class="cer-header-text">
         <div class="cer-label">Claim · Evidence · Reasoning</div>
-        <div class="cer-question">How do Earth's four spheres work together as one system? Use examples of sphere interactions to support your answer.</div>
+        <div class="cer-question">Is your family preparedness plan ready for a real natural disaster? Use your drill results and criteria as evidence.</div>
       </div>
     </div>
 
@@ -1444,7 +1360,7 @@ em { color: #5A4D3E; }
       <div class="cer-section-body">
         <div class="cer-section-title">Claim <span class="cer-section-hint">— What do you think is true?</span></div>
         <div class="cer-write-box">
-          <p class="cer-starter" style="color:#9A6420;font-style:normal;font-weight:700;">📋 Write your own claim — no starter. Use what you've learned about Earth's spheres.</p>
+          <p class="cer-starter" style="color:#9A6420;font-style:normal;font-weight:700;">📋 Write your own claim — no starter. Say how ready your plan is.</p>
           <textarea class="response-textarea ta-sm" id="cer-claim"
             data-label="Part C — Claim"
             placeholder="Write your claim here..."
@@ -1462,7 +1378,7 @@ em { color: #5A4D3E; }
       <div class="cer-section-body">
         <div class="cer-section-title">Evidence <span class="cer-section-hint">— What from the lesson supports your claim?</span></div>
         <div class="cer-write-box">
-          <p class="cer-starter" style="color:#9A6420;font-style:normal;font-weight:700;">📋 Cite at least two examples of sphere interactions. No starter.</p>
+          <p class="cer-starter" style="color:#9A6420;font-style:normal;font-weight:700;">📋 Cite your drill time and at least two criteria. No starter.</p>
           <textarea class="response-textarea ta-sm" id="cer-evidence"
             data-label="Part C — Evidence"
             placeholder="Write your evidence here..."
@@ -1480,7 +1396,7 @@ em { color: #5A4D3E; }
       <div class="cer-section-body">
         <div class="cer-section-title">Reasoning <span class="cer-section-hint">— Why does the evidence support your claim?</span></div>
         <div class="cer-write-box">
-          <p class="cer-starter" style="color:#9A6420;font-style:normal;font-weight:700;">📋 Explain how the spheres work as one system. No starter.</p>
+          <p class="cer-starter" style="color:#9A6420;font-style:normal;font-weight:700;">📋 Explain why that evidence shows your plan is (or isn't yet) ready. No starter.</p>
           <textarea class="response-textarea ta-sm" id="cer-reasoning"
             data-label="Part C — Reasoning"
             placeholder="Write your reasoning here..."
@@ -1494,7 +1410,7 @@ em { color: #5A4D3E; }
 
     <!-- Vocab check -->
     <div class="cer-vocab-check">
-      📚 <strong>Vocab check:</strong> Try to use at least two of these words: <strong>geosphere</strong>, <strong>hydrosphere</strong>, <strong>atmosphere</strong>, <strong>biosphere</strong>, <strong>interaction</strong>, <strong>system</strong>
+      📚 <strong>Vocab check:</strong> Try to use at least two of these words: <strong>criteria</strong>, <strong>constraints</strong>, <strong>design</strong>, <strong>test</strong>, <strong>improve</strong>, <strong>drill</strong>
     </div>
   </div><!-- /cer-block -->
 
@@ -1510,9 +1426,9 @@ em { color: #5A4D3E; }
     <div class="revise-prompts">
       <p>Write 3–4 sentences answering these:</p>
       <ul>
-        <li>What did you predict at the start? Was it accurate?</li>
-        <li>What from the lesson changed or confirmed your thinking?</li>
-        <li>How is your final explanation more complete than your first prediction?</li>
+        <li>What did you predict would be the hardest part? Was it?</li>
+        <li>What did testing teach you that you couldn't learn on paper?</li>
+        <li>What is the next improvement you would make?</li>
       </ul>
     </div>
     <div class="cer-write-box" style="margin-top:14px;">
@@ -1531,7 +1447,7 @@ em { color: #5A4D3E; }
     <div class="gathered-header">
       <div class="gathered-header-icon">📋</div>
       <div>
-        <div class="gathered-header-label">Lesson 27.01 · Submission Packet</div>
+        <div class="gathered-header-label">Lesson 32.02 · Submission Packet</div>
         <div class="gathered-header-title">Gathered Answers</div>
       </div>
     </div>
@@ -1566,17 +1482,17 @@ em { color: #5A4D3E; }
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
           <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
-          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part A — Four spheres scene:</strong> One outdoor scene with all four spheres labeled and two interaction arrows explained.</span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part A — Final Plan:</strong> Photo of your plan table and drill notes, plus your written plan summary.</span>
         </div>
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
           <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
-          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part B — Evidence Questions:</strong> All three questions answered in complete sentences.</span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part B — Evidence Questions:</strong> All three questions answered in complete sentences about your design, test, and improvement.</span>
         </div>
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
           <span class="check-icon" style="font-size:20px;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px solid #D0C8BE;background:#fff;"></span>
-          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part C — CER Response:</strong> Claim, at least two sphere interactions as evidence, and reasoning about Earth as one system.</span>
+          <span style="font-size:16px;color:#2B1D12;line-height:1.55;"><strong>Part C — CER Response:</strong> Claim, drill results and criteria as evidence, and reasoning about how ready your plan is.</span>
         </div>
 
         <div class="turn-in-item" onclick="toggleCheck(this)" style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:#FAFAF6;border:1.5px solid #E8DDD2;border-radius:12px;margin-bottom:8px;cursor:pointer;user-select:none;">
@@ -1618,7 +1534,7 @@ em { color: #5A4D3E; }
 <!-- ═══ FOOTER ═══ -->
 <footer class="footer">
   <div class="footer-line1">Optima Academy Online &mdash; <span>5th Grade Science</span></div>
-  <div class="footer-line2">Module 27 · Lesson 27.01 — How Do Earth's Four Spheres Interact? · SC.5.E.7.1 · NGSS 5-ESS2-1</div>
+  <div class="footer-line2">Module 32 · Lesson 32.02 — Engineering Challenge: Design a Family Preparedness Plan · SC.5.E.7.7, SC.5.N.1.1 · NGSS 5-ESS3-1, 3-5-ETS1-1, 3-5-ETS1-2, 3-5-ETS1-3</div>
   <div class="footer-line3">© Optima Academy Online. All rights reserved.</div>
 </footer>
 
@@ -1719,7 +1635,7 @@ function checkQuiz(optEl) {
     var scoreMsg = document.getElementById('quizScoreMsg');
     scoreNum.textContent = quizCorrect;
     if (quizCorrect === 3) {
-      scoreMsg.textContent = '🎉 Perfect score! You can spot sphere interactions anywhere.';
+      scoreMsg.textContent = '🎉 Perfect score! You\'re already thinking like a scientist.';
       setTimeout(window.launchConfetti, 300);
       var vp = document.getElementById('quizVideoPerfect');
       if (vp) vp.classList.add('show');
@@ -1942,8 +1858,8 @@ function refreshGathered() {
 
   lines.push('═══════════════════════════════════════════════');
   lines.push('  OPTIMA ACADEMY ONLINE — 5TH GRADE SCIENCE');
-  lines.push('  Lesson 27.01 · How Do Earth\'s Four Spheres Interact?');
-  lines.push('  Unit 5 — Earth and Space Science');
+  lines.push('  Lesson 32.02 · Engineering Challenge: Design a Family Preparedness Plan');
+  lines.push('  Unit 6 — Water, Weather, Climate, and Preparedness');
   lines.push('  Student: ' + (name || '(add your name above)'));
   lines.push('═══════════════════════════════════════════════');
   lines.push('');
@@ -1987,7 +1903,7 @@ function downloadGathered() {
   var blob = new Blob([text], {type: 'text/plain'});
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'lesson-27-01-how-do-earths-four-spheres-interact.txt';
+  a.download = 'lesson-32-02-engineering-challenge-design-a-family-preparedness-plan.txt';
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }
 
