@@ -1,0 +1,17 @@
+/* One step at a time (science, G3-G5) */
+.os-on .os-hide, .os-on .os-never { display: none !important; }
+.os-bar { display: flex; align-items: center; gap: 12px; margin: 22px 0 8px; padding: 14px 4px 4px; border-top: 2px dashed rgba(120, 110, 80, .35); }
+.os-count { flex: 1; text-align: center; font: 800 14px/1.2 system-ui, -apple-system, "Segoe UI", sans-serif; color: #5b6785; white-space: nowrap; }
+.os-back { border: 0; background: none; color: #5b6785; font: 700 15px system-ui, -apple-system, "Segoe UI", sans-serif; cursor: pointer; padding: 12px 8px; min-height: 44px; border-radius: 10px; }
+.os-back:hover { background: rgba(0, 0, 0, .05); }
+.os-next { border: 0; cursor: pointer; background: #1f6f54; color: #fff; font: 800 16px/1.2 system-ui, -apple-system, "Segoe UI", sans-serif; padding: 12px 18px; min-height: 48px; border-radius: 14px; box-shadow: 0 4px 0 #134a38; max-width: 62%; text-align: left; }
+.os-next:active { transform: translateY(3px); box-shadow: 0 1px 0 #134a38; }
+.os-next:focus-visible, .os-back:focus-visible { outline: 3px solid #f2c14e; outline-offset: 2px; }
+.os-next.os-end { background: #8a93a6; box-shadow: none; cursor: default; }
+.os-g4 .os-next { background: #2f6b4f; }
+.os-g5 .os-next { background: #3b4f7a; box-shadow: 0 4px 0 #26345a; }
+.os-g5 .os-next:active { box-shadow: 0 1px 0 #26345a; }
+@media (max-width: 520px) { .os-bar { flex-wrap: wrap; } .os-count { order: -1; flex: 1 0 100%; } .os-next { max-width: none; flex: 1; } }
+@media (prefers-reduced-motion: reduce) { .os-next:active { transform: none; } }
+/* each step is short, so the floating Back to Top is not needed (it sat on top of Next on phones) */
+.os-on .back-to-top, .os-on #backToTop { display: none !important; }

@@ -1719,6 +1719,14 @@
         '<p class="nc-start-n">Captions are on. To turn them off, press CC on the video.</p>';
     });
   }
+  /* one step at a time (the ELA step walker, for science): assets/sparkle/onestep.js. On when the lesson data says  "onestep": true
+     (or ?steps=1 in the address, to preview any lesson); ?steps=0 turns it off. */
+  function loadOneStep() {
+    var q = location.search; if (/[?&]steps=0\b/.test(q) || !(D.onestep || /[?&]steps=1\b/.test(q))) return;
+    var me = document.querySelector('script[src*="nc-sparkle.js"]'), base = me ? me.getAttribute('src').replace(/nc-sparkle\.js.*$/, '') : 'assets/sparkle/', v = '?v=20261111a';
+    var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = base + 'onestep.css' + v; document.head.appendChild(l);
+    var s = document.createElement('script'); s.src = base + 'onestep.js' + v; document.body.appendChild(s);
+  }
   function boot() {
     guard('lean', buildLean);
     guard('tabs', buildTabs);
@@ -1738,6 +1746,7 @@
     guard('wonder', buildWonder);
     guard('tools', buildTools);
     guard('starthere', buildStartHere);
+    guard('onestep', loadOneStep);
     window.__ncSparkleAPI = {
       store: store, voice: Voice,
       teardown: function () {

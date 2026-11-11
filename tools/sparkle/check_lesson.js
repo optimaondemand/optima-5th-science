@@ -12,7 +12,7 @@ const key = process.argv[2]; if (!key) { console.log('usage: check_lesson.js WW-
 const [w, l] = key.split('-');
 const page = fs.readdirSync(ROOT).find(f => f.startsWith(`lesson-${+w}-${l}-`) && f.endsWith('.html'));
 const OUT = path.join(__dirname, 'out', key); fs.mkdirSync(OUT, { recursive: true });
-const URL = `http://localhost:8765/${page}`;
+const URL = `http://localhost:8765/${page}?steps=0`;   // the whole page at once (word counts, boxes); the step walker is tested by stepwalk.js
 const D = JSON.parse(fs.readFileSync(path.join(__dirname, 'lessons', key, 'data.json'), 'utf8'));
 const BAD = [/\bbets?\b/i, /\bwager/i, /\bchips?\b/i, /\bkeeper\b/i, /investigate tab/i, /\bgo back to\b/i, /in your notebook\b(?! page)/i, /\bDutch\b/];
 let fails = 0, warns = 0;
