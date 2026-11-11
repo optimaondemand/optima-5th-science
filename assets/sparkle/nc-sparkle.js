@@ -531,6 +531,17 @@
         return r;
       };
     }
+    // progress bar: count only the tabs students can see (with a hidden tab, the last step stopped at 80%)
+    if (typeof window.updateProgress === 'function' && window.tabProgress) {
+      window.updateProgress = function () {
+        var ids = Object.keys(window.tabProgress).filter(function (k) { return (T.hide || []).indexOf(k) < 0; });
+        var n = ids.filter(function (k) { return window.tabProgress[k]; }).length;
+        var pct = Math.round(n / Math.max(1, ids.length) * 100);
+        var f = document.getElementById('progressFill'), pc = document.getElementById('progressPct');
+        if (f) f.style.width = pct + '%'; if (pc) pc.textContent = pct + '%';
+      };
+      window.updateProgress();
+    }
     // next buttons: the Lesson goes straight to Self-Check
     $$('#tab-lesson .tab-next-btn').forEach(function (b) { b.setAttribute('onclick', "switchTab('quiz')"); b.textContent = 'Continue to 🧠 Self-Check →'; });
     $$('#tab-vocab .tab-next-btn').forEach(function (b) { b.textContent = 'Continue to 📖 The Lesson →'; });

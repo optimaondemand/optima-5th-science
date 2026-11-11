@@ -424,7 +424,7 @@
   "warmup": {
     "predict": {
       "title": "Slice the tree: make a prediction",
-      "intro": "Van Helmont's willow gained 164 pounds in 5 years. Where did those pounds come from? This real slice of a tree trunk is cut into 10 pieces. Each piece stands for about 16 pounds of new tree.",
+      "intro": "A scientist's willow tree gained 164 pounds in 5 years. You'll meet him in Part 1. Where did those pounds come from? This real slice of a tree trunk is cut into 10 pieces. Each piece stands for about 16 pounds of new tree.",
       "job": [
         "Tap Soil, Water, Air, or Sunlight to fill the next piece of the slice.",
         "Use more pieces for the place you think more of the weight came from.",

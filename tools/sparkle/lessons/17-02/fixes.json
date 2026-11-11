@@ -57,5 +57,47 @@
   "find": " class=\"info-value\">5-LS1-1 · TEKS 5.12(A)</div",
   "replace": " class=\"info-value\">SC.5.N.2.1, SC.5.L.14.2 · TEKS 5.12(A)</div",
   "why": "absorbed: page edited outside the kit"
+ },
+ {
+  "kind": "fix",
+  "why": "Leftover from the old lesson: there is no evidence map or scorecard on this page any more.",
+  "find": "copy your gathered answers into Canvas — and add a photo of your evidence map and scorecard. Use this checklist before you submit.",
+  "replace": "copy your Gathered Answers into Canvas. Use this checklist to make sure everything is ready."
+ },
+ {
+  "kind": "plain",
+  "why": "pilot audit, 10 Nov 2026 (Bethany picked): the Investigate tab is hidden; this tab is The Lesson",
+  "find": "📖 Before You Investigate",
+  "replace": "📖 The Lesson"
+ },
+ {
+  "kind": "plain",
+  "why": "pilot audit, 10 Nov 2026 (Bethany picked): name the experiments where the letters are used",
+  "find": "Evidence A and Evidence C were done almost 400 years apart, in different ways.",
+  "replace": "Evidence A (van Helmont's willow) and Evidence C (the sealed jar) were done almost 400 years apart, in different ways."
+ },
+ {
+  "kind": "plain",
+  "why": "pilot audit, 10 Nov 2026 (Bethany picked): \"No starter\" read like a note to the builder",
+  "find": "Answer the question in one clear sentence. No starter — use your own words.",
+  "replace": "Answer the question in one clear sentence. Use your own words."
+ },
+ {
+  "kind": "plain",
+  "why": "pilot audit, 10 Nov 2026 (Bethany picked): name the experiments; drop the builder note",
+  "find": "Use at least TWO of the three experiments (A, B, C). Include numbers where you can. No starter.",
+  "replace": "Use at least TWO of the three experiments: A, the willow; B, the dark box; C, the sealed jar. Include numbers where you can. Use your own words."
+ },
+ {
+  "kind": "plain",
+  "why": "pilot audit, 10 Nov 2026 (Bethany picked): drop the builder note",
+  "find": "why can't soil explain the growth? No starter.",
+  "replace": "why can't soil explain the growth? Use your own words."
+ },
+ {
+  "kind": "cut",
+  "why": "pilot audit, 10 Nov 2026 (Bethany picked): filler label",
+  "find": "Lesson 17.02 · Submission Packet",
+  "replace": "Lesson 17.02"
  }
 ]

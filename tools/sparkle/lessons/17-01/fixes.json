@@ -57,5 +57,41 @@
   "find": " class=\"info-value\">5-LS1-1 · TEKS 5.12(A), 5.5",
   "replace": " class=\"info-value\">SC.5.L.14.2 · TEKS 5.12(A), 5.5",
   "why": "absorbed: page edited outside the kit"
+ },
+ {
+  "kind": "fix",
+  "why": "pilot audit, 10 Nov 2026 (Bethany picked): a seed at a thousandth of an ounce vs a tree of a few hundred pounds is millions of times, not thousands",
+  "find": "The tree weighs thousands of times more.",
+  "replace": "The tree weighs millions of times more."
+ },
+ {
+  "kind": "plain",
+  "why": "pilot audit, 10 Nov 2026 (Bethany picked): name the diagram (it is on another tab)",
+  "find": "Use evidence from the diagram and the lesson to support your answer.",
+  "replace": "Use evidence from the plant parts diagram (in The Lesson) and the rest of the lesson to support your answer."
+ },
+ {
+  "kind": "plain",
+  "why": "pilot audit, 10 Nov 2026 (Bethany picked): \"No starter\" read like a note to the builder",
+  "find": "Write your claim about where plants get their materials. No starter — use your own words.",
+  "replace": "Write your claim about where plants get their materials. Use your own words."
+ },
+ {
+  "kind": "plain",
+  "why": "pilot audit, 10 Nov 2026 (Bethany picked): name the diagram; drop the builder note",
+  "find": "Use evidence from BOTH the diagram AND the lesson (the willow tree experiment, plant structures). Cite at least two pieces. No starter.",
+  "replace": "Use evidence from BOTH the plant parts diagram AND the lesson (the willow tree experiment). Give at least two pieces. Use your own words."
+ },
+ {
+  "kind": "plain",
+  "why": "pilot audit, 10 Nov 2026 (Bethany picked): no idioms; drop the builder note",
+  "find": "Explain why your evidence supports your claim. Connect the dots between the data and the rule. No starter.",
+  "replace": "Explain why your evidence supports your claim. Show how the data leads to the rule. Use your own words."
+ },
+ {
+  "kind": "cut",
+  "why": "pilot audit, 10 Nov 2026 (Bethany picked): filler label",
+  "find": "Lesson 17.01 · Submission Packet",
+  "replace": "Lesson 17.01"
  }
 ]
