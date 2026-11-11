@@ -875,6 +875,14 @@
   ]
  },
  "wonder": {
+  "cabinet": {
+   "title": "The biggest seed in the world",
+   "model": "assets/models/17-02-coco-de-mer.glb",
+   "viewer": "assets/sparkle/vendor/model-viewer-umd.min.js",
+   "alt": "A 3D scan of a coco de mer seed: a large, dark brown seed with two rounded halves joined in the middle.",
+   "text": "This is a real seed from the Smithsonian. It comes from the coco de mer, a palm that grows wild on just two small islands in the Seychelles, in the Indian Ocean. It is the largest seed of any plant. One seed can weigh about 40 pounds. But the palm it grows into can stand about 100 feet tall and weigh far more than its seed. So even the biggest seed on Earth can't hold a whole tree. The rest is built from carbon dioxide and water.",
+   "credit": "3D model: Lodoicea maldivica (coco de mer) seed, Smithsonian National Museum of Natural History, Department of Botany. CC0."
+  },
   "footage": {
    "after": ".nc-jar",
    "title": "The whole planet's plants, from space",
