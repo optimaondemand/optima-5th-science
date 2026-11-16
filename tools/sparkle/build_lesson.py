@@ -59,6 +59,8 @@ def main(key, flags=()):
             return hashlib.sha1(f.read()).hexdigest()[:8]
     css, js = 'assets/sparkle/nc-sparkle.css', 'assets/sparkle/nc-sparkle.js'
     head = '%s\n<link rel="stylesheet" href="%s?v=%s">\n' % (FONT, css, ver(css))
+    if os.path.exists(os.path.join(ROOT, 'assets/tab-quiet.js')):  # stops sound when the tab changes (shared G3-5)
+        head += '<script src="assets/tab-quiet.js?v=%s"></script>\n' % ver('assets/tab-quiet.js')
     blob = json.dumps(data, ensure_ascii=False, indent=1).replace('</', '<\\/')
     tail = '<script type="application/json" id="nc-data">\n%s\n</script>\n<script src="%s?v=%s"></script>\n' % (blob, js, ver(js))
 

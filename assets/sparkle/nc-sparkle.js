@@ -353,6 +353,7 @@
       var open = crBox.hidden; crBox.hidden = !open; crB.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
     document.addEventListener('visibilitychange', function () { if (document.hidden && playing) pause(); });
+    document.addEventListener('optima:quiet', function () { if (playing) pause(); });  // tab change (assets/tab-quiet.js)
 
     // reduced motion: no zooming. The pictures appear one at a time, at the student's pace.
     var stillI = -1;
