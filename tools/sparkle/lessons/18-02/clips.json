@@ -1,0 +1,26 @@
+{
+ "voice": "Gdj2QBsAjgQnu3rwg2ZN",
+ "model": "eleven_v4",
+ "clips": {
+  "k-warmup": {
+   "text": "Look at the rabbit and the clover. Turn the arrow so it points the way you think a food chain arrow should go. Then pick what your arrow stands for, tap Save, and write your reasons. You will check it in Part 4.",
+   "dur": 14.52
+  },
+  "k-words": {
+   "text": "Model. Producer. Consumer. Food chain. Food web. Decomposer.",
+   "dur": 6.61
+  },
+  "k-part1": {
+   "text": "Charles Elton printed this page in nineteen twenty-seven. Tap each yellow line to read it in plain English. Then trace his arrows on the Bear Island diagram, from the sea to the polar bear, and from the plants to the arctic fox.",
+   "dur": 16.43
+  },
+  "k-quiz": {
+   "text": "Three quick questions, just for you. They are not graded. Tap an answer and read the note under it. For each one, ask yourself which way the energy moves.",
+   "dur": 11.23
+  },
+  "k-assign": {
+   "text": "Now add your half of page eighteen. Answer the two Part B questions about your model. In Part C, write your notebook page. Then tap evidence cards in the planner to build your C-E-R about how energy moves from the sun.",
+   "dur": 16.12
+  }
+ }
+}

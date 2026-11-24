@@ -1495,6 +1495,7 @@
       var b = store.bets || {};
       var pl = PRED_LINE ? PRED_LINE() : ['--- WARM-UP: MY PREDICTION (10 PIECES OF THE TREE) ---', 'Soil ' + (b.soil || 0) + ' · Water ' + (b.water || 0) + ' · Air ' + (b.air || 0) + ' · Sunlight ' + (b.sun || 0)];
       L.push(pl[0], pl[1], 'My reason: ' + v('pred-1'), '');
+      EXTRA_LINES.forEach(function (f) { var x = f(); L.push(x[0], x[1], ''); });
       (A.keep || ['partb-2', 'partb-3']).forEach(function (id, k) { L.push('--- PART B — QUESTION ' + (k + 1) + ' ---', v(id), ''); });
       (D.nextPage ? D.nextPage.boxes : []).forEach(function (bx) { L.push('--- PART C — ' + bx.label.toUpperCase() + ' ---', v(bx.id), ''); });
       L.push('--- CLAIM ---', v('cer-claim'), '', '--- EVIDENCE ---', v('cer-evidence'), '', '--- REASONING ---', v('cer-reasoning'), '');
@@ -1632,7 +1633,39 @@
     // 2. Real data (Part 4, after the twist)
     if (Wd.data) {
       var R = Wd.data, h4 = $(R.host || '.nc-tl');
-      if (h4) {
+      if (h4 && R.bars) {
+        // a bar graph: one bar per group (R.bars: [{name, v, color}]); drag or tap a bar to read it
+        var bb = wonderBox('📈', 'Real data', R.title, 3), BW = 600, BH = 240, BL = 56, BB = 46, BT = 16, mx = Math.max.apply(null, R.bars.map(function (q) { return q.v; }));
+        var slotW = (BW - BL - 10) / R.bars.length, bw = slotW * 0.62, top = Math.ceil(mx / 5000) * 5000, ticks = '';
+        for (var tv = 0; tv <= top; tv += 5000) { var ty = BH - BB - tv / top * (BH - BB - BT); ticks += '<line x1="' + BL + '" y1="' + ty.toFixed(1) + '" x2="' + (BW - 10) + '" y2="' + ty.toFixed(1) + '" stroke="#f0e8dc"/><text x="' + (BL - 6) + '" y="' + (ty + 3).toFixed(1) + '" font-size="10" fill="#7a6a58" text-anchor="end">' + tv.toLocaleString('en-US') + '</text>'; }
+        var bars = R.bars.map(function (q, i) { var x = BL + i * slotW + (slotW - bw) / 2, h = Math.max(1.5, q.v / top * (BH - BB - BT)); return '<rect class="nc-bar" data-i="' + i + '" x="' + x.toFixed(1) + '" y="' + (BH - BB - h).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + h.toFixed(1) + '" fill="' + q.color + '" rx="3"/>' +
+          '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (BH - BB + 15) + '" font-size="10.5" font-weight="700" fill="#2B1D12" text-anchor="middle">' + esc(q.name) + '</text>' + (q.name2 ? '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (BH - BB + 28) + '" font-size="10.5" font-weight="700" fill="#2B1D12" text-anchor="middle">' + esc(q.name2) + '</text>' : ''); }).join('');
+        bb.querySelector('.nc-wx-body').innerHTML = '<p class="nc-p">' + esc(R.intro) + '</p>' + job(R.job) +
+          '<div class="nc-dt-read" aria-live="polite">Drag across the bars, or tap one.</div>' +
+          '<svg class="nc-dt nc-bars" viewBox="0 0 ' + BW + ' ' + BH + '" role="img" aria-label="' + esc(R.alt) + '">' + ticks + bars +
+            '<text x="' + BL + '" y="10" font-size="9.5" fill="#7a6a58">' + esc(R.ylabel) + '</text>' +
+            '<rect class="nc-dt-hit" x="' + BL + '" y="0" width="' + (BW - BL - 10) + '" height="' + BH + '" fill="transparent"/></svg>' +
+          '<div class="nc-q">' + esc(R.ask) + '</div><div class="nc-opts">' + R.opts.map(function (o, i) { return '<button type="button" class="nc-opt" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div><div class="nc-fb" aria-live="polite"></div>' +
+          '<p class="nc-credit">' + esc(R.credit) + '</p>';
+        var wowB = $(R.after || '.nc-wow'); after(wowB || h4, bb);
+        var bsvg = bb.querySelector('.nc-bars'), brd = bb.querySelector('.nc-dt-read');
+        function barAt(e) {
+          var r = bsvg.getBoundingClientRect(), t = e.touches ? e.touches[0] : e, x = (t.clientX - r.left) * BW / r.width;
+          var i = Math.max(0, Math.min(R.bars.length - 1, Math.floor((x - BL) / slotW))), q = R.bars[i];
+          $$('.nc-bar', bb).forEach(function (el) { el.classList.toggle('on', +el.dataset.i === i); });
+          brd.innerHTML = '<b>' + esc(q.full || (q.name + (q.name2 ? ' ' + q.name2 : ''))) + ':</b> ' + q.v.toLocaleString('en-US') + ' ' + esc(R.unit);
+        }
+        var bhit = bb.querySelector('.nc-dt-hit');
+        ['mousemove', 'touchmove', 'touchstart', 'click'].forEach(function (ev) { bhit.addEventListener(ev, function (e) { if (ev.indexOf('touch') === 0) e.preventDefault(); barAt(e); }, { passive: false }); });
+        var bfb = bb.querySelector('.nc-fb');
+        $$('.nc-opt', bb).forEach(function (bt) {
+          bt.addEventListener('click', function () {
+            var o = R.opts[+bt.dataset.i];
+            if (o.ok) { bt.classList.add('ok'); bfb.innerHTML = '✅ ' + esc(R.win); store.dataDone = 1; save(); ping(); }
+            else { bt.classList.add('no'); setTimeout(function () { bt.classList.remove('no'); }, 700); bfb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(o.hint) + '</span>'; ping(true); }
+          });
+        });
+      } else if (h4) {
         var b2 = wonderBox('📈', 'Real data', R.title, 3);
         // one line (R.values) or several (R.series: [{name, values, color, axis}]) on the same axes.
         // R.yearly: one point per year (otherwise one per month). A series with axis: 2 uses its own scale on the right.
@@ -2199,6 +2232,400 @@
     drawAll();
   }
 
+  /* ═════════════ 18.02 modules: turn the arrow, trace Elton's page, flip and run, chain meets the pond, draw the arrows ═════════════ */
+  var EXTRA_LINES = []; // modules add lines to Gathered Answers here (each returns [heading, text])
+
+  /* ───────────── Warm-Up: Turn the arrow (a prediction on a real photo) ───────────── */
+  function buildTurn() {
+    var T = D.turn; if (!T) return;
+    var pred = $('#pred-1'); if (!pred) throw new Error('pred-1 missing');
+    var host = pred.closest('.response-q') || pred.parentNode;
+    var card = host.closest('.activity-card') || host.parentNode;
+    $$('.callout, .socratic-q', card).forEach(hide);
+    store.tn = store.tn || {}; var S = store.tn;
+    var A = T.a, B = T.b; // A = the eater on the left of the photo, B = the food on the right
+    var g = mk('div', 'nc-g nc-tn');
+    g.innerHTML = '<div class="nc-g-k">Warm-Up game</div><h4 class="nc-g-t nc-tn-title">' + esc(T.title) + '</h4><p class="nc-p">' + esc(T.intro) + '</p>' + job(T.job) +
+      '<figure class="nc-tn-fig"><img src="' + esc(T.img) + '" alt="' + esc(T.alt) + '">' +
+        '<span class="nc-tn-tag" style="left:' + A.x + '%;top:' + A.y + '%">' + esc(A.label) + '</span>' +
+        '<span class="nc-tn-tag" style="left:' + B.x + '%;top:' + B.y + '%">' + esc(B.label) + '</span>' +
+        '<button type="button" class="nc-tn-arrow" style="left:' + T.ax + '%;top:' + T.ay + '%" aria-label="The arrow. Drag it around, or tap it to turn it."><svg viewBox="0 0 120 40" aria-hidden="true"><path d="M6 20 H92" stroke="#fff" stroke-width="13" stroke-linecap="round"/><path d="M6 20 H92" stroke="#e8590c" stroke-width="7" stroke-linecap="round"/><path d="M84 4 L116 20 L84 36 Z" fill="#e8590c" stroke="#fff" stroke-width="3" stroke-linejoin="round"/></svg></button>' +
+      '</figure>' +
+      '<div class="nc-tn-row"><button type="button" class="nc-btn nc-tn-turn">↻ Turn the arrow</button><span class="nc-tn-now" aria-live="polite"></span></div>' +
+      '<p class="nc-credit">' + esc(T.credit) + '</p>' +
+      '<div class="nc-tn-ask" hidden><div class="nc-q">' + esc(T.q) + '</div><div class="nc-opts nc-tn-opts">' + T.opts.map(function (o, i) { return '<button type="button" class="nc-opt" data-i="' + i + '">' + esc(o) + '</button>'; }).join('') + '</div>' +
+        '<div class="nc-rw-ctl"><button type="button" class="nc-btn nc-tn-save" disabled>🔒 Save my prediction</button><button type="button" class="nc-cup-edit nc-tn-edit" hidden>✎ Change my prediction</button></div></div>' +
+      '<div class="nc-bet-seal nc-tn-seal" hidden></div>' +
+      '<label class="nc-np-l" for="pred-1" style="margin-top:12px">' + esc(T.reasonPrompt) + '</label>';
+    before(host, g);
+    pred.placeholder = T.placeholder;
+    var arrow = g.querySelector('.nc-tn-arrow'), now = g.querySelector('.nc-tn-now'), ask = g.querySelector('.nc-tn-ask'), saveB = g.querySelector('.nc-tn-save'), editB = g.querySelector('.nc-tn-edit'), seal = g.querySelector('.nc-tn-seal'), turnB = g.querySelector('.nc-tn-turn');
+    var ang = S.dir === 'a' ? 180 : S.dir === 'b' ? 0 : 90; // 0 points right (to B), 180 points left (to A), 90 = not chosen yet
+    function dirText(d) { return d === 'a' ? T.toA : d === 'b' ? T.toB : ''; }
+    function summary() { return dirText(S.dir) + (S.mean != null ? ' · ' + T.opts[S.mean] : ''); }
+    PRED_LINE = function () { return ['--- WARM-UP: MY PREDICTION ---', 'My arrow: ' + (S.saved ? summary() : '(not saved yet)')]; };
+    function setAng(a, anim) { ang = a; arrow.style.transition = anim && !RM ? 'transform .35s ease' : 'none'; arrow.style.transform = 'translate(-50%,-50%) rotate(' + a + 'deg)'; }
+    function draw() {
+      var saved = !!S.saved, locked = !!S.revealed;
+      setAng(S.dir === 'a' ? 180 : S.dir === 'b' ? 0 : ang, true);
+      now.innerHTML = S.dir ? '➜ ' + esc(dirText(S.dir)) : esc(T.notYet);
+      arrow.disabled = saved; turnB.disabled = saved;
+      turnB.textContent = saved ? '🔒 Arrow saved' : '↻ Turn the arrow';
+      ask.hidden = !S.dir;
+      $$('.nc-tn-opts .nc-opt', g).forEach(function (b) { b.classList.toggle('sel', +b.dataset.i === S.mean); b.disabled = saved; });
+      saveB.disabled = !S.dir || S.mean == null; saveB.hidden = saved;
+      editB.hidden = !saved || locked;
+      seal.hidden = !saved;
+      seal.textContent = !saved ? '' : (locked ? T.lockedNote : T.saved).replace('{p}', summary());
+      g.classList.toggle('nc-done', saved);
+      refresh();
+    }
+    function choose(d) { if (S.saved) return; S.dir = d; save(); ping(); draw(); }
+    turnB.addEventListener('click', function () { choose(S.dir === 'b' ? 'a' : 'b'); });
+    // drag the arrow around its middle; it settles on the nearer side when you let go
+    var drag = null;
+    arrow.addEventListener('pointerdown', function (e) { if (S.saved) return; e.preventDefault(); drag = { moved: false }; arrow.setPointerCapture(e.pointerId); arrow.classList.add('drag'); });
+    arrow.addEventListener('pointermove', function (e) {
+      if (!drag) return; var r = arrow.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      var a = Math.atan2(e.clientY - cy, e.clientX - cx) * 180 / Math.PI; if (Math.hypot(e.clientX - cx, e.clientY - cy) > 12) { drag.moved = true; setAng(a, false); }
+    });
+    function end() {
+      if (!drag) return; var moved = drag.moved; drag = null; arrow.classList.remove('drag');
+      if (!moved) { choose(S.dir === 'b' ? 'a' : 'b'); return; }
+      var a = ((ang % 360) + 360) % 360; choose(a > 90 && a < 270 ? 'a' : 'b');
+    }
+    arrow.addEventListener('pointerup', end); arrow.addEventListener('pointercancel', end);
+    arrow.addEventListener('keydown', function (e) { if (e.key === 'ArrowLeft') { e.preventDefault(); choose('a'); } if (e.key === 'ArrowRight') { e.preventDefault(); choose('b'); } });
+    $$('.nc-tn-opts .nc-opt', g).forEach(function (b) { b.addEventListener('click', function () { if (S.saved) return; S.mean = +b.dataset.i; save(); draw(); }); });
+    saveB.addEventListener('click', function () { S.saved = 1; save(); ping(); bind({ prediction: { arrow: S.dir, meaning: S.mean } }); draw(); });
+    editB.addEventListener('click', function () { if (S.revealed) return; S.saved = 0; save(); draw(); });
+    document.addEventListener('nc:tn', draw);
+    draw();
+    putKeeper('k-warmup', g.querySelector('.nc-job'), 'after');
+  }
+
+  /* ───────────── Part 1 game: trace a path on the real 1927 diagram ───────────── */
+  function buildTrace() {
+    var R = D.trace; if (!R) return;
+    var src = $('.nc-src'); if (!src) throw new Error('trace needs the source page');
+    store.tc = store.tc || {}; var S = store.tc; S.paths = S.paths || []; S.found = S.found || [];
+    var g = mk('div', 'nc-g nc-tc');
+    g.innerHTML = gameHead(R.kicker, R.title) + '<p class="nc-p">' + esc(R.intro) + '</p>' +
+      '<div class="nc-tc-task" aria-live="polite"></div>' +
+      '<div class="nc-tc-fig"><img src="' + esc(R.img) + '" alt="' + esc(R.alt) + '" width="' + R.w + '" height="' + R.h + '">' +
+        '<svg class="nc-tc-svg" viewBox="0 0 ' + R.w + ' ' + R.h + '" aria-hidden="true"></svg>' +
+        Object.keys(R.boxes).map(function (k) { var b = R.boxes[k]; return '<button type="button" class="nc-tc-box" data-k="' + k + '" style="left:' + (b[0] / R.w * 100).toFixed(2) + '%;top:' + (b[1] / R.h * 100).toFixed(2) + '%;width:' + (b[2] / R.w * 100).toFixed(2) + '%;height:' + (b[3] / R.h * 100).toFixed(2) + '%" aria-label="' + esc(R.names[k] || k) + '"></button>'; }).join('') +
+      '</div>' +
+      '<div class="nc-fb nc-tc-fb" aria-live="polite"></div>' +
+      '<button type="button" class="nc-cup-edit nc-tc-reset">↺ Clear my paths and start again</button>' +
+      '<div class="nc-wow nc-tc-wow" hidden><div class="nc-wow-k">Look closer</div><p class="nc-wow-nums">' + esc(R.wow) + '</p></div>' +
+      '<p class="nc-credit">' + esc(R.credit) + '</p>';
+    after(src, g);
+    var svg = g.querySelector('.nc-tc-svg'), task = g.querySelector('.nc-tc-task'), fb = g.querySelector('.nc-tc-fb');
+    var cur = S.cur || [];
+    function ctr(k) { var b = R.boxes[k]; return [b[0] + b[2] / 2, b[1] + b[3] / 2]; }
+    function step() { return S.paths.length < R.paths.length ? R.paths[S.paths.length] : null; }
+    function line(ks, cls) { if (ks.length < 2) return ''; return '<polyline class="' + cls + '" points="' + ks.map(function (k) { return ctr(k).join(','); }).join(' ') + '"/>'; }
+    function draw() {
+      var P = step(), all = S.found.length >= R.find.need;
+      svg.innerHTML = S.paths.map(function (p) { return line(p, 'nc-tc-done'); }).join('') + line(cur, 'nc-tc-now') +
+        (P ? '' : S.found.map(function (k) { var a = ctr(k), b = ctr(R.find.to); return '<line class="nc-tc-in" x1="' + a[0] + '" y1="' + a[1] + '" x2="' + b[0] + '" y2="' + b[1] + '"/>'; }).join(''));
+      var on = {}; S.paths.forEach(function (p) { p.forEach(function (k) { on[k] = 1; }); }); cur.forEach(function (k) { on[k] = 1; });
+      $$('.nc-tc-box', g).forEach(function (b) { b.classList.toggle('on', !!on[b.dataset.k]); b.classList.toggle('got', S.found.indexOf(b.dataset.k) > -1 || (!P && b.dataset.k === R.find.to)); });
+      if (P) task.innerHTML = '<b>Path ' + (S.paths.length + 1) + ' of ' + R.paths.length + ':</b> ' + esc(P.q) + (cur.length ? ' <span class="nc-tc-so">So far: ' + cur.map(function (k) { return esc(R.names[k]); }).join(' → ') + '</span>' : '');
+      else if (!all) task.innerHTML = '<b>Last step:</b> ' + esc(R.find.q) + ' <span class="nc-tc-so">Found ' + S.found.length + ' of ' + R.find.need + '</span>';
+      else task.innerHTML = '✅ ' + esc(R.find.win);
+      g.querySelector('.nc-tc-wow').hidden = !all;
+      g.classList.toggle('nc-done', all);
+      if (all && !S.done) { S.done = 1; save(); ping(); }
+    }
+    $$('.nc-tc-box', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var k = b.dataset.k, P = step();
+        if (P) {
+          var want = P.path[cur.length];
+          if (k === want) {
+            cur.push(k); S.cur = cur; fb.innerHTML = '';
+            if (cur.length === P.path.length) { S.paths.push(cur.slice()); cur = []; S.cur = []; ping(); fb.innerHTML = '✓ ' + esc(P.win); }
+            save(); draw();
+          } else if (cur.indexOf(k) < 0) { ping(true); fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(cur.length ? P.hint : P.start) + '</span>'; b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 600); }
+          return;
+        }
+        if (S.found.length >= R.find.need) return;
+        if (R.find.ok.indexOf(k) > -1) { if (S.found.indexOf(k) < 0) { S.found.push(k); save(); ping(); fb.innerHTML = '✓ ' + esc(R.names[k]) + '. ' + esc(R.find.says[k] || ''); } }
+        else { ping(true); fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(R.find.hint) + '</span>'; b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 600); }
+        draw();
+      });
+    });
+    g.querySelector('.nc-tc-reset').addEventListener('click', function () { S.paths = []; S.found = []; S.cur = []; cur = []; S.done = 0; save(); fb.innerHTML = ''; draw(); });
+    draw();
+  }
+
+  /* ───────────── Part 2 game: flip the arrows, then run the energy ───────────── */
+  function buildFlip() {
+    var F = D.flip; if (!F) return;
+    var p2 = $$('#tab-lesson .card-head-label').filter(function (e) { return /Part 2|Section 2/.test(e.textContent); })[0];
+    var body = p2 && p2.closest('.card').querySelector('.card-body'); if (!body) throw new Error('Part 2 card missing');
+    store.fl = store.fl || {}; var S = store.fl; if (!S.back) S.back = F.start.slice();
+    var n = F.chain.length;
+    var g = mk('div', 'nc-g nc-fl');
+    g.innerHTML = gameHead(F.kicker, F.title) + '<p class="nc-p">' + esc(F.intro) + '</p>' + job(F.job) +
+      '<div class="nc-fl-chain">' + F.chain.map(function (c, i) {
+        return (i ? '<button type="button" class="nc-fl-ar" data-i="' + (i - 1) + '" aria-label="Arrow between ' + esc(F.chain[i - 1].name) + ' and ' + esc(c.name) + '. Tap to flip it."><span class="nc-fl-line"><i></i><i></i><i></i></span><span class="nc-fl-heat" aria-hidden="true">heat</span></button>' : '') +
+          '<span class="nc-fl-c">' + chip(c) + '</span>';
+      }).join('') + '</div>' +
+      '<div class="nc-fl-ctl"><button type="button" class="nc-btn nc-fl-run">▶ Run the energy</button><button type="button" class="nc-cup-edit nc-fl-mix">↺ Mix up the arrows</button></div>' +
+      '<ol class="nc-fl-says" aria-live="polite"></ol>' +
+      '<div class="nc-fl-win" hidden></div>' +
+      '<p class="nc-credit">' + esc(F.credit) + '</p>';
+    var socr = body.querySelector('.socratic-q'); if (socr) before(socr, g); else body.appendChild(g);
+    var says = g.querySelector('.nc-fl-says'), runB = g.querySelector('.nc-fl-run'), win = g.querySelector('.nc-fl-win'), timer = null, running = false;
+    function drawArrows() {
+      $$('.nc-fl-ar', g).forEach(function (b) { var i = +b.dataset.i; b.classList.toggle('back', !!S.back[i]); b.classList.remove('run', 'ok', 'bad'); b.disabled = running; });
+      runB.disabled = running; runB.textContent = running ? '⚡ Running…' : '▶ Run the energy';
+    }
+    function drawWin() {
+      var ok = S.won && S.back.every(function (x) { return !x; });
+      win.hidden = !ok; win.innerHTML = ok ? '✅ ' + esc(F.win) : '';
+      g.classList.toggle('nc-done', !!ok);
+      $$('.nc-fl-ar', g).forEach(function (b) { b.classList.toggle('ok', !!ok); });
+    }
+    function sentence(i) { var a = F.chain[i].the, b = F.chain[i + 1].the; return S.back[i] ? F.no[i].replace('{a}', b).replace('{b}', a) : F.yes[i]; }
+    function run() {
+      if (running) return; running = true; clearTimeout(timer); says.innerHTML = ''; win.hidden = true; drawArrows();
+      var i = 0, bad = 0;
+      (function next() {
+        if (i >= n - 1) {
+          running = false; drawArrows();
+          if (!bad) { if (!S.won) { S.won = 1; save(); } ping(); }
+          else { ping(true); says.insertAdjacentHTML('beforeend', '<li class="nc-fl-tip">🤔 ' + esc(F.tryAgain.replace('{n}', bad)) + '</li>'); }
+          drawWin(); return;
+        }
+        var b = $('.nc-fl-ar[data-i="' + i + '"]', g), back = !!S.back[i]; if (back) bad++;
+        b.classList.add('run', back ? 'bad' : 'ok');
+        says.insertAdjacentHTML('beforeend', '<li class="' + (back ? 'nc-fl-no' : 'nc-fl-yes') + '">' + (back ? '✗ ' : '✓ ') + esc(sentence(i)) + '</li>');
+        i++; timer = setTimeout(next, RM ? 0 : 1100);
+      })();
+    }
+    $$('.nc-fl-ar', g).forEach(function (b) { b.addEventListener('click', function () { if (running) return; var i = +b.dataset.i; S.back[i] = S.back[i] ? 0 : 1; S.won = S.won && S.back.every(function (x) { return !x; }) ? 1 : 0; save(); says.innerHTML = ''; drawArrows(); drawWin(); }); });
+    runB.addEventListener('click', run);
+    g.querySelector('.nc-fl-mix').addEventListener('click', function () { if (running) return; S.back = F.start.slice(); S.won = 0; save(); says.innerHTML = ''; drawArrows(); drawWin(); });
+    drawArrows(); drawWin();
+  }
+
+  /* ───────────── Part 3 game: the chain meets the pond (it has to become a web) ───────────── */
+  function buildPond() {
+    var P = D.pond; if (!P) return;
+    var p3 = $$('#tab-lesson .card-head-label').filter(function (e) { return /Part 3|Section 3/.test(e.textContent); })[0];
+    var body = p3 && p3.closest('.card').querySelector('.card-body'); if (!body) throw new Error('Part 3 card missing');
+    store.pd = store.pd || {}; var S = store.pd; S.found = S.found || [];
+    var N = P.nodes;
+    var g = mk('div', 'nc-g nc-pd');
+    g.innerHTML = gameHead(P.kicker, P.title) + '<p class="nc-p">' + esc(P.intro) + '</p>' +
+      '<div class="nc-pd-start"><span class="nc-pd-sl">' + esc(P.startLabel) + '</span>' + P.chain.map(function (k, i) { return (i ? '<span class="nc-yd-ar on" aria-hidden="true">→</span>' : '') + chip(N[k]); }).join('') + '</div>' +
+      job(P.job) +
+      '<div class="nc-pd-grid"><figure class="nc-pd-fig"><img src="' + esc(P.img) + '" alt="' + esc(P.alt) + '">' +
+        P.spots.map(function (s, i) { return '<button type="button" class="nc-pd-spot" data-i="' + i + '" style="left:' + s.x + '%;top:' + s.y + '%" aria-label="Look closer: ' + esc(s.where) + '">🔎</button>'; }).join('') +
+        '</figure>' +
+        '<div class="nc-pd-lens" aria-live="polite"><div class="nc-pd-lens-k">Look closer</div><p class="nc-p">' + esc(P.lensHint) + '</p></div></div>' +
+      '<div class="nc-pd-count"></div>' +
+      '<div class="nc-pd-web"><svg class="nc-pd-svg" aria-hidden="true"></svg>' +
+        Object.keys(N).map(function (k) { var o = N[k]; return '<span class="nc-pd-node" data-k="' + k + '" style="left:' + o.pos[0] + '%;top:' + o.pos[1] + '%">' + chip(o) + '</span>'; }).join('') + '</div>' +
+      '<div class="nc-pd-key">' + esc(P.key) + '</div>' +
+      '<div class="nc-fb nc-pd-fb" aria-live="polite"></div>' +
+      '<button type="button" class="nc-cup-edit nc-pd-reset">↺ Hide them all and look again</button>' +
+      '<p class="nc-credit">' + esc(P.credit) + '</p>';
+    var kc = body.querySelector('.key-concept'); if (kc) after(kc, g); else body.appendChild(g);
+    var web = g.querySelector('.nc-pd-web'), svg = g.querySelector('.nc-pd-svg'), lens = g.querySelector('.nc-pd-lens'), fb = g.querySelector('.nc-pd-fb');
+    function shown(k) { return P.chain.indexOf(k) > -1 || P.spots.some(function (s, i) { return s.node === k && S.found.indexOf(i) > -1; }); }
+    function place() { var narrow = web.clientWidth && web.clientWidth < 440; web.classList.toggle('nc-pd-tall', !!narrow); $$('.nc-pd-node', web).forEach(function (el) { var q = N[el.dataset.k].pos; el.style.left = (narrow ? q[1] : q[0]) + '%'; el.style.top = (narrow ? q[0] : q[1]) + '%'; }); }
+    function lines() {
+      place();
+      var r = web.getBoundingClientRect(); if (!r.width) return;
+      svg.setAttribute('viewBox', '0 0 ' + r.width + ' ' + r.height); svg.setAttribute('width', r.width); svg.setAttribute('height', r.height);
+      var out = '<defs><marker id="nc-pd-head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#e8590c"/></marker><marker id="nc-pd-head2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#8d6e63"/></marker></defs>';
+      P.edges.forEach(function (e) {
+        if (!shown(e[0]) || !shown(e[1])) return;
+        var a = $('.nc-pd-node[data-k="' + e[0] + '"] img', web), b = $('.nc-pd-node[data-k="' + e[1] + '"] img', web); if (!a || !b) return;
+        var ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect();
+        var x1 = ra.left + ra.width / 2 - r.left, y1 = ra.top + ra.height / 2 - r.top, x2 = rb.left + rb.width / 2 - r.left, y2 = rb.top + rb.height / 2 - r.top;
+        var d = Math.hypot(x2 - x1, y2 - y1) || 1, ux = (x2 - x1) / d, uy = (y2 - y1) / d, rr = ra.width / 2 + 3, rr2 = rb.width / 2 + 5;
+        var dead = e[2] === 'dead';
+        out += '<line x1="' + (x1 + ux * rr).toFixed(1) + '" y1="' + (y1 + uy * rr).toFixed(1) + '" x2="' + (x2 - ux * rr2).toFixed(1) + '" y2="' + (y2 - uy * rr2).toFixed(1) + '" class="' + (dead ? 'nc-pd-dead' : 'nc-pd-e') + '" marker-end="url(#' + (dead ? 'nc-pd-head2' : 'nc-pd-head') + ')"/>';
+      });
+      svg.innerHTML = out;
+    }
+    function show(i) {
+      var s = P.spots[i], o = N[s.node];
+      lens.innerHTML = '<div class="nc-pd-lens-k">Look closer · ' + esc(s.where) + '</div><div class="nc-pd-lens-b"><img src="' + esc(o.img) + '" alt="' + esc(o.alt) + '"><div><b>' + esc(o.name) + '</b><p>' + esc(s.text) + '</p></div></div>';
+    }
+    function draw() {
+      $$('.nc-pd-node', web).forEach(function (el) { var k = el.dataset.k, on = shown(k); el.classList.toggle('on', on); el.classList.toggle('chain', P.chain.indexOf(k) > -1); });
+      $$('.nc-pd-spot', g).forEach(function (b) { b.classList.toggle('got', S.found.indexOf(+b.dataset.i) > -1); });
+      var n = S.found.length, all = n >= P.spots.length;
+      g.querySelector('.nc-pd-count').innerHTML = '<b>' + n + ' of ' + P.spots.length + '</b> hidden living things found';
+      if (all) fb.innerHTML = '✅ ' + esc(P.win);
+      else if (n >= P.webAt) fb.innerHTML = '🕸️ ' + esc(P.webNote);
+      g.classList.toggle('nc-done', all);
+      if (all && !S.done) { S.done = 1; save(); ping(); }
+      lines();
+    }
+    $$('.nc-pd-spot', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var i = +b.dataset.i; show(i);
+        if (S.found.indexOf(i) < 0) { S.found.push(i); save(); ping(); var el = $('.nc-pd-node[data-k="' + P.spots[i].node + '"]', web); if (el && !RM) { el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); } }
+        draw();
+      });
+    });
+    g.querySelector('.nc-pd-reset').addEventListener('click', function () { S.found = []; S.done = 0; save(); fb.innerHTML = ''; lens.innerHTML = '<div class="nc-pd-lens-k">Look closer</div><p class="nc-p">' + esc(P.lensHint) + '</p>'; draw(); });
+    window.addEventListener('resize', lines);
+    $$('img', web).forEach(function (im) { if (!im.complete) im.addEventListener('load', lines); });
+    document.addEventListener('nc:tab', function () { setTimeout(lines, 50); });
+    var mo = window.ResizeObserver ? new ResizeObserver(lines) : null; if (mo) mo.observe(web);
+    draw();
+  }
+
+  /* ───────────── Part 4: draw the arrows (build your own model), then compare and the twist ───────────── */
+  function buildDraw() {
+    var W = D.draw; if (!W) return;
+    var act = $('#tab-lesson .act-body'); if (!act) throw new Error('lesson body missing');
+    var sec = mk('div', 'nc-part4');
+    sec.innerHTML = '<div class="card theme-sky nc-p4card"><div class="card-head"><div class="card-head-icon">✏️</div><div><div class="card-head-label">Part 4</div><div class="card-head-title">' + esc(W.cardTitle) + '</div></div></div><div class="card-body"><p>' + esc(W.intro) + '</p><div class="nc-g nc-dw"></div></div></div>';
+    act.appendChild(sec);
+    var g = sec.querySelector('.nc-dw');
+    store.dw = store.dw || {}; var S = store.dw; S.edges = S.edges || [];
+    g.innerHTML = gameHead(W.kicker, W.title) +
+      '<div class="nc-q">' + esc(W.pickQ) + '</div><div class="nc-dw-places">' + W.places.map(function (p, i) { return '<button type="button" class="nc-opt nc-dw-pl" data-i="' + i + '">' + p.icon + ' ' + esc(p.label) + '</button>'; }).join('') + '</div>' +
+      '<div class="nc-dw-work" hidden>' + job(W.job) +
+        '<p class="nc-dw-clue"></p>' +
+        '<div class="nc-dw-board"><svg class="nc-dw-svg" aria-hidden="true"></svg></div>' +
+        '<div class="nc-fb nc-dw-fb" aria-live="polite"></div>' +
+        '<div class="nc-dw-ctl"><button type="button" class="nc-cup-edit nc-dw-undo">↶ Erase my last arrow</button><button type="button" class="nc-cup-edit nc-dw-clear">↺ Erase all my arrows</button><button type="button" class="nc-cup-edit nc-dw-other">🗺️ Pick a different place</button></div>' +
+        '<h5 class="nc-dw-th">' + esc(W.tableTitle) + '</h5><div class="nc-dw-table"></div>' +
+      '</div>' +
+      '<div class="nc-reveal nc-dw-cmp" hidden><h5>' + esc(W.compareTitle) + '</h5><div class="nc-mt-rows nc-dw-rows"></div></div>' +
+      '<div class="nc-wow nc-dw-wow" hidden><div class="nc-wow-k">The twist</div><blockquote class="nc-wow-q">“' + esc(W.twist.quote) + '”</blockquote>' +
+        '<figure class="nc-dw-cyc"><img src="' + esc(W.twist.img) + '" alt="' + esc(W.twist.alt) + '"><figcaption>' + esc(W.twist.cap) + '</figcaption></figure>' +
+        '<p class="nc-wow-nums">' + esc(W.twist.line) + '</p><p class="nc-wow-chain">' + esc(W.twist.chain) + '</p></div>';
+    putKeeper('k-part4', g.querySelector('.nc-g-t'), 'after');
+    var board = g.querySelector('.nc-dw-board'), svg = g.querySelector('.nc-dw-svg'), fb = g.querySelector('.nc-dw-fb'), work = g.querySelector('.nc-dw-work');
+    function PL() { return S.place != null ? W.places[S.place] : null; }
+    function has(a, b) { return S.edges.some(function (e) { return e[0] === a && e[1] === b; }); }
+    function eats(p, a, b) { return p.eats.some(function (e) { return e[0] === a && e[1] === b; }); }
+    function coreDone(p) { for (var i = 0; i < p.core.length - 1; i++) if (!has(p.core[i], p.core[i + 1])) return false; return true; }
+    function into(k) { return S.edges.some(function (e) { return e[1] === k; }); }
+    function allDone(p) { return coreDone(p) && into(p.extra) && into(p.decomposer); }
+    function visible(p) { return coreDone(p) ? p.core.concat([p.extra, p.decomposer]) : p.core; }
+    var pick = null;
+    function center(k) { var el = $('.nc-dw-card[data-k="' + k + '"] img', board), r = board.getBoundingClientRect(); if (!el) return null; var q = el.getBoundingClientRect(); return [q.left + q.width / 2 - r.left, q.top + q.height / 2 - r.top, q.width / 2]; }
+    function lines(temp) {
+      var r = board.getBoundingClientRect(); if (!r.width) return;
+      svg.setAttribute('viewBox', '0 0 ' + r.width + ' ' + r.height); svg.setAttribute('width', r.width); svg.setAttribute('height', r.height);
+      var out = '<defs><marker id="nc-dw-head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1a6b35"/></marker><marker id="nc-dw-head3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#8d6e63"/></marker><marker id="nc-dw-head2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#e8590c"/></marker></defs>';
+      S.edges.forEach(function (e) {
+        var a = center(e[0]), b = center(e[1]); if (!a || !b) return;
+        var d = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1, ux = (b[0] - a[0]) / d, uy = (b[1] - a[1]) / d;
+        var x1 = a[0] + ux * (a[2] + 3), y1 = a[1] + uy * (a[2] + 3), x2 = b[0] - ux * (b[2] + 6), y2 = b[1] - uy * (b[2] + 6);
+        var dead = e[1] === PL().decomposer;
+        out += '<line x1="' + x1.toFixed(1) + '" y1="' + y1.toFixed(1) + '" x2="' + x2.toFixed(1) + '" y2="' + y2.toFixed(1) + '" class="' + (dead ? 'nc-dw-dead' : 'nc-dw-e') + '" marker-end="url(#' + (dead ? 'nc-dw-head3' : 'nc-dw-head') + ')"/>' +
+          '<text x="' + ((x1 + x2) / 2).toFixed(1) + '" y="' + ((y1 + y2) / 2 - 5).toFixed(1) + '" class="nc-dw-lab" text-anchor="middle">' + (dead ? 'when it dies' : 'energy') + '</text>';
+      });
+      if (temp) out += '<line x1="' + temp[0] + '" y1="' + temp[1] + '" x2="' + temp[2] + '" y2="' + temp[3] + '" class="nc-dw-temp" marker-end="url(#nc-dw-head2)"/>';
+      svg.innerHTML = out;
+    }
+    function attempt(a, b) {
+      var p = PL(); if (!p || a === b) return;
+      var A = p.cards[a], B = p.cards[b];
+      if (has(a, b)) { fb.innerHTML = 'That arrow is already there.'; return; }
+      if (eats(p, a, b)) {
+        S.edges.push([a, b]); save(); ping();
+        fb.innerHTML = '✓ ' + esc((b === p.decomposer ? W.okDead : W.ok).replace('{a}', A.the).replace('{b}', B.the));
+        if (coreDone(p) && !S.extraShown) { S.extraShown = 1; save(); fb.innerHTML += ' ' + esc(W.addMore); }
+      } else if (eats(p, b, a)) { ping(true); fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(W.backward.split('{a}').join(A.the).split('{b}').join(B.the)) + '</span>'; }
+      else { ping(true); fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(W.noLink.replace('{a}', A.the).replace('{b}', B.the)) + '</span>'; }
+      drawAll();
+    }
+    function posOf(p) { return p.pos2 && board.clientWidth && board.clientWidth < 440 ? p.pos2 : p.pos; }
+    function layout() { var p = PL(); if (!p) return; var P = posOf(p); $$('.nc-dw-card', board).forEach(function (e) { var q = P[e.dataset.k]; if (q) { e.style.left = q[0] + '%'; e.style.top = q[1] + '%'; } }); }
+    function cardEl(k, p) {
+      var c = p.cards[k], pos = posOf(p)[k];
+      var el = mk('button', 'nc-dw-card' + (k === p.extra || k === p.decomposer ? ' extra' : ''), chip(c));
+      el.type = 'button'; el.dataset.k = k; el.style.left = pos[0] + '%'; el.style.top = pos[1] + '%';
+      el.setAttribute('aria-label', c.name + '. Tap it, then tap the living thing its energy goes to. Or draw an arrow from it.');
+      var d0 = null;
+      el.addEventListener('pointerdown', function (e) { e.preventDefault(); var r = board.getBoundingClientRect(), c0 = center(k); d0 = { moved: false, x: e.clientX, y: e.clientY, c: c0, r: r }; el.setPointerCapture(e.pointerId); });
+      el.addEventListener('pointermove', function (e) { if (!d0) return; if (Math.abs(e.clientX - d0.x) + Math.abs(e.clientY - d0.y) > 10) { d0.moved = true; board.classList.add('drawing'); lines([d0.c[0], d0.c[1], e.clientX - d0.r.left, e.clientY - d0.r.top]); } });
+      el.addEventListener('pointerup', function (e) {
+        if (!d0) return; var moved = d0.moved; d0 = null; board.classList.remove('drawing');
+        if (!moved) { // tap mode: first tap picks the food, second tap picks the eater
+          if (pick === null) { pick = k; fb.innerHTML = esc(W.tapNext.replace('{a}', p.cards[k].the)); }
+          else if (pick === k) { pick = null; fb.innerHTML = ''; }
+          else { var a = pick; pick = null; attempt(a, k); }
+          drawAll(); return;
+        }
+        var hit = null; $$('.nc-dw-card', board).forEach(function (o) { var q = o.getBoundingClientRect(); if (e.clientX >= q.left - 6 && e.clientX <= q.right + 6 && e.clientY >= q.top - 6 && e.clientY <= q.bottom + 6) hit = o.dataset.k; });
+        lines(); if (hit && hit !== k) attempt(k, hit); else fb.innerHTML = esc(W.dropHint);
+      });
+      el.addEventListener('pointercancel', function () { d0 = null; board.classList.remove('drawing'); lines(); });
+      return el;
+    }
+    function table(p) {
+      var ks = visible(p);
+      return '<div class="nc-dw-tr nc-dw-trh"><span>Box</span><span>Producer or consumer?</span><span>Gets its energy from</span><span>Arrow points to</span></div>' + ks.map(function (k) {
+        var c = p.cards[k], from = S.edges.filter(function (e) { return e[1] === k; }).map(function (e) { return p.cards[e[0]].name; }), to = S.edges.filter(function (e) { return e[0] === k; }).map(function (e) { return p.cards[e[1]].name; });
+        return '<div class="nc-dw-tr"><b>' + esc(c.name) + '</b><span>' + esc(c.role) + '</span><span>' + (from.length ? esc(from.join(', ')) : (k === p.core[0] ? '—' : '…')) + '</span><span>' + (to.length ? esc(to.join(', ')) : '…') + '</span></div>';
+      }).join('');
+    }
+    function chainText(p) { var s = p.core.map(function (k) { return p.cards[k].name; }).join(' → '); var ex = S.edges.filter(function (e) { return e[1] === p.extra; })[0]; if (ex) s += '; also ' + p.cards[ex[0]].name + ' → ' + p.cards[p.extra].name; var dc = S.edges.filter(function (e) { return e[1] === p.decomposer; })[0]; if (dc) s += '; when it dies, ' + p.cards[dc[0]].name + ' → ' + p.cards[p.decomposer].name; return s; }
+    EXTRA_LINES.push(function () { var p = PL(); return ['--- PART 4: MY FOOD CHAIN MODEL ---', p && S.edges.length ? p.label + ': ' + chainText(p) : '(not drawn yet)']; });
+    function savedChip() {
+      var np = $('.nc-np-head'); if (!np) return; var p = PL(), el = $('.nc-dw-saved', np);
+      if (!S.bound || !p) { if (el) el.remove(); return; }
+      if (!el) { el = mk('div', 'nc-dw-saved'); np.appendChild(el); }
+      el.innerHTML = '<span>📓 ' + esc(W.savedLabel) + '</span> ' + p.core.map(function (k) { return chip(p.cards[k]); }).join('<span class="nc-yd-ar on" aria-hidden="true">→</span>');
+    }
+    function drawAll() {
+      var p = PL();
+      $$('.nc-dw-pl', g).forEach(function (b) { b.classList.toggle('sel', +b.dataset.i === S.place); });
+      work.hidden = !p; if (!p) return;
+      g.querySelector('.nc-dw-clue').textContent = p.clue;
+      var vis = visible(p);
+      if (board.dataset.place !== String(S.place) || board.querySelectorAll('.nc-dw-card').length !== vis.length) {
+        $$('.nc-dw-card', board).forEach(function (e) { e.remove(); });
+        vis.forEach(function (k) { board.appendChild(cardEl(k, p)); });
+        board.dataset.place = String(S.place);
+      }
+      $$('.nc-dw-card', board).forEach(function (e) { e.classList.toggle('pick', e.dataset.k === pick); e.classList.toggle('linked', S.edges.some(function (x) { return x[0] === e.dataset.k || x[1] === e.dataset.k; })); });
+      g.querySelector('.nc-dw-undo').hidden = !S.edges.length || !!S.bound;
+      g.querySelector('.nc-dw-clear').hidden = !S.edges.length || !!S.bound;
+      g.querySelector('.nc-dw-other').hidden = !!S.bound;
+      g.querySelector('.nc-dw-table').innerHTML = table(p);
+      layout(); lines();
+      var done = allDone(p);
+      g.querySelector('.nc-dw-cmp').hidden = !done; g.querySelector('.nc-dw-wow').hidden = !done;
+      g.classList.toggle('nc-done', done);
+      if (done) {
+        fb.innerHTML = '✅ ' + esc(W.win);
+        var T = D.turn, tn = store.tn || {};
+        var rows = [
+          [W.rows[0], tn.saved ? (tn.dir === 'a' ? T.toA : T.toB) : '(not saved)', T.toA + ' (' + W.evArrow + ')'],
+          [W.rows[1], tn.saved && tn.mean != null ? T.opts[tn.mean] : '(not saved)', W.evMean]
+        ];
+        g.querySelector('.nc-dw-rows').innerHTML = '<div class="nc-mt-r nc-mt-rh"><span></span><span>You predicted</span><span>The evidence</span></div>' + rows.map(function (r) { return '<div class="nc-mt-r"><b>' + esc(r[0]) + '</b><span>' + esc(r[1]) + '</span><span class="nc-mt-ev">' + esc(r[2]) + '</span></div>'; }).join('');
+        if (!S.bound) { S.bound = 1; save(); bind({ model: { place: p.k, chain: chainText(p) } }); if (tn.saved && !tn.revealed) { tn.revealed = 1; store.tn = tn; save(); document.dispatchEvent(new Event('nc:tn')); } note('✏️ Part 4 done. Your model is saved on page ' + D.page + '. Read the twist below.'); }
+      }
+      savedChip(); refresh();
+    }
+    $$('.nc-dw-pl', g).forEach(function (b) { b.addEventListener('click', function () { if (S.bound) return; var i = +b.dataset.i; if (i !== S.place) { S.place = i; S.edges = []; S.extraShown = 0; pick = null; fb.innerHTML = ''; save(); } drawAll(); }); });
+    g.querySelector('.nc-dw-undo').addEventListener('click', function () { S.edges.pop(); if (!coreDone(PL())) S.extraShown = 0; save(); fb.innerHTML = ''; drawAll(); });
+    g.querySelector('.nc-dw-clear').addEventListener('click', function () { S.edges = []; S.extraShown = 0; pick = null; save(); fb.innerHTML = ''; drawAll(); });
+    g.querySelector('.nc-dw-other').addEventListener('click', function () { S.place = null; S.edges = []; S.extraShown = 0; pick = null; save(); fb.innerHTML = ''; drawAll(); try { g.scrollIntoView({ block: 'start', behavior: RM ? 'auto' : 'smooth' }); } catch (e) {} });
+    window.addEventListener('resize', function () { layout(); lines(); });
+    var mo = window.ResizeObserver ? new ResizeObserver(function () { layout(); lines(); }) : null; if (mo) mo.observe(board);
+    setTimeout(savedChip, 0);
+    drawAll();
+  }
+
   function boot() {
     guard('lean', buildLean);
     guard('tabs', buildTabs);
@@ -2206,19 +2633,24 @@
     guard('bets', buildBets);
     guard('cups', buildCups);
     guard('rewind', buildRewind);
+    guard('turn', buildTurn);
     guard('wordlens', buildWordLens);
     guard('source', buildSource);
+    guard('trace', buildTrace);
     guard('lamp', buildLamp);
     guard('sort', buildSort);
     guard('air', buildAir);
     guard('beam', buildBeam);
+    guard('flip', buildFlip);
     guard('bag', buildBag);
     guard('timelapse', buildTimelapse);
     guard('jars', buildJars);
     guard('pour', buildPour);
+    guard('pond', buildPond);
     guard('otherside', buildOtherSide);
     guard('meter', buildMeter);
     guard('yard', buildYard);
+    guard('draw', buildDraw);
     guard('assignment', buildAssignment);
     guard('quizcard', function () { var q = $('#tab-quiz'); if (q) putKeeper('k-quiz', q, 'prepend'); });
     guard('wonder', buildWonder);
