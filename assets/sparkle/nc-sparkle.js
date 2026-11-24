@@ -1636,8 +1636,8 @@
       if (h4 && R.bars) {
         // a bar graph: one bar per group (R.bars: [{name, v, color}]); drag or tap a bar to read it
         var bb = wonderBox('📈', 'Real data', R.title, 3), BW = 600, BH = 240, BL = 56, BB = 46, BT = 16, mx = Math.max.apply(null, R.bars.map(function (q) { return q.v; }));
-        var slotW = (BW - BL - 10) / R.bars.length, bw = slotW * 0.62, top = Math.ceil(mx / 5000) * 5000, ticks = '';
-        for (var tv = 0; tv <= top; tv += 5000) { var ty = BH - BB - tv / top * (BH - BB - BT); ticks += '<line x1="' + BL + '" y1="' + ty.toFixed(1) + '" x2="' + (BW - 10) + '" y2="' + ty.toFixed(1) + '" stroke="#f0e8dc"/><text x="' + (BL - 6) + '" y="' + (ty + 3).toFixed(1) + '" font-size="10" fill="#7a6a58" text-anchor="end">' + tv.toLocaleString('en-US') + '</text>'; }
+        var slotW = (BW - BL - 10) / R.bars.length, bw = slotW * 0.62, stp = R.step || 5000, top = Math.ceil(mx / stp) * stp, ticks = '';
+        for (var tv = 0; tv <= top; tv += stp) { var ty = BH - BB - tv / top * (BH - BB - BT); ticks += '<line x1="' + BL + '" y1="' + ty.toFixed(1) + '" x2="' + (BW - 10) + '" y2="' + ty.toFixed(1) + '" stroke="#f0e8dc"/><text x="' + (BL - 6) + '" y="' + (ty + 3).toFixed(1) + '" font-size="10" fill="#7a6a58" text-anchor="end">' + tv.toLocaleString('en-US') + '</text>'; }
         var bars = R.bars.map(function (q, i) { var x = BL + i * slotW + (slotW - bw) / 2, h = Math.max(1.5, q.v / top * (BH - BB - BT)); return '<rect class="nc-bar" data-i="' + i + '" x="' + x.toFixed(1) + '" y="' + (BH - BB - h).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + h.toFixed(1) + '" fill="' + q.color + '" rx="3"/>' +
           '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (BH - BB + 15) + '" font-size="10.5" font-weight="700" fill="#2B1D12" text-anchor="middle">' + esc(q.name) + '</text>' + (q.name2 ? '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (BH - BB + 28) + '" font-size="10.5" font-weight="700" fill="#2B1D12" text-anchor="middle">' + esc(q.name2) + '</text>' : ''); }).join('');
         bb.querySelector('.nc-wx-body').innerHTML = '<p class="nc-p">' + esc(R.intro) + '</p>' + job(R.job) +
@@ -2626,6 +2626,424 @@
     drawAll();
   }
 
+  /* ───────────── 19.01 Warm-Up: Pin the heart on a real chest X-ray (a prediction) ───────────── */
+  function inHeart(H, x, y) { var dx = (x - H.cx) / H.rx, dy = (y - H.cy) / H.ry; return dx * dx + dy * dy <= 1; }
+  function pinZone(P, x, y) {
+    var H = P.heart;
+    if (inHeart(H, x, y)) return 'on';
+    if (x < P.mid) return 'right';
+    if (y < H.cy - H.ry) return 'high';
+    if (y > H.cy + H.ry) return 'low';
+    return 'left';
+  }
+  function buildPin() {
+    var P = D.pin; if (!P) return;
+    var pred = $('#pred-1'); if (!pred) throw new Error('pred-1 missing');
+    var host = pred.closest('.response-q') || pred.parentNode;
+    var card = host.closest('.activity-card') || host.parentNode;
+    $$('.callout, .socratic-q', card).forEach(hide);
+    store.pn = store.pn || {}; var S = store.pn;
+    var g = mk('div', 'nc-g nc-pn');
+    g.innerHTML = '<div class="nc-g-k">Warm-Up game</div><h4 class="nc-g-t">' + esc(P.title) + '</h4><p class="nc-p">' + esc(P.intro) + '</p>' + job(P.job) +
+      '<div class="nc-pn-fig" role="group" aria-label="' + esc(P.alt) + '"><img src="' + esc(P.img) + '" alt="' + esc(P.alt) + '" draggable="false">' +
+        '<span class="nc-pn-side nc-pn-r">' + esc(P.rightLabel) + '</span><span class="nc-pn-side nc-pn-l">' + esc(P.leftLabel) + '</span>' +
+        '<span class="nc-pn-real" hidden></span>' +
+        '<span class="nc-pn-pin" hidden aria-hidden="true">📍</span>' +
+      '</div>' +
+      '<div class="nc-pn-row"><span class="nc-pn-now" aria-live="polite"></span></div>' +
+      '<div class="nc-pn-keys" hidden><span>Nudge your pin:</span><button type="button" class="nc-cup-edit" data-d="-1,0" aria-label="Move the pin left">◀</button><button type="button" class="nc-cup-edit" data-d="1,0" aria-label="Move the pin right">▶</button><button type="button" class="nc-cup-edit" data-d="0,-1" aria-label="Move the pin up">▲</button><button type="button" class="nc-cup-edit" data-d="0,1" aria-label="Move the pin down">▼</button></div>' +
+      '<p class="nc-credit">' + esc(P.credit) + '</p>' +
+      '<div class="nc-rw-ctl"><button type="button" class="nc-btn nc-pn-save" disabled>🔒 Save my pin</button><button type="button" class="nc-cup-edit nc-pn-edit" hidden>✎ Move my pin</button></div>' +
+      '<div class="nc-bet-seal nc-pn-seal" hidden></div>' +
+      '<label class="nc-np-l" for="pred-1" style="margin-top:12px">' + esc(P.reasonPrompt) + '</label>';
+    before(host, g);
+    pred.placeholder = P.placeholder;
+    var fig = g.querySelector('.nc-pn-fig'), pin = g.querySelector('.nc-pn-pin'), now = g.querySelector('.nc-pn-now'), saveB = g.querySelector('.nc-pn-save'), editB = g.querySelector('.nc-pn-edit'), seal = g.querySelector('.nc-pn-seal'), real = g.querySelector('.nc-pn-real'), keys = g.querySelector('.nc-pn-keys');
+    var H = P.heart;
+    real.style.left = ((H.cx - H.rx) * 100) + '%'; real.style.top = ((H.cy - H.ry) * 100) + '%'; real.style.width = (H.rx * 200) + '%'; real.style.height = (H.ry * 200) + '%';
+    function where() { return S.x == null ? '' : P.zones[pinZone(P, S.x, S.y)]; }
+    PRED_LINE = function () { return ['--- WARM-UP: MY PREDICTION ---', 'My heart pin: ' + (S.saved ? P.zones[pinZone(P, S.x, S.y)] : '(not saved yet)')]; };
+    function draw() {
+      var saved = !!S.saved, locked = !!S.revealed;
+      pin.hidden = S.x == null;
+      if (S.x != null) { pin.style.left = (S.x * 100) + '%'; pin.style.top = (S.y * 100) + '%'; }
+      now.textContent = S.x == null ? P.notYet : (saved ? '' : P.placed);
+      keys.hidden = S.x == null || saved;
+      fig.classList.toggle('locked', saved);
+      saveB.disabled = S.x == null; saveB.hidden = saved;
+      editB.hidden = !saved || locked;
+      real.hidden = !locked;
+      seal.hidden = !saved;
+      seal.textContent = !saved ? '' : (locked ? P.lockedNote.replace('{w}', where()) : P.saved);
+      g.classList.toggle('nc-done', saved);
+      refresh();
+    }
+    function place(x, y) { if (S.saved) return; S.x = clamp(x, 0.02, 0.98); S.y = clamp(y, 0.04, 0.96); save(); draw(); }
+    var dragging = false;
+    function fromEvent(e) { var r = fig.getBoundingClientRect(); return [(e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height]; }
+    fig.addEventListener('pointerdown', function (e) { if (S.saved) return; e.preventDefault(); dragging = true; try { fig.setPointerCapture(e.pointerId); } catch (x) {} var p = fromEvent(e); place(p[0], p[1]); });
+    fig.addEventListener('pointermove', function (e) { if (!dragging) return; var p = fromEvent(e); place(p[0], p[1]); });
+    function up() { if (dragging) { dragging = false; ping(); } }
+    fig.addEventListener('pointerup', up); fig.addEventListener('pointercancel', up);
+    $$('.nc-pn-keys button', g).forEach(function (b) { b.addEventListener('click', function () { var d = b.dataset.d.split(','); place(S.x + 0.03 * d[0], S.y + 0.03 * d[1]); }); });
+    saveB.addEventListener('click', function () { if (S.x == null) return; S.saved = 1; save(); ping(); bind({ prediction: { pin: [Math.round(S.x * 100), Math.round(S.y * 100)] } }); draw(); });
+    editB.addEventListener('click', function () { if (S.revealed) return; S.saved = 0; save(); draw(); });
+    document.addEventListener('nc:pn', draw);
+    draw();
+    putKeeper('k-warmup', g.querySelector('.nc-job'), 'after');
+  }
+
+  /* ───────────── 19.01 Part 1 game: slide the vein on Harvey's 1628 Figure 2 ───────────── */
+  function buildVein() {
+    var V = D.vein; if (!V) return;
+    var src = $('.nc-src'); if (!src) throw new Error('vein needs the source page');
+    store.vn = store.vn || {}; var S = store.vn;
+    var pts = V.path, n = pts.length, W = V.w, Hh = V.h;
+    // cumulative length along the vein (image units), and where the valve and thumb sit on it
+    var cum = [0]; for (var i = 1; i < n; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+    var L = cum[n - 1];
+    function at(s) { s = clamp(s, 0, L); for (var i = 1; i < n; i++) if (cum[i] >= s) { var t = (s - cum[i - 1]) / ((cum[i] - cum[i - 1]) || 1); return [lerp(pts[i - 1][0], pts[i][0], t), lerp(pts[i - 1][1], pts[i][1], t)]; } return pts[n - 1]; }
+    function proj(x, y) { var best = 1e9, bs = 0; for (var i = 1; i < n; i++) { var ax = pts[i - 1][0], ay = pts[i - 1][1], bx = pts[i][0], by = pts[i][1], dx = bx - ax, dy = by - ay, l2 = dx * dx + dy * dy || 1, t = clamp(((x - ax) * dx + (y - ay) * dy) / l2, 0, 1), px = ax + t * dx, py = ay + t * dy, d = Math.hypot(x - px, y - py); if (d < best) { best = d; bs = cum[i - 1] + t * (cum[i] - cum[i - 1]); } } return [bs, best]; }
+    var sValve = proj(V.valve[0], V.valve[1])[0], sThumb = proj(V.thumb[0], V.thumb[1])[0];
+    function sub(a, b) { var out = [at(a)]; for (var i = 0; i < n; i++) if (cum[i] > a && cum[i] < b) out.push(pts[i]); out.push(at(b)); return out.map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' '); }
+    var g = mk('div', 'nc-g nc-vn');
+    g.innerHTML = gameHead(V.kicker, V.title) + '<p class="nc-p">' + esc(V.intro) + '</p>' +
+      '<div class="nc-vn-task" aria-live="polite"></div>' +
+      '<div class="nc-vn-stage"><div class="nc-vn-fig"><img src="' + esc(V.img) + '" alt="' + esc(V.alt) + '" width="' + W + '" height="' + Hh + '" draggable="false">' +
+        '<svg class="nc-vn-svg" viewBox="0 0 ' + W + ' ' + Hh + '" aria-hidden="true"></svg>' +
+        '<span class="nc-vn-lab nc-vn-hand" style="top:3%">' + esc(V.handLabel) + '</span><span class="nc-vn-lab nc-vn-heart" style="bottom:3%">' + esc(V.heartLabel) + '</span>' +
+      '</div>' +
+      '<div class="nc-vn-side"><div class="nc-vn-btns">' +
+        '<button type="button" class="nc-btn nc-vn-down">' + esc(V.btnDown) + '</button>' +
+        '<button type="button" class="nc-btn nc-vn-lift" hidden>' + esc(V.btnLift) + '</button>' +
+        '<button type="button" class="nc-btn nc-vn-up">' + esc(V.btnUp) + '</button>' +
+      '</div><div class="nc-fb nc-vn-fb" aria-live="polite"></div></div></div>' +
+      '<div class="nc-vn-ask" hidden><div class="nc-q">' + esc(V.ask) + '</div><div class="nc-opts">' + V.opts.map(function (o, i) { return '<button type="button" class="nc-opt" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div><div class="nc-fb nc-vn-afb" aria-live="polite"></div></div>' +
+      '<button type="button" class="nc-cup-edit nc-vn-reset">↺ Let the blood back in and start again</button>' +
+      '<details class="nc-why"><summary>' + esc(V.tryTitle) + '</summary><p class="nc-p">' + esc(V.tryText) + '</p></details>' +
+      '<p class="nc-credit">' + esc(V.credit) + '</p>';
+    after(src, g);
+    var svg = g.querySelector('.nc-vn-svg'), task = g.querySelector('.nc-vn-task'), fb = g.querySelector('.nc-vn-fb'), afb = g.querySelector('.nc-vn-afb');
+    var bDown = g.querySelector('.nc-vn-down'), bLift = g.querySelector('.nc-vn-lift'), bUp = g.querySelector('.nc-vn-up');
+    // live state: e0..e1 = the empty stretch of vein; bulge = how swollen the knot is (0..1); finger = where the sliding finger is
+    var live = { e0: 0, e1: 0, bulge: 0, finger: null };
+    function steps() { return (S.down ? 1 : 0) + (S.lift ? 1 : 0) + (S.up ? 1 : 0); }
+    function render() {
+      var out = '<polyline class="nc-vn-blood" points="' + sub(0, L) + '"/>';
+      if (live.e1 > live.e0 + 1) out += '<polyline class="nc-vn-empty" points="' + sub(live.e0, live.e1) + '"/>';
+      var vp = at(sValve), r = 9 + live.bulge * 9;
+      out += '<circle class="nc-vn-valve' + (live.bulge > 0.05 ? ' swell' : '') + '" cx="' + vp[0] + '" cy="' + vp[1] + '" r="' + r.toFixed(1) + '"/>';
+      out += '<text class="nc-vn-vt" x="' + (vp[0] + 22) + '" y="' + (vp[1] + 5) + '">valve</text>';
+      var tp = at(sThumb); out += '<g class="nc-vn-thumb' + (S.thumbOn ? ' on' : '') + '"><circle cx="' + tp[0] + '" cy="' + tp[1] + '" r="15"/><text x="' + (tp[0] - 24) + '" y="' + (tp[1] + 5) + '" text-anchor="end">' + (S.thumbOn ? 'thumb pressing' : 'thumb spot') + '</text></g>';
+      if (live.finger != null) { var fp = at(live.finger); out += '<circle class="nc-vn-finger" cx="' + fp[0] + '" cy="' + fp[1] + '" r="17"/>'; }
+      svg.innerHTML = out;
+    }
+    function settle() {
+      live.finger = null; live.bulge = 0;
+      if (S.thumbOn) { live.e0 = sThumb; live.e1 = sValve - 4; } else { live.e0 = live.e1 = 0; }
+      render();
+    }
+    function draw(msg) {
+      var k = steps();
+      task.innerHTML = '<b>' + (k < 3 ? 'Test ' + (k + 1) + ' of 3:' : '✓ All three tests done.') + '</b> ' + esc(k < 3 ? V.steps[!S.down ? 0 : !S.lift ? 1 : 2] : V.done);
+      bLift.hidden = !S.thumbOn;
+      bDown.disabled = false; bUp.disabled = false;
+      bDown.textContent = S.down ? V.btnDownAgain : V.btnDown;
+      bUp.textContent = S.up ? V.btnUpAgain : V.btnUp;
+      g.querySelector('.nc-vn-ask').hidden = k < 3;
+      if (msg != null) fb.innerHTML = msg;
+      g.classList.toggle('nc-done', !!S.answered);
+      if (S.answered) { var o = V.opts.filter(function (x) { return x.ok; })[0]; $$('.nc-vn-ask .nc-opt', g).forEach(function (b) { b.classList.toggle('ok', V.opts[+b.dataset.i].ok); }); afb.innerHTML = '✅ ' + esc(V.win); }
+      settle();
+    }
+    // the two slides (also used by the buttons)
+    var anim = null;
+    function slide(dir) {
+      if (anim) return;
+      var from = dir > 0 ? sThumb : Math.min(L, sValve + 120), to = dir > 0 ? Math.min(L, sValve + 70) : sValve;
+      var t0 = null, dur = RM ? 1 : 1100;
+      if (dir > 0) S.thumbOn = 1;
+      function frame(ts) {
+        if (t0 == null) t0 = ts; var p = clamp((ts - t0) / dur, 0, 1), s = lerp(from, to, smooth(0, 1, p));
+        live.finger = s;
+        if (dir > 0) { live.e0 = sThumb; live.e1 = Math.min(s, sValve - 4); live.bulge = 0; }
+        else { live.e0 = live.e1 = 0; live.bulge = p; }
+        render();
+        if (p < 1) anim = requestAnimationFrame(frame); else { anim = null; finish(dir); }
+      }
+      anim = requestAnimationFrame(frame);
+    }
+    function finish(dir) {
+      if (dir > 0) { S.down = 1; S.thumbOn = 1; save(); ping(); draw('✓ ' + esc(V.okDown)); }
+      else {
+        S.up = 1; save(); ping(); live.finger = null; draw('✓ ' + esc(V.okUp)); live.bulge = 1; render();
+        setTimeout(function () { live.bulge = 0; render(); }, 1600);
+      }
+    }
+    function lift() {
+      if (!S.thumbOn || anim) return;
+      S.thumbOn = 0; S.lift = 1; save();
+      var t0 = null, dur = RM ? 1 : 900, a = sThumb, b = sValve - 4;
+      function frame(ts) { if (t0 == null) t0 = ts; var p = clamp((ts - t0) / dur, 0, 1); live.e0 = lerp(a, b, p); live.e1 = b; live.finger = null; render(); if (p < 1) anim = requestAnimationFrame(frame); else { anim = null; ping(); draw('✓ ' + esc(V.okLift)); } }
+      anim = requestAnimationFrame(frame);
+    }
+    bDown.addEventListener('click', function () { slide(1); });
+    bUp.addEventListener('click', function () { slide(-1); });
+    bLift.addEventListener('click', lift);
+    // finger drag along the vein: down (toward the heart) or up (toward the hand)
+    var fig = g.querySelector('.nc-vn-fig'), dr = null;
+    function img(e) { var r = fig.getBoundingClientRect(); return [(e.clientX - r.left) * W / r.width, (e.clientY - r.top) * Hh / r.height]; }
+    fig.addEventListener('pointerdown', function (e) {
+      if (anim) return; var p = img(e), q = proj(p[0], p[1]);
+      if (q[1] > V.grab) { fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(V.missVein) + '</span>'; return; }
+      e.preventDefault(); try { fig.setPointerCapture(e.pointerId); } catch (x) {} dr = { s0: q[0], s: q[0] }; live.finger = q[0]; render();
+    });
+    fig.addEventListener('pointermove', function (e) {
+      if (!dr) return; var p = img(e), q = proj(p[0], p[1]); dr.s = q[0]; live.finger = q[0];
+      if (dr.s > dr.s0 && dr.s0 <= sValve) { if (dr.s0 <= sThumb + 30) { S.thumbOn = 1; live.e0 = sThumb; live.e1 = Math.min(dr.s, sValve - 4); } }
+      else if (dr.s < dr.s0 && dr.s0 > sValve) { live.bulge = clamp((dr.s0 - Math.max(dr.s, sValve)) / Math.max(30, dr.s0 - sValve), 0, 1); if (dr.s < sValve) { dr.s = sValve; live.finger = sValve; } }
+      render();
+    });
+    function end() {
+      if (!dr) return; var d = dr; dr = null;
+      if (d.s - d.s0 > 50 && d.s0 <= sThumb + 30 && d.s >= sValve) { finish(1); return; }
+      if (d.s0 - d.s > 40 && d.s0 > sValve + 20 && d.s <= sValve + 12) { finish(-1); return; }
+      if (d.s - d.s0 > 30) fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(V.hintDown) + '</span>';
+      else if (d.s0 - d.s > 30) fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(V.hintUp) + '</span>';
+      settle();
+    }
+    fig.addEventListener('pointerup', end); fig.addEventListener('pointercancel', end);
+    $$('.nc-vn-ask .nc-opt', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var o = V.opts[+b.dataset.i];
+        if (o.ok) { S.answered = 1; save(); ping(); draw(); bind({ vein: 1 }); }
+        else { ping(true); b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 700); afb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(o.hint) + '</span>'; }
+      });
+    });
+    g.querySelector('.nc-vn-reset').addEventListener('click', function () { if (anim) { cancelAnimationFrame(anim); anim = null; } store.vn = S = {}; save(); afb.innerHTML = ''; $$('.nc-vn-ask .nc-opt', g).forEach(function (b) { b.classList.remove('ok'); }); draw(''); });
+    draw();
+  }
+
+  /* ───────────── 19.01 Part 2 game: knock one organ out and watch who fails next ───────────── */
+  function organChip(O, k, cls) { var o = O[k]; return '<span class="' + (cls || 'nc-ko-chip') + '" data-k="' + k + '"><img src="' + esc(o.img) + '" alt="' + esc(o.name) + ' (model)" draggable="false"><b>' + esc(o.name) + '</b></span>'; }
+  function buildKnock() {
+    var K = D.knock; if (!K) return;
+    var p2 = $$('#tab-lesson .card-head-label').filter(function (e) { return /Part 2|Section 2/.test(e.textContent); })[0];
+    var body = p2 && p2.closest('.card').querySelector('.card-body'); if (!body) throw new Error('Part 2 card missing');
+    store.ko = store.ko || {}; var S = store.ko; S.done = S.done || {};
+    var O = D.organs;
+    var g = mk('div', 'nc-g nc-ko');
+    g.innerHTML = gameHead(K.kicker, K.title) + '<p class="nc-p">' + esc(K.intro) + '</p>' + job(K.job) +
+      '<div class="nc-ko-board">' + K.board.map(function (k) { return '<button type="button" class="nc-ko-org" data-k="' + k + '" aria-pressed="false">' + organChip(O, k) + '<span class="nc-ko-sw" aria-hidden="true"><i></i></span><span class="nc-ko-st">on</span></button>'; }).join('') + '</div>' +
+      '<div class="nc-ko-panel" aria-live="polite"></div>' +
+      '<div class="nc-ko-score"></div>' +
+      '<div class="nc-wow nc-ko-wow" hidden><div class="nc-wow-k">What you found</div><p class="nc-wow-nums">' + esc(K.win) + '</p></div>' +
+      '<button type="button" class="nc-cup-edit nc-ko-reset">↺ Switch every organ back on and start again</button>' +
+      '<details class="nc-why"><summary>' + esc(K.whyTitle) + '</summary><p class="nc-p">' + esc(K.why) + '</p></details>' +
+      '<p class="nc-credit">' + esc(K.credit) + '</p>';
+    body.appendChild(g);
+    var panel = g.querySelector('.nc-ko-panel'), score = g.querySelector('.nc-ko-score');
+    var cur = null, timers = [];
+    function clearT() { timers.forEach(clearTimeout); timers = []; }
+    function need() { return K.cases.filter(function (c) { return c.need; }).map(function (c) { return c.k; }); }
+    function doneN() { return need().filter(function (k) { return S.done[k]; }).length; }
+    function caseOf(k) { return K.cases.filter(function (c) { return c.k === k; })[0]; }
+    function drawBoard() {
+      $$('.nc-ko-org', g).forEach(function (b) {
+        var k = b.dataset.k, off = cur === k, c = caseOf(k);
+        b.classList.toggle('off', off); b.classList.toggle('seen', !!S.done[k]); b.classList.toggle('hit', false);
+        b.setAttribute('aria-pressed', String(off)); b.querySelector('.nc-ko-st').textContent = off ? 'OFF' : (S.done[k] ? '✓ tested' : (c ? 'on' : 'on'));
+      });
+      var n = doneN(), all = n >= need().length;
+      score.textContent = n + ' of ' + need().length + ' organs tested' + (all ? ' ✓' : '');
+      g.querySelector('.nc-ko-wow').hidden = !all;
+      g.classList.toggle('nc-done', all);
+    }
+    function showCase(k) {
+      clearT(); var c = caseOf(k); cur = k; drawBoard();
+      if (!c) { panel.innerHTML = '<p class="nc-p">' + esc(K.notTested.split('{o}').join(O[k].name.toLowerCase())) + '</p>'; return; }
+      panel.innerHTML = '<div class="nc-ko-off">' + organChip(O, k, 'nc-ko-chip big') + '<div><div class="nc-q">' + esc(K.predictQ.replace('{o}', O[k].name.toLowerCase())) + '</div><div class="nc-opts nc-ko-opts">' + K.speeds.map(function (s, i) { return '<button type="button" class="nc-opt" data-i="' + i + '">' + esc(s) + '</button>'; }).join('') + '</div></div></div><div class="nc-fb nc-ko-fb"></div><ol class="nc-ko-chain"></ol>';
+      $$('.nc-ko-opts .nc-opt', panel).forEach(function (b) {
+        b.addEventListener('click', function () {
+          if (panel.dataset.ran === k) return;
+          var i = +b.dataset.i, right = i === c.speed;
+          b.classList.add(right ? 'ok' : 'sel');
+          $$('.nc-ko-opts .nc-opt', panel).forEach(function (x) { x.disabled = true; });
+          panel.querySelector('.nc-ko-fb').innerHTML = right ? '✓ ' + esc(K.gotIt) : '<span class="nc-ask-no">' + esc(K.notQuite.replace('{s}', K.speeds[c.speed].toLowerCase())) + '</span>';
+          run(c);
+        });
+      });
+      panel.dataset.ran = '';
+      if (S.done[k]) { // already tested: show the chain right away, no new prediction needed
+        $$('.nc-ko-opts .nc-opt', panel).forEach(function (x, i) { x.disabled = true; if (i === c.speed) x.classList.add('ok'); });
+        run(c, true);
+      }
+    }
+    function run(c, instant) {
+      panel.dataset.ran = c.k;
+      var ol = panel.querySelector('.nc-ko-chain');
+      c.chain.forEach(function (step, i) {
+        timers.push(setTimeout(function () {
+          var li = mk('li', 'nc-ko-li', (step.o ? organChip(O, step.o, 'nc-ko-chip sm') : '') + '<span>' + esc(step.t) + '</span>');
+          ol.appendChild(li);
+          if (step.o) { var b = $('.nc-ko-org[data-k="' + step.o + '"]', g); if (b) { b.classList.add('hit'); } }
+          if (i === c.chain.length - 1) {
+            ol.appendChild(mk('li', 'nc-ko-end', '⏱ ' + esc(c.end)));
+            if (!S.done[c.k]) { S.done[c.k] = 1; save(); ping(); }
+            drawBoard(); $$('.nc-ko-org', g).forEach(function (b) { if (c.chain.some(function (s) { return s.o === b.dataset.k; })) b.classList.add('hit'); });
+            if (doneN() >= need().length && !S.noted) { S.noted = 1; save(); note('🫀 Part 2 done. Every organ needs the others, but not all at the same speed.'); }
+          }
+        }, instant || RM ? 0 : 650 * (i + 1)));
+      });
+    }
+    $$('.nc-ko-org', g).forEach(function (b) {
+      b.addEventListener('click', function () { var k = b.dataset.k; if (cur === k) { cur = null; clearT(); panel.innerHTML = '<p class="nc-p">' + esc(K.backOn.replace('{o}', O[k].name.toLowerCase())) + '</p>'; drawBoard(); return; } showCase(k); });
+    });
+    g.querySelector('.nc-ko-reset').addEventListener('click', function () { clearT(); cur = null; store.ko = S = { done: {} }; save(); panel.innerHTML = '<p class="nc-p">' + esc(K.start) + '</p>'; drawBoard(); });
+    panel.innerHTML = '<p class="nc-p">' + esc(K.start) + '</p>';
+    drawBoard();
+  }
+
+  /* ───────────── 19.01 Part 3 game: race the reflex (a real reaction-time test) ───────────── */
+  function buildReflex() {
+    var R = D.reflex; if (!R) return;
+    var p3 = $$('#tab-lesson .card-head-label').filter(function (e) { return /Part 3|Section 3/.test(e.textContent); })[0];
+    var body = p3 && p3.closest('.card').querySelector('.card-body'); if (!body) throw new Error('Part 3 card missing');
+    store.rx = store.rx || {}; var S = store.rx; S.tries = S.tries || [];
+    var TRIES = R.tries || 3;
+    var g = mk('div', 'nc-g nc-rx');
+    g.innerHTML = gameHead(R.kicker, R.title) + '<p class="nc-p">' + esc(R.intro) + '</p>' + job(R.job) +
+      '<button type="button" class="nc-rx-pad" aria-label="The test pad. Tap Start, then tap here the moment the pan glows red."><img src="' + esc(R.img) + '" alt="' + esc(R.alt) + '" draggable="false"><span class="nc-rx-glow"></span><span class="nc-rx-msg"></span></button>' +
+      '<div class="nc-rx-row"><button type="button" class="nc-btn nc-rx-go"></button><span class="nc-rx-times" aria-live="polite"></span></div>' +
+      '<div class="nc-reveal nc-rx-cmp" hidden><h5>' + esc(R.compareTitle) + '</h5><div class="nc-rx-bars"></div><p class="nc-p nc-rx-note"></p></div>' +
+      '<div class="nc-wow nc-rx-wow" hidden><div class="nc-wow-k">Wait, really?</div><p class="nc-wow-nums">' + esc(R.wow) + '</p><ol class="nc-rx-steps">' + R.path.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ol></div>' +
+      '<button type="button" class="nc-cup-edit nc-rx-reset">↺ Clear my times and test again</button>' +
+      '<p class="nc-credit">' + esc(R.credit) + '</p>';
+    body.appendChild(g);
+    var pad = g.querySelector('.nc-rx-pad'), msg = g.querySelector('.nc-rx-msg'), go = g.querySelector('.nc-rx-go'), times = g.querySelector('.nc-rx-times');
+    var state = 'idle', t0 = 0, timer = null;
+    function avg() { if (!S.tries.length) return null; var s = 0; S.tries.forEach(function (t) { s += t; }); return Math.round(s / S.tries.length); }
+    function sec(ms) { return (ms / 1000).toFixed(2) + ' s'; }
+    EXTRA_LINES.push(function () { return ['--- PART 3: MY REACTION TIME ---', S.tries.length ? 'My tries: ' + S.tries.map(sec).join(', ') + ' · Average: ' + sec(avg()) : '(not tested yet)']; });
+    function draw() {
+      var n = S.tries.length, done = n >= TRIES;
+      pad.className = 'nc-rx-pad ' + state;
+      go.hidden = state === 'wait' || state === 'red';
+      go.textContent = done ? R.btnAgain : (n ? R.btnNext.replace('{n}', n + 1).replace('{t}', TRIES) : R.btnStart);
+      if (state === 'idle') msg.textContent = done ? R.msgDone : R.msgIdle;
+      times.innerHTML = n ? 'Your times: ' + S.tries.map(function (t) { return '<b>' + sec(t) + '</b>'; }).join(' · ') + (done ? ' · Average <b>' + sec(avg()) + '</b>' : '') : '';
+      var cmp = g.querySelector('.nc-rx-cmp'); cmp.hidden = !done; g.querySelector('.nc-rx-wow').hidden = !done;
+      if (done) {
+        var a = avg(), mx = Math.max(a, R.reflexMs, R.typicalMs) * 1.1;
+        g.querySelector('.nc-rx-bars').innerHTML = [[R.youLabel, a, 'you'], [R.typicalLabel, R.typicalMs, 'typ'], [R.reflexLabel, R.reflexMs, 'rfx']].map(function (r) { return '<div class="nc-rx-bar ' + r[2] + '"><span>' + esc(r[0]) + '</span><i style="width:' + (r[1] / mx * 100).toFixed(1) + '%"></i><b>' + (r[2] === 'you' ? sec(r[1]) : esc(r[2] === 'rfx' ? R.reflexText : R.typicalText)) + '</b></div>'; }).join('');
+        g.querySelector('.nc-rx-note').textContent = R.note;
+      }
+      g.classList.toggle('nc-done', done);
+      refresh();
+    }
+    function start() {
+      if (S.tries.length >= TRIES) { S.tries = []; save(); }
+      state = 'wait'; msg.textContent = R.msgWait; draw();
+      clearTimeout(timer);
+      timer = setTimeout(function () { state = 'red'; t0 = performance.now(); msg.textContent = R.msgRed; draw(); }, 1400 + Math.random() * 2200);
+    }
+    function hit(e) {
+      if (e) e.preventDefault();
+      if (state === 'wait') { clearTimeout(timer); state = 'idle'; ping(true); msg.textContent = R.msgEarly; draw(); msg.textContent = R.msgEarly; return; }
+      if (state !== 'red') return;
+      var ms = Math.round(performance.now() - t0); state = 'idle';
+      if (ms < 80) { msg.textContent = R.msgEarly; draw(); msg.textContent = R.msgEarly; return; }
+      S.tries.push(Math.min(ms, 2000)); save(); ping();
+      draw(); msg.textContent = (S.tries.length >= TRIES ? R.msgDone : R.msgGot).replace('{t}', sec(ms));
+      if (S.tries.length >= TRIES) bind({ reaction: { avg: avg(), tries: S.tries.slice() } });
+      savedChip();
+    }
+    go.addEventListener('click', start);
+    pad.addEventListener('pointerdown', hit);
+    pad.addEventListener('keydown', function (e) { if (e.key === ' ' || e.key === 'Enter') hit(e); });
+    g.querySelector('.nc-rx-reset').addEventListener('click', function () { clearTimeout(timer); state = 'idle'; S.tries = []; save(); draw(); savedChip(); });
+    function savedChip() {
+      var np = $('.nc-np-head'); if (!np) return; var el = $('.nc-rx-saved', np);
+      if (S.tries.length < TRIES) { if (el) el.remove(); return; }
+      if (!el) { el = mk('div', 'nc-dw-saved nc-rx-saved'); np.appendChild(el); }
+      el.innerHTML = '<span>📓 ' + esc(R.savedLabel) + '</span> <b>' + sec(avg()) + '</b> · ' + esc(R.reflexLabel) + ': ' + esc(R.reflexText);
+    }
+    setTimeout(savedChip, 0);
+    draw();
+  }
+
+  /* ───────────── 19.01 Part 4 game: light the team for each scenario, then check the heart pin ───────────── */
+  function buildTeam() {
+    var T = D.team; if (!T) return;
+    var act = $('#tab-lesson .act-body'); if (!act) throw new Error('lesson body missing');
+    var O = D.organs;
+    var sec4 = mk('div', 'nc-part4');
+    sec4.innerHTML = '<div class="card theme-sky nc-p4card"><div class="card-head"><div class="card-head-icon">🧩</div><div><div class="card-head-label">Part 4</div><div class="card-head-title">' + esc(T.cardTitle) + '</div></div></div><div class="card-body"><p>' + esc(T.intro) + '</p><p class="nc-tm-more">' + esc(T.more) + '</p><div class="nc-g nc-tm"></div></div></div>';
+    act.appendChild(sec4);
+    var g = sec4.querySelector('.nc-tm');
+    store.tm = store.tm || {}; var S = store.tm; S.lit = S.lit || {}; S.ok = S.ok || {};
+    g.innerHTML = gameHead(T.kicker, T.title) + job(T.job) +
+      '<div class="nc-tm-tabs" role="tablist">' + T.cases.map(function (c, i) { return '<button type="button" class="nc-opt nc-tm-tab" data-i="' + i + '" role="tab">' + c.icon + ' ' + esc(c.short) + '</button>'; }).join('') + '</div>' +
+      '<div class="nc-tm-case" aria-live="polite"></div>' +
+      '<div class="nc-tm-grid">' + T.board.map(function (k) { return '<button type="button" class="nc-tm-org" data-k="' + k + '" aria-pressed="false">' + organChip(O, k, 'nc-ko-chip') + '<small>' + esc(O[k].job) + '</small></button>'; }).join('') + '</div>' +
+      '<div class="nc-tm-ctl"><button type="button" class="nc-btn nc-tm-check">✓ Check my team</button><button type="button" class="nc-cup-edit nc-tm-clear">↺ Turn off all the lights</button></div>' +
+      '<div class="nc-fb nc-tm-fb" aria-live="polite"></div>' +
+      '<div class="nc-reveal nc-tm-cmp" hidden><h5>' + esc(T.compareTitle) + '</h5><div class="nc-tm-cmpgrid"><div class="nc-pn-fig nc-tm-xr"><img src="' + esc(D.pin.img) + '" alt="' + esc(D.pin.alt) + '"><span class="nc-pn-real"></span><span class="nc-pn-pin" aria-hidden="true">📍</span></div><div class="nc-mt-rows nc-tm-rows"></div></div></div>' +
+      '<div class="nc-wow nc-tm-wow" hidden><div class="nc-wow-k">The twist</div><blockquote class="nc-wow-q">' + esc(T.twist.head) + '</blockquote><p class="nc-wow-nums">' + esc(T.twist.line) + '</p><p class="nc-wow-chain">' + esc(T.twist.chain) + '</p></div>';
+    putKeeper('k-part4', g.querySelector('.nc-g-t'), 'after');
+    var caseBox = g.querySelector('.nc-tm-case'), fb = g.querySelector('.nc-tm-fb');
+    var ci = S.cur || 0;
+    function C() { return T.cases[ci]; }
+    function lit() { return S.lit[ci] = S.lit[ci] || []; }
+    function allOk() { return T.cases.every(function (c, i) { return S.ok[i]; }); }
+    function drawCase() {
+      var c = C();
+      $$('.nc-tm-tab', g).forEach(function (b) { var i = +b.dataset.i; b.classList.toggle('sel', i === ci); b.classList.toggle('ok', !!S.ok[i]); b.setAttribute('aria-selected', String(i === ci)); });
+      caseBox.innerHTML = '<div class="nc-tm-sc"><span class="nc-tm-ic">' + c.icon + '</span><div><b>' + esc(c.title) + '</b><p class="nc-p">' + esc(c.text) + '</p></div></div>';
+      var L = lit();
+      $$('.nc-tm-org', g).forEach(function (b) { var on = L.indexOf(b.dataset.k) > -1; b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); b.disabled = !!S.ok[ci]; });
+      g.querySelector('.nc-tm-check').hidden = !!S.ok[ci];
+      g.querySelector('.nc-tm-clear').hidden = !!S.ok[ci] || !L.length;
+      if (S.ok[ci]) fb.innerHTML = '✅ ' + esc(c.win);
+      var done = allOk();
+      g.classList.toggle('nc-done', done);
+      g.querySelector('.nc-tm-cmp').hidden = !done; g.querySelector('.nc-tm-wow').hidden = !done;
+      if (done) reveal();
+    }
+    function reveal() {
+      var P = D.pin, pn = store.pn || {}, H = P.heart, fig = g.querySelector('.nc-tm-xr'), real = $('.nc-pn-real', fig), pin = $('.nc-pn-pin', fig);
+      real.style.left = ((H.cx - H.rx) * 100) + '%'; real.style.top = ((H.cy - H.ry) * 100) + '%'; real.style.width = (H.rx * 200) + '%'; real.style.height = (H.ry * 200) + '%';
+      if (pn.saved) { pin.hidden = false; pin.style.left = (pn.x * 100) + '%'; pin.style.top = (pn.y * 100) + '%'; } else pin.hidden = true;
+      var zone = pn.saved ? pinZone(P, pn.x, pn.y) : null;
+      var rows = [[T.rows[0], pn.saved ? P.zones[zone] : '(not saved)', T.evWhere], [T.rows[1], pn.saved ? (zone === 'on' ? T.yesOn : T.notOn) : '(not saved)', T.evShape]];
+      g.querySelector('.nc-tm-rows').innerHTML = '<div class="nc-mt-r nc-mt-rh"><span></span><span>You predicted</span><span>The evidence</span></div>' + rows.map(function (r) { return '<div class="nc-mt-r"><b>' + esc(r[0]) + '</b><span>' + esc(r[1]) + '</span><span class="nc-mt-ev">' + esc(r[2]) + '</span></div>'; }).join('');
+      if (!S.bound) { S.bound = 1; save(); bind({ team: 1 }); if (pn.saved && !pn.revealed) { pn.revealed = 1; store.pn = pn; save(); document.dispatchEvent(new Event('nc:pn')); } note('🧩 Part 4 done. Look at the X-ray: is your pin on the heart?'); }
+    }
+    $$('.nc-tm-tab', g).forEach(function (b) { b.addEventListener('click', function () { ci = +b.dataset.i; S.cur = ci; save(); fb.innerHTML = ''; drawCase(); }); });
+    $$('.nc-tm-org', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (S.ok[ci]) return; var L = lit(), k = b.dataset.k, i = L.indexOf(k);
+        if (i > -1) L.splice(i, 1); else L.push(k);
+        save(); fb.innerHTML = ''; drawCase();
+      });
+    });
+    g.querySelector('.nc-tm-clear').addEventListener('click', function () { S.lit[ci] = []; save(); fb.innerHTML = ''; drawCase(); });
+    g.querySelector('.nc-tm-check').addEventListener('click', function () {
+      var c = C(), L = lit();
+      var wrong = L.filter(function (k) { return c.wrong && c.wrong[k]; });
+      var miss = c.need.filter(function (k) { return L.indexOf(k) < 0; });
+      if (wrong.length) { ping(true); fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(c.wrong[wrong[0]]) + '</span>'; return; }
+      if (miss.length) { ping(true); fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(c.hint[miss[0]] || T.missHint) + ' ' + esc(T.missCount.replace('{n}', miss.length)) + '</span>'; return; }
+      S.ok[ci] = 1; save(); ping();
+      var next = -1; for (var j = 1; j <= T.cases.length; j++) { var q = (ci + j) % T.cases.length; if (!S.ok[q]) { next = q; break; } }
+      drawCase();
+      fb.innerHTML = '✅ ' + esc(c.win) + (next > -1 ? ' <button type="button" class="nc-cup-edit nc-tm-next">Next: ' + T.cases[next].icon + ' ' + esc(T.cases[next].short) + ' →</button>' : '');
+      var nb = $('.nc-tm-next', fb); if (nb) nb.addEventListener('click', function () { ci = next; S.cur = ci; save(); fb.innerHTML = ''; drawCase(); });
+    });
+    EXTRA_LINES.push(function () { var n = T.cases.filter(function (c, i) { return S.ok[i]; }).length; return ['--- PART 4: ORGAN TEAMS ---', n ? T.cases.map(function (c, i) { return S.ok[i] ? c.short + ': ' + (S.lit[i] || []).map(function (k) { return O[k].name; }).join(', ') : null; }).filter(Boolean).join(' | ') : '(not done yet)']; });
+    drawCase();
+  }
+
   function boot() {
     guard('lean', buildLean);
     guard('tabs', buildTabs);
@@ -2634,23 +3052,28 @@
     guard('cups', buildCups);
     guard('rewind', buildRewind);
     guard('turn', buildTurn);
+    guard('pin', buildPin);
     guard('wordlens', buildWordLens);
     guard('source', buildSource);
     guard('trace', buildTrace);
+    guard('vein', buildVein);
     guard('lamp', buildLamp);
     guard('sort', buildSort);
     guard('air', buildAir);
     guard('beam', buildBeam);
     guard('flip', buildFlip);
+    guard('knock', buildKnock);
     guard('bag', buildBag);
     guard('timelapse', buildTimelapse);
     guard('jars', buildJars);
     guard('pour', buildPour);
     guard('pond', buildPond);
+    guard('reflex', buildReflex);
     guard('otherside', buildOtherSide);
     guard('meter', buildMeter);
     guard('yard', buildYard);
     guard('draw', buildDraw);
+    guard('team', buildTeam);
     guard('assignment', buildAssignment);
     guard('quizcard', function () { var q = $('#tab-quiz'); if (q) putKeeper('k-quiz', q, 'prepend'); });
     guard('wonder', buildWonder);

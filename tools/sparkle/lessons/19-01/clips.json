@@ -1,0 +1,26 @@
+{
+ "voice": "Gdj2QBsAjgQnu3rwg2ZN",
+ "model": "eleven_v4",
+ "clips": {
+  "k-warmup": {
+   "text": "This is a real X-ray of a person's chest. Where is the heart? Tap to drop your pin, or drag it. Then tap Save my pin and write why you put it there. You will check it in Part 4.",
+   "dur": 13.64
+  },
+  "k-words": {
+   "text": "Organ. Function. Brain. Heart. Lungs. Skeleton.",
+   "dur": 6.27
+  },
+  "k-part1": {
+   "text": "William Harvey printed this book in sixteen twenty-eight. Tap each yellow line to read it in plain English. Then try his famous test on Figure 2: slide the blood along the vein, and find out which way it can go.",
+   "dur": 16.04
+  },
+  "k-quiz": {
+   "text": "Three quick questions, just for you. They are not graded. Tap an answer and read the note under it. Think about which organs work as a team.",
+   "dur": 10.27
+  },
+  "k-assign": {
+   "text": "Now add your half of page nineteen. Answer the two Part B questions. In Part C, write your notebook page and use your reaction time. Then tap evidence cards in the planner to build your C-E-R about how your organs work together.",
+   "dur": 16.51
+  }
+ }
+}
