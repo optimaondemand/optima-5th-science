@@ -1,0 +1,26 @@
+{
+ "voice": "Gdj2QBsAjgQnu3rwg2ZN",
+ "model": "eleven_v4",
+ "clips": {
+  "k-warmup": {
+   "text": "Put two fingers on the side of your neck and feel your pulse. Now guess: how fast will it beat after one minute of jumping jacks? Tap the heart in that rhythm. Then tap Save my beat and write why.",
+   "dur": 14.76
+  },
+  "k-words": {
+   "text": "Body system. Respiratory system. Circulatory system. Digestive system. Muscular system. Pulse.",
+   "dur": 9.33
+  },
+  "k-part1": {
+   "text": "In sixteen twenty-eight, William Harvey used math to study the heart. Tap each yellow line to read it in plain English. Then run the clock below and see how much blood one heart pushes out in half an hour.",
+   "dur": 14.92
+  },
+  "k-quiz": {
+   "text": "Three quick questions, just for you. They are not graded. Tap an answer and read the note under it. Think about which organs work as a team.",
+   "dur": 10.27
+  },
+  "k-assign": {
+   "text": "Now add your half of page nineteen. Answer the two Part B questions. In Part C, write your notebook page and use your pulse card. Then tap evidence cards in the planner to build your C-E-R about how your body systems team up.",
+   "dur": 16.77
+  }
+ }
+}

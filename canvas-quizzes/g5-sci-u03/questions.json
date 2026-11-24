@@ -1,0 +1,236 @@
+{
+ "id": "g5sci_u03_check",
+ "unit": 3,
+ "title": "Unit 3 Check: Forces, Plants, and Body Systems",
+ "description": "13 questions on Unit 3 (lessons 16.01 to 19.02): mass and forces, where plants get their materials, scientific arguments, food energy from the sun, food chain models, and body systems working together. Read each question carefully. Some questions have a small data table.",
+ "group": "Summative Assessments",
+ "lessons": [
+  "16.01",
+  "16.02",
+  "17.01",
+  "17.02",
+  "18.01",
+  "18.02",
+  "19.01",
+  "19.02"
+ ],
+ "questions": [
+  {
+   "type": "mc",
+   "from": "16.01, Part 1 (More Mass = Harder to Move)",
+   "cov": "16.01-a",
+   "q": "A soccer ball and a bowling ball sit on the floor. You give each one the same gentle kick. What happens?",
+   "opts": [
+    "The soccer ball rolls farther, because it has less mass",
+    "The bowling ball rolls farther, because heavy things keep going",
+    "They roll the same distance, because the kicks were the same",
+    "Neither one moves, because the forces are balanced"
+   ],
+   "ans": 0,
+   "why": "The same force has a bigger effect on an object with less mass.",
+   "look": "16.01, Part 1"
+  },
+  {
+   "type": "mc",
+   "from": "16.01, Part 2 (Balanced Forces = No Motion)",
+   "cov": "16.01-b",
+   "q": "Two dogs pull on opposite ends of a rope toy. The toy slowly moves toward the bigger dog. What does this show?",
+   "opts": [
+    "The forces are balanced",
+    "The forces are unbalanced, and the bigger dog pulls with more force",
+    "No forces are acting on the toy",
+    "The smaller dog is pulling harder"
+   ],
+   "ans": 1,
+   "why": "When opposite forces are not equal, the object moves toward the bigger force.",
+   "look": "16.01, Part 2"
+  },
+  {
+   "type": "mc",
+   "from": "16.02, Investigate (mass test data)",
+   "cov": "16.02-a",
+   "q": "<p>A student flicked two objects with the same push, three times each, and measured how far they slid.</p><table border=\"1\" cellpadding=\"6\" style=\"border-collapse:collapse\"><tr><th>Object</th><th>Trial 1</th><th>Trial 2</th><th>Trial 3</th></tr><tr><td>Tennis ball (light)</td><td>42 cm</td><td>38 cm</td><td>40 cm</td></tr><tr><td>Hardcover book (heavy)</td><td>7 cm</td><td>5 cm</td><td>6 cm</td></tr></table><p>Which conclusion does this data support?</p>",
+   "opts": [
+    "The book moved less because it was pushed with less force",
+    "Mass does not change how far an object moves",
+    "The same push moved the light object much farther, so more mass means less motion from the same force",
+    "The heavy object moved farther on average"
+   ],
+   "ans": 2,
+   "why": "The pushes were the same, and the light ball went about 40 cm while the book went about 6 cm.",
+   "look": "16.02, Investigate"
+  },
+  {
+   "type": "mc",
+   "from": "16.02, Part 1 (Stop and Think: why the same push)",
+   "cov": "16.02-b",
+   "q": "In the mass test, why should both objects get the same push?",
+   "opts": [
+    "So both objects stop in the same place",
+    "So the heavy object can win",
+    "It does not matter how hard you push each one",
+    "So the only thing that changes is the mass, and the test is fair"
+   ],
+   "ans": 3,
+   "why": "A fair test changes only one thing. Then any difference in the results comes from the mass.",
+   "look": "16.02, Part 1"
+  },
+  {
+   "type": "mc",
+   "from": "17.01, Parts 2 and 4 (air and water build the plant)",
+   "cov": "17.01-a",
+   "q": "A pumpkin vine grows from one small seed into a plant with 10 kilograms of leaves, stems, and pumpkins. The soil in its pot barely changes. Where did most of the plant's new mass come from?",
+   "opts": [
+    "Nutrients the roots pulled out of the soil",
+    "Carbon dioxide from the air, and water",
+    "Sunlight that turned into solid material",
+    "The fertilizer that was added to the pot"
+   ],
+   "ans": 1,
+   "why": "Plants build their bodies mostly from carbon dioxide and water. Sunlight gives the energy, but it is not the material.",
+   "look": "17.01, Part 2"
+  },
+  {
+   "type": "tf",
+   "from": "17.01, Part 3 (What Soil Really Does)",
+   "cov": "17.01-b",
+   "q": "True or false: Fertilizer is the food that plants eat to build their bodies.",
+   "ans": false,
+   "why": "Fertilizer adds small amounts of nutrients, minerals like nitrogen, that help plants grow. Plants make their own food using light, air, and water.",
+   "look": "17.01, Part 3"
+  },
+  {
+   "type": "match",
+   "from": "17.02, Part 1 (three parts of a scientific argument)",
+   "cov": "17.02-a",
+   "q": "Match each sentence to the part of a scientific argument it is.",
+   "pairs": [
+    [
+     "Plants get most of their mass from air and water.",
+     "Claim"
+    ],
+    [
+     "The willow tree gained 164 pounds while the soil lost only 2 ounces.",
+     "Evidence"
+    ],
+    [
+     "The soil barely changed, so the tree's new mass must have come from somewhere else, like the air and water.",
+     "Reasoning"
+    ]
+   ],
+   "extra": [
+    "Prediction"
+   ],
+   "why": "A claim says what is true, evidence is the data, and reasoning explains how the data proves the claim.",
+   "look": "17.02, Part 1"
+  },
+  {
+   "type": "mc",
+   "from": "17.02, Part 4 (Witness C: the sealed jar)",
+   "cov": "17.02-b",
+   "q": "<p>A plant was sealed in a clear jar with a carbon dioxide meter.</p><table border=\"1\" cellpadding=\"6\" style=\"border-collapse:collapse\"><tr><th>Time</th><th>Lamp</th><th>Carbon dioxide in the jar</th></tr><tr><td>Start</td><td>on</td><td>420</td></tr><tr><td>After 2 hours</td><td>on</td><td>200</td></tr><tr><td>After 4 hours</td><td>off for the last 2 hours</td><td>230</td></tr></table><p>What does this data show?</p>",
+   "opts": [
+    "The plant took in carbon dioxide all the time, light or dark",
+    "The plant took in carbon dioxide while it had light, and stopped when the light was off",
+    "The soil soaked up the carbon dioxide",
+    "The jar must have had a leak"
+   ],
+   "ans": 1,
+   "why": "The number fell with the lamp on and crept back up with the lamp off. Light powers the plant's building.",
+   "look": "17.02, Part 4"
+  },
+  {
+   "type": "mc",
+   "from": "18.01, Parts 1 and 2 (producers and consumers)",
+   "cov": "18.01-a",
+   "q": "Which of these living things can make its own food using energy from sunlight?",
+   "opts": [
+    "A rabbit",
+    "An oak tree",
+    "A hawk",
+    "A grasshopper"
+   ],
+   "ans": 1,
+   "why": "Plants are producers. They use sunlight to make food. Animals are consumers and must eat.",
+   "look": "18.01, Part 1"
+  },
+  {
+   "type": "mc",
+   "from": "18.02, Part 2 (Arrows Show Energy Flow)",
+   "cov": "18.02-a",
+   "q": "In the food chain model Grass → Rabbit → Fox, what does the arrow from the rabbit to the fox stand for?",
+   "opts": [
+    "The rabbit eats the fox",
+    "Energy moves from the rabbit to the fox when the fox eats it",
+    "The fox gives energy to the rabbit",
+    "The rabbit runs toward the fox"
+   ],
+   "ans": 1,
+   "why": "Food chain arrows point toward the eater. They show which way the energy flows.",
+   "look": "18.02, Part 2"
+  },
+  {
+   "type": "match",
+   "from": "19.01, Parts 1 and 4 (organs and their functions)",
+   "cov": "19.01-a",
+   "q": "Match each organ to its main job.",
+   "pairs": [
+    [
+     "Heart",
+     "Pumps blood to every part of the body"
+    ],
+    [
+     "Lungs",
+     "Take in oxygen and push out carbon dioxide"
+    ],
+    [
+     "Stomach",
+     "Mashes food and mixes it with juices"
+    ],
+    [
+     "Brain",
+     "Thinks, feels, and sends messages to the body"
+    ],
+    [
+     "Kidneys",
+     "Filter waste and extra water out of the blood"
+    ]
+   ],
+   "extra": [
+    "Holds you up and protects organs"
+   ],
+   "why": "Each organ has its own function, and they work as a team.",
+   "look": "19.01, Part 4"
+  },
+  {
+   "type": "mc",
+   "from": "19.02, Part 4 (the pulse lab) and Part 2 (Keep the gauges up)",
+   "cov": "19.02-a",
+   "q": "<p>A student measured these numbers.</p><table border=\"1\" cellpadding=\"6\" style=\"border-collapse:collapse\"><tr><th></th><th>At rest</th><th>After 1 minute of jumping jacks</th></tr><tr><td>Heartbeats per minute</td><td>80</td><td>128</td></tr><tr><td>Breaths in 30 seconds</td><td>8</td><td>14</td></tr></table><p>Which explanation fits this data best?</p>",
+   "opts": [
+    "The heart got tired, so it had to beat faster",
+    "The lungs sent air straight to the muscles, so the heart did not matter",
+    "The muscles needed more oxygen, so the lungs and the heart sped up together to deliver it",
+    "The digestive system sped up the heart"
+   ],
+   "ans": 2,
+   "why": "Working muscles need more oxygen. The lungs bring it into the blood and the heart pumps that blood to the muscles, so both speed up.",
+   "look": "19.02, Part 4"
+  },
+  {
+   "type": "mc",
+   "from": "19.02, Part 4 (Load the arrows)",
+   "cov": "19.02-b",
+   "q": "In a box-and-arrow model of body systems, what does the arrow from the lungs to the heart and blood carry?",
+   "opts": [
+    "Nutrients",
+    "Carbon dioxide",
+    "Oxygen",
+    "Signals"
+   ],
+   "ans": 2,
+   "why": "In the lungs, oxygen moves from the air into the blood. Carbon dioxide goes the other way, out of the blood and out with your breath.",
+   "look": "19.02, Part 4"
+  }
+ ]
+}

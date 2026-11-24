@@ -1595,7 +1595,7 @@
   function journal() {
     refresh();
     var nm = ((document.getElementById('student-name') || {}).value || '').trim();
-    var b = book(); bind({ np: store.np, prediction: store.bets });
+    var b = book(); bind(store.bets ? { np: store.np, prediction: store.bets } : { np: store.np });  // only 17.01's tree saves bets: other lessons keep their own prediction
     var txt = (document.getElementById('gatheredOutput') || {}).value || '';
     var pics = (store.snaps || []).concat(store.sketch ? [store.sketch] : []);
     var pages = Object.keys(book()).sort(function (a, c) { return a - c; });
@@ -3044,6 +3044,531 @@
     drawCase();
   }
 
+
+  /* ───────────── 19.02 Warm-Up: tap the beat (predict your pulse after exercise by tapping its rhythm) ───────────── */
+  function bpmOf(taps) {
+    // beats per minute from the last taps (needs 4 taps = 3 gaps); gaps over 2 s start a new try
+    var t = taps.slice(-8), gaps = [];
+    for (var i = 1; i < t.length; i++) { var d = t[i] - t[i - 1]; if (d > 2000) gaps = []; else gaps.push(d); }
+    if (gaps.length < 3) return null;
+    var s = 0; gaps.forEach(function (g) { s += g; });
+    return Math.round(60000 / (s / gaps.length));
+  }
+  function buildBeat() {
+    var B = D.beat; if (!B) return;
+    var pred = $('#pred-1'); if (!pred) throw new Error('pred-1 missing');
+    var host = pred.closest('.response-q') || pred.parentNode;
+    var card = host.closest('.activity-card') || host.parentNode;
+    $$('.callout, .socratic-q', card).forEach(hide);
+    store.bt = store.bt || {}; var S = store.bt;
+    var g = mk('div', 'nc-g nc-bt');
+    g.innerHTML = '<div class="nc-g-k">Warm-Up game</div><h4 class="nc-g-t">' + esc(B.title) + '</h4><p class="nc-p">' + esc(B.intro) + '</p>' + job(B.job) +
+      '<div class="nc-bt-stage">' +
+        '<button type="button" class="nc-bt-heart" aria-label="' + esc(B.tapLabel) + '"><img src="' + esc(B.img) + '" alt="" draggable="false"><span class="nc-bt-ring" aria-hidden="true"></span></button>' +
+        '<div class="nc-bt-read"><div class="nc-bt-k">' + esc(B.readLabel) + '</div><div class="nc-bt-n" aria-live="polite">–</div><div class="nc-bt-u">beats per minute</div>' +
+          '<div class="nc-bt-nudge"><button type="button" class="nc-cup-edit" data-d="-5" aria-label="5 fewer beats per minute">−5</button><button type="button" class="nc-cup-edit" data-d="5" aria-label="5 more beats per minute">+5</button></div>' +
+          '<div class="nc-bt-hint"></div></div>' +
+      '</div>' +
+      '<p class="nc-credit">' + esc(B.credit) + '</p>' +
+      '<div class="nc-rw-ctl"><button type="button" class="nc-btn nc-bt-save" disabled>🔒 Save my beat</button><button type="button" class="nc-cup-edit nc-bt-play">▶ Show my beat</button><button type="button" class="nc-cup-edit nc-bt-edit" hidden>✎ Change my beat</button></div>' +
+      '<div class="nc-bet-seal nc-bt-seal" hidden></div>' +
+      '<label class="nc-np-l" for="pred-1" style="margin-top:12px">' + esc(B.reasonPrompt) + '</label>';
+    before(host, g);
+    pred.placeholder = B.placeholder;
+    var heart = g.querySelector('.nc-bt-heart'), num = g.querySelector('.nc-bt-n'), hint = g.querySelector('.nc-bt-hint');
+    var saveB = g.querySelector('.nc-bt-save'), editB = g.querySelector('.nc-bt-edit'), playB = g.querySelector('.nc-bt-play'), seal = g.querySelector('.nc-bt-seal');
+    var taps = [], show = null;
+    PRED_LINE = function () { return ['--- WARM-UP: MY PREDICTION ---', 'My guess for my heartbeats per minute after 1 minute of exercise: ' + (S.saved ? S.bpm : '(not saved yet)')]; };
+    function beatOnce() { if (RM) return; heart.classList.remove('go'); void heart.offsetWidth; heart.classList.add('go'); }
+    function draw() {
+      var saved = !!S.saved, locked = !!S.revealed;
+      num.textContent = S.bpm ? S.bpm : '–';
+      saveB.disabled = !S.bpm; saveB.hidden = saved;
+      editB.hidden = !saved || locked;
+      playB.hidden = !S.bpm;
+      heart.disabled = saved;
+      $$('.nc-bt-nudge button', g).forEach(function (b) { b.disabled = saved || !S.bpm; });
+      seal.hidden = !saved;
+      seal.textContent = !saved ? '' : (locked ? B.lockedNote.replace('{n}', S.bpm) : B.saved.replace('{n}', S.bpm));
+      g.classList.toggle('nc-done', saved);
+      refresh();
+    }
+    function setHint() {
+      if (!S.bpm) { hint.textContent = taps.length ? B.keepTapping : B.notYet; return; }
+      hint.textContent = S.bpm < B.low ? B.tooLow : (S.bpm > B.high ? B.tooHigh : B.got);
+    }
+    heart.addEventListener('pointerdown', function (e) {
+      if (S.saved) return; e.preventDefault();
+      taps.push(performance.now()); beatOnce();
+      var v = bpmOf(taps); if (v) { S.bpm = clamp(v, 30, 240); save(); }
+      setHint(); draw();
+    });
+    heart.addEventListener('keydown', function (e) { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); heart.dispatchEvent(new PointerEvent('pointerdown')); } });
+    $$('.nc-bt-nudge button', g).forEach(function (b) { b.addEventListener('click', function () { if (S.saved || !S.bpm) return; S.bpm = clamp(S.bpm + (+b.dataset.d), 30, 240); save(); setHint(); draw(); }); });
+    playB.addEventListener('click', function () {
+      if (!S.bpm) return; clearInterval(show); var k = 0; beatOnce();
+      show = setInterval(function () { if (++k >= 6) { clearInterval(show); return; } beatOnce(); }, 60000 / S.bpm);
+    });
+    saveB.addEventListener('click', function () { if (!S.bpm) return; S.saved = 1; save(); ping(); bind({ prediction: { bpm: S.bpm } }); draw(); });
+    editB.addEventListener('click', function () { if (S.revealed) return; S.saved = 0; taps = []; save(); setHint(); draw(); });
+    document.addEventListener('nc:bt', draw);
+    setHint(); draw();
+    putKeeper('k-warmup', g.querySelector('.nc-job'), 'after');
+  }
+
+  /* ───────────── 19.02 Part 1 game: run Harvey's clock (half an hour of heartbeats, poured into liter jugs) ───────────── */
+  function jugSVG(fill, i) {
+    var f = clamp(fill, 0, 1), y = 58 - 46 * f;
+    return '<svg viewBox="0 0 48 64" aria-hidden="true"><defs><linearGradient id="nc-ck-g' + i + '" x1="0" x2="1"><stop offset="0" stop-color="#7a1010"/><stop offset=".45" stop-color="#c0392b"/><stop offset="1" stop-color="#6e0f0f"/></linearGradient>' +
+      '<clipPath id="nc-ck-c' + i + '"><path d="M8 10h30v44a6 6 0 0 1-6 6H14a6 6 0 0 1-6-6z"/></clipPath></defs>' +
+      '<rect x="8" y="' + y.toFixed(1) + '" width="30" height="60" fill="url(#nc-ck-g' + i + ')" clip-path="url(#nc-ck-c' + i + ')"/>' +
+      '<path d="M8 10h30v44a6 6 0 0 1-6 6H14a6 6 0 0 1-6-6z" fill="rgba(230,240,248,.25)" stroke="#8aa3b8" stroke-width="2"/>' +
+      '<path d="M38 18h4a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4h-4" fill="none" stroke="#8aa3b8" stroke-width="2.4"/>' +
+      '<path d="M11 14v38" stroke="rgba(255,255,255,.7)" stroke-width="2.2" stroke-linecap="round"/>' +
+      '<path d="M30 22h6M30 34h6M30 46h6" stroke="#c0392b" stroke-width="1.4" opacity=".7"/></svg>';
+  }
+  function buildClock() {
+    var K = D.clock; if (!K) return;
+    var src = $('.nc-src'); if (!src) throw new Error('clock needs the source page');
+    store.ck = store.ck || {}; var S = store.ck;
+    if (S.amt == null) S.amt = null; if (!S.beats) S.beats = 'harvey'; if (S.t == null) S.t = 0;
+    var g = mk('div', 'nc-g nc-ck');
+    g.innerHTML = gameHead(K.kicker, K.title) + '<p class="nc-p">' + esc(K.intro) + '</p>' + job(K.job) +
+      '<div class="nc-q">' + esc(K.amtQ) + '</div><div class="nc-opts nc-ck-amts">' + K.amounts.map(function (a, i) { return '<button type="button" class="nc-opt" data-i="' + i + '"><b>' + esc(a.t) + '</b> <span class="nc-ck-sub">' + esc(a.sub) + '</span></button>'; }).join('') + '</div>' +
+      '<div class="nc-q">' + esc(K.beatsQ) + '</div><div class="nc-opts nc-ck-beats">' + K.beatsOpts.map(function (b) { return '<button type="button" class="nc-opt" data-k="' + b.k + '"><b>' + esc(b.t) + '</b> <span class="nc-ck-sub">' + esc(b.sub) + '</span></button>'; }).join('') + '</div>' +
+      '<div class="nc-ck-stage">' +
+        '<div class="nc-ck-clock"><div class="nc-ck-dial"><img src="' + esc(K.clockImg) + '" alt="' + esc(K.clockAlt) + '" draggable="false"><div class="nc-ck-face" role="slider" tabindex="0" aria-label="' + esc(K.faceLabel) + '" aria-valuemin="0" aria-valuemax="30"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47" fill="rgba(255,255,255,.12)"/>' +
+          '<path class="nc-ck-sweep" fill="rgba(192,57,43,.22)"/><line class="nc-ck-hand" x1="50" y1="50" x2="50" y2="10" stroke="#0E1C42" stroke-width="3.4" stroke-linecap="round"/><circle cx="50" cy="50" r="4" fill="#0E1C42"/></svg></div></div>' +
+          '<div class="nc-ck-time" aria-live="polite"></div></div>' +
+        '<div class="nc-ck-right"><div class="nc-ck-count"></div><div class="nc-ck-jugs"></div><div class="nc-ck-line"></div>' +
+          '<div class="nc-rw-ctl"><button type="button" class="nc-btn nc-ck-run">▶ Run the clock</button><button type="button" class="nc-cup-edit nc-ck-reset">↺ Back to zero</button></div>' +
+          '<div class="nc-fb nc-ck-fb" aria-live="polite"></div></div>' +
+      '</div>' +
+      '<div class="nc-reveal nc-ck-now" hidden><h5>' + esc(K.todayTitle) + '</h5><p class="nc-p">' + esc(K.today) + '</p><div class="nc-ck-cups"><img src="' + esc(K.cupsImg) + '" alt="' + esc(K.cupsAlt) + '"><span>' + esc(K.cupsCap) + '</span></div></div>' +
+      '<div class="nc-ck-ask" hidden><div class="nc-q">' + esc(K.ask) + '</div><div class="nc-opts">' + K.opts.map(function (o, i) { return '<button type="button" class="nc-opt nc-ck-o" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div><div class="nc-fb nc-ck-afb" aria-live="polite"></div></div>' +
+      '<div class="nc-wow nc-ck-wow" hidden><div class="nc-wow-k">Wait, really?</div><p class="nc-wow-nums">' + esc(K.wow) + '</p></div>' +
+      '<details class="nc-why"><summary>' + esc(K.whyTitle) + '</summary><p class="nc-p">' + esc(K.why) + '</p></details>' +
+      '<p class="nc-credit">' + esc(K.credit) + '</p>';
+    after(src, g);
+    var face = g.querySelector('.nc-ck-face'), hand = g.querySelector('.nc-ck-hand'), sweep = g.querySelector('.nc-ck-sweep'), time = g.querySelector('.nc-ck-time');
+    var jugs = g.querySelector('.nc-ck-jugs'), count = g.querySelector('.nc-ck-count'), line = g.querySelector('.nc-ck-line'), fb = g.querySelector('.nc-ck-fb'), runB = g.querySelector('.nc-ck-run');
+    var BODY = K.bodyLiters, anim = null;
+    function beatsTotal() { var b = K.beatsOpts.filter(function (x) { return x.k === S.beats; })[0]; return b ? b.n : 1000; }
+    function liters(t) { if (S.amt == null) return 0; return K.amounts[S.amt].ml * beatsTotal() * (t / 30) / 1000; }
+    function hasRun(k) { return S.ran && S.ran[k]; }
+    function key() { return S.amt + ':' + S.beats; }
+    function drawClock() {
+      var a = S.t / 60 * 2 * Math.PI, x = 50 + 40 * Math.sin(a), y = 50 - 40 * Math.cos(a);
+      hand.setAttribute('x2', x.toFixed(2)); hand.setAttribute('y2', y.toFixed(2));
+      sweep.setAttribute('d', S.t <= 0 ? '' : 'M50 50 L50 10 A40 40 0 ' + (S.t > 30 ? 1 : 0) + ' 1 ' + x.toFixed(2) + ' ' + y.toFixed(2) + ' Z');
+      face.setAttribute('aria-valuenow', String(Math.round(S.t)));
+      time.textContent = Math.round(S.t) + ' of 30 minutes';
+      var L = liters(S.t), n = Math.max(BODY, Math.ceil(L) || 1), shown = Math.min(n, K.maxJugs), html = '';
+      for (var i = 0; i < shown; i++) html += '<span class="nc-ck-jug' + (i < BODY ? ' body' : ' over') + '">' + jugSVG(L - i, i) + '</span>';
+      if (n > K.maxJugs) html += '<span class="nc-ck-more">+ ' + (n - K.maxJugs) + ' more</span>';
+      jugs.innerHTML = html;
+      var beats = Math.round(beatsTotal() * S.t / 30);
+      count.innerHTML = S.amt == null ? esc(K.pickFirst) : '<b>' + beats.toLocaleString('en-US') + '</b> beats × ' + esc(K.amounts[S.amt].short) + ' = <b>' + (L < 10 ? L.toFixed(1) : Math.round(L)) + ' liters</b> of blood';
+      line.innerHTML = '<span class="nc-ck-bodyk"></span> ' + esc(K.bodyLabel.replace('{n}', BODY)) + (L > BODY ? ' · <b class="nc-ck-past">' + esc(K.pastLabel) + '</b>' : '');
+    }
+    function drawOpts() {
+      $$('.nc-ck-amts .nc-opt', g).forEach(function (b) { b.classList.toggle('sel', +b.dataset.i === S.amt); });
+      $$('.nc-ck-beats .nc-opt', g).forEach(function (b) { b.classList.toggle('sel', b.dataset.k === S.beats); });
+      runB.disabled = S.amt == null; runB.textContent = S.amt == null ? K.btnPick : (S.t >= 30 ? K.btnAgain : K.btnRun);
+      var passed = S.ran && Object.keys(S.ran).some(function (k) { return S.ran[k] > BODY; });
+      g.querySelector('.nc-ck-now').hidden = !passed;
+      g.querySelector('.nc-ck-ask').hidden = !passed;
+      g.querySelector('.nc-ck-wow').hidden = !S.answered;
+      g.classList.toggle('nc-done', !!S.answered);
+      if (S.answered) { $$('.nc-ck-o', g).forEach(function (b) { b.classList.toggle('ok', !!K.opts[+b.dataset.i].ok); }); g.querySelector('.nc-ck-afb').innerHTML = '✅ ' + esc(K.win); }
+    }
+    function landed() {
+      var L = liters(30); S.ran = S.ran || {}; S.ran[key()] = L; save();
+      if (L > BODY) { ping(); fb.innerHTML = '✓ ' + esc(K.okPast.replace('{l}', L < 10 ? L.toFixed(1) : Math.round(L))); if (!S.noted) { S.noted = 1; save(); bind({ clock: { liters: Math.round(L) } }); } }
+      else fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(K.notPast.replace('{l}', L.toFixed(1))) + '</span>';
+      drawOpts();
+    }
+    function run() {
+      if (S.amt == null || anim) return;
+      if (S.t >= 30) S.t = 0;
+      var from = S.t, t0 = null, dur = RM ? 1 : 3600 * (30 - from) / 30;
+      fb.innerHTML = '';
+      function frame(ts) { if (t0 == null) t0 = ts; var p = clamp((ts - t0) / dur, 0, 1); S.t = lerp(from, 30, p); drawClock(); if (p < 1) anim = requestAnimationFrame(frame); else { anim = null; S.t = 30; save(); drawClock(); landed(); } }
+      anim = requestAnimationFrame(frame);
+    }
+    runB.addEventListener('click', run);
+    g.querySelector('.nc-ck-reset').addEventListener('click', function () { if (anim) { cancelAnimationFrame(anim); anim = null; } S.t = 0; save(); fb.innerHTML = ''; drawClock(); drawOpts(); });
+    $$('.nc-ck-amts .nc-opt', g).forEach(function (b) { b.addEventListener('click', function () { if (anim) return; S.amt = +b.dataset.i; S.t = 0; save(); fb.innerHTML = ''; drawClock(); drawOpts(); }); });
+    $$('.nc-ck-beats .nc-opt', g).forEach(function (b) { b.addEventListener('click', function () { if (anim) return; S.beats = b.dataset.k; S.t = 0; save(); fb.innerHTML = ''; drawClock(); drawOpts(); }); });
+    // drag the hand around the clock face (0 to 30 minutes)
+    var dr = false;
+    function fromE(e) { var r = face.getBoundingClientRect(), x = e.clientX - r.left - r.width / 2, y = e.clientY - r.top - r.height / 2; var a = Math.atan2(x, -y); if (a < 0) a += 2 * Math.PI; return a / (2 * Math.PI) * 60; }
+    face.addEventListener('pointerdown', function (e) { if (S.amt == null) { fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(K.pickFirst) + '</span>'; return; } if (anim) return; e.preventDefault(); dr = true; try { face.setPointerCapture(e.pointerId); } catch (x) {} var m = fromE(e); if (m <= 32) { S.t = clamp(m, 0, 30); drawClock(); } });
+    face.addEventListener('pointermove', function (e) { if (!dr) return; var m = fromE(e); if (m > 45) m = 0; if (m > 30) m = 30; if (m >= S.t - 8) S.t = clamp(m, 0, 30); drawClock(); });
+    function up() { if (!dr) return; dr = false; save(); if (S.t >= 29.5) { S.t = 30; drawClock(); landed(); } }
+    face.addEventListener('pointerup', up); face.addEventListener('pointercancel', up);
+    face.addEventListener('keydown', function (e) { if (S.amt == null) return; var d = e.key === 'ArrowRight' || e.key === 'ArrowUp' ? 5 : (e.key === 'ArrowLeft' || e.key === 'ArrowDown' ? -5 : 0); if (!d) return; e.preventDefault(); S.t = clamp(S.t + d, 0, 30); save(); drawClock(); if (S.t >= 30) landed(); });
+    $$('.nc-ck-o', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var o = K.opts[+b.dataset.i];
+        if (o.ok) { S.answered = 1; save(); ping(); drawOpts(); note('⏱ Part 1 done. Harvey\'s math says the blood goes around and around.'); }
+        else { ping(true); b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 700); g.querySelector('.nc-ck-afb').innerHTML = '<span class="nc-ask-no">🤔 ' + esc(o.hint) + '</span>'; }
+      });
+    });
+    EXTRA_LINES.push(function () { var best = 0; Object.keys(S.ran || {}).forEach(function (k) { best = Math.max(best, S.ran[k]); }); return ['--- PART 1: HARVEY\'S HALF HOUR ---', best ? 'Most blood in half an hour in my runs: ' + (best < 10 ? best.toFixed(1) : Math.round(best)) + ' liters (an adult body holds about ' + BODY + ' liters)' : '(not run yet)']; });
+    drawClock(); drawOpts();
+  }
+
+  /* ───────────── 19.02 Part 2 game: keep the gauges up (heart AND lungs must speed up together), plus the breath-out jar ───────────── */
+  function buildGauge() {
+    var G = D.gauge; if (!G) return;
+    var p2 = $$('#tab-lesson .card-head-label').filter(function (e) { return /Part 2|Section 2/.test(e.textContent); })[0];
+    var body = p2 && p2.closest('.card').querySelector('.card-body'); if (!body) throw new Error('Part 2 card missing');
+    store.gg = store.gg || {}; var S = store.gg; S.ok = S.ok || {}; S.jar = S.jar || {};
+    if (!S.act) S.act = G.acts[0].k; if (S.hr == null) S.hr = G.start.hr; if (S.br == null) S.br = G.start.br;
+    var O = D.organs;
+    var g = mk('div', 'nc-g nc-gg');
+    g.innerHTML = gameHead(G.kicker, G.title) + '<p class="nc-p">' + esc(G.intro) + '</p>' + job(G.job) +
+      '<div class="nc-gg-acts" role="tablist">' + G.acts.map(function (a) { return '<button type="button" class="nc-opt nc-gg-act" data-k="' + a.k + '" role="tab">' + a.icon + ' ' + esc(a.t) + '</button>'; }).join('') + '</div>' +
+      '<div class="nc-gg-stage">' +
+        '<div class="nc-gg-photo"><img src="' + esc(G.img) + '" alt="' + esc(G.alt) + '" draggable="false"><span class="nc-gg-tag"></span></div>' +
+        '<div class="nc-gg-ctl">' +
+          '<label class="nc-gg-row">' + organChip(O, 'heart', 'nc-ko-chip sm') + '<span class="nc-gg-l">' + esc(G.hrLabel) + ' <b class="nc-gg-hr"></b></span><input type="range" class="nc-gg-hrs" min="' + G.hrRange[0] + '" max="' + G.hrRange[1] + '" step="5" aria-label="' + esc(G.hrLabel) + '"></label>' +
+          '<label class="nc-gg-row">' + organChip(O, 'lungs', 'nc-ko-chip sm') + '<span class="nc-gg-l">' + esc(G.brLabel) + ' <b class="nc-gg-br"></b></span><input type="range" class="nc-gg-brs" min="' + G.brRange[0] + '" max="' + G.brRange[1] + '" step="2" aria-label="' + esc(G.brLabel) + '"></label>' +
+          '<div class="nc-gg-meter">' + organChip(O, 'muscles', 'nc-ko-chip sm') + '<div class="nc-gg-mbox"><div class="nc-gg-ml">' + esc(G.meterLabel) + '</div><div class="nc-gg-bar"><i></i><span class="nc-gg-goal"></span></div><div class="nc-gg-state" aria-live="polite"></div></div></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="nc-ko-score nc-gg-score"></div>' +
+      '<div class="nc-reveal nc-gg-jar"><h5>' + esc(G.jar.title) + '</h5><p class="nc-p">' + esc(G.jar.intro) + '</p>' +
+        '<div class="nc-gg-jars"><figure><div class="nc-gg-dots in"></div><figcaption>' + esc(G.jar.inLabel) + '</figcaption></figure><figure><div class="nc-gg-dots out"></div><figcaption>' + esc(G.jar.outLabel) + '</figcaption></figure></div>' +
+        '<div class="nc-gg-key"><span><i class="o2"></i>' + esc(G.jar.keyO2) + '</span><span><i class="co2"></i>' + esc(G.jar.keyCO2) + '</span><span><i class="n2"></i>' + esc(G.jar.keyOther) + '</span></div>' +
+        '<label class="nc-gg-row nc-gg-guess"><span class="nc-gg-l">' + esc(G.jar.guessLabel) + ' <b class="nc-gg-gv"></b></span><input type="range" class="nc-gg-gs" min="0" max="21" step="1" aria-label="' + esc(G.jar.guessLabel) + '"></label>' +
+        '<div class="nc-rw-ctl"><button type="button" class="nc-btn nc-gg-blow">' + esc(G.jar.btn) + '</button><button type="button" class="nc-cup-edit nc-gg-jreset" hidden>↺ Breathe in again and guess again</button></div>' +
+        '<div class="nc-fb nc-gg-jfb" aria-live="polite"></div></div>' +
+      '<button type="button" class="nc-cup-edit nc-gg-reset">↺ Start the runner over</button>' +
+      '<details class="nc-why"><summary>' + esc(G.whyTitle) + '</summary><p class="nc-p">' + esc(G.why) + '</p></details>' +
+      '<p class="nc-credit">' + esc(G.credit) + '</p>';
+    body.appendChild(g);
+    var hrS = g.querySelector('.nc-gg-hrs'), brS = g.querySelector('.nc-gg-brs'), bar = g.querySelector('.nc-gg-bar i'), goal = g.querySelector('.nc-gg-goal'), state = g.querySelector('.nc-gg-state'), score = g.querySelector('.nc-gg-score'), tag = g.querySelector('.nc-gg-tag');
+    var level = 0.6, green = 0, timer = null;
+    function A() { return G.acts.filter(function (a) { return a.k === S.act; })[0]; }
+    function supply() { var a = A(); return Math.min(S.hr / a.hr, S.br / a.br); }
+    function verdict() {
+      var a = A(), h = S.hr / a.hr, b = S.br / a.br;
+      if (a.maxHr && (S.hr > a.maxHr || S.br > a.maxBr)) return ['waste', G.msgWaste];
+      if (h >= 1 && b >= 1) return ['ok', G.msgOk];
+      if (h >= 1 && b < 1) return ['lowbr', G.msgLowBr];
+      if (b >= 1 && h < 1) return ['lowhr', G.msgLowHr];
+      return ['low', G.msgLow];
+    }
+    function doneN() { return G.acts.filter(function (a) { return S.ok[a.k]; }).length; }
+    function drawAll() {
+      $$('.nc-gg-act', g).forEach(function (b) { var k = b.dataset.k; b.classList.toggle('sel', k === S.act); b.classList.toggle('ok', !!S.ok[k]); b.setAttribute('aria-selected', String(k === S.act)); });
+      hrS.value = S.hr; brS.value = S.br;
+      g.querySelector('.nc-gg-hr').textContent = S.hr; g.querySelector('.nc-gg-br').textContent = S.br;
+      tag.textContent = A().icon + ' ' + A().t;
+      var n = doneN(), all = n >= G.acts.length;
+      score.textContent = n + ' of ' + G.acts.length + ' kept in the green' + (all ? ' ✓' : '');
+      var J = S.jar;
+      g.querySelector('.nc-gg-gs').value = J.guess == null ? 0 : J.guess;
+      g.querySelector('.nc-gg-gv').textContent = J.guess == null ? '?' : J.guess;
+      g.querySelector('.nc-gg-blow').hidden = !!J.shown; g.querySelector('.nc-gg-jreset').hidden = !J.shown;
+      dots(g.querySelector('.nc-gg-dots.in'), G.jar.inAir);
+      dots(g.querySelector('.nc-gg-dots.out'), J.shown ? G.jar.outAir : null);
+      if (J.shown) g.querySelector('.nc-gg-jfb').innerHTML = '✅ ' + esc((J.guess <= G.jar.lowGuess ? G.jar.winLow : G.jar.win).replace('{g}', J.guess));
+      g.classList.toggle('nc-done', all && !!J.shown);
+      refresh();
+    }
+    function dots(el, mix) {
+      if (!mix) { el.innerHTML = '<span class="nc-gg-q">?</span>'; el.classList.add('empty'); return; }
+      el.classList.remove('empty');
+      var h = ''; for (var i = 0; i < 100; i++) h += '<i class="' + (i < mix.o2 ? 'o2' : (i < mix.o2 + mix.co2 ? 'co2' : 'n2')) + '"></i>';
+      el.innerHTML = h;
+    }
+    function tick() {
+      if (!g.offsetParent || document.hidden) return;
+      var s = supply(), v = verdict(), a = A();
+      var target = v[0] === 'ok' ? 0.9 : clamp(0.9 * s - (v[0] === 'waste' ? 0 : 0.15), 0.05, 0.9);
+      if (v[0] === 'waste') target = 0.95;
+      level += (target - level) * 0.18;
+      bar.style.width = (level * 100).toFixed(1) + '%';
+      bar.className = level >= 0.75 ? 'green' : (level >= 0.5 ? 'yellow' : 'red');
+      goal.style.left = '75%';
+      state.innerHTML = (v[0] === 'ok' ? '✓ ' : '🤔 ') + esc(v[1]);
+      state.className = 'nc-gg-state ' + (v[0] === 'ok' ? 'ok' : 'no');
+      if (v[0] === 'ok' && level >= 0.75) {
+        green += 0.15;
+        if (green >= G.holdSec && !S.ok[a.k]) {
+          S.ok[a.k] = 1; save(); ping(); drawAll();
+          var next = G.acts.filter(function (x) { return !S.ok[x.k]; })[0];
+          state.innerHTML = '✅ ' + esc(a.win) + (next ? ' ' + esc(G.nextHint.replace('{a}', next.t.toLowerCase())) : '');
+          if (!next && !S.noted) { S.noted = 1; save(); bind({ gauge: 1 }); }
+        }
+      } else green = 0;
+    }
+    timer = setInterval(tick, 150);
+    hrS.addEventListener('input', function () { S.hr = +hrS.value; save(); green = 0; drawAll(); });
+    brS.addEventListener('input', function () { S.br = +brS.value; save(); green = 0; drawAll(); });
+    $$('.nc-gg-act', g).forEach(function (b) { b.addEventListener('click', function () { S.act = b.dataset.k; save(); green = 0; drawAll(); }); });
+    var gs = g.querySelector('.nc-gg-gs');
+    gs.addEventListener('input', function () { if (S.jar.shown) return; S.jar.guess = +gs.value; save(); drawAll(); });
+    g.querySelector('.nc-gg-blow').addEventListener('click', function () {
+      var J = S.jar; if (J.guess == null) { g.querySelector('.nc-gg-jfb').innerHTML = '<span class="nc-ask-no">🤔 ' + esc(G.jar.guessFirst) + '</span>'; return; }
+      J.shown = 1; save(); ping(); drawAll();
+    });
+    g.querySelector('.nc-gg-jreset').addEventListener('click', function () { S.jar = {}; save(); g.querySelector('.nc-gg-jfb').innerHTML = ''; drawAll(); });
+    g.querySelector('.nc-gg-reset').addEventListener('click', function () { S.ok = {}; S.act = G.acts[0].k; S.hr = G.start.hr; S.br = G.start.br; S.noted = 0; save(); green = 0; level = 0.6; drawAll(); });
+    EXTRA_LINES.push(function () { return ['--- PART 2: KEEP THE GAUGES UP ---', doneN() + ' of ' + G.acts.length + ' activities kept in the green' + (S.jar.shown ? ' · My guess for oxygen left in a breath out: ' + S.jar.guess + ' of 21 (real: about ' + G.jar.outAir.o2 + ')' : '')]; });
+    drawAll();
+  }
+
+  /* ───────────── 19.02 Part 3 game: peek under the box (a lens over the model shows what it leaves out) ───────────── */
+  function buildPeek() {
+    var P = D.peek; if (!P) return;
+    var p3 = $$('#tab-lesson .card-head-label').filter(function (e) { return /Part 3|Section 3/.test(e.textContent); })[0];
+    var body = p3 && p3.closest('.card').querySelector('.card-body'); if (!body) throw new Error('Part 3 card missing');
+    store.pk = store.pk || {}; var S = store.pk; S.seen = S.seen || {};
+    var O = D.organs;
+    var g = mk('div', 'nc-g nc-pk');
+    g.innerHTML = gameHead(P.kicker, P.title) + '<p class="nc-p">' + esc(P.intro) + '</p>' + job(P.job) +
+      '<div class="nc-pk-board">' + P.boxes.map(function (b, i) {
+        return '<button type="button" class="nc-pk-box" data-i="' + i + '" aria-label="' + esc(P.peekLabel.replace('{b}', b.name)) + '"><span class="nc-pk-imgs">' + b.organs.map(function (k) { return '<img src="' + esc(O[k].img) + '" alt="" draggable="false">'; }).join('') + '</span><b>' + esc(b.name) + '</b><small>' + esc(b.sys) + '</small><span class="nc-pk-tick" aria-hidden="true">🔍</span></button>' +
+          (i < P.boxes.length - 1 ? '<span class="nc-pk-arrow" aria-hidden="true">' + esc(P.arrows[i]) + '</span>' : '');
+      }).join('') +
+      '<div class="nc-pk-lens" aria-hidden="true"><span></span></div></div>' +
+      '<div class="nc-pk-found" aria-live="polite"></div>' +
+      '<div class="nc-ko-score nc-pk-score"></div>' +
+      '<div class="nc-pk-ask" hidden><div class="nc-q">' + esc(P.ask) + '</div><div class="nc-opts">' + P.opts.map(function (o, i) { return '<button type="button" class="nc-opt nc-pk-o" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div><div class="nc-fb nc-pk-afb" aria-live="polite"></div></div>' +
+      '<button type="button" class="nc-cup-edit nc-pk-reset">↺ Put the lens away and start again</button>' +
+      '<p class="nc-credit">' + esc(P.credit) + '</p>';
+    body.appendChild(g);
+    var board = g.querySelector('.nc-pk-board'), lens = g.querySelector('.nc-pk-lens'), lensIn = lens.querySelector('span'), found = g.querySelector('.nc-pk-found'), score = g.querySelector('.nc-pk-score');
+    var cur = -1, dwell = null;
+    function drawAll() {
+      var n = Object.keys(S.seen).length, all = n >= P.boxes.length;
+      $$('.nc-pk-box', g).forEach(function (b) { b.classList.toggle('seen', !!S.seen[b.dataset.i]); b.classList.toggle('now', +b.dataset.i === cur); });
+      score.textContent = n + ' of ' + P.boxes.length + ' boxes peeked under' + (all ? ' ✓' : '');
+      g.querySelector('.nc-pk-ask').hidden = !all;
+      g.classList.toggle('nc-done', !!S.answered);
+      if (S.answered) { $$('.nc-pk-o', g).forEach(function (b) { b.classList.toggle('ok', !!P.opts[+b.dataset.i].ok); }); g.querySelector('.nc-pk-afb').innerHTML = '✅ ' + esc(P.win); }
+    }
+    function showFound(i) {
+      var b = P.boxes[i];
+      found.innerHTML = '<div class="nc-pk-card"><img src="' + esc(b.img) + '" alt="' + esc(b.alt) + '"><div><div class="nc-pk-k">' + esc(P.underLabel.replace('{b}', b.name)) + '</div><p class="nc-p">' + esc(b.text) + '</p><p class="nc-credit">' + esc(b.credit) + '</p></div></div>';
+    }
+    function peek(i) {
+      if (i === cur) return; cur = i; clearTimeout(dwell);
+      if (i < 0) { lens.classList.remove('on'); drawAll(); return; }
+      lens.classList.add('on'); lensIn.style.backgroundImage = 'url("' + P.boxes[i].img + '")';
+      dwell = setTimeout(function () { if (!S.seen[i]) { S.seen[i] = 1; save(); ping(); if (Object.keys(S.seen).length === P.boxes.length) bind({ peek: 1 }); } showFound(i); drawAll(); }, RM ? 0 : 450);
+      drawAll();
+    }
+    function moveLens(x, y) { lens.style.left = x + 'px'; lens.style.top = y + 'px'; }
+    function boxAt(cx, cy) {
+      var hit = -1;
+      $$('.nc-pk-box', g).forEach(function (b) { var r = b.getBoundingClientRect(); if (cx >= r.left && cx <= r.right && cy >= r.top && cy <= r.bottom) hit = +b.dataset.i; });
+      return hit;
+    }
+    var dr = false;
+    board.addEventListener('pointerdown', function (e) {
+      e.preventDefault(); dr = true; try { board.setPointerCapture(e.pointerId); } catch (x) {}
+      var r = board.getBoundingClientRect(); moveLens(e.clientX - r.left, e.clientY - r.top); peek(boxAt(e.clientX, e.clientY));
+    });
+    board.addEventListener('pointermove', function (e) {
+      if (!dr && e.pointerType !== 'mouse') return;
+      var r = board.getBoundingClientRect(); moveLens(e.clientX - r.left, e.clientY - r.top); peek(boxAt(e.clientX, e.clientY));
+    });
+    function up() { dr = false; }
+    board.addEventListener('pointerup', up); board.addEventListener('pointercancel', up);
+    board.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse' && !dr) { clearTimeout(dwell); cur = -1; lens.classList.remove('on'); drawAll(); } });
+    $$('.nc-pk-box', g).forEach(function (b) { b.addEventListener('keydown', function (e) { if (e.key !== 'Enter' && e.key !== ' ') return; e.preventDefault(); var i = +b.dataset.i, r = b.getBoundingClientRect(), br = board.getBoundingClientRect(); moveLens(r.left - br.left + r.width / 2, r.top - br.top + r.height / 2); cur = -2; peek(i); }); });
+    $$('.nc-pk-o', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var o = P.opts[+b.dataset.i];
+        if (o.ok) { S.answered = 1; save(); ping(); drawAll(); note('🔍 Part 3 done. A good model leaves things out on purpose.'); }
+        else { ping(true); b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 700); g.querySelector('.nc-pk-afb').innerHTML = '<span class="nc-ask-no">🤔 ' + esc(o.hint) + '</span>'; }
+      });
+    });
+    g.querySelector('.nc-pk-reset').addEventListener('click', function () { store.pk = S = { seen: {} }; save(); cur = -1; lens.classList.remove('on'); found.innerHTML = ''; g.querySelector('.nc-pk-afb').innerHTML = ''; $$('.nc-pk-o', g).forEach(function (b) { b.classList.remove('ok'); }); drawAll(); });
+    var last = Object.keys(S.seen).map(Number).sort().pop(); if (last != null) showFound(last);
+    drawAll();
+  }
+
+  /* ───────────── 19.02 Part 4: the pulse lab (timers + tap counters fill the data table) ───────────── */
+  function buildLab() {
+    var L = D.lab; if (!L) return;
+    var act = $('#tab-lesson .act-body'); if (!act) throw new Error('lesson body missing');
+    var sec4 = mk('div', 'nc-part4');
+    sec4.innerHTML = '<div class="card theme-sky nc-p4card"><div class="card-head"><div class="card-head-icon">⏱️</div><div><div class="card-head-label">Part 4</div><div class="card-head-title">' + esc(L.cardTitle) + '</div></div></div><div class="card-body"><p>' + esc(L.intro) + '</p><div class="nc-g nc-lb"></div></div></div>';
+    act.appendChild(sec4);
+    var g = sec4.querySelector('.nc-lb');
+    store.lb = store.lb || {}; var S = store.lb;
+    g.innerHTML = gameHead(L.kicker, L.title) +
+      '<div class="nc-lb-how"><img src="' + esc(L.img) + '" alt="' + esc(L.alt) + '"><div><p class="nc-p">' + esc(L.how) + '</p><p class="nc-p nc-lb-safe">🌱 ' + esc(L.safe) + '</p><p class="nc-credit">' + esc(L.credit) + '</p></div></div>' +
+      '<ol class="nc-lb-steps">' + L.steps.map(function (s, i) {
+        if (s.move) return '<li class="nc-lb-step" data-s="' + i + '"><b>' + esc(s.t) + '</b><p class="nc-p">' + esc(s.text) + '</p><div class="nc-lb-timer"><button type="button" class="nc-btn nc-lb-mv">▶ Start the 1-minute timer</button><span class="nc-lb-left" aria-live="polite"></span><span class="nc-lb-bar"><i></i></span></div></li>';
+        return '<li class="nc-lb-step" data-s="' + i + '"><b>' + esc(s.t) + '</b><p class="nc-p">' + esc(s.text) + '</p>' + s.counts.map(function (c) {
+          return '<div class="nc-lb-ct" data-k="' + c.k + '" data-sec="' + c.sec + '"><div class="nc-lb-ctl"><span class="nc-lb-cl">' + esc(c.label) + '</span><button type="button" class="nc-cup-edit nc-lb-go">▶ Start ' + c.sec + ' seconds</button><span class="nc-lb-left" aria-live="polite"></span></div>' +
+            '<div class="nc-lb-tapr"><button type="button" class="nc-lb-tap" disabled>' + esc(c.tap) + '</button><label class="nc-lb-num">' + esc(L.countLabel) + ' <input type="number" inputmode="numeric" min="0" max="' + c.max + '" class="nc-lb-in"></label></div></div>';
+        }).join('') + '</li>';
+      }).join('') + '</ol>' +
+      '<div class="nc-lb-table"></div>' +
+      '<div class="nc-fb nc-lb-fb" aria-live="polite"></div>' +
+      '<button type="button" class="nc-cup-edit nc-lb-reset">↺ Clear my data and measure again</button>';
+    var running = null;
+    function val(k) { return S[k] == null || S[k] === '' ? null : +S[k]; }
+    function per(k, m) { var v = val(k); return v == null ? null : v * m; }
+    function done() { return ['hr0', 'br0', 'hr1', 'br1'].every(function (k) { return val(k) != null; }); }
+    function drawTable() {
+      var rows = [[L.rows[0], val('hr0'), val('hr1')], [L.rows[1], per('hr0', 4), per('hr1', 4)], [L.rows[2], val('br0'), val('br1')]];
+      function c(v) { return v == null ? '–' : v; }
+      function d(a, b) { return a == null || b == null ? '–' : (b - a > 0 ? '+' : '') + (b - a); }
+      g.querySelector('.nc-lb-table').innerHTML = '<div class="nc-lb-tk">📋 ' + esc(L.tableTitle) + '</div><table><thead><tr><th></th><th>' + esc(L.cols[0]) + '</th><th>' + esc(L.cols[1]) + '</th><th>' + esc(L.cols[2]) + '</th></tr></thead><tbody>' +
+        rows.map(function (r) { return '<tr><th>' + esc(r[0]) + '</th><td>' + c(r[1]) + '</td><td>' + c(r[2]) + '</td><td>' + d(r[1], r[2]) + '</td></tr>'; }).join('') + '</tbody></table>';
+      $$('.nc-lb-ct', g).forEach(function (ct) { var k = ct.dataset.k, inp = $('.nc-lb-in', ct); if (document.activeElement !== inp) inp.value = val(k) == null ? '' : val(k); ct.classList.toggle('ok', val(k) != null); });
+      var mv = $('.nc-lb-step [class*="nc-lb-mv"]', g); if (mv) { mv.textContent = S.moved ? '↺ Start the 1-minute timer again' : '▶ Start the 1-minute timer'; mv.closest('.nc-lb-step').classList.toggle('ok', !!S.moved); }
+      var fb = g.querySelector('.nc-lb-fb'), hr0 = per('hr0', 4), hr1 = per('hr1', 4);
+      if (done()) {
+        if (hr0 < L.sane[0] || hr0 > L.sane[1] || hr1 < L.sane[0] || hr1 > L.sane[1]) fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(L.odd) + '</span>';
+        else if (hr1 <= hr0) fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(L.noRise) + '</span>';
+        else fb.innerHTML = '✅ ' + esc(L.win.replace('{a}', hr0).replace('{b}', hr1).replace('{d}', hr1 - hr0));
+      } else fb.innerHTML = '';
+      g.classList.toggle('nc-done', done());
+      if (done() && !S.bound) { S.bound = 1; save(); bind({ pulse: { rest: hr0, after: hr1, brRest: val('br0'), brAfter: val('br1') } }); var bt = store.bt || {}; if (bt.saved && !bt.revealed) { bt.revealed = 1; store.bt = bt; save(); document.dispatchEvent(new Event('nc:bt')); } note('⏱ Your pulse data is saved. Now load the arrows in your model.'); }
+      document.dispatchEvent(new Event('nc:lab'));
+      savedChip(); refresh();
+    }
+    function stopRun() { if (!running) return; clearInterval(running.iv); running.ct.classList.remove('run'); $('.nc-lb-tap', running.ct) && ($('.nc-lb-tap', running.ct).disabled = true); running = null; }
+    $$('.nc-lb-ct', g).forEach(function (ct) {
+      var k = ct.dataset.k, sec = +ct.dataset.sec, go = $('.nc-lb-go', ct), tap = $('.nc-lb-tap', ct), left = $('.nc-lb-left', ct), inp = $('.nc-lb-in', ct), n = 0;
+      go.addEventListener('click', function () {
+        stopRun(); n = 0; S[k] = 0; save(); var end = Date.now() + sec * 1000;
+        ct.classList.add('run'); tap.disabled = false; tap.focus(); left.textContent = sec + ' s'; go.textContent = '↺ Start over';
+        running = { ct: ct, iv: setInterval(function () {
+          var s = Math.ceil((end - Date.now()) / 1000);
+          if (s <= 0) { stopRun(); left.textContent = '⏱ Time! You counted ' + n + '.'; ping(); drawTable(); return; }
+          left.textContent = s + ' s';
+        }, 200) };
+        drawTable();
+      });
+      tap.addEventListener('pointerdown', function (e) { e.preventDefault(); if (!running || running.ct !== ct) return; n++; S[k] = n; save(); tap.classList.remove('hit'); void tap.offsetWidth; tap.classList.add('hit'); inp.value = n; });
+      tap.addEventListener('keydown', function (e) { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); tap.dispatchEvent(new PointerEvent('pointerdown')); } });
+      inp.addEventListener('input', function () { var v = inp.value === '' ? null : clamp(Math.round(+inp.value), 0, +inp.max); S[k] = v; save(); drawTable(); });
+    });
+    var mv = $('.nc-lb-mv', g);
+    if (mv) mv.addEventListener('click', function () {
+      var step = mv.closest('.nc-lb-step'), left = $('.nc-lb-left', step), barI = $('.nc-lb-bar i', step), end = Date.now() + 60000;
+      mv.disabled = true;
+      var iv = setInterval(function () {
+        var s = Math.ceil((end - Date.now()) / 1000); barI.style.width = ((60 - s) / 60 * 100) + '%';
+        if (s <= 0) { clearInterval(iv); mv.disabled = false; left.textContent = L.moveDone; S.moved = 1; save(); ping(); drawTable(); return; }
+        left.textContent = s + ' s · ' + L.keepMoving;
+      }, 250);
+    });
+    g.querySelector('.nc-lb-reset').addEventListener('click', function () { stopRun(); ['hr0', 'br0', 'hr1', 'br1', 'moved', 'bound'].forEach(function (k) { delete S[k]; }); save(); $$('.nc-lb-left', g).forEach(function (e) { e.textContent = ''; }); $$('.nc-lb-go', g).forEach(function (b) { b.textContent = b.textContent.replace('↺ Start over', '▶ Start ' + b.closest('.nc-lb-ct').dataset.sec + ' seconds'); }); drawTable(); });
+    function savedChip() {
+      var np = $('.nc-np-head'); if (!np) return; var el = $('.nc-lb-saved', np);
+      if (!done()) { if (el) el.remove(); return; }
+      if (!el) { el = mk('div', 'nc-dw-saved nc-lb-saved'); np.appendChild(el); }
+      el.innerHTML = '<span>📓 ' + esc(L.savedLabel) + '</span> <b>' + per('hr0', 4) + ' → ' + per('hr1', 4) + '</b> ' + esc(L.savedUnit) + ' · ' + esc(L.savedBreaths) + ' <b>' + val('br0') + ' → ' + val('br1') + '</b>';
+    }
+    setTimeout(savedChip, 0);
+    EXTRA_LINES.push(function () { return ['--- PART 4: MY PULSE DATA ---', done() ? 'Heartbeats per minute: at rest ' + per('hr0', 4) + ', after 1 minute of exercise ' + per('hr1', 4) + ' (change ' + (per('hr1', 4) - per('hr0', 4)) + ') · Breaths in 30 seconds: at rest ' + val('br0') + ', after ' + val('br1') : '(not measured yet)']; });
+    drawTable();
+  }
+
+  /* ───────────── 19.02 Part 4 game: load the arrows (put the right cargo on each arrow of a body-systems model) ───────────── */
+  function buildCargo() {
+    var C = D.cargo; if (!C) return;
+    var lab = $('.nc-lb'); if (!lab) throw new Error('cargo needs the lab');
+    var O = D.organs;
+    store.cg = store.cg || {}; var S = store.cg; S.load = S.load || {};
+    var g = mk('div', 'nc-g nc-cg');
+    function boxH(b) { var x = C.boxes[b]; return '<span class="nc-cg-box"><span class="nc-pk-imgs">' + x.organs.map(function (k) { return '<img src="' + esc(O[k].img) + '" alt="" draggable="false">'; }).join('') + '</span><b>' + esc(x.name) + '</b><small>' + esc(x.sys) + '</small></span>'; }
+    g.innerHTML = gameHead(C.kicker, C.title) + '<p class="nc-p">' + esc(C.intro) + '</p>' + job(C.job) +
+      '<div class="nc-cg-tray" role="group" aria-label="Cargo tags">' + C.tags.map(function (t) { return '<button type="button" class="nc-cg-tag" data-t="' + t.k + '" draggable="false">' + t.icon + ' ' + esc(t.t) + '</button>'; }).join('') + '</div>' +
+      '<div class="nc-cg-model">' + C.arrows.map(function (a, i) {
+        return '<div class="nc-cg-row" data-i="' + i + '">' + boxH(a.from) + '<button type="button" class="nc-cg-slot" data-i="' + i + '" aria-label="' + esc(C.slotLabel.replace('{a}', C.boxes[a.from].name).replace('{b}', C.boxes[a.to].name)) + '"><span class="nc-cg-load"></span><span class="nc-cg-head" aria-hidden="true">➜</span></button>' + boxH(a.to) + '</div>';
+      }).join('') + '</div>' +
+      '<div class="nc-rw-ctl"><button type="button" class="nc-btn nc-cg-check">✓ Check my model</button><button type="button" class="nc-cup-edit nc-cg-clear">↺ Unload every arrow</button></div>' +
+      '<div class="nc-fb nc-cg-fb" aria-live="polite"></div>' +
+      '<div class="nc-reveal nc-cg-cmp" hidden><h5>' + esc(C.compareTitle) + '</h5><div class="nc-mt-rows nc-cg-rows"></div></div>' +
+      '<div class="nc-wow nc-cg-wow" hidden><div class="nc-wow-k">The twist</div><blockquote class="nc-wow-q">' + esc(C.twist.head) + '</blockquote><p class="nc-wow-nums">' + esc(C.twist.line) + '</p><p class="nc-wow-chain">' + esc(C.twist.chain) + '</p></div>';
+    after(lab, g);
+    putKeeper('k-part4', lab.querySelector('.nc-g-t'), 'after');
+    var held = null, fb = g.querySelector('.nc-cg-fb');
+    function tagOf(k) { return C.tags.filter(function (t) { return t.k === k; })[0]; }
+    function drawAll() {
+      $$('.nc-cg-tag', g).forEach(function (b) { b.classList.toggle('held', b.dataset.t === held); b.setAttribute('aria-pressed', String(b.dataset.t === held)); });
+      $$('.nc-cg-slot', g).forEach(function (s) {
+        var i = +s.dataset.i, L = S.load[i] || [];
+        s.querySelector('.nc-cg-load').innerHTML = L.length ? L.map(function (k) { var t = tagOf(k); return '<span class="nc-cg-chip" data-t="' + k + '">' + t.icon + ' ' + esc(t.t) + ' <i aria-hidden="true">✕</i></span>'; }).join('') : '<span class="nc-cg-empty">' + esc(held ? C.dropHere : C.empty) + '</span>';
+        s.classList.toggle('full', !!L.length); s.classList.toggle('ready', !!held && !S.ok);
+        s.disabled = !!S.ok;
+      });
+      g.querySelector('.nc-cg-check').hidden = !!S.ok; g.querySelector('.nc-cg-clear').hidden = !!S.ok;
+      g.classList.toggle('nc-done', !!S.ok);
+      g.querySelector('.nc-cg-cmp').hidden = !S.ok; g.querySelector('.nc-cg-wow').hidden = !S.ok;
+      if (S.ok) { fb.innerHTML = '✅ ' + esc(C.win); compare(); }
+      refresh();
+    }
+    function compare() {
+      var bt = store.bt || {}, lb = store.lb || {}, real = lb.hr1 != null ? lb.hr1 * 4 : null, rest = lb.hr0 != null ? lb.hr0 * 4 : null;
+      var rows = [[C.rows[0], bt.saved ? bt.bpm + ' ' + C.unit : '(not saved)', real != null ? real + ' ' + C.unit : C.noData],
+        [C.rows[1], bt.saved && rest != null ? (bt.bpm > rest ? C.upYes : C.upNo) : '(not saved)', rest != null && real != null ? (real > rest ? C.evUp.replace('{d}', real - rest) : C.evFlat) : C.noData]];
+      g.querySelector('.nc-cg-rows').innerHTML = '<div class="nc-mt-r nc-mt-rh"><span></span><span>You predicted</span><span>The evidence</span></div>' + rows.map(function (r) { return '<div class="nc-mt-r"><b>' + esc(r[0]) + '</b><span>' + esc(r[1]) + '</span><span class="nc-mt-ev">' + esc(r[2]) + '</span></div>'; }).join('');
+    }
+    function put(i, k) {
+      if (S.ok) return; var L = S.load[i] = S.load[i] || [], j = L.indexOf(k);
+      if (j > -1) L.splice(j, 1); else { if (L.length >= 2) L.shift(); L.push(k); }
+      save(); fb.innerHTML = ''; drawAll();
+    }
+    $$('.nc-cg-tag', g).forEach(function (b) {
+      b.addEventListener('click', function () { if (S.ok || b._dragged) return; held = b.dataset.t; drawAll(); });
+      // drag a tag onto an arrow
+      b.addEventListener('pointerdown', function (e) {
+        if (S.ok || e.pointerType === 'mouse' && e.button) return;
+        var sx = e.clientX, sy = e.clientY, ghost = null, k = b.dataset.t;
+        function mv(ev) {
+          if (!ghost && Math.hypot(ev.clientX - sx, ev.clientY - sy) < 8) return;
+          if (!ghost) { ghost = mk('span', 'nc-cg-ghost', b.innerHTML); document.body.appendChild(ghost); held = k; drawAll(); }
+          ghost.style.left = ev.clientX + 'px'; ghost.style.top = ev.clientY + 'px';
+        }
+        function upE(ev) {
+          document.removeEventListener('pointermove', mv); document.removeEventListener('pointerup', upE);
+          if (!ghost) return; ghost.remove();
+          var el = document.elementFromPoint(ev.clientX, ev.clientY), s = el && el.closest && el.closest('.nc-cg-slot');
+          if (s && g.contains(s)) { put(+s.dataset.i, k); held = null; drawAll(); }
+          b._dragged = true; setTimeout(function () { b._dragged = false; }, 0);
+        }
+        document.addEventListener('pointermove', mv); document.addEventListener('pointerup', upE);
+      });
+    });
+    $$('.nc-cg-slot', g).forEach(function (s) {
+      s.addEventListener('click', function (e) {
+        var i = +s.dataset.i, chip = e.target.closest && e.target.closest('.nc-cg-chip');
+        if (chip && !held) { put(i, chip.dataset.t); return; }
+        if (!held) { fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(C.pickTag) + '</span>'; return; }
+        put(i, held);
+      });
+    });
+    g.querySelector('.nc-cg-clear').addEventListener('click', function () { S.load = {}; held = null; save(); fb.innerHTML = ''; drawAll(); });
+    g.querySelector('.nc-cg-check').addEventListener('click', function () {
+      for (var i = 0; i < C.arrows.length; i++) {
+        var a = C.arrows[i], L = S.load[i] || [];
+        var wrong = L.filter(function (k) { return a.need.indexOf(k) < 0; })[0];
+        if (wrong) { ping(true); fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc((a.wrong && a.wrong[wrong]) || C.wrongHint) + '</span>'; flash(i); return; }
+        if (L.length < a.need.length) { ping(true); var miss = C.arrows.filter(function (x, j) { return (S.load[j] || []).length < x.need.length; }).length; fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc((L.length ? a.more : a.hint) || C.wrongHint) + ' ' + esc(C.missCount.replace('{n}', miss)) + '</span>'; flash(i); return; }
+      }
+      S.ok = 1; held = null; save(); ping(); bind({ model: S.load }); drawAll();
+      note('🧩 Part 4 done. Your model shows the whole team.');
+    });
+    function flash(i) { var r = $('.nc-cg-row[data-i="' + i + '"]', g); if (!r) return; r.classList.remove('flash'); void r.offsetWidth; r.classList.add('flash'); }
+    document.addEventListener('nc:lab', function () { if (S.ok) compare(); });
+    EXTRA_LINES.push(function () { return ['--- PART 4: MY BOX-AND-ARROW MODEL ---', S.ok ? C.arrows.map(function (a, i) { return C.boxes[a.from].name + ' → ' + C.boxes[a.to].name + ': ' + (S.load[i] || []).map(function (k) { return tagOf(k).t; }).join(' + '); }).join(' | ') : '(not checked yet)']; });
+    drawAll();
+  }
+
   function boot() {
     guard('lean', buildLean);
     guard('tabs', buildTabs);
@@ -3053,27 +3578,33 @@
     guard('rewind', buildRewind);
     guard('turn', buildTurn);
     guard('pin', buildPin);
+    guard('beat', buildBeat);
     guard('wordlens', buildWordLens);
     guard('source', buildSource);
     guard('trace', buildTrace);
     guard('vein', buildVein);
+    guard('clock', buildClock);
     guard('lamp', buildLamp);
     guard('sort', buildSort);
     guard('air', buildAir);
     guard('beam', buildBeam);
     guard('flip', buildFlip);
     guard('knock', buildKnock);
+    guard('gauge', buildGauge);
     guard('bag', buildBag);
     guard('timelapse', buildTimelapse);
     guard('jars', buildJars);
     guard('pour', buildPour);
     guard('pond', buildPond);
     guard('reflex', buildReflex);
+    guard('peek', buildPeek);
     guard('otherside', buildOtherSide);
     guard('meter', buildMeter);
     guard('yard', buildYard);
     guard('draw', buildDraw);
     guard('team', buildTeam);
+    guard('lab', buildLab);
+    guard('cargo', buildCargo);
     guard('assignment', buildAssignment);
     guard('quizcard', function () { var q = $('#tab-quiz'); if (q) putKeeper('k-quiz', q, 'prepend'); });
     guard('wonder', buildWonder);

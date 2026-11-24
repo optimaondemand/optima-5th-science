@@ -1,0 +1,11 @@
+<!-- Paste into <resources> of imsmanifest.xml when the course .imscc is built (held until Bethany says so).
+     The course must also define the assignment group "g5sci_group_summative" ("Summative Assessments") in course_settings/assignment_groups.xml. -->
+<resource identifier="g5sci_u03_check" type="imsqti_xmlv1p2/imscc_xmlv1p1/assessment">
+  <file href="g5sci_u03_check/assessment_meta.xml"/>
+  <file href="non_cc_assessments/g5sci_u03_check.xml.qti"/>
+  <dependency identifierref="g5sci_u03_check_dep"/>
+</resource>
+<resource identifier="g5sci_u03_check_dep" type="associatedcontent/imscc_xmlv1p1/learning-application-resource" href="g5sci_u03_check/assessment_meta.xml">
+  <file href="g5sci_u03_check/assessment_meta.xml"/>
+  <file href="non_cc_assessments/g5sci_u03_check.xml.qti"/>
+</resource>
