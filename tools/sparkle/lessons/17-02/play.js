@@ -3,7 +3,7 @@
 const { chromium } = require('playwright');
 const path = require('path'), fs = require('fs');
 const OUT = path.join(__dirname, '..', '..', 'out', '17-02'); fs.mkdirSync(OUT, { recursive: true });
-const URL = 'http://localhost:8765/lesson-17-02-argument-from-evidence-plant-growth-materials.html';
+const URL = 'http://localhost:8765/lesson-17-02-argument-from-evidence-plant-growth-materials.html?steps=0';
 let fails = 0; const FAIL = m => { fails++; console.log('FAIL', m); }, OK = m => console.log('ok  ', m);
 
 (async () => {

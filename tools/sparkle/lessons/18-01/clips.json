@@ -1,0 +1,26 @@
+{
+ "voice": "Gdj2QBsAjgQnu3rwg2ZN",
+ "model": "eleven_v4",
+ "clips": {
+  "k-warmup": {
+   "text": "Pick one meal: the burger, the pizza, or the apple. Do you think its energy rewinds all the way back to the sun? If yes, how many steps back? Save your prediction, then write one reason. You will check it in Part 4.",
+   "dur": 16.2
+  },
+  "k-words": {
+   "text": "Sunlight. Producer. Consumer. Energy. Food chain. Photosynthesis.",
+   "dur": 7.0
+  },
+  "k-part1": {
+   "text": "This page was printed in seventeen seventy-nine by Jan Ingenhousz. Tap each yellow line to read it in plain English. Then drag the sun to bright sun, to shade, and to night. Count the bubbles each time, and look at your table.",
+   "dur": 17.4
+  },
+  "k-quiz": {
+   "text": "Three quick questions, just for you. They are not graded. Tap an answer and read the note under it. Each one asks you to trace energy back to where it started.",
+   "dur": 11.31
+  },
+  "k-assign": {
+   "text": "Now add your page to the chain. Answer the two Part B questions about the backyard. In Part C, write your notebook page. Then tap evidence cards in the planner to build your C-E-R about where food energy begins.",
+   "dur": 15.23
+  }
+ }
+}

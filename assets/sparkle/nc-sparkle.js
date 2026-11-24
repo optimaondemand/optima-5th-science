@@ -565,6 +565,12 @@
     if (copy) { var c2 = copy; while (c2.parentNode && !c2.parentNode.classList.contains('card-body') && c2.parentNode.id !== 'tab-vocab') c2 = c2.parentNode; hide(c2); }
     // clean top: everything is answered on the page, details live in the info strip
     hide($('.need-strip')); hide($('.info-strip'));
+    (D.leanHide || []).forEach(function (sel) { $$(sel).forEach(hide); });
+    (D.leanHideText || []).forEach(function (needle) {
+      var e = textEl($('#tab-lesson'), needle); if (!e) return;
+      while (e.parentNode && !e.parentNode.classList.contains('act-body') && e.parentNode.id !== 'tab-lesson') e = e.parentNode;
+      hide(e);
+    });
     if (D.opener) { var bq = $$('.intro-2col .card').filter(function (c) { return /Big Question/i.test(c.textContent); })[0]; if (bq) { hide(bq); var i2 = $('.intro-2col'); if (i2) i2.classList.add('nc-one'); } }
   }
 
@@ -673,10 +679,11 @@
     var S = D.source; if (!S) return;
     var p1 = $$('#tab-lesson .card-head-label').filter(function (e) { return /Part 1|Section 1/.test(e.textContent); })[0];
     var body = p1 && p1.closest('.card').querySelector('.card-body'); if (!body) throw new Error('Part 1 card missing');
-    var card = mk('div', 'nc-g nc-src');
+    var card = mk('div', 'nc-g nc-src' + (S.w > S.h ? ' nc-src-wide' : ''));
     var rows = S.lines.map(function (l, i) {
       var top = (l.y[0] / S.h * 100).toFixed(2), hgt = ((l.y[1] - l.y[0]) / S.h * 100).toFixed(2);
-      return '<button type="button" class="nc-src-hl" data-i="' + i + '" style="top:' + top + '%;height:' + hgt + '%" aria-label="Line ' + (i + 1) + ': hear it in plain English"><span>' + (i + 1) + '</span></button>';
+      var xs = l.x ? ';left:' + (l.x[0] / S.w * 100).toFixed(2) + '%;width:' + ((l.x[1] - l.x[0]) / S.w * 100).toFixed(2) + '%' : '';
+      return '<button type="button" class="nc-src-hl" data-i="' + i + '" style="top:' + top + '%;height:' + hgt + '%' + xs + '" aria-label="Line ' + (i + 1) + ': hear it in plain English"><span>' + (i + 1) + '</span></button>';
     }).join('');
     card.innerHTML = gameHead(S.kicker, S.title) + '<p class="nc-p">' + esc(S.intro) + '</p>' + job(S.job) +
       '<div class="nc-src-grid">' +
@@ -1627,24 +1634,33 @@
       var R = Wd.data, h4 = $(R.host || '.nc-tl');
       if (h4) {
         var b2 = wonderBox('📈', 'Real data', R.title, 3);
-        // one line (R.values) or several (R.series: [{name, values, color}]) on the same axes
-        var SER = R.series || [{ name: '', values: R.values, color: '#2e86c1' }], V = SER[0].values, n = V.length;
-        var ALL = [].concat.apply([], SER.map(function (q) { return q.values; }));
-        var lo = Math.floor(Math.min.apply(null, ALL) - 1), hi = Math.ceil(Math.max.apply(null, ALL) + 1);
-        var W = 600, H = 220, L = 44, Rr = 10, T = 12, B = 30;
+        // one line (R.values) or several (R.series: [{name, values, color, axis}]) on the same axes.
+        // R.yearly: one point per year (otherwise one per month). A series with axis: 2 uses its own scale on the right.
+        var SER = R.series || [{ name: '', values: R.values, color: '#2e86c1' }], V = SER[0].values, n = V.length, YR = !!R.yearly;
+        function span(list) { var all = [].concat.apply([], list.map(function (q) { return q.values; })); var mn = Math.min.apply(null, all), mx = Math.max.apply(null, all); var pad = YR ? (mx - mn) * 0.06 : 1; return [Math.floor(mn - pad), Math.ceil(mx + pad)]; }
+        var S1 = SER.filter(function (q) { return q.axis !== 2; }), S2 = SER.filter(function (q) { return q.axis === 2; });
+        var AX = { 1: span(S1), 2: S2.length ? span(S2) : null };
+        if (YR) { AX[1][0] = 0; if (AX[2]) AX[2][0] = 0; } // counts of animals start at zero
+        var W = 600, H = 220, L = YR ? 50 : 44, Rr = S2.length ? 46 : 10, T = YR ? 14 : 12, B = 30;
         function X(i) { return L + i * (W - L - Rr) / (n - 1); }
-        function Y(v) { return T + (hi - v) * (H - T - B) / (hi - lo); }
-        function pathOf(vals) { return vals.map(function (v, i) { return (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(v).toFixed(1); }).join(' '); }
+        function Yof(v, ax) { var r = AX[ax || 1]; return T + (r[1] - v) * (H - T - B) / (r[1] - r[0]); }
+        function pathOf(q) { return q.values.map(function (v, i) { return (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Yof(v, q.axis).toFixed(1); }).join(' '); }
+        function nice(r) { var d = r[1] - r[0], st = Math.pow(10, Math.floor(Math.log10(d / 4))); [1, 2, 2.5, 5, 10].some(function (m) { if (d / (st * m) <= 6) { st *= m; return true; } return false; }); return st; }
         var yrs = '', grid = '';
-        for (var yy = 0; yy * 12 < n; yy++) { var xi = X(yy * 12); yrs += '<text x="' + xi.toFixed(1) + '" y="' + (H - 10) + '" font-size="10" fill="#7a6a58" text-anchor="middle">' + (R.start[0] + yy) + '</text>'; grid += '<line x1="' + xi.toFixed(1) + '" y1="' + T + '" x2="' + xi.toFixed(1) + '" y2="' + (H - B) + '" stroke="#efe6d8"/>'; }
-        for (var gv = Math.ceil(lo / 5) * 5; gv <= hi; gv += 5) grid += '<line x1="' + L + '" y1="' + Y(gv).toFixed(1) + '" x2="' + (W - Rr) + '" y2="' + Y(gv).toFixed(1) + '" stroke="#f3ece0"/><text x="' + (L - 6) + '" y="' + (Y(gv) + 3).toFixed(1) + '" font-size="10" fill="#7a6a58" text-anchor="end">' + gv + '</text>';
+        if (YR) { var every = R.labelEvery || 10; for (var ii = 0; ii < n; ii++) { var yv = R.start[0] + ii; if (yv % every) continue; var xi = X(ii); yrs += '<text x="' + xi.toFixed(1) + '" y="' + (H - 10) + '" font-size="10" fill="#7a6a58" text-anchor="middle">' + yv + '</text>'; grid += '<line x1="' + xi.toFixed(1) + '" y1="' + T + '" x2="' + xi.toFixed(1) + '" y2="' + (H - B) + '" stroke="#efe6d8"/>'; } }
+        else { for (var yy = 0; yy * 12 < n; yy++) { var xm = X(yy * 12); yrs += '<text x="' + xm.toFixed(1) + '" y="' + (H - 10) + '" font-size="10" fill="#7a6a58" text-anchor="middle">' + (R.start[0] + yy) + '</text>'; grid += '<line x1="' + xm.toFixed(1) + '" y1="' + T + '" x2="' + xm.toFixed(1) + '" y2="' + (H - B) + '" stroke="#efe6d8"/>'; } }
+        var st1 = YR ? nice(AX[1]) : 5;
+        for (var gv = Math.ceil(AX[1][0] / st1) * st1; gv <= AX[1][1]; gv += st1) grid += '<line x1="' + L + '" y1="' + Yof(gv).toFixed(1) + '" x2="' + (W - Rr) + '" y2="' + Yof(gv).toFixed(1) + '" stroke="#f3ece0"/><text x="' + (L - 6) + '" y="' + (Yof(gv) + 3).toFixed(1) + '" font-size="10" fill="' + (S2.length ? S1[0].color : '#7a6a58') + '" text-anchor="end">' + gv.toLocaleString('en-US') + '</text>';
+        if (AX[2]) { var st2 = nice(AX[2]); for (var gw = Math.ceil(AX[2][0] / st2) * st2; gw <= AX[2][1]; gw += st2) grid += '<text x="' + (W - Rr + 6) + '" y="' + (Yof(gw, 2) + 3).toFixed(1) + '" font-size="10" fill="' + S2[0].color + '" text-anchor="start">' + gw.toLocaleString('en-US') + '</text>'; }
         var MON = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var yl = R.ylabel || ('CO₂, ' + R.unit);
         b2.querySelector('.nc-wx-body').innerHTML = '<p class="nc-p">' + esc(R.intro) + '</p>' + job(R.job) +
-          (SER.length > 1 ? '<div class="nc-dt-key">' + SER.map(function (q) { return '<span><i style="background:' + q.color + '"></i>' + esc(q.name) + '</span>'; }).join('') + '</div>' : '') +
+          (SER.length > 1 ? '<div class="nc-dt-key">' + SER.map(function (q) { return '<span><i style="background:' + q.color + '"></i>' + esc(q.name) + (q.axis === 2 && R.ylabel2 ? ' (right scale)' : (S2.length ? ' (left scale)' : '')) + '</span>'; }).join('') + '</div>' : '') +
           '<div class="nc-dt-read" aria-live="polite">Drag across the graph.</div>' +
           '<svg class="nc-dt" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(R.alt || 'A line graph of carbon dioxide in the air at Mauna Loa from 2016 to 2026. It zigzags every year and climbs over time.') + '">' + grid +
-            SER.map(function (q) { return '<path d="' + pathOf(q.values) + '" fill="none" stroke="' + q.color + '" stroke-width="2.4" stroke-linejoin="round" class="nc-dt-line"/>'; }).join('') + yrs +
-            '<text x="' + L + '" y="9" font-size="9.5" fill="#7a6a58">CO₂, ' + esc(R.unit) + '</text>' +
+            SER.map(function (q) { return '<path d="' + pathOf(q) + '" fill="none" stroke="' + q.color + '" stroke-width="2.4" stroke-linejoin="round" class="nc-dt-line"/>'; }).join('') + yrs +
+            '<text x="' + L + '" y="' + (YR ? 10 : 9) + '" font-size="9.5" fill="' + (S2.length ? S1[0].color : '#7a6a58') + '">' + esc(yl) + '</text>' +
+            (AX[2] && R.ylabel2 ? '<text x="' + (W - 4) + '" y="10" font-size="9.5" fill="' + S2[0].color + '" text-anchor="end">' + esc(R.ylabel2) + '</text>' : '') +
             '<line class="nc-dt-cur" x1="0" y1="' + T + '" x2="0" y2="' + (H - B) + '" stroke="#0E1C42" stroke-dasharray="3 3" opacity="0"/>' + SER.map(function (q) { return '<circle class="nc-dt-dot" r="5" fill="' + (SER.length > 1 ? q.color : '#c0392b') + '" stroke="#fff" stroke-width="1.5" opacity="0"/>'; }).join('') +
             '<rect class="nc-dt-hit" x="' + L + '" y="0" width="' + (W - L - Rr) + '" height="' + H + '" fill="transparent"/></svg>' +
           '<div class="nc-q">' + esc(R.ask) + '</div><div class="nc-opts">' + R.opts.map(function (o, i) { return '<button type="button" class="nc-opt" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div><div class="nc-fb" aria-live="polite"></div>' +
@@ -1654,10 +1670,10 @@
         function at(e) {
           var r = svg.getBoundingClientRect(), t = e.touches ? e.touches[0] : e, x = (t.clientX - r.left) * W / r.width;
           var i = Math.max(0, Math.min(n - 1, Math.round((x - L) / ((W - L - Rr) / (n - 1)))));
-          var m = (R.start[1] - 1 + i) % 12, y = R.start[0] + Math.floor((R.start[1] - 1 + i) / 12);
           cur.setAttribute('x1', X(i)); cur.setAttribute('x2', X(i)); cur.setAttribute('opacity', '1');
-          SER.forEach(function (q, k) { dots[k].setAttribute('cx', X(i)); dots[k].setAttribute('cy', Y(q.values[i])); dots[k].setAttribute('opacity', '1'); });
-          rd.innerHTML = '<b>' + MON[m] + ' ' + y + ':</b> ' + SER.map(function (q) { return (q.name ? esc(q.name) + ' ' : '') + q.values[i].toFixed(1) + ' ppm'; }).join(' · ');
+          SER.forEach(function (q, k) { dots[k].setAttribute('cx', X(i)); dots[k].setAttribute('cy', Yof(q.values[i], q.axis)); dots[k].setAttribute('opacity', '1'); });
+          var when = YR ? String(R.start[0] + i) : MON[(R.start[1] - 1 + i) % 12] + ' ' + (R.start[0] + Math.floor((R.start[1] - 1 + i) / 12));
+          rd.innerHTML = '<b>' + when + ':</b> ' + SER.map(function (q) { return (q.name ? esc(q.name) + ' ' : '') + (YR ? Math.round(q.values[i]).toLocaleString('en-US') : q.values[i].toFixed(1) + ' ppm'); }).join(' · ');
         }
         var hit = b2.querySelector('.nc-dt-hit');
         ['mousemove', 'touchmove', 'touchstart', 'click'].forEach(function (ev) { hit.addEventListener(ev, function (e) { if (ev.indexOf('touch') === 0) e.preventDefault(); at(e); }, { passive: false }); });
@@ -1728,22 +1744,483 @@
     var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = base + 'onestep.css' + v; document.head.appendChild(l);
     var s = document.createElement('script'); s.src = base + 'onestep.js' + v; document.body.appendChild(s);
   }
+  /* ═════════════ 18.01 modules (Nov 2026): rewind a meal, the sun dial, sweep the sunbeam, pour the energy, the backyard ═════════════ */
+
+  // a small shared helper: a photo chip (real photo + label)
+  function chip(x, cls) {
+    return '<span class="' + (cls || 'nc-pchip') + '"><img src="' + esc(x.img) + '" alt="' + esc(x.alt || x.name) + '" loading="lazy" draggable="false"><b>' + esc(x.name) + '</b>' + (x.role ? '<small>' + esc(x.role) + '</small>' : '') + '</span>';
+  }
+
+  /* ───────────── Warm-Up: Rewind my lunch (a prediction) ───────────── */
+  function buildRewind() {
+    var W = D.rewind; if (!W) return;
+    var pred = $('#pred-1'); if (!pred) throw new Error('pred-1 missing');
+    var host = pred.closest('.response-q') || pred.parentNode;
+    var card = host.closest('.activity-card') || host.parentNode;
+    $$('.callout, .socratic-q', card).forEach(hide);
+    store.rw = store.rw || {}; var S = store.rw; if (S.steps == null) S.steps = 2;
+    var g = mk('div', 'nc-g nc-rw');
+    g.innerHTML = '<div class="nc-g-k">Warm-Up game</div><h4 class="nc-g-t nc-rw-title">' + esc(W.title) + '</h4><p class="nc-p">' + esc(W.intro) + '</p>' + job(W.job) +
+      '<div class="nc-rw-meals" role="group" aria-label="Pick a meal">' + W.meals.map(function (m, i) {
+        return '<button type="button" class="nc-rw-meal" data-i="' + i + '" aria-pressed="false"><img src="' + esc(m.img) + '" alt="' + esc(m.alt) + '"><b>' + esc(m.label) + '</b></button>';
+      }).join('') + '</div>' +
+      '<div class="nc-rw-ask" hidden>' +
+        '<div class="nc-q">' + esc(W.reach.q) + '</div><div class="nc-opts nc-rw-reach">' + W.reach.opts.map(function (o, i) { return '<button type="button" class="nc-opt" data-i="' + i + '">' + esc(o) + '</button>'; }).join('') + '</div>' +
+        '<div class="nc-rw-stepsq" hidden><div class="nc-q">' + esc(W.steps.q) + '</div>' +
+          '<div class="nc-rw-steps"><button type="button" class="nc-cup-b nc-rw-minus" aria-label="One step fewer">−</button><span class="nc-rw-read" aria-live="polite"><b class="nc-rw-n">2</b> <span class="nc-rw-u">steps back</span></span><button type="button" class="nc-cup-b nc-rw-plus" aria-label="One step more">+</button></div>' +
+          '<p class="nc-rw-hint">' + esc(W.steps.hint) + '</p></div>' +
+        '<div class="nc-rw-ctl"><button type="button" class="nc-btn nc-rw-save" disabled>🔒 Save my prediction</button><button type="button" class="nc-cup-edit nc-rw-edit" hidden>✎ Change my prediction</button></div>' +
+      '</div>' +
+      '<div class="nc-bet-seal nc-rw-seal" hidden></div>' +
+      '<label class="nc-np-l" for="pred-1" style="margin-top:12px">' + esc(W.reasonPrompt) + '</label>';
+    before(host, g);
+    pred.placeholder = W.placeholder || 'I predict my meal rewinds to the sun because…';
+    var ask = g.querySelector('.nc-rw-ask'), stepsQ = g.querySelector('.nc-rw-stepsq'), saveB = g.querySelector('.nc-rw-save'), editB = g.querySelector('.nc-rw-edit'), seal = g.querySelector('.nc-rw-seal');
+    function summary() {
+      if (S.meal == null) return '(not saved yet)';
+      var m = W.meals[S.meal].label;
+      return m + ' · ' + (S.reach === 0 ? 'rewinds all the way to the sun, in ' + S.steps + ' steps' : 'stops before the sun');
+    }
+    PRED_LINE = function () { return ['--- WARM-UP: MY PREDICTION ---', 'My meal: ' + (S.saved ? summary() : '(not saved yet)')]; };
+    function draw() {
+      var saved = !!S.saved, locked = !!S.revealed;
+      $$('.nc-rw-meal', g).forEach(function (b) { var on = +b.dataset.i === S.meal; b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); b.disabled = saved; });
+      ask.hidden = S.meal == null;
+      $$('.nc-rw-reach .nc-opt', g).forEach(function (b) { b.classList.toggle('sel', +b.dataset.i === S.reach); b.disabled = saved; });
+      stepsQ.hidden = S.reach !== 0;
+      g.querySelector('.nc-rw-n').textContent = S.steps;
+      g.querySelector('.nc-rw-u').textContent = S.steps === 1 ? 'step back' : 'steps back';
+      g.querySelector('.nc-rw-minus').disabled = saved || S.steps <= 1;
+      g.querySelector('.nc-rw-plus').disabled = saved || S.steps >= 6;
+      saveB.disabled = S.meal == null || S.reach == null; saveB.hidden = saved;
+      editB.hidden = !saved || locked;
+      seal.hidden = !saved;
+      seal.textContent = !saved ? '' : (locked ? W.lockedNote : W.saved).replace('{p}', summary());
+      g.classList.toggle('nc-done', saved);
+      refresh();
+    }
+    $$('.nc-rw-meal', g).forEach(function (b) { b.addEventListener('click', function () { if (S.saved) return; S.meal = +b.dataset.i; save(); draw(); }); });
+    $$('.nc-rw-reach .nc-opt', g).forEach(function (b) { b.addEventListener('click', function () { if (S.saved) return; S.reach = +b.dataset.i; save(); draw(); }); });
+    g.querySelector('.nc-rw-minus').addEventListener('click', function () { if (S.saved) return; S.steps = Math.max(1, S.steps - 1); save(); draw(); });
+    g.querySelector('.nc-rw-plus').addEventListener('click', function () { if (S.saved) return; S.steps = Math.min(6, S.steps + 1); save(); draw(); });
+    saveB.addEventListener('click', function () { S.saved = 1; save(); ping(); bind({ prediction: { meal: W.meals[S.meal].k, reach: S.reach === 0, steps: S.steps } }); draw(); });
+    editB.addEventListener('click', function () { if (S.revealed) return; S.saved = 0; save(); draw(); });
+    document.addEventListener('nc:rw', draw);
+    draw();
+    putKeeper('k-warmup', g.querySelector('.nc-job'), 'after');
+  }
+
+  /* ───────────── Part 1 game: the sun dial (light, shade, night) over a real photo of a plant in water ───────────── */
+  function buildLamp() {
+    var L = D.lamp; if (!L) return;
+    var src = $('.nc-src'); if (!src) throw new Error('lamp needs the source page');
+    store.lp = store.lp || {}; var S = store.lp; S.rec = S.rec || {}; if (S.v == null) S.v = 90;
+    var Z = L.zones; // [{k, label, min, rate}], brightest first
+    var g = mk('div', 'nc-g nc-lp');
+    g.innerHTML = gameHead(L.kicker, L.title) + '<p class="nc-p">' + esc(L.intro) + '</p>' + job(L.job) +
+      '<div class="nc-lp-stage">' +
+        '<figure class="nc-lp-fig"><img src="' + esc(L.img) + '" alt="' + esc(L.alt) + '"><div class="nc-lp-shade"></div><canvas class="nc-lp-bub" aria-hidden="true"></canvas>' +
+          '<span class="nc-lp-model">Moving bubbles: a model</span><span class="nc-lp-cnt" aria-live="polite"></span></figure>' +
+        '<div class="nc-lp-side">' +
+          '<label class="nc-lp-lb" for="nc-lp-sl">Drag the sun</label>' +
+          '<div class="nc-lp-sky"><input id="nc-lp-sl" class="nc-lp-sl" type="range" min="0" max="100" step="1" aria-valuetext="">' +
+            '<div class="nc-lp-marks">' + Z.slice().reverse().map(function (z) { return '<span>' + esc(z.label) + '</span>'; }).join('') + '</div></div>' +
+          '<div class="nc-lp-now" aria-live="polite"></div>' +
+          '<button type="button" class="nc-btn nc-lp-go">⏱ Count the bubbles</button>' +
+          '<div class="nc-lp-table"></div>' +
+          '<button type="button" class="nc-cup-edit nc-lp-clear">↺ Clear my counts</button>' +
+        '</div>' +
+      '</div>' +
+      '<p class="nc-credit">' + esc(L.credit) + '</p>' +
+      '<div class="nc-lp-q" hidden><div class="nc-q">' + esc(L.q) + '</div><div class="nc-opts">' + L.opts.map(function (o, i) { return '<button type="button" class="nc-opt" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div><div class="nc-fb nc-lp-fb" aria-live="polite"></div></div>';
+    after(src, g);
+    var sl = g.querySelector('.nc-lp-sl'), shade = g.querySelector('.nc-lp-shade'), cv = g.querySelector('.nc-lp-bub'), fig = g.querySelector('.nc-lp-fig');
+    var now = g.querySelector('.nc-lp-now'), goB = g.querySelector('.nc-lp-go'), tbl = g.querySelector('.nc-lp-table'), cnt = g.querySelector('.nc-lp-cnt'), qBox = g.querySelector('.nc-lp-q'), fb = g.querySelector('.nc-lp-fb');
+    function zone(v) { for (var i = 0; i < Z.length; i++) if (v >= Z[i].min) return Z[i]; return Z[Z.length - 1]; }
+    var counting = false, bubbles = [], acc = 0, ctx = null, last = 0, live = 0;
+    function size() { var r = fig.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2); cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d); ctx = cv.getContext('2d'); ctx.setTransform(d, 0, 0, d, 0, 0); }
+    function frame(t) {
+      requestAnimationFrame(frame);
+      var dt = last ? Math.min((t - last) / 1000, 0.1) : 0; last = t;
+      if (!ctx || RM) return;
+      var r = fig.getBoundingClientRect(); if (r.bottom < 0 || r.top > window.innerHeight) return;
+      var z = zone(S.v), rate = z.rate * (0.6 + 0.4 * (S.v - z.min) / Math.max(1, 100 - z.min));
+      if (z.rate === 0) rate = 0;
+      acc += rate * dt;
+      while (acc >= 1) { acc -= 1; var a = L.from; bubbles.push({ x: a[0] + Math.random() * (a[2] - a[0]), y: a[1] + Math.random() * (a[3] - a[1]), r: 1.6 + Math.random() * 2.6, vy: 0.05 + Math.random() * 0.05, w: Math.random() * 6.28 }); if (counting) { live++; cnt.textContent = live + (live === 1 ? ' bubble' : ' bubbles'); } }
+      ctx.clearRect(0, 0, r.width, r.height);
+      bubbles = bubbles.filter(function (b) { return b.y > L.top; });
+      bubbles.forEach(function (b) {
+        b.y -= b.vy * dt * 2.2; b.w += dt * 3; var x = (b.x + Math.sin(b.w) * 0.004) * r.width, y = b.y * r.height;
+        var gr = ctx.createRadialGradient(x - b.r * 0.35, y - b.r * 0.35, 0.3, x, y, b.r);
+        gr.addColorStop(0, 'rgba(255,255,255,0.95)'); gr.addColorStop(0.6, 'rgba(220,240,255,0.45)'); gr.addColorStop(1, 'rgba(255,255,255,0.15)');
+        ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(x, y, b.r, 0, 6.2832); ctx.fill();
+        ctx.strokeStyle = 'rgba(255,255,255,0.7)'; ctx.lineWidth = 0.7; ctx.stroke();
+      });
+    }
+    function draw() {
+      sl.value = S.v;
+      var z = zone(S.v);
+      shade.style.opacity = String((1 - S.v / 100) * 0.82);
+      sl.setAttribute('aria-valuetext', z.label);
+      now.innerHTML = '<span class="nc-lp-ic">' + z.icon + '</span> ' + esc(z.label) + (S.rec[z.k] != null ? ' <small>(counted: ' + S.rec[z.k] + ')</small>' : '');
+      tbl.innerHTML = '<div class="nc-lp-r nc-lp-rh"><span>Light</span><span>Bubbles counted</span></div>' + Z.map(function (q) { var n = S.rec[q.k]; return '<div class="nc-lp-r' + (n != null ? ' on' : '') + '"><span>' + q.icon + ' ' + esc(q.label) + '</span><b>' + (n != null ? n : '—') + '</b></div>'; }).join('');
+      var all = Z.every(function (q) { return S.rec[q.k] != null; });
+      qBox.hidden = !all;
+      goB.disabled = counting; sl.disabled = counting;
+      goB.textContent = counting ? '⏱ Counting…' : '⏱ Count the bubbles (' + esc(z.label.toLowerCase()) + ')';
+      g.classList.toggle('nc-done', !!S.done);
+      if (S.done) { var ok = $$('.nc-lp-q .nc-opt', g).filter(function (b) { return L.opts[+b.dataset.i].ok; })[0]; if (ok) ok.classList.add('ok'); fb.innerHTML = '✅ ' + esc(L.win); }
+    }
+    sl.addEventListener('input', function () { S.v = +sl.value; save(); draw(); });
+    goB.addEventListener('click', function () {
+      var z = zone(S.v); counting = true; live = 0; cnt.textContent = '0 bubbles'; cnt.classList.add('on'); draw();
+      var secs = L.seconds || 6;
+      function finish() {
+        // the count is the model's: its rate times the seconds, give or take one
+        var n = z.rate === 0 ? 0 : Math.max(1, Math.round(z.rate * secs * (0.6 + 0.4 * (S.v - z.min) / Math.max(1, 100 - z.min)) + (Math.random() < 0.5 ? -1 : 1)));
+        if (!RM && live > 0) n = live;
+        S.rec[z.k] = n; counting = false; save(); ping(); cnt.textContent = n + (n === 1 ? ' bubble' : ' bubbles') + ' in ' + secs + ' seconds'; draw();
+      }
+      if (RM) finish(); else setTimeout(finish, secs * 1000);
+    });
+    g.querySelector('.nc-lp-clear').addEventListener('click', function () { if (counting) return; S.rec = {}; S.done = 0; save(); cnt.textContent = ''; cnt.classList.remove('on'); $$('.nc-lp-q .nc-opt', g).forEach(function (b) { b.classList.remove('ok'); }); fb.innerHTML = ''; draw(); });
+    $$('.nc-lp-q .nc-opt', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var o = L.opts[+b.dataset.i];
+        if (o.ok) { b.classList.add('ok'); if (!S.done) { S.done = 1; save(); ping(); } draw(); }
+        else { b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 700); fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(o.hint) + '</span>'; ping(true); }
+      });
+    });
+    window.addEventListener('resize', size);
+    var im = fig.querySelector('img'); if (im.complete) size(); else im.addEventListener('load', size);
+    requestAnimationFrame(frame);
+    draw();
+  }
+
+  /* ───────────── Part 2 game: sweep the sunbeam (who can make food from sunlight?) ───────────── */
+  function buildBeam() {
+    var B = D.beam; if (!B) return;
+    var p2 = $$('#tab-lesson .card-head-label').filter(function (e) { return /Part 2|Section 2/.test(e.textContent); })[0];
+    var body = p2 && p2.closest('.card').querySelector('.card-body'); if (!body) throw new Error('Part 2 card missing');
+    store.bm = store.bm || {}; var S = store.bm; S.g = S.g || {}; S.lit = S.lit || {};
+    var g = mk('div', 'nc-g nc-bm');
+    g.innerHTML = gameHead(B.kicker, B.title) + '<p class="nc-p">' + esc(B.intro) + '</p>' + job(B.job) +
+      '<div class="nc-bm-sky"><button type="button" class="nc-bm-sun" aria-label="The sunbeam. Drag it onto a photo, or use the Shine button on a photo.">☀️<span>Drag me</span></button><span class="nc-bm-skyt">' + esc(B.skyText) + '</span></div>' +
+      '<div class="nc-bm-grid">' + B.cards.map(function (c, i) {
+        return '<div class="nc-bm-c" data-i="' + i + '"><div class="nc-bm-ph"><img src="' + esc(c.img) + '" alt="' + esc(c.alt) + '" loading="lazy"><span class="nc-bm-glow" aria-hidden="true"></span></div>' +
+          '<div class="nc-bm-nm">' + esc(c.name) + '</div>' +
+          '<div class="nc-bm-guess"><button type="button" class="nc-bm-gb" data-k="p">🌱 Producer</button><button type="button" class="nc-bm-gb" data-k="c">🍽️ Consumer</button></div>' +
+          '<button type="button" class="nc-bm-shine" hidden>☀️ Shine on it</button>' +
+          '<div class="nc-bm-res" aria-live="polite"></div></div>';
+      }).join('') + '</div>' +
+      '<div class="nc-bm-score" aria-live="polite"></div>' +
+      '<div class="nc-bm-ctl"><button type="button" class="nc-cup-edit nc-bm-reset">↺ Start over</button></div>' +
+      '<p class="nc-credit">' + esc(B.credit) + '</p>';
+    var socr = body.querySelector('.socratic-q'); if (socr) before(socr, g); else body.appendChild(g);
+    putKeeper('k-lesson2', g.querySelector('.nc-job'), 'after');
+    var sun = g.querySelector('.nc-bm-sun'), score = g.querySelector('.nc-bm-score');
+    function shine(i) {
+      if (S.g[i] == null || S.lit[i]) return;
+      S.lit[i] = 1; save(); ping(B.cards[i].prod !== (S.g[i] === 'p'));
+      var c = $('.nc-bm-c[data-i="' + i + '"]', g); if (c && !RM) { c.classList.remove('nc-bm-flash'); void c.offsetWidth; c.classList.add('nc-bm-flash'); }
+      draw();
+    }
+    function draw() {
+      var n = 0, right = 0;
+      $$('.nc-bm-c', g).forEach(function (c) {
+        var i = +c.dataset.i, C = B.cards[i], gs = S.g[i], lit = !!S.lit[i];
+        $$('.nc-bm-gb', c).forEach(function (b) { b.classList.toggle('sel', b.dataset.k === gs); b.disabled = lit; });
+        c.querySelector('.nc-bm-shine').hidden = gs == null || lit;
+        c.classList.toggle('ready', gs != null && !lit);
+        c.classList.toggle('lit', lit); c.classList.toggle('prod', lit && C.prod); c.classList.toggle('cons', lit && !C.prod);
+        var ok = lit && (C.prod === (gs === 'p'));
+        c.querySelector('.nc-bm-res').innerHTML = lit ? '<b>' + (C.prod ? '🍬 Makes its own food' : '🚫 Can\'t make food') + '</b> ' + (ok ? '✓ ' : '') + esc(C.why) : '';
+        if (lit) { n++; if (ok) right++; }
+      });
+      score.innerHTML = n < B.cards.length ? n + ' of ' + B.cards.length + ' lit by the sunbeam' : '✅ All six are lit. You sorted ' + right + ' of 6 before the sun showed you. ' + esc(B.win);
+      var done = n >= B.cards.length; g.classList.toggle('nc-done', done);
+      if (done && !S.done) { S.done = 1; save(); }
+    }
+    $$('.nc-bm-gb', g).forEach(function (b) { b.addEventListener('click', function () { var i = +b.closest('.nc-bm-c').dataset.i; if (S.lit[i]) return; S.g[i] = b.dataset.k; save(); draw(); }); });
+    $$('.nc-bm-shine', g).forEach(function (b) { b.addEventListener('click', function () { shine(+b.closest('.nc-bm-c').dataset.i); }); });
+    g.querySelector('.nc-bm-reset').addEventListener('click', function () { S.g = {}; S.lit = {}; S.done = 0; save(); draw(); });
+    // drag the sunbeam: any photo it passes over that has a guess lights up
+    var drag = null;
+    sun.addEventListener('pointerdown', function (e) { e.preventDefault(); drag = { x: e.clientX, y: e.clientY }; sun.setPointerCapture(e.pointerId); sun.classList.add('drag'); });
+    sun.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      sun.style.transform = 'translate(' + (e.clientX - drag.x) + 'px,' + (e.clientY - drag.y) + 'px)';
+      sun.style.visibility = 'hidden'; var el = document.elementFromPoint(e.clientX, e.clientY); sun.style.visibility = '';
+      var c = el && el.closest && el.closest('.nc-bm-c');
+      $$('.nc-bm-c', g).forEach(function (x) { x.classList.toggle('over', x === c); });
+      if (c && g.contains(c)) shine(+c.dataset.i);
+    });
+    function end() { if (!drag) return; drag = null; sun.classList.remove('drag'); sun.style.transform = ''; $$('.nc-bm-c', g).forEach(function (x) { x.classList.remove('over'); }); }
+    sun.addEventListener('pointerup', end); sun.addEventListener('pointercancel', end);
+    sun.addEventListener('click', function () { if (!$$('.nc-bm-c.ready', g).length) note('☀️ First pick Producer or Consumer on a photo. Then drag the sun onto it.'); });
+    draw();
+  }
+
+  /* ───────────── Part 3 game: pour the energy down the chain (where does it go?) ───────────── */
+  function buildPour() {
+    var P = D.pour; if (!P) return;
+    var p3 = $$('#tab-lesson .card-head-label').filter(function (e) { return /Part 3|Section 3/.test(e.textContent); })[0];
+    var body = p3 && p3.closest('.card').querySelector('.card-body'); if (!body) throw new Error('Part 3 card missing');
+    store.po = store.po || {}; var S = store.po; S.tags = S.tags || {};
+    var N = P.links.length;
+    var g = mk('div', 'nc-g nc-po');
+    g.innerHTML = gameHead(P.kicker, P.title) + '<p class="nc-p">' + esc(P.intro) + '</p>' + job(P.job) +
+      '<div class="nc-po-pred"></div>' +
+      '<div class="nc-po-lab" hidden>' +
+        '<div class="nc-po-chain">' + P.links.map(function (l, i) {
+          return (i ? '<div class="nc-po-arrow" aria-hidden="true"><i></i><span class="nc-po-heat" data-i="' + i + '"></span></div>' : '') +
+            '<div class="nc-po-link" data-i="' + i + '"><div class="nc-po-ph"><img src="' + esc(l.img) + '" alt="' + esc(l.alt || l.name) + '"><span class="nc-po-fill"></span></div><b>' + esc(l.name) + '</b><span class="nc-po-n">' + (i === 0 ? '☀️' : '0') + '</span></div>';
+        }).join('') + '</div>' +
+        '<div class="nc-po-ctl"><button type="button" class="nc-btn nc-po-go">☀️ Hold to pour sunlight</button><button type="button" class="nc-cup-edit nc-po-again" hidden>↺ Pour again</button></div>' +
+        '<p class="nc-po-note">' + esc(P.note) + '</p>' +
+        '<div class="nc-po-after" hidden><p class="nc-po-res"></p>' +
+          '<div class="nc-q">' + esc(P.tagsQ) + '</div><div class="nc-po-tags">' + P.tags.map(function (t, i) {
+            return '<div class="nc-po-row" data-i="' + i + '"><span class="nc-po-s">' + esc(t.before) + ' <span class="nc-po-blank">____</span> ' + esc(t.after) + '</span><span class="nc-po-ch">' + P.forms.map(function (f) { return '<button type="button" class="nc-po-f" data-f="' + esc(f.k) + '">' + f.icon + ' ' + esc(f.k) + '</button>'; }).join('') + '</span><span class="nc-po-tfb"></span></div>';
+          }).join('') + '</div>' +
+          '<div class="nc-po-q" hidden><div class="nc-q">' + esc(P.q) + '</div><div class="nc-opts">' + P.opts.map(function (o, i) { return '<button type="button" class="nc-opt" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div><div class="nc-fb nc-po-fb" aria-live="polite"></div></div>' +
+        '</div>' +
+      '</div>' +
+      '<p class="nc-credit">' + esc(P.credit) + '</p>';
+    body.appendChild(g);
+    putKeeper('k-lesson3', g.querySelector('.nc-job'), 'after');
+    var predBox = g.querySelector('.nc-po-pred'), lab = g.querySelector('.nc-po-lab'), goB = g.querySelector('.nc-po-go'), againB = g.querySelector('.nc-po-again'), aft = g.querySelector('.nc-po-after');
+    var filling = 0, held = null, raf = 0;
+    function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
+    function setLevels(lv) { // lv[i] = energy at link i (link 0 = sun)
+      $$('.nc-po-link', g).forEach(function (el) { var i = +el.dataset.i; if (!i) return; var v = lv[i] || 0; el.querySelector('.nc-po-n').textContent = fmt(v); el.querySelector('.nc-po-fill').style.height = (v > 0 ? Math.max(6, Math.log10(v + 1) / 3 * 100) : 0) + '%'; el.classList.toggle('on', v > 0); });
+    }
+    function cascade() {
+      var lv = [0, P.start]; for (var i = 2; i < N; i++) lv[i] = lv[i - 1] * P.pass;
+      if (RM) { setLevels(lv); $$('.nc-po-heat', g).forEach(function (h) { h.classList.add('on'); }); return finishPour(); }
+      var k = 2;
+      (function next() {
+        if (k >= N) return finishPour();
+        var h = $('.nc-po-heat[data-i="' + (k - 1) + '"]', g); if (h) { h.textContent = '🔥 ' + fmt(lv[k - 1] - lv[k]) + ' lost as heat'; h.classList.add('on'); }
+        var show = lv.slice(0, k + 1); setLevels(show); k++; setTimeout(next, 900);
+      })();
+    }
+    function finishPour() {
+      var lv = [0, P.start]; for (var i = 2; i < N; i++) lv[i] = lv[i - 1] * P.pass;
+      $$('.nc-po-heat', g).forEach(function (h) { var i = +h.dataset.i; if (i >= 1 && i < N - 1) { h.textContent = '🔥 ' + fmt(lv[i] - lv[i + 1]) + ' lost as heat'; h.classList.add('on'); } });
+      setLevels(lv);
+      if (!S.poured) { S.poured = 1; save(); ping(); }
+      drawAll();
+    }
+    function startHold(e) {
+      if (S.poured || filling >= P.start) return;
+      if (e) e.preventDefault();
+      goB.classList.add('on');
+      var t0 = performance.now(), f0 = filling;
+      cancelAnimationFrame(raf);
+      (function step(t) {
+        filling = Math.min(P.start, f0 + (t - t0) / 1000 * P.start / 1.6);
+        setLevels([0, filling]);
+        if (filling >= P.start) { goB.classList.remove('on'); return cascade(); }
+        raf = requestAnimationFrame(step);
+      })(t0);
+      held = true;
+    }
+    function stopHold() { if (!held) return; held = null; cancelAnimationFrame(raf); goB.classList.remove('on'); if (filling > 0 && filling < P.start) goB.textContent = '☀️ Keep pouring (' + fmt(filling) + ' of ' + fmt(P.start) + ')'; }
+    goB.addEventListener('pointerdown', startHold);
+    goB.addEventListener('pointerup', stopHold); goB.addEventListener('pointerleave', stopHold); goB.addEventListener('pointercancel', stopHold);
+    goB.addEventListener('keydown', function (e) { if ((e.key === ' ' || e.key === 'Enter') && !held) { e.preventDefault(); filling = P.start; setLevels([0, filling]); cascade(); } });
+    goB.addEventListener('click', function (e) { if (e.detail === 0) return; if (!S.poured && filling < P.start && !held) { filling = Math.min(P.start, filling + P.start / 4); setLevels([0, filling]); if (filling >= P.start) cascade(); else goB.textContent = '☀️ Keep pouring (' + fmt(filling) + ' of ' + fmt(P.start) + ')'; } });
+    againB.addEventListener('click', function () { S.poured = 0; filling = 0; save(); $$('.nc-po-heat', g).forEach(function (h) { h.classList.remove('on'); h.textContent = ''; }); setLevels([0, 0]); drawAll(); });
+    function drawAll() {
+      var picked = S.pred;
+      predBox.innerHTML = '<div class="nc-q">' + esc(P.predict.q) + '</div><div class="nc-opts nc-po-p">' + P.predict.opts.map(function (o, i) { return '<button type="button" class="nc-opt' + (picked === i ? ' sel' : '') + '" data-i="' + i + '"' + (picked != null ? ' disabled' : '') + '>' + esc(o) + '</button>'; }).join('') + '</div>' +
+        (picked != null ? '<p class="nc-jar-you">Your prediction is saved: <b>' + esc(P.predict.opts[picked]) + '</b></p>' : '');
+      $$('.nc-po-p .nc-opt', predBox).forEach(function (b) { b.addEventListener('click', function () { if (S.pred != null) return; S.pred = +b.dataset.i; save(); ping(); drawAll(); }); });
+      lab.hidden = S.pred == null;
+      goB.disabled = !!S.poured; goB.textContent = S.poured ? '☀️ Poured (the chain is full)' : (filling > 0 ? '☀️ Keep pouring (' + fmt(filling) + ' of ' + fmt(P.start) + ')' : '☀️ Hold to pour sunlight');
+      againB.hidden = !S.poured;
+      aft.hidden = !S.poured;
+      if (S.poured) {
+        g.querySelector('.nc-po-res').innerHTML = (S.pred === P.predict.ans ? '✅ ' : '') + esc(P.result);
+        var lv = [0, P.start]; for (var i = 2; i < N; i++) lv[i] = lv[i - 1] * P.pass; setLevels(lv);
+        $$('.nc-po-heat', g).forEach(function (h) { var i = +h.dataset.i; if (i >= 1 && i < N - 1) { h.textContent = '🔥 ' + fmt(lv[i] - lv[i + 1]) + ' lost as heat'; h.classList.add('on'); } });
+      }
+      var allTags = true;
+      $$('.nc-po-row', g).forEach(function (r) {
+        var i = +r.dataset.i, T = P.tags[i], v = S.tags[i], ok = v === T.ans;
+        if (!ok) allTags = false;
+        r.classList.toggle('ok', ok);
+        r.querySelector('.nc-po-blank').textContent = ok ? T.ans : '____';
+        $$('.nc-po-f', r).forEach(function (b) { b.classList.toggle('ok', ok && b.dataset.f === T.ans); b.disabled = ok; });
+        r.querySelector('.nc-po-tfb').innerHTML = ok ? '✓ ' + esc(T.yes) : '';
+      });
+      g.querySelector('.nc-po-q').hidden = !allTags;
+      if (S.done) { var okb = $$('.nc-po-q .nc-opt', g).filter(function (b) { return P.opts[+b.dataset.i].ok; })[0]; if (okb) okb.classList.add('ok'); g.querySelector('.nc-po-fb').innerHTML = '✅ ' + esc(P.win); }
+      g.classList.toggle('nc-done', !!S.done);
+      refresh();
+    }
+    $$('.nc-po-f', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var r = b.closest('.nc-po-row'), i = +r.dataset.i, T = P.tags[i];
+        if (b.dataset.f === T.ans) { S.tags[i] = T.ans; save(); ping(); drawAll(); }
+        else { b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 600); r.querySelector('.nc-po-tfb').innerHTML = '<span class="nc-ask-no">🤔 ' + esc(T.hint) + '</span>'; ping(true); }
+      });
+    });
+    $$('.nc-po-q .nc-opt', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var o = P.opts[+b.dataset.i];
+        if (o.ok) { b.classList.add('ok'); if (!S.done) { S.done = 1; save(); ping(); } drawAll(); }
+        else { b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 700); g.querySelector('.nc-po-fb').innerHTML = '<span class="nc-ask-no">🤔 ' + esc(o.hint) + '</span>'; ping(true); }
+      });
+    });
+    drawAll();
+  }
+
+  /* ───────────── Part 4: rewind the meals, build the backyard chain, turn the sun off ───────────── */
+  function buildYard() {
+    var Y = D.yard; if (!Y) return;
+    var act = $('#tab-lesson .act-body'); if (!act) throw new Error('lesson body missing');
+    var sec = mk('div', 'nc-part4');
+    sec.innerHTML = '<div class="card theme-sky nc-p4card"><div class="card-head"><div class="card-head-icon">🔬</div><div><div class="card-head-label">Part 4</div><div class="card-head-title">' + esc(Y.cardTitle) + '</div></div></div><div class="card-body"><p>' + esc(Y.intro) + '</p><div class="nc-g nc-yd"></div></div></div>';
+    act.appendChild(sec);
+    var g = sec.querySelector('.nc-yd'), RW = D.rewind;
+    store.yd = store.yd || {}; var S = store.yd; S.rw = S.rw || {}; S.built = S.built || [];
+    var order = Y.chain.map(function (c) { return c.k; });
+    if (!S.deck) { S.deck = order.slice(); for (var i = S.deck.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = S.deck[i]; S.deck[i] = S.deck[j]; S.deck[j] = t; } if (S.deck.join() === order.join()) S.deck.reverse(); save(); }
+    function C(k) { return Y.chain.filter(function (c) { return c.k === k; })[0]; }
+    g.innerHTML = gameHead(Y.kicker, Y.rewTitle) + job(Y.rewJob) +
+      '<div class="nc-yd-meals">' + RW.meals.map(function (m, i) {
+        return '<div class="nc-yd-meal" data-i="' + i + '"><div class="nc-yd-path"></div><button type="button" class="nc-btn nc-yd-rw">◀◀ Rewind</button></div>';
+      }).join('') + '</div>' +
+      '<div class="nc-yd-b" hidden><h4 class="nc-g-t">' + esc(Y.buildTitle) + '</h4><p class="nc-p">' + esc(Y.clues) + '</p>' + job(Y.buildJob) +
+        '<figure class="nc-yd-fig"><img src="' + esc(Y.photo.img) + '" alt="' + esc(Y.photo.alt) + '"><figcaption>' + esc(Y.photo.caption) + ' <span class="nc-credit">' + esc(Y.photo.credit) + '</span></figcaption></figure>' +
+        '<div class="nc-yd-slots" aria-label="Your food chain, in energy order"></div>' +
+        '<div class="nc-yd-deck"></div><div class="nc-fb nc-yd-bfb" aria-live="polite"></div>' +
+        '<button type="button" class="nc-cup-edit nc-yd-unbuild">↺ Take the chain apart</button>' +
+      '</div>' +
+      '<div class="nc-yd-s" hidden><h4 class="nc-g-t">' + esc(Y.sunTitle) + '</h4><div class="nc-yd-spred"></div>' +
+        '<div class="nc-yd-sw"><button type="button" class="nc-yd-switch" aria-pressed="true">☀️ The sun is ON</button></div>' +
+        '<ol class="nc-yd-story"></ol><p class="nc-yd-note">' + esc(Y.sunNote) + '</p>' +
+      '</div>' +
+      '<div class="nc-reveal nc-yd-cmp" hidden><h5>' + esc(Y.compareTitle) + '</h5><div class="nc-mt-rows nc-yd-rows"></div></div>' +
+      '<div class="nc-wow nc-yd-wow" hidden><div class="nc-wow-k">The twist</div><blockquote class="nc-wow-q">“' + esc(Y.twist.quote) + '”</blockquote><p class="nc-wow-nums">' + esc(Y.twist.line) + '</p><p class="nc-wow-chain">' + esc(Y.twist.chain) + '</p></div>';
+    putKeeper('k-part4', g.querySelector('.nc-job'), 'after');
+    // A. rewind the three meals
+    function drawRewind() {
+      var all = true;
+      $$('.nc-yd-meal', g).forEach(function (el) {
+        var i = +el.dataset.i, m = RW.meals[i], n = S.rw[i] || 0, path = [{ name: m.label, img: m.img, alt: m.alt }].concat(m.chain.slice(0, n));
+        el.querySelector('.nc-yd-path').innerHTML = path.map(function (x, k) { return (k ? '<span class="nc-yd-back" aria-hidden="true">◀</span>' : '') + chip(x, 'nc-pchip' + (k === path.length - 1 && n ? ' new' : '')); }).join('');
+        var end = n >= m.chain.length, b = el.querySelector('.nc-yd-rw');
+        b.disabled = end; b.textContent = end ? '☀️ Back to the sun in ' + m.chain.length + ' steps' : (n ? '◀◀ Rewind one more step' : '◀◀ Rewind one step');
+        el.classList.toggle('done', end);
+        if (!end) all = false;
+      });
+      return all;
+    }
+    $$('.nc-yd-rw', g).forEach(function (b) { b.addEventListener('click', function () { var i = +b.closest('.nc-yd-meal').dataset.i; S.rw[i] = (S.rw[i] || 0) + 1; save(); ping(); drawAll(); }); });
+    // B. build the backyard chain (tap a card or drag it to the chain)
+    var slots = g.querySelector('.nc-yd-slots'), deck = g.querySelector('.nc-yd-deck'), bfb = g.querySelector('.nc-yd-bfb');
+    function place(k) {
+      var want = order[S.built.length];
+      if (k === want) { S.built.push(k); save(); ping(); bfb.innerHTML = '✓ ' + esc(C(k).yes); drawAll(); }
+      else { ping(true); bfb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(C(want).hint) + '</span>'; var el = $('.nc-yd-card[data-k="' + k + '"]', g); if (el) { el.classList.add('no'); setTimeout(function () { el.classList.remove('no'); }, 600); } }
+    }
+    function drawBuild() {
+      slots.innerHTML = order.map(function (k, i) { var on = i < S.built.length; return (i ? '<span class="nc-yd-ar' + (i < S.built.length ? ' on' : '') + '" aria-hidden="true">→</span>' : '') + '<span class="nc-yd-slot' + (on ? ' on' : '') + '">' + (on ? chip(C(S.built[i])) : '<i>' + (i + 1) + '</i>') + '</span>'; }).join('');
+      deck.innerHTML = S.deck.filter(function (k) { return S.built.indexOf(k) < 0; }).map(function (k) { return '<button type="button" class="nc-yd-card" data-k="' + k + '">' + chip(C(k)) + '</button>'; }).join('');
+      $$('.nc-yd-card', deck).forEach(function (b) {
+        b.addEventListener('click', function (e) { if (b._dragged) { b._dragged = 0; return; } place(b.dataset.k); });
+        var d0 = null;
+        b.addEventListener('pointerdown', function (e) { e.preventDefault(); d0 = { x: e.clientX, y: e.clientY, moved: false }; b.setPointerCapture(e.pointerId); });
+        b.addEventListener('pointermove', function (e) { if (!d0) return; var dx = e.clientX - d0.x, dy = e.clientY - d0.y; if (Math.abs(dx) + Math.abs(dy) > 8) { d0.moved = true; b.classList.add('drag'); b.style.transform = 'translate(' + dx + 'px,' + dy + 'px)'; } });
+        b.addEventListener('pointerup', function (e) {
+          if (!d0) return; var moved = d0.moved; d0 = null; b.classList.remove('drag'); b.style.transform = '';
+          if (!moved) return; b._dragged = 1;
+          var r = slots.getBoundingClientRect(); if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top - 20 && e.clientY <= r.bottom + 20) place(b.dataset.k);
+        });
+        b.addEventListener('pointercancel', function () { d0 = null; b.classList.remove('drag'); b.style.transform = ''; });
+      });
+      var done = S.built.length >= order.length;
+      if (done) bfb.innerHTML = '✅ ' + esc(Y.buildWin);
+      g.querySelector('.nc-yd-unbuild').hidden = !S.built.length || !!S.sunDone;
+      return done;
+    }
+    g.querySelector('.nc-yd-unbuild').addEventListener('click', function () { S.built = []; save(); bfb.innerHTML = ''; drawAll(); });
+    // C. turn the sun off
+    var sw = g.querySelector('.nc-yd-switch'), story = g.querySelector('.nc-yd-story'), sunOn = true, timer = null;
+    function drawSun() {
+      var picked = S.spred, P = Y.sunPredict;
+      g.querySelector('.nc-yd-spred').innerHTML = '<div class="nc-q">' + esc(P.q) + '</div><div class="nc-opts nc-yd-sp">' + P.opts.map(function (o, i) { return '<button type="button" class="nc-opt' + (picked === i ? ' sel' : '') + '" data-i="' + i + '"' + (picked != null ? ' disabled' : '') + '>' + esc(o) + '</button>'; }).join('') + '</div>' +
+        (picked != null ? '<p class="nc-jar-you">Your prediction is saved: <b>' + esc(P.opts[picked]) + '</b></p>' : '');
+      $$('.nc-yd-sp .nc-opt', g).forEach(function (b) { b.addEventListener('click', function () { if (S.spred != null) return; S.spred = +b.dataset.i; save(); ping(); drawAll(); }); });
+      sw.disabled = picked == null;
+      sw.textContent = picked == null ? '☀️ The sun is ON (predict first)' : (sunOn ? '☀️ The sun is ON · tap to turn it off' : '🌑 The sun is OFF · tap to turn it back on');
+      sw.setAttribute('aria-pressed', String(sunOn));
+      slots.classList.toggle('nc-yd-dark', !sunOn);
+    }
+    function fadeTo(k) { $$('.nc-yd-slot', slots).forEach(function (s, i) { s.classList.toggle('gone', !sunOn && i <= k); }); }
+    sw.addEventListener('click', function () {
+      if (S.spred == null) return;
+      clearTimeout(timer); sunOn = !sunOn; drawSun();
+      if (!sunOn) {
+        story.innerHTML = ''; var k = 0;
+        (function next() {
+          if (k >= Y.story.length) { if (!S.sunDone) { S.sunDone = 1; save(); ping(); } drawAll(); return; }
+          fadeTo(k); story.insertAdjacentHTML('beforeend', '<li>' + esc(Y.story[k]) + '</li>'); k++;
+          timer = setTimeout(next, RM ? 0 : 1100);
+        })();
+      } else { fadeTo(-1); story.innerHTML = '<li class="back">' + esc(Y.sunBack) + '</li>'; }
+    });
+    function drawAll() {
+      var rwDone = drawRewind();
+      g.querySelector('.nc-yd-b').hidden = !rwDone;
+      if (rwDone && RW && store.rw && !store.rw.revealed && store.rw.saved) { store.rw.revealed = 1; save(); document.dispatchEvent(new Event('nc:rw')); }
+      var built = drawBuild();
+      g.querySelector('.nc-yd-s').hidden = !built;
+      drawSun();
+      if (!sunOn) fadeTo(Y.story.length - 1);
+      if (S.sunDone && sunOn && !story.children.length) story.innerHTML = '<li class="back">' + esc(Y.sunBack) + '</li>';
+      var done = rwDone && built && S.sunDone;
+      g.querySelector('.nc-yd-cmp').hidden = !done; g.querySelector('.nc-yd-wow').hidden = !done;
+      g.classList.toggle('nc-done', !!done);
+      if (done) {
+        var R = store.rw || {}, mi = R.meal, m = mi != null ? RW.meals[mi] : null;
+        var rows = [
+          [Y.rows[0], m && R.saved ? m.label + ': ' + (R.reach === 0 ? 'yes' : 'no') : '(not saved)', m ? m.label + ': yes' : 'Yes, every meal'],
+          [Y.rows[1], m && R.saved && R.reach === 0 ? R.steps + (R.steps === 1 ? ' step' : ' steps') : '—', m ? m.chain.length + ' steps' : '2 or 3 steps'],
+          [Y.rows[2], S.spred == null ? '—' : Y.sunPredict.opts[S.spred], Y.sunPredict.opts[Y.sunPredict.ans]]
+        ];
+        g.querySelector('.nc-yd-rows').innerHTML = '<div class="nc-mt-r nc-mt-rh"><span></span><span>You predicted</span><span>The evidence</span></div>' + rows.map(function (r) { return '<div class="nc-mt-r"><b>' + esc(r[0]) + '</b><span>' + esc(r[1]) + '</span><span class="nc-mt-ev">' + esc(r[2]) + '</span></div>'; }).join('');
+        if (!S.bound) { S.bound = 1; save(); bind({ rewound: 1, sun: S.spred, revealed: 1 }); note('🔬 Part 4 done. Read the twist below.'); }
+      }
+    }
+    drawAll();
+  }
+
   function boot() {
     guard('lean', buildLean);
     guard('tabs', buildTabs);
     guard('opener', buildOpener);
     guard('bets', buildBets);
     guard('cups', buildCups);
+    guard('rewind', buildRewind);
     guard('wordlens', buildWordLens);
     guard('source', buildSource);
+    guard('lamp', buildLamp);
     guard('sort', buildSort);
     guard('air', buildAir);
+    guard('beam', buildBeam);
     guard('bag', buildBag);
     guard('timelapse', buildTimelapse);
     guard('jars', buildJars);
+    guard('pour', buildPour);
     guard('otherside', buildOtherSide);
     guard('meter', buildMeter);
+    guard('yard', buildYard);
     guard('assignment', buildAssignment);
+    guard('quizcard', function () { var q = $('#tab-quiz'); if (q) putKeeper('k-quiz', q, 'prepend'); });
     guard('wonder', buildWonder);
     guard('tools', buildTools);
     guard('starthere', buildStartHere);
