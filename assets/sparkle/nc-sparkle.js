@@ -3569,6 +3569,374 @@
     drawAll();
   }
 
+  /* ───────────── 20.01 Warm-Up: Stack the weights (a solid rod and a hollow tube, same material: guess what each holds) ───────────── */
+  var beamN = 0;
+  function beamSVG(kind, w, load, bent, cls, thick) {
+    // a shaded rod or tube resting on two blocks, with a stack of weights in the middle (a model)
+    var tube = kind !== 'solid', th = thick || (tube ? 26 : 14), u = 'nc-bm' + (++beamN), y = 128, sag = bent ? 16 : 0, n = Math.min(load || 0, 20), stack = '';
+    for (var i = 0; i < n; i++) stack += '<rect x="' + (w / 2 - 14) + '" y="' + (y - th / 2 - 9 - i * 7 + sag) + '" width="28" height="6.4" rx="1.6" fill="url(#' + u + 'w)" stroke="#2c3440" stroke-width=".6"/>';
+    var mid = w / 2, L = 26, R = w - 26;
+    var path = 'M' + L + ' ' + y + ' Q' + mid + ' ' + (y + sag * 2) + ' ' + R + ' ' + y;
+    return '<svg class="' + (cls || '') + '" viewBox="0 0 ' + w + ' 186" aria-hidden="true"><defs>' +
+      '<linearGradient id="' + u + 'g" gradientUnits="userSpaceOnUse" x1="0" y1="' + (y - th / 2) + '" x2="0" y2="' + (y + th / 2 + sag) + '"><stop offset="0" stop-color="#f3eee6"/><stop offset=".35" stop-color="#cfc6b8"/><stop offset=".7" stop-color="#9c9182"/><stop offset="1" stop-color="#6f665a"/></linearGradient>' +
+      '<linearGradient id="' + u + 'w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a96a8"/><stop offset=".5" stop-color="#4a5566"/><stop offset="1" stop-color="#2c3440"/></linearGradient>' +
+      '<linearGradient id="' + u + 'b" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7a5a3a"/><stop offset="1" stop-color="#a8825a"/></linearGradient></defs>' +
+      '<rect x="6" y="' + (y + th / 2) + '" width="34" height="44" rx="3" fill="url(#' + u + 'b)"/><rect x="' + (w - 40) + '" y="' + (y + th / 2) + '" width="34" height="44" rx="3" fill="url(#' + u + 'b)"/>' +
+      '<path d="' + path + '" stroke="url(#' + u + 'g)" stroke-width="' + th + '" fill="none" stroke-linecap="butt"/>' +
+      '<path d="' + path + '" stroke="rgba(255,255,255,.55)" stroke-width="2" fill="none" transform="translate(0,' + (-th / 2 + 3) + ')"/>' +
+      (tube ? '<ellipse cx="' + L + '" cy="' + y + '" rx="5" ry="' + (th / 2) + '" fill="#b8ad9e" stroke="#6f665a"/><ellipse cx="' + L + '" cy="' + y + '" rx="3.2" ry="' + (th / 2 - 4) + '" fill="#3a332b"/>' :
+        '<ellipse cx="' + L + '" cy="' + y + '" rx="3" ry="' + (th / 2) + '" fill="#b8ad9e" stroke="#6f665a"/>') +
+      (bent ? '<path d="M' + (mid - 6) + ' ' + (y + sag * 2 - 4) + ' l5 8 l-3 4 l6 7" stroke="#c0392b" stroke-width="2.2" fill="none"/>' : '') +
+      stack + '</svg>';
+  }
+  function buildStack() {
+    var B = D.stack; if (!B) return;
+    var pred = $('#pred-1'); if (!pred) throw new Error('pred-1 missing');
+    var host = pred.closest('.response-q') || pred.parentNode;
+    var card = host.closest('.activity-card') || host.parentNode;
+    $$('.callout, .socratic-q', card).forEach(hide);
+    store.sw = store.sw || {}; var S = store.sw;
+    var g = mk('div', 'nc-g nc-sw');
+    g.innerHTML = '<div class="nc-g-k">Warm-Up game</div><h4 class="nc-g-t">' + esc(B.title) + '</h4><p class="nc-p">' + esc(B.intro) + '</p>' + job(B.job) +
+      '<div class="nc-sw-row">' + B.items.map(function (it, i) {
+        return '<div class="nc-sw-item" data-k="' + it.k + '"><div class="nc-sw-name">' + esc(it.name) + '</div><div class="nc-sw-note">' + esc(it.note) + '</div>' +
+          '<div class="nc-sw-pic"></div>' +
+          '<div class="nc-sw-step"><button type="button" class="nc-cup-edit nc-sw-m" data-k="' + it.k + '" aria-label="One fewer weight for the ' + esc(it.name) + '">−</button>' +
+          '<span class="nc-sw-n" aria-live="polite">–</span><button type="button" class="nc-cup-edit nc-sw-p" data-k="' + it.k + '" aria-label="One more weight for the ' + esc(it.name) + '">+</button></div>' +
+          '<div class="nc-sw-u">' + esc(B.unit) + '</div></div>';
+      }).join('') + '</div>' +
+      '<p class="nc-credit">' + esc(B.model) + '</p>' +
+      '<div class="nc-rw-ctl"><button type="button" class="nc-btn nc-sw-save" disabled>🔒 Save my guess</button><button type="button" class="nc-cup-edit nc-sw-edit" hidden>✎ Change my guess</button></div>' +
+      '<div class="nc-fb nc-sw-hint" aria-live="polite"></div>' +
+      '<div class="nc-bet-seal nc-sw-seal" hidden></div>' +
+      '<label class="nc-np-l" for="pred-1" style="margin-top:12px">' + esc(B.reasonPrompt) + '</label>';
+    before(host, g);
+    pred.placeholder = B.placeholder;
+    var saveB = g.querySelector('.nc-sw-save'), editB = g.querySelector('.nc-sw-edit'), seal = g.querySelector('.nc-sw-seal'), hint = g.querySelector('.nc-sw-hint');
+    function has() { return S.solid != null && S.tube != null; }
+    PRED_LINE = function () { return ['--- WARM-UP: MY PREDICTION ---', S.saved ? 'Weights I guessed each one holds: solid rod ' + S.solid + ', hollow tube ' + S.tube : '(not saved yet)']; };
+    function draw() {
+      var saved = !!S.saved, locked = !!S.revealed;
+      $$('.nc-sw-item', g).forEach(function (el) {
+        var k = el.dataset.k, v = S[k];
+        el.querySelector('.nc-sw-n').textContent = v == null ? '–' : v;
+        el.querySelector('.nc-sw-pic').innerHTML = beamSVG(k, 300, v || 0, false, 'nc-sw-svg');
+        $$('button', el).forEach(function (b) { b.disabled = saved; });
+      });
+      saveB.disabled = !has(); saveB.hidden = saved; editB.hidden = !saved || locked;
+      hint.textContent = saved || has() ? '' : B.notYet;
+      seal.hidden = !saved;
+      seal.textContent = !saved ? '' : (locked ? B.lockedNote : B.saved).replace('{a}', S.solid).replace('{b}', S.tube);
+      g.classList.toggle('nc-done', saved);
+      refresh();
+    }
+    $$('.nc-sw-m, .nc-sw-p', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (S.saved) return; var k = b.dataset.k, v = S[k] == null ? 0 : S[k];
+        S[k] = clamp(v + (b.classList.contains('nc-sw-p') ? 1 : -1), 0, B.max); save(); draw();
+      });
+    });
+    saveB.addEventListener('click', function () { if (!has()) return; S.saved = 1; save(); ping(); bind({ prediction: { solid: S.solid, tube: S.tube } }); draw(); });
+    editB.addEventListener('click', function () { if (S.revealed) return; S.saved = 0; save(); draw(); });
+    document.addEventListener('nc:sw', draw);
+    draw();
+    putKeeper('k-warmup', g.querySelector('.nc-job'), 'after');
+  }
+
+  /* ───────────── 20.01 Part 1 game: Grow the giant (make the animal bigger, thicken the bone until it holds) ───────────── */
+  function buildGiant() {
+    var G = D.giant; if (!G) return;
+    var src = $('.nc-src'); var body = src ? src.parentNode : null; if (!body) throw new Error('giant needs the source');
+    store.gt = store.gt || {}; var S = store.gt; S.fixed = S.fixed || {};
+    if (!S.size) S.size = 1; if (!S.th) S.th = 1;
+    var g = mk('div', 'nc-g nc-gt');
+    g.innerHTML = gameHead(G.kicker, G.title) + '<p class="nc-p">' + esc(G.intro) + '</p>' + job(G.job) +
+      '<div class="nc-gt-sizes" role="group" aria-label="Animal size">' + G.sizes.map(function (s) { return '<button type="button" class="nc-opt nc-gt-sz" data-s="' + s + '">' + (s === 1 ? 'Normal size' : s + ' times as tall') + '</button>'; }).join('') + '</div>' +
+      '<div class="nc-gt-stage"><div class="nc-gt-animal"><img src="' + esc(G.img) + '" alt="' + esc(G.imgAlt) + '" draggable="false"><div class="nc-gt-lab"></div></div>' +
+        '<div class="nc-gt-bonebox"><svg class="nc-gt-bone" viewBox="0 0 360 200" role="img" aria-label="A model of a leg bone"></svg><div class="nc-gt-state" aria-live="polite"></div></div></div>' +
+      '<label class="nc-gt-sl">Bone thickness: <b class="nc-gt-tv"></b> times as thick<input type="range" class="nc-gt-th" min="1" max="' + G.maxThick + '" step="0.1"></label>' +
+      '<div class="nc-gt-meter"><i></i><span class="nc-gt-mark" title="enough"></span></div>' +
+      '<details class="nc-why"><summary>Why does a bigger animal need a thicker bone?</summary><p class="nc-p">' + esc(G.explain) + '</p></details>' +
+      '<div class="nc-fb nc-gt-need"></div>' +
+      '<div class="nc-gt-ask" hidden><div class="nc-q">' + esc(G.ask) + '</div><div class="nc-opts">' + G.opts.map(function (o, i) { return '<button type="button" class="nc-opt nc-gt-o" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div><div class="nc-fb nc-gt-afb" aria-live="polite"></div></div>' +
+      '<div class="nc-reveal nc-gt-gal" hidden><img src="' + esc(G.galileo) + '" alt="' + esc(G.galileoAlt) + '"><p class="nc-p">' + esc(G.galileoCap) + '</p></div>' +
+      '<button type="button" class="nc-cup-edit nc-gt-reset">↺ Shrink the animal and start again</button>' +
+      '<p class="nc-credit">' + esc(G.model) + '</p>';
+    after(src, g);
+    var sl = g.querySelector('.nc-gt-th'), svg = g.querySelector('.nc-gt-bone'), st = g.querySelector('.nc-gt-state'), img = g.querySelector('.nc-gt-animal img'), lab = g.querySelector('.nc-gt-lab');
+    function ratio() { return (S.th * S.th) / Math.pow(S.size, 3); } // strength (thickness squared) vs weight (size cubed)
+    function need(s) { return Math.pow(s, 1.5); }
+    function stateOf() { var r = ratio(); return r >= 0.97 ? 'ok' : (r >= 0.6 ? 'bend' : 'snap'); }
+    function boneSVG(len, th, state) {
+      var L = 60 + len * 90, cx = 180, w = Math.min(14 * th, 92), x0 = cx - L / 2, x1 = cx + L / 2, k = Math.max(w * 0.9, 22), sag = state === 'bend' ? 10 : 0;
+      var shaft = 'M' + (x0 + k * 0.8) + ' ' + (100 - w / 2) + ' Q' + cx + ' ' + (100 - w / 2 + sag) + ' ' + (x1 - k * 0.8) + ' ' + (100 - w / 2) + ' L' + (x1 - k * 0.8) + ' ' + (100 + w / 2) + ' Q' + cx + ' ' + (100 + w / 2 + sag) + ' ' + (x0 + k * 0.8) + ' ' + (100 + w / 2) + 'Z';
+      var ends = [x0 + k * 0.55, x1 - k * 0.55].map(function (x) { return '<circle cx="' + x + '" cy="' + (100 - k * 0.42) + '" r="' + (k * 0.55) + '" fill="url(#nc-gt-bn)"/><circle cx="' + x + '" cy="' + (100 + k * 0.42) + '" r="' + (k * 0.55) + '" fill="url(#nc-gt-bn)"/>'; }).join('');
+      var crack = state === 'snap' ? '<path d="M' + (cx - 4) + ' ' + (100 - w / 2 - 6) + ' l8 ' + (w * 0.35) + ' l-7 ' + (w * 0.3) + ' l9 ' + (w * 0.45 + 8) + '" stroke="#c0392b" stroke-width="3" fill="none" stroke-linejoin="round"/>' : '';
+      return '<defs><linearGradient id="nc-gt-bn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbf4e4"/><stop offset=".45" stop-color="#e6d6b8"/><stop offset="1" stop-color="#b59d78"/></linearGradient></defs>' +
+        ends + '<path d="' + shaft + '" fill="url(#nc-gt-bn)" stroke="#9c8462" stroke-width="1.2"/>' +
+        '<path d="M' + (x0 + k) + ' ' + (100 - w / 2 + 3) + ' L' + (x1 - k) + ' ' + (100 - w / 2 + 3) + '" stroke="rgba(255,255,255,.7)" stroke-width="2"/>' + crack;
+    }
+    function draw() {
+      var s = S.size, state = stateOf();
+      $$('.nc-gt-sz', g).forEach(function (b) { b.classList.toggle('sel', +b.dataset.s === s); b.classList.toggle('ok', !!S.fixed[b.dataset.s]); });
+      sl.value = S.th; g.querySelector('.nc-gt-tv').textContent = (+S.th).toFixed(1);
+      svg.innerHTML = boneSVG(s, S.th, state);
+      img.style.width = (34 + s * 22) + '%';
+      lab.textContent = s === 1 ? G.normalLabel : G.sizeLabel.replace('{s}', s) + ' · ' + G.weightLabel.replace('{w}', Math.pow(s, 3));
+      st.textContent = G.states[state]; st.className = 'nc-gt-state nc-gt-' + state;
+      var m = g.querySelector('.nc-gt-meter i'); m.style.width = Math.min(100, ratio() * 100 / 1.6) + '%'; m.className = 'nc-gt-' + state;
+      g.querySelector('.nc-gt-mark').style.left = (100 / 1.6) + '%';
+      var all = S.fixed[2] && S.fixed[3];
+      g.querySelector('.nc-gt-need').innerHTML = all ? '' : '<span class="nc-ask-no">' + esc(G.need) + '</span>';
+      g.querySelector('.nc-gt-ask').hidden = !all;
+      g.querySelector('.nc-gt-gal').hidden = !S.answered;
+      g.classList.toggle('nc-done', !!S.answered);
+      if (S.answered) { $$('.nc-gt-o', g).forEach(function (b) { b.classList.toggle('ok', !!G.opts[+b.dataset.i].ok); }); g.querySelector('.nc-gt-afb').innerHTML = '✅ ' + esc(G.win); }
+      refresh();
+    }
+    function check() {
+      if (S.size > 1 && stateOf() === 'ok' && !S.fixed[S.size]) { S.fixed[S.size] = +(+S.th).toFixed(1); save(); ping(); if (S.fixed[2] && S.fixed[3]) bind({ giant: S.fixed }); }
+    }
+    $$('.nc-gt-sz', g).forEach(function (b) { b.addEventListener('click', function () { S.size = +b.dataset.s; save(); if (stateOf() === 'snap') ping(true); draw(); }); });
+    sl.addEventListener('input', function () { S.th = +sl.value; save(); check(); draw(); });
+    $$('.nc-gt-o', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var o = G.opts[+b.dataset.i];
+        if (o.ok) { S.answered = 1; save(); ping(); draw(); note('🦴 Part 1 done. A giant needs much thicker bones.'); }
+        else { ping(true); b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 700); g.querySelector('.nc-gt-afb').innerHTML = '<span class="nc-ask-no">🤔 ' + esc(o.hint) + '</span>'; }
+      });
+    });
+    g.querySelector('.nc-gt-reset').addEventListener('click', function () { store.gt = S = { size: 1, th: 1, fixed: {} }; save(); g.querySelector('.nc-gt-afb').innerHTML = ''; $$('.nc-gt-o', g).forEach(function (b) { b.classList.remove('ok'); }); draw(); });
+    EXTRA_LINES.push(function () { return ['--- PART 1: GROW THE GIANT ---', S.fixed[2] && S.fixed[3] ? 'Bone thickness that held: ' + S.fixed[2] + ' times as thick at 2 times as tall, ' + S.fixed[3] + ' times as thick at 3 times as tall' : '(not finished yet)']; });
+    draw();
+  }
+
+  /* ───────────── 20.01 Part 2 game: Memory pairs (a plant part and an animal part that do the same job) ───────────── */
+  function buildPairs() {
+    var P = D.pairs; if (!P) return;
+    var p2 = $$('#tab-lesson .card-head-label').filter(function (e) { return /Part 2|Section 2/.test(e.textContent); })[0];
+    var body = p2 && p2.closest('.card').querySelector('.card-body'); if (!body) throw new Error('Part 2 card missing');
+    store.mp = store.mp || {}; var S = store.mp; S.got = S.got || {}; S.tries = S.tries || 0;
+    function shuffle() { var a = P.cards.map(function (c, i) { return i; }); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+    if (!S.order || S.order.length !== P.cards.length) { S.order = shuffle(); save(); }
+    var g = mk('div', 'nc-g nc-mp');
+    g.innerHTML = gameHead(P.kicker, P.title) + '<p class="nc-p">' + esc(P.intro) + '</p>' + job(P.job) +
+      '<div class="nc-mp-score"><span class="nc-mp-found"></span><span class="nc-mp-tries"></span></div>' +
+      '<div class="nc-mp-grid"></div>' +
+      '<div class="nc-fb nc-mp-fb" aria-live="polite"></div>' +
+      '<div class="nc-mp-jobs"></div>' +
+      '<button type="button" class="nc-cup-edit nc-mp-reset">↺ Shuffle and play again</button>' +
+      '<p class="nc-credit">' + esc(P.credit) + '</p>';
+    body.appendChild(g);
+    var grid = g.querySelector('.nc-mp-grid'), fb = g.querySelector('.nc-mp-fb'), up = [], busy = false;
+    function layout() {
+      grid.innerHTML = S.order.map(function (ci) {
+        var c = P.cards[ci];
+        return '<button type="button" class="nc-mp-card" data-c="' + ci + '" aria-label="A face-down card"><span class="nc-mp-in"><span class="nc-mp-back" aria-hidden="true">?</span>' +
+          '<span class="nc-mp-face"><img src="' + esc(c.img) + '" alt="' + esc(c.alt) + '" loading="lazy" draggable="false"><b>' + esc(c.name) + '</b><small>' + (c.kind === 'plant' ? '🌿 plant' : '🐾 animal') + '</small></span></span></button>';
+      }).join('');
+      $$('.nc-mp-card', g).forEach(function (b) { b.addEventListener('click', function () { flip(b); }); });
+    }
+    function cardOf(ci) { return $('.nc-mp-card[data-c="' + ci + '"]', g); }
+    function draw() {
+      var n = Object.keys(S.got).length;
+      $$('.nc-mp-card', g).forEach(function (b) {
+        var ci = +b.dataset.c, c = P.cards[ci], open = !!S.got[c.p] || up.indexOf(ci) > -1;
+        b.classList.toggle('open', open); b.classList.toggle('got', !!S.got[c.p]);
+        b.setAttribute('aria-label', open ? c.name + ' (' + c.kind + ')' : 'A face-down card');
+        b.disabled = !!S.got[c.p];
+      });
+      g.querySelector('.nc-mp-found').textContent = P.foundLabel.replace('{n}', n);
+      g.querySelector('.nc-mp-tries').textContent = P.triesLabel.replace('{n}', S.tries);
+      g.querySelector('.nc-mp-jobs').innerHTML = Object.keys(S.got).map(function (k) { return '<div class="nc-mp-job"><b>' + esc(P.jobs[k]) + '</b> ' + esc(P.jobLines[k]) + '</div>'; }).join('');
+      g.classList.toggle('nc-done', n >= 6);
+      if (n >= 6) fb.innerHTML = '✅ ' + esc(P.win);
+      refresh();
+    }
+    function flip(b) {
+      var ci = +b.dataset.c, c = P.cards[ci];
+      if (busy || S.got[c.p] || up.indexOf(ci) > -1) return;
+      up.push(ci); fb.innerHTML = ''; draw();
+      if (up.length < 2) return;
+      S.tries++; save();
+      var a = P.cards[up[0]], z = P.cards[up[1]];
+      if (a.p === z.p && a.kind !== z.kind) {
+        S.got[a.p] = 1; save(); ping(); up = []; fb.innerHTML = '✅ ' + esc(P.jobs[a.p]) + '!';
+        if (Object.keys(S.got).length >= 6) { bind({ pairs: S.tries }); note('🧩 Part 2 done: all 6 pairs.'); }
+        draw(); return;
+      }
+      busy = true; ping(true);
+      fb.innerHTML = '<span class="nc-ask-no">🤔 ' + (a.kind === z.kind ? 'Those are both ' + (a.kind === 'plant' ? 'plant parts' : 'animal parts') + '. A pair is one plant and one animal.' : 'Those two do different jobs. Remember where they are and try again.') + '</span>';
+      setTimeout(function () { up = []; busy = false; draw(); }, RM ? 700 : 1300);
+    }
+    g.querySelector('.nc-mp-reset').addEventListener('click', function () { store.mp = S = { got: {}, tries: 0, order: shuffle() }; save(); up = []; busy = false; fb.innerHTML = ''; layout(); draw(); });
+    EXTRA_LINES.push(function () { var n = Object.keys(S.got).length; return ['--- PART 2: MEMORY PAIRS ---', n >= 6 ? 'All 6 pairs found in ' + S.tries + ' turns' : n + ' of 6 pairs found']; });
+    layout(); draw();
+  }
+
+  /* ───────────── 20.01 Part 3 game: Clue by clue (read a real skull one clue at a time) ───────────── */
+  function buildClue() {
+    var C = D.clue; if (!C) return;
+    var p3 = $$('#tab-lesson .card-head-label').filter(function (e) { return /Part 3|Section 3/.test(e.textContent); })[0];
+    var body = p3 && p3.closest('.card').querySelector('.card-body'); if (!body) throw new Error('Part 3 card missing');
+    store.cl = store.cl || {}; var S = store.cl; S.s = S.s || [];
+    var g = mk('div', 'nc-g nc-cl');
+    g.innerHTML = gameHead(C.kicker, C.title) + '<p class="nc-p">' + esc(C.intro) + '</p>' + job(C.job) +
+      '<div class="nc-cl-tabs" role="group" aria-label="Skulls">' + C.skulls.map(function (k, i) { return '<button type="button" class="nc-opt nc-cl-tab" data-i="' + i + '">Skull ' + (i + 1) + '</button>'; }).join('') + '</div>' +
+      '<div class="nc-cl-box"></div>' +
+      '<div class="nc-fb nc-cl-win" aria-live="polite"></div>' +
+      '<button type="button" class="nc-cup-edit nc-cl-reset">' + esc(C.againLabel) + '</button>';
+    body.appendChild(g);
+    var box = g.querySelector('.nc-cl-box'), cur = 0;
+    function st(i) { return S.s[i] = S.s[i] || { n: 1 }; }
+    function stars(n) { return '★★★'.slice(0, n) + '☆☆☆'.slice(0, 3 - n); }
+    function drawBox(msg) {
+      var K = C.skulls[cur], s = st(cur), solved = !!s.ok, n = solved ? 3 : s.n, w = solved || n >= 3 ? null : K.wins[n - 1];
+      var clip = w ? 'circle(' + (w[2] * 100) + '% at ' + (w[0] * 100) + '% ' + (w[1] * 100) + '%)' : 'none';
+      box.innerHTML = '<div class="nc-cl-pic"><img class="nc-cl-blur" src="' + esc(K.img) + '" alt="" aria-hidden="true" draggable="false"><img class="nc-cl-sharp" src="' + esc(K.img) + '" alt="' + esc(solved || n >= 3 ? K.alt : 'Part of a skull, the rest is blurred.') + '" style="clip-path:' + clip + ';-webkit-clip-path:' + clip + '" draggable="false"></div>' +
+        '<ol class="nc-cl-clues">' + K.clues.slice(0, n).map(function (t, i) { return '<li><span class="nc-cl-k">' + esc(C.clueLabel.replace('{n}', i + 1)) + '</span> ' + esc(t) + '</li>'; }).join('') + '</ol>' +
+        (solved ? '<div class="nc-cl-stars">' + stars(s.stars) + ' <span>' + esc(C.starsLabel.replace('{n}', s.stars)) + '</span></div><p class="nc-p nc-cl-rev">✅ ' + esc(K.reveal) + '</p>' + (cur < C.skulls.length - 1 ? '<button type="button" class="nc-btn nc-cl-next-skull">' + esc(C.nextSkull) + '</button>' : '') :
+          '<div class="nc-q">How did this animal live?</div><div class="nc-opts">' + K.opts.map(function (o, i) { return '<button type="button" class="nc-opt nc-cl-o" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div>' +
+          '<div class="nc-fb" aria-live="polite">' + (msg ? '<span class="nc-ask-no">🤔 ' + esc(msg) + '</span>' : '') + '</div>' +
+          (n < 3 ? '<button type="button" class="nc-cup-edit nc-cl-more">' + esc(C.nextLabel) + '</button>' : '')) +
+        '<p class="nc-credit">' + esc(K.credit) + '</p>';
+      $$('.nc-cl-tab', g).forEach(function (b) { var i = +b.dataset.i; b.classList.toggle('sel', i === cur); b.classList.toggle('ok', !!(S.s[i] && S.s[i].ok)); });
+      var more = box.querySelector('.nc-cl-more'); if (more) more.addEventListener('click', function () { s.n = Math.min(3, s.n + 1); save(); drawBox(); });
+      var nx = box.querySelector('.nc-cl-next-skull'); if (nx) nx.addEventListener('click', function () { cur++; drawBox(); });
+      $$('.nc-cl-o', box).forEach(function (b) {
+        b.addEventListener('click', function () {
+          var o = K.opts[+b.dataset.i];
+          if (o.ok) { s.ok = 1; s.stars = 4 - s.n; save(); ping(); drawAll(); }
+          else { ping(true); if (s.n < 3) { s.n++; save(); } drawBox(o.hint); }
+        });
+      });
+    }
+    function drawAll() {
+      var done = C.skulls.every(function (k, i) { return S.s[i] && S.s[i].ok; });
+      g.querySelector('.nc-cl-win').innerHTML = done ? '✅ ' + esc(C.win) : '';
+      if (done && !S.bound) { S.bound = 1; save(); bind({ skulls: S.s.map(function (x) { return x.stars; }) }); note('🦴 Part 3 done: both skulls solved.'); }
+      g.classList.toggle('nc-done', done);
+      drawBox(); refresh();
+    }
+    $$('.nc-cl-tab', g).forEach(function (b) { b.addEventListener('click', function () { cur = +b.dataset.i; drawBox(); }); });
+    g.querySelector('.nc-cl-reset').addEventListener('click', function () { store.cl = S = { s: [] }; save(); cur = 0; drawAll(); });
+    EXTRA_LINES.push(function () { return ['--- PART 3: CLUE BY CLUE ---', C.skulls.map(function (k, i) { var x = S.s[i]; return 'Skull ' + (i + 1) + ': ' + (x && x.ok ? x.stars + ' stars' : 'not solved'); }).join(' · ')]; });
+    drawAll();
+  }
+
+  /* ───────────── 20.01 Part 4: Roll the tube (test the Warm-Up guess) + case files ───────────── */
+  function tubeCap(R) { return Math.round(4 * (Math.pow(R, 4) - Math.pow(R * R - 1, 2)) / R); } // same area as a solid rod of radius 1; strength in bending
+  function buildBench() {
+    var B = D.bench; if (!B) return;
+    var act = $('#tab-lesson .act-body'); if (!act) throw new Error('lesson body missing');
+    var sec4 = mk('div', 'nc-part4');
+    sec4.innerHTML = '<div class="card theme-sky nc-p4card"><div class="card-head"><div class="card-head-icon">🔩</div><div><div class="card-head-label">Part 4</div><div class="card-head-title">' + esc(B.cardTitle) + '</div></div></div><div class="card-body"><p>' + esc(B.intro) + '</p><div class="nc-g nc-tb"></div></div></div>';
+    act.appendChild(sec4);
+    var g = sec4.querySelector('.nc-tb');
+    store.tb = store.tb || {}; var S = store.tb; S.res = S.res || {}; if (!S.r) S.r = 1;
+    g.innerHTML = gameHead(B.kicker, B.title) + job(B.job) +
+      '<div class="nc-tb-stage"><div class="nc-tb-x"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="56" fill="none" stroke="#e4dccf" stroke-dasharray="3 4"/><circle class="nc-tb-out" cx="60" cy="60" fill="#7d4fa8"/><circle class="nc-tb-in" cx="60" cy="60" fill="#fffdf7"/></svg><div class="nc-tb-xl"></div></div>' +
+        '<div class="nc-tb-beam"></div></div>' +
+      '<label class="nc-gt-sl">' + esc(B.rLabel) + ': <b class="nc-tb-rv"></b><input type="range" class="nc-tb-r" min="1" max="2.2" step="0.1"></label>' +
+      '<p class="nc-p nc-tb-same">' + esc(B.same) + '</p>' +
+      '<div class="nc-rw-ctl"><button type="button" class="nc-btn nc-tb-load">' + esc(B.loadLabel) + '</button><button type="button" class="nc-cup-edit nc-tb-off" hidden>' + esc(B.againLabel) + '</button></div>' +
+      '<div class="nc-fb nc-tb-fb" aria-live="polite"></div>' +
+      '<div class="nc-tb-log"></div>' +
+      '<div class="nc-tb-photos">' + B.photos.map(function (p) { return '<figure><img src="' + esc(p.img) + '" alt="' + esc(p.cap) + '"><figcaption>' + esc(p.cap) + '</figcaption></figure>'; }).join('') + '</div>' +
+      '<p class="nc-credit">' + esc(B.photoCredit) + ' ' + esc(B.model) + '</p>' +
+      '<div class="nc-reveal nc-tb-cmp" hidden><h5>' + esc(B.compareTitle) + '</h5><div class="nc-mt-rows nc-tb-rows"></div></div>';
+    var sl = g.querySelector('.nc-tb-r'), beam = g.querySelector('.nc-tb-beam'), loadB = g.querySelector('.nc-tb-load'), offB = g.querySelector('.nc-tb-off'), fb = g.querySelector('.nc-tb-fb');
+    var anim = null, shown = 0, bent = false;
+    function key(r) { return (+r).toFixed(1); }
+    function tested(r) { return S.res[key(r)] != null; }
+    function done() { return S.res['1.0'] != null && Object.keys(S.res).some(function (k) { return +k >= 2; }); }
+    function widest() { var ks = Object.keys(S.res).filter(function (k) { return +k > 1; }).sort(function (a, b) { return b - a; }); return ks.length ? ks[0] : null; }
+    function drawX() {
+      var R = +S.r, ro = 22 * R, ri = 22 * Math.sqrt(Math.max(0, R * R - 1));
+      g.querySelector('.nc-tb-out').setAttribute('r', ro.toFixed(1)); g.querySelector('.nc-tb-in').setAttribute('r', ri.toFixed(1));
+      g.querySelector('.nc-tb-xl').textContent = R <= 1 ? B.solidLabel : B.tubeLabel.replace('{x}', R.toFixed(1));
+      g.querySelector('.nc-tb-rv').textContent = R <= 1 ? B.solidLabel : B.tubeLabel.replace('{x}', R.toFixed(1));
+    }
+    function drawBeam() { beam.innerHTML = beamSVG(S.r <= 1 ? 'solid' : 'tube', 420, shown, bent, 'nc-tb-svg', 14 * S.r); }
+    function drawLog() {
+      var ks = Object.keys(S.res).sort(function (a, b) { return a - b; });
+      g.querySelector('.nc-tb-log').innerHTML = ks.length ? '<table><thead><tr><th>Test</th><th>Weights it held</th></tr></thead><tbody>' + ks.map(function (k) { return '<tr><th>' + esc(+k <= 1 ? B.solidLabel : B.tubeLabel.replace('{x}', k)) + '</th><td>' + S.res[k] + '</td></tr>'; }).join('') + '</tbody></table>' : '';
+      var d = done();
+      g.querySelector('.nc-tb-cmp').hidden = !d;
+      if (d) {
+        var sw = store.sw || {}, w = widest();
+        var rows = [[B.rows[0], sw.saved ? sw.solid : B.notSaved, S.res['1.0']], [B.rows[1], sw.saved ? sw.tube : B.notSaved, S.res[w] + ' (' + B.tubeLabel.replace('{x}', w) + ')']];
+        g.querySelector('.nc-tb-rows').innerHTML = '<div class="nc-mt-r nc-mt-rh"><span></span><span>You predicted</span><span>The test</span></div>' + rows.map(function (r) { return '<div class="nc-mt-r"><b>' + esc(r[0]) + '</b><span>' + esc(r[1]) + '</span><span class="nc-mt-ev">' + esc(r[2]) + '</span></div>'; }).join('');
+        fb.innerHTML = '✅ ' + esc(B.win);
+      } else if (!anim) fb.innerHTML = Object.keys(S.res).length ? '<span class="nc-ask-no">' + esc(B.need) + '</span>' : '';
+      g.classList.toggle('nc-done', d);
+    }
+    function stop() { if (anim) { clearInterval(anim); anim = null; } loadB.disabled = false; sl.disabled = false; }
+    sl.addEventListener('input', function () { stop(); S.r = +sl.value; save(); shown = 0; bent = false; offB.hidden = true; loadB.hidden = false; drawX(); drawBeam(); drawLog(); });
+    loadB.addEventListener('click', function () {
+      if (anim) return; var cap = tubeCap(+S.r); shown = 0; bent = false; loadB.disabled = true; sl.disabled = true; fb.innerHTML = '';
+      function step() {
+        shown++; if (shown > cap) { bent = true; drawBeam(); stop(); S.res[key(S.r)] = cap; save(); ping(); loadB.hidden = true; offB.hidden = false; finish(); if (!done()) fb.innerHTML = esc(B.heldLabel.replace('{n}', cap)) + ' <span class="nc-ask-no">' + esc(B.need) + '</span>'; return; }
+        drawBeam();
+      }
+      if (RM) { shown = cap; step(); return; }
+      anim = setInterval(step, 140);
+    });
+    offB.addEventListener('click', function () { stop(); shown = 0; bent = false; offB.hidden = true; loadB.hidden = false; drawBeam(); drawLog(); });
+    function finish() {
+      drawLog();
+      if (done() && !S.bound) {
+        S.bound = 1; save(); bind({ tube: { solid: S.res['1.0'], tube: S.res[widest()] } });
+        var sw = store.sw || {}; if (sw.saved && !sw.revealed) { sw.revealed = 1; store.sw = sw; save(); document.dispatchEvent(new Event('nc:sw')); }
+        note('🔩 Your test is saved. Now solve the case files.');
+      }
+      document.dispatchEvent(new Event('nc:tb')); refresh();
+    }
+    EXTRA_LINES.push(function () { return ['--- PART 4: ROLL THE TUBE ---', done() ? 'Solid rod held ' + S.res['1.0'] + ' weights; hollow tube (' + widest() + ' times as wide) held ' + S.res[widest()] + ' weights' : '(not tested yet)']; });
+    sl.value = S.r; drawX(); drawBeam(); drawLog();
+  }
+  function buildCases() {
+    var C = D.cases; if (!C) return;
+    var tb = $('.nc-tb'); if (!tb) throw new Error('cases need the bench');
+    store.cf = store.cf || {}; var S = store.cf; S.ok = S.ok || {};
+    var g = mk('div', 'nc-g nc-cf');
+    g.innerHTML = gameHead(C.kicker, C.title) + '<p class="nc-p">' + esc(C.intro) + '</p>' +
+      '<div class="nc-cf-score"></div><div class="nc-cf-grid">' + C.files.map(function (f, i) {
+        return '<div class="nc-cf-file" data-i="' + i + '"><img src="' + esc(f.img) + '" alt="' + esc(f.alt) + '"><div class="nc-cf-body"><b>' + esc(f.name) + '</b><div class="nc-cf-clue">🔎 ' + esc(f.clue) + '</div>' +
+          '<div class="nc-cf-opts">' + f.opts.map(function (o, j) { return '<button type="button" class="nc-opt nc-cf-o" data-j="' + j + '">' + esc(o) + '</button>'; }).join('') + '</div><div class="nc-fb nc-cf-fb" aria-live="polite"></div></div></div>';
+      }).join('') + '</div>' +
+      '<p class="nc-credit">' + esc(C.credit) + '</p>' +
+      '<button type="button" class="nc-cup-edit nc-cf-reset">↺ Close the case files and start again</button>' +
+      '<div class="nc-wow nc-cf-wow" hidden><div class="nc-wow-k">The twist</div><blockquote class="nc-wow-q">' + esc(C.twist.head) + '</blockquote><p class="nc-wow-nums">' + esc(C.twist.line) + '</p><p class="nc-wow-chain">' + esc(C.twist.chain) + '</p></div>';
+    after(tb, g);
+    putKeeper('k-part4', tb.querySelector('.nc-g-t'), 'after');
+    function draw() {
+      var n = Object.keys(S.ok).length;
+      $$('.nc-cf-file', g).forEach(function (el) {
+        var i = +el.dataset.i, f = C.files[i], ok = !!S.ok[i];
+        el.classList.toggle('ok', ok);
+        $$('.nc-cf-o', el).forEach(function (b) { var j = +b.dataset.j; b.classList.toggle('ok', ok && j === f.ok); b.disabled = ok; });
+        if (ok) el.querySelector('.nc-cf-fb').innerHTML = '✅ ' + esc(f.why);
+      });
+      g.querySelector('.nc-cf-score').textContent = C.doneLabel.replace('{n}', n);
+      var all = n >= C.files.length;
+      g.querySelector('.nc-cf-wow').hidden = !all; g.classList.toggle('nc-done', all);
+      refresh();
+    }
+    $$('.nc-cf-file', g).forEach(function (el) {
+      var i = +el.dataset.i, f = C.files[i];
+      $$('.nc-cf-o', el).forEach(function (b) {
+        b.addEventListener('click', function () {
+          if (+b.dataset.j === f.ok) { S.ok[i] = 1; save(); ping(); if (Object.keys(S.ok).length === C.files.length) { bind({ cases: 1 }); note('🗂️ Part 4 done: all five case files.'); } draw(); }
+          else { ping(true); b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 700); el.querySelector('.nc-cf-fb').innerHTML = '<span class="nc-ask-no">🤔 Look at the shape again. ' + esc(f.clue) + ' What would that shape be good at?</span>'; }
+        });
+      });
+    });
+    g.querySelector('.nc-cf-reset').addEventListener('click', function () { store.cf = S = { ok: {} }; save(); $$('.nc-cf-fb', g).forEach(function (e) { e.innerHTML = ''; }); draw(); });
+    EXTRA_LINES.push(function () { return ['--- PART 4: CASE FILES ---', Object.keys(S.ok).length + ' of ' + C.files.length + ' solved']; });
+    draw();
+  }
+
   function boot() {
     guard('lean', buildLean);
     guard('tabs', buildTabs);
@@ -3579,11 +3947,15 @@
     guard('turn', buildTurn);
     guard('pin', buildPin);
     guard('beat', buildBeat);
+    guard('stack', buildStack);
     guard('wordlens', buildWordLens);
     guard('source', buildSource);
     guard('trace', buildTrace);
     guard('vein', buildVein);
     guard('clock', buildClock);
+    guard('giant', buildGiant);
+    guard('pairs', buildPairs);
+    guard('clue', buildClue);
     guard('lamp', buildLamp);
     guard('sort', buildSort);
     guard('air', buildAir);
@@ -3605,6 +3977,8 @@
     guard('team', buildTeam);
     guard('lab', buildLab);
     guard('cargo', buildCargo);
+    guard('bench', buildBench);
+    guard('cases', buildCases);
     guard('assignment', buildAssignment);
     guard('quizcard', function () { var q = $('#tab-quiz'); if (q) putKeeper('k-quiz', q, 'prepend'); });
     guard('wonder', buildWonder);

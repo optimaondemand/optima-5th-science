@@ -1,0 +1,26 @@
+{
+ "voice": "Gdj2QBsAjgQnu3rwg2ZN",
+ "model": "eleven_v4",
+ "clips": {
+  "k-warmup": {
+   "text": "Here are a solid rod and a hollow tube. They are the same length, and they weigh the same. How many weights can each one hold before it bends? Set a guess for each one. Then tap Save my guess and write why.",
+   "dur": 15.31
+  },
+  "k-words": {
+   "text": "Structure. Function. Stem. Skeleton. Protection. Survive.",
+   "dur": 6.69
+  },
+  "k-part1": {
+   "text": "In sixteen thirty-eight, Galileo wrote about bones and stems. Tap each yellow line to read it in plain English. Then grow the giant below, and find out how thick its leg bone has to be.",
+   "dur": 14.11
+  },
+  "k-quiz": {
+   "text": "Three quick questions, just for you. They are not graded. Tap an answer and read the note under it. Think about what job each structure does.",
+   "dur": 10.11
+  },
+  "k-assign": {
+   "text": "Now write your half of page twenty. Answer the two Part B questions. In Part C, make your same-job pair card. Then tap evidence cards in the planner to build your C-E-R about how structures help living things survive.",
+   "dur": 17.01
+  }
+ }
+}

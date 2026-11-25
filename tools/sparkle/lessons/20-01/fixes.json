@@ -1,0 +1,116 @@
+[
+ {
+  "kind": "label",
+  "why": "Standards label (standing approval): the planning table lists CPALMS SC.5.L.14.2 for 20.01 (NGSS 5-LS1-1 support stays in the footer). TEKS (Texas) removed; header now matches the footer.",
+  "find": "<div class=\"info-value\">SC.5.L.14.2 · TEKS 5.13(A)</div>",
+  "replace": "<div class=\"info-value\">SC.5.L.14.2</div>"
+ },
+ {
+  "kind": "fix",
+  "why": "Suggested-image placeholder removed (Bethany ticked leftovers + AI image). The figure is a real USFWS photo now (DATA figure).",
+  "find": "    <div class=\"image-suggestion\" style=\"display:none;\">\n      <div class=\"image-suggestion-icon\">🖼️</div>\n      <div class=\"image-suggestion-label\">Suggested Image — Generate This</div>\n      <div class=\"image-suggestion-desc\">\n        Photorealistic photo showing a young tree (with visible trunk and branches) next to a deer or similar animal standing in a forest clearing. Both organisms are upright and clearly visible. Natural daylight, sharp focus, no people, no cartoons, no white background.\n      </div>\n      <div class=\"image-suggestion-file\">Save as: images/20-01-structures-comparison.jpg</div>\n    </div>\n",
+  "replace": ""
+ },
+ {
+  "kind": "fix",
+  "why": "Sections become Parts 1 to 3 to match Part 4 (Bethany ticked leftovers).",
+  "find": "<div class=\"card-head-label\">Section 1</div>",
+  "replace": "<div class=\"card-head-label\">Part 1</div>"
+ },
+ {
+  "kind": "fix",
+  "why": "Sections become Parts.",
+  "find": "<div class=\"card-head-label\">Section 2</div>",
+  "replace": "<div class=\"card-head-label\">Part 2</div>"
+ },
+ {
+  "kind": "fix",
+  "why": "Sections become Parts.",
+  "find": "<div class=\"card-head-label\">Section 3</div>",
+  "replace": "<div class=\"card-head-label\">Part 3</div>"
+ },
+ {
+  "kind": "fix",
+  "why": "The Lesson tab now holds Galileo, three games and the Part 4 test bench.",
+  "find": "<div class=\"act-time\" style=\"background:#D4772C;\">⏱ 15 min</div>",
+  "replace": "<div class=\"act-time\" style=\"background:#D4772C;\">⏱ 30 min</div>"
+ },
+ {
+  "kind": "fix",
+  "why": "Rose stems have prickles, not true thorns (Bethany ticked thorns → spines/prickles).",
+  "find": "A rose guards itself with thorns. A porcupine uses quills.",
+  "replace": "A rose guards itself with sharp prickles. A porcupine uses quills."
+ },
+ {
+  "kind": "fix",
+  "why": "Cactus spines are changed leaves, not thorns; the Unit 4 test says spines (Bethany ticked it). Same answer.",
+  "find": "A cactus has SHARP THORNS. What is the function of this structure?",
+  "replace": "A cactus has SHARP SPINES. What is the function of this structure?"
+ },
+ {
+  "kind": "fix",
+  "why": "Spines (same as the question).",
+  "find": "Thorns keep thirsty animals from eating the cactus and stealing that water.",
+  "replace": "Spines keep thirsty animals from eating the cactus and stealing that water."
+ },
+ {
+  "kind": "fix",
+  "why": "Spines (same as the question).",
+  "find": "And thorns aren't flat enough to catch much sunlight.",
+  "replace": "And spines aren't flat enough to catch much sunlight."
+ },
+ {
+  "kind": "fix",
+  "why": "\"Fur actually slows swimming\" is not supported (Bethany ticked it).",
+  "find": "Fur actually slows swimming, not speeds it up.",
+  "replace": "Fur doesn't make them swim faster."
+ },
+ {
+  "kind": "fix",
+  "why": "\"No starter\" reads like a note to the builder (Bethany ticked leftovers).",
+  "find": "<div class=\"cer-section-title\">Claim <span class=\"cer-section-hint\">— What do you think is true?</span></div>\n        <div class=\"cer-write-box\">\n          <p class=\"cer-starter\" style=\"color:#9A6420;font-style:normal;font-weight:700;\">📋 Write in your own words. No starter — use what you learned about structures.</p>",
+  "replace": "<div class=\"cer-section-title\">Claim <span class=\"cer-section-hint\">— What do you think is true?</span></div>\n        <div class=\"cer-write-box\">\n          <p class=\"cer-starter\" style=\"color:#9A6420;font-style:normal;font-weight:700;\">📋 Write in your own words. Use what you learned about structures.</p>"
+ },
+ {
+  "kind": "fix",
+  "why": "\"No starter\"; the structure detective table is gone (Part 4 case files instead).",
+  "find": "<div class=\"cer-section-title\">Evidence <span class=\"cer-section-hint\">— Which structures from the lesson and your table support your claim?</span></div>\n        <div class=\"cer-write-box\">\n          <p class=\"cer-starter\" style=\"color:#9A6420;font-style:normal;font-weight:700;\">📋 Write in your own words. No starter — use what you learned about structures.</p>",
+  "replace": "<div class=\"cer-section-title\">Evidence <span class=\"cer-section-hint\">— Which structures from the lesson and your games support your claim?</span></div>\n        <div class=\"cer-write-box\">\n          <p class=\"cer-starter\" style=\"color:#9A6420;font-style:normal;font-weight:700;\">📋 Write in your own words. Name at least two structures.</p>"
+ },
+ {
+  "kind": "fix",
+  "why": "\"No starter\" reads like a note to the builder.",
+  "find": "<div class=\"cer-section-title\">Reasoning <span class=\"cer-section-hint\">— Why does the evidence support your claim?</span></div>\n        <div class=\"cer-write-box\">\n          <p class=\"cer-starter\" style=\"color:#9A6420;font-style:normal;font-weight:700;\">📋 Write in your own words. No starter — use what you learned about structures.</p>",
+  "replace": "<div class=\"cer-section-title\">Reasoning <span class=\"cer-section-hint\">— Why does the evidence support your claim?</span></div>\n        <div class=\"cer-write-box\">\n          <p class=\"cer-starter\" style=\"color:#9A6420;font-style:normal;font-weight:700;\">📋 Write in your own words. Explain how each shape fits its job.</p>"
+ },
+ {
+  "kind": "fix",
+  "why": "The Vocabulary tab is the Warm-Up now (Revise is hidden).",
+  "find": "Look back at your prediction from the Vocabulary tab.",
+  "replace": "Look back at your prediction from the Warm-Up."
+ },
+ {
+  "kind": "fix",
+  "why": "Filler label (same as 17.02 to 19.02).",
+  "find": "Lesson 20.01 · Submission Packet",
+  "replace": "Lesson 20.01"
+ },
+ {
+  "kind": "fix",
+  "why": "No paper notebook and no Part A drawing any more (Bethany ticked leftovers).",
+  "find": "When you've finished all three parts, copy your gathered answers above into Canvas — or take a photo of your notebook. Use this checklist to make sure everything is ready.",
+  "replace": "When you've finished, copy your Gathered Answers into Canvas. Your game results are already in them. Use this checklist before you submit."
+ },
+ {
+  "kind": "fix",
+  "why": "Everything is answered on the page now (no paper notebook).",
+  "find": "📋 Structure detective — copy into your notebook",
+  "replace": "📋 Structure detective"
+ },
+ {
+  "kind": "fix",
+  "why": "The old AI image is never shown (the layer puts in the real USFWS photo); point the page at the real photo so the 3.3 MB AI file is not downloaded first.",
+  "find": "src=\"images/20-01-structures-comparison.jpg\"",
+  "replace": "src=\"images/nc/20-01-figure-deer.jpg\""
+ }
+]

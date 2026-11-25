@@ -1,0 +1,1047 @@
+{
+ "onestep": true,
+ "lesson": "20.01",
+ "prefix": "g5sci-20-1",
+ "page": 20,
+ "pages": 30,
+ "title": "How Do Structures Help Organisms Survive?",
+ "audio": "assets/audio/keeper/",
+ "h2c": "assets/sparkle/vendor/html2canvas.min.js",
+ "tabs": {
+  "hide": [
+   "explore"
+  ],
+  "redirect": {
+   "explore": "lesson"
+  },
+  "labels": {
+   "vocab": "🌅 Warm-Up",
+   "lesson": "📖 The Lesson",
+   "quiz": "🧠 Self-Check",
+   "assignment": "✍️ Assignment"
+  }
+ },
+ "leanHide": [
+  "#tab-lesson .diagram-wrap"
+ ],
+ "leanHideText": [
+  "Key Concept"
+ ],
+ "figure": {
+  "sel": "#tab-lesson > .lesson-figure",
+  "img": "images/nc/20-01-figure-deer.jpg",
+  "label": "📷 Real photo · A deer among the trees",
+  "alt": "A white-tailed deer with big ears stands among green leaves, looking at the camera. A tree trunk rises beside it.",
+  "caption": "A deer and a tree. Both stand up all day. Each uses different structures to do it.",
+  "credit": "Photo: Courtney Celley, U.S. Fish and Wildlife Service (public domain)."
+ },
+ "opener": {
+  "kicker": "The Notebook Chain · Page 20",
+  "title": "How Do Structures Help Organisms Survive?",
+  "question": "How can a plant and an animal solve the very same survival problem with completely different body parts?",
+  "zoom": 6,
+  "step": 5.6,
+  "alt": "An opening film that zooms in from Earth seen from space, to Florida, to a white-tailed deer on a trail between pine trees, to a deer skeleton in a museum, to a leg bone cut open to show its hollow middle, and finally to spongy bone under a microscope.",
+  "frames": [
+   {
+    "img": "images/nc/20-01-zoom-earth.jpg",
+    "w": 1920,
+    "h": 1920,
+    "fx": 0.23,
+    "fy": 0.52,
+    "label": "Earth, seen from space",
+    "scale": "about 12,700 km across",
+    "line": "Every living thing on Earth has to hold itself up against gravity."
+   },
+   {
+    "img": "images/nc/20-01-zoom-florida.jpg",
+    "w": 1920,
+    "h": 1642,
+    "fx": 0.36,
+    "fy": 0.14,
+    "label": "Florida, seen by a NASA satellite",
+    "scale": "this picture is about 550 km across",
+    "line": "In Florida's woods, pine trees and deer solve that problem in very different ways."
+   },
+   {
+    "img": "images/nc/20-01-zoom-deer.jpg",
+    "w": 1920,
+    "h": 1440,
+    "fx": 0.505,
+    "fy": 0.51,
+    "label": "A white-tailed deer near Gainesville, Florida",
+    "scale": "the deer is about 1 meter tall at the shoulder",
+    "line": "The pines stand on woody stems. The deer stands on four legs."
+   },
+   {
+    "img": "images/nc/20-01-zoom-skeleton.jpg",
+    "w": 1920,
+    "h": 1920,
+    "fx": 0.36,
+    "fy": 0.72,
+    "label": "A deer skeleton in a museum",
+    "scale": "about 1.2 meters tall at the shoulder",
+    "line": "Inside the deer, a frame of bones holds it up, protects its heart and lungs, and lets it run."
+   },
+   {
+    "img": "images/nc/20-01-zoom-bone.jpg",
+    "w": 1920,
+    "h": 1674,
+    "fx": 0.57,
+    "fy": 0.62,
+    "label": "A thigh bone, cut across",
+    "scale": "about 3 cm across (a human bone in a university collection)",
+    "line": "Cut a leg bone and you find a surprise: it is a hard tube with a hollow middle."
+   },
+   {
+    "img": "images/nc/20-01-zoom-spongy.jpg",
+    "w": 1240,
+    "h": 1277,
+    "fx": 0.5,
+    "fy": 0.5,
+    "label": "Spongy bone under a microscope (stained purple)",
+    "scale": "each purple strut is about 0.1 to 0.2 mm thick",
+    "line": "In some places, bone is a web of tiny struts. It is strong, but light."
+   }
+  ],
+  "credits": [
+   [
+    "Blue Marble, Western Hemisphere",
+    "NASA, Reto Stöckli",
+    "Public domain",
+    "https://commons.wikimedia.org/wiki/File:Blue_Marble_Western_Hemisphere.jpg"
+   ],
+   [
+    "Florida (MODIS, 16 February 2016)",
+    "Jeff Schmaltz, MODIS Land Rapid Response Team, NASA GSFC",
+    "Public domain",
+    "https://commons.wikimedia.org/wiki/File:Florida_(MODIS_2016-02-16).jpg"
+   ],
+   [
+    "White-tailed deer at Morningside Nature Center, Gainesville",
+    "Alex Abair",
+    "CC BY 4.0",
+    "https://commons.wikimedia.org/wiki/File:Odocoileus_virginianus_at_Morningside_Nature_Center.jpg"
+   ],
+   [
+    "Deer skeleton, Museum of Comparative Anatomy, Bologna",
+    "Marco Vinci",
+    "CC BY-SA 3.0",
+    "https://commons.wikimedia.org/wiki/File:Scheletro_di_Cervo,_deer_skeleton,_museo_di_Anatomia_Comparata_di_Bologna.JPG"
+   ],
+   [
+    "Femur, detail of the shaft cut across (Charles University collection)",
+    "MAKY.OREL",
+    "CC0",
+    "https://commons.wikimedia.org/wiki/File:Femur_-_detail_of_diaphysis_cross_section.jpg"
+   ],
+   [
+    "Spongy bone under a microscope",
+    "Nataliia Maryenko",
+    "CC BY-SA 4.0",
+    "https://commons.wikimedia.org/wiki/File:Spongy_bone_in_polarized_light.jpg"
+   ]
+  ]
+ },
+ "keeper": {
+  "name": "Listen",
+  "role": "",
+  "clips": {
+   "k-warmup": {
+    "text": "Here are a solid rod and a hollow tube. They are the same length, and they weigh the same. How many weights can each one hold before it bends? Set a guess for each one. Then tap Save my guess and write why.",
+    "dur": 15.31,
+    "cues": [
+     {
+      "at": "solid rod",
+      "sel": ".nc-sw-item",
+      "fx": "glow",
+      "i": 0
+     },
+     {
+      "at": "hollow tube",
+      "sel": ".nc-sw-item",
+      "fx": "glow",
+      "i": 1
+     },
+     {
+      "at": "Set a guess",
+      "sel": ".nc-sw-step",
+      "fx": "point",
+      "all": true
+     },
+     {
+      "at": "Save my guess",
+      "sel": ".nc-sw-save",
+      "fx": "pop"
+     },
+     {
+      "at": "write why",
+      "sel": "#pred-1",
+      "fx": "point"
+     }
+    ]
+   },
+   "k-words": {
+    "text": "Structure. Function. Stem. Skeleton. Protection. Survive.",
+    "dur": 6.69,
+    "cues": [
+     {
+      "at": "Structure",
+      "sel": ".nc-wl-st",
+      "fx": "pop",
+      "i": 0,
+      "scroll": false
+     },
+     {
+      "at": "Function",
+      "sel": ".nc-wl-st",
+      "fx": "pop",
+      "i": 1,
+      "scroll": false
+     },
+     {
+      "at": "Stem",
+      "sel": ".nc-wl-st",
+      "fx": "pop",
+      "i": 2,
+      "scroll": false
+     },
+     {
+      "at": "Skeleton",
+      "sel": ".nc-wl-st",
+      "fx": "pop",
+      "i": 3,
+      "scroll": false
+     },
+     {
+      "at": "Protection",
+      "sel": ".nc-wl-st",
+      "fx": "pop",
+      "i": 4,
+      "scroll": false
+     },
+     {
+      "at": "Survive",
+      "sel": ".nc-wl-st",
+      "fx": "pop",
+      "i": 5,
+      "scroll": false
+     }
+    ]
+   },
+   "k-part1": {
+    "text": "In sixteen thirty-eight, Galileo wrote about bones and stems. Tap each yellow line to read it in plain English. Then grow the giant below, and find out how thick its leg bone has to be.",
+    "dur": 14.11,
+    "cues": [
+     {
+      "at": "Galileo",
+      "sel": ".nc-src-paper",
+      "fx": "glow"
+     },
+     {
+      "at": "yellow line",
+      "sel": ".nc-src-hl",
+      "fx": "pop"
+     },
+     {
+      "at": "grow the giant",
+      "sel": ".nc-gt-stage",
+      "fx": "glow"
+     },
+     {
+      "at": "leg bone",
+      "sel": ".nc-gt-bone",
+      "fx": "pop"
+     }
+    ]
+   },
+   "k-quiz": {
+    "text": "Three quick questions, just for you. They are not graded. Tap an answer and read the note under it. Think about what job each structure does.",
+    "dur": 10.11,
+    "cues": [
+     {
+      "at": "Tap an answer",
+      "sel": "#tab-quiz .quiz-option",
+      "fx": "point"
+     }
+    ]
+   },
+   "k-assign": {
+    "text": "Now write your half of page twenty. Answer the two Part B questions. In Part C, make your same-job pair card. Then tap evidence cards in the planner to build your C-E-R about how structures help living things survive.",
+    "dur": 17.01,
+    "cues": [
+     {
+      "at": "Part B",
+      "sel": "#partb-1",
+      "fx": "point"
+     },
+     {
+      "at": "Part C",
+      "sel": "#nc-p1",
+      "fx": "point"
+     },
+     {
+      "at": "planner",
+      "sel": ".nc-plan",
+      "fx": "glow"
+     }
+    ]
+   }
+  }
+ },
+ "stack": {
+  "title": "Stack the weights",
+  "intro": "A solid rod and a hollow tube are made from the same amount of the same material. They are the same length, and they weigh the same. Each one rests on two blocks.",
+  "job": [
+   "Guess how many weights each one holds before it bends.",
+   "Use − and + to set each guess.",
+   "Tap Save my guess, then write why."
+  ],
+  "items": [
+   {
+    "k": "solid",
+    "name": "Solid rod",
+    "note": "thin and solid all the way through"
+   },
+   {
+    "k": "tube",
+    "name": "Hollow tube",
+    "note": "wider, with a hollow middle"
+   }
+  ],
+  "max": 20,
+  "unit": "weights",
+  "model": "A model: the rod and tube are drawings, and each weight is the same.",
+  "notYet": "Set a guess for both, then save.",
+  "saved": "🔒 Saved: solid rod {a} weights, hollow tube {b} weights. Part 4 tests it.",
+  "lockedNote": "🔒 Your guess: solid rod {a}, hollow tube {b}. Part 4 shows the test next to it.",
+  "reasonPrompt": "Why do you think so? Write at least 2 sentences. Which one is stronger, and why?",
+  "placeholder": "I think the ___ will hold more weights because…"
+ },
+ "wordlens": {
+  "intro": "Tap a word to see what it means.",
+  "words": [
+   {
+    "w": "structure",
+    "icon": "🏗️",
+    "def": "A body part of a plant or animal, like a stem, a root, a bone, or fur."
+   },
+   {
+    "w": "function",
+    "icon": "⚙️",
+    "def": "The job a structure does. A stem's function is to hold the plant up."
+   },
+   {
+    "w": "stem",
+    "icon": "🌳",
+    "def": "The part of a plant that holds it up and carries water and food between the roots and leaves."
+   },
+   {
+    "w": "skeleton",
+    "icon": "🦴",
+    "def": "An animal's frame of bones. It holds the body up, protects soft parts, and helps it move."
+   },
+   {
+    "w": "protection",
+    "icon": "🛡️",
+    "def": "Keeping safe from harm. Bark protects a tree. A shell protects a turtle."
+   },
+   {
+    "w": "survive",
+    "icon": "🌱",
+    "def": "To stay alive long enough to grow and have young."
+   }
+  ]
+ },
+ "source": {
+  "kicker": "Part 1 · A real book from 1638",
+  "title": "Galileo's giant bone",
+  "tag": "Real source from 1638",
+  "alt": "Two printed pages in Italian from Galileo's 1638 book. The left page, page 129, shows a drawing of a small bone and a much bigger, much fatter bone. The right page, page 147, shows a drawing of a hollow tube above a solid rod.",
+  "intro": "Galileo is famous for studying the stars, but he also studied how things break. In his last book, from 1638, he asked: what happens to bones when an animal gets much bigger? These are two pages from that book, in Italian.",
+  "img": "images/nc/20-01-galileo.jpg",
+  "w": 1644,
+  "h": 1100,
+  "job": [
+   "Tap each yellow line to read it in plain English.",
+   "Then find the two lines in the hunts."
+  ],
+  "lines": [
+   {
+    "y": [
+     62,
+     152
+    ],
+    "x": [
+     55,
+     680
+    ],
+    "en": "Here is a quick example. I once drew a bone that was made three times longer, and thickened enough to do the same job in a big animal that the small bone does in a small animal."
+   },
+   {
+    "y": [
+     175,
+     420
+    ],
+    "x": [
+     130,
+     600
+    ],
+    "tag": "fat",
+    "en": "The two bones: the small one, and the big one. See how much fatter the big bone has to be."
+   },
+   {
+    "y": [
+     445,
+     505
+    ],
+    "x": [
+     55,
+     680
+    ],
+    "en": "You can see how out of shape the bigger bone becomes."
+   },
+   {
+    "y": [
+     505,
+     690
+    ],
+    "x": [
+     55,
+     680
+    ],
+    "en": "So a giant with the same body shape as an ordinary person would need bones made of a much harder material. If not, as he grew huge, he would be crushed by his own weight and fall."
+   },
+   {
+    "y": [
+     735,
+     825
+    ],
+    "x": [
+     55,
+     680
+    ],
+    "tag": "dog",
+    "en": "That is why I believe a small dog could carry two or three dogs its own size on its back, but a horse could not carry even one horse its own size."
+   },
+   {
+    "y": [
+     60,
+     250
+    ],
+    "x": [
+     890,
+     1510
+    ],
+    "tag": "birds",
+    "en": "Nature uses hollow shapes in a thousand ways. They make a thing much stronger without making it heavier. You can see this in the bones of birds and in many reeds, which are light but very hard to bend or break."
+   },
+   {
+    "y": [
+     250,
+     320
+    ],
+    "x": [
+     890,
+     1510
+    ],
+    "en": "A stalk of straw holds up a head of wheat that is heavier than the whole stalk. If it had the same amount of material but were solid, it would bend and break much more easily."
+   },
+   {
+    "y": [
+     610,
+     845
+    ],
+    "x": [
+     890,
+     1310
+    ],
+    "en": "Galileo's drawing: a hollow tube on top and a solid rod below. They weigh the same and are the same length."
+   }
+  ],
+  "asks": [
+   {
+    "q": "Hunt 1: Find the line where Galileo says a small dog could carry two or three dogs its own size.",
+    "tag": "dog",
+    "yes": "Yes! A small dog could carry two or three dogs, but a horse could not carry even one horse. Bigger bodies get heavy fast.",
+    "no": "Not that one. Look near the bottom of the left page."
+   },
+   {
+    "q": "Hunt 2: Find the line where Galileo says bird bones and reeds are hollow.",
+    "tag": "birds",
+    "yes": "Yes! Bird bones and reeds are hollow, light, and hard to bend. A plant and an animal use the same trick.",
+    "no": "Not quite. Look at the top of the right page."
+   }
+  ],
+  "credit": "Source: Galileo Galilei, Discorsi e dimostrazioni matematiche intorno à due nuove scienze (Leiden, 1638), pages 129 and 147, scan from Google Books via Wikimedia Commons (public domain). Plain-English version written for this lesson."
+ },
+ "giant": {
+  "kicker": "Part 1 game · Test Galileo's idea",
+  "title": "Grow the giant",
+  "intro": "Here is a model of an animal's leg bone. Make the animal bigger, and see what its bone has to do.",
+  "job": [
+   "Tap 2 times bigger. Watch the bone.",
+   "Drag the thickness slider until the bone holds.",
+   "Do the same for 3 times bigger."
+  ],
+  "img": "images/nc/20-01-figure-deer.jpg",
+  "imgAlt": "The deer, drawn at the size you picked.",
+  "sizes": [
+   1,
+   2,
+   3
+  ],
+  "maxThick": 6,
+  "sizeLabel": "{s} times as tall",
+  "weightLabel": "{w} times as heavy",
+  "explain": "When an animal gets 2 times taller, it also gets 2 times wider and 2 times thicker, so it is about 8 times as heavy (2 × 2 × 2). A bone's strength depends on how thick it is across.",
+  "states": {
+   "ok": "✅ The bone holds.",
+   "bend": "⚠️ The bone is bending. Make it thicker.",
+   "snap": "💥 Snap! The bone is too thin for this much weight."
+  },
+  "need": "Make the bone thick enough to hold at 2 times and at 3 times as tall.",
+  "ask": "So what kind of bones does a giant need?",
+  "opts": [
+   {
+    "t": "Bones that are much thicker, not just longer",
+    "ok": true
+   },
+   {
+    "t": "Bones that are just longer",
+    "hint": "Look at what happened when you made the animal bigger and only the length grew."
+   },
+   {
+    "t": "Thinner bones, so they weigh less",
+    "hint": "Try a thin bone at 3 times as tall. What happens?"
+   }
+  ],
+  "win": "Right. At 3 times as tall, the animal is 27 times as heavy, so its bone has to be about 5 times as thick. That is what Galileo drew.",
+  "galileo": "images/nc/20-01-galileo-bones.jpg",
+  "galileoAlt": "Galileo's 1638 drawing: a small, thin bone above a big bone that is three times longer and much, much fatter.",
+  "galileoCap": "Galileo's own drawing, 1638: the bone made 3 times longer had to be much fatter.",
+  "model": "A model: the bone is a drawing, and the numbers are rounded.",
+  "normalLabel": "Normal size · normal weight"
+ },
+ "pairs": {
+  "kicker": "Part 2 game · Same job, different structures",
+  "title": "Memory pairs",
+  "intro": "Each card shows a real plant part or animal part. A pair is one plant and one animal that do the same job.",
+  "job": [
+   "Tap two cards to turn them over.",
+   "If they do the same job, they stay up.",
+   "Find all 6 pairs."
+  ],
+  "cards": [
+   {
+    "p": "support",
+    "kind": "plant",
+    "name": "A pine's woody stem",
+    "img": "images/nc/20-01-pr-trunk.jpg",
+    "alt": "The straight trunk of a longleaf pine in a Florida-like forest."
+   },
+   {
+    "p": "support",
+    "kind": "animal",
+    "name": "A deer's skeleton",
+    "img": "images/nc/20-01-zoom-skeleton.jpg",
+    "alt": "A deer skeleton standing in a museum."
+   },
+   {
+    "p": "sharp",
+    "kind": "plant",
+    "name": "A rose's prickles",
+    "img": "images/nc/20-01-pr-prickles.jpg",
+    "alt": "A red rose stem with sharp, hooked prickles."
+   },
+   {
+    "p": "sharp",
+    "kind": "animal",
+    "name": "A porcupine's quills",
+    "img": "images/nc/20-01-pr-porcupine.jpg",
+    "alt": "A porcupine covered in long, sharp quills."
+   },
+   {
+    "p": "cover",
+    "kind": "plant",
+    "name": "A tree's bark",
+    "img": "images/nc/20-01-pr-bark.jpg",
+    "alt": "Close-up of thick, rough, ridged tree bark."
+   },
+   {
+    "p": "cover",
+    "kind": "animal",
+    "name": "A box turtle's shell",
+    "img": "images/nc/20-01-turtle.jpg",
+    "alt": "A Florida box turtle with a high, hard, patterned shell."
+   },
+   {
+    "p": "water",
+    "kind": "plant",
+    "name": "A tree's roots",
+    "img": "images/nc/20-01-pr-roots.jpg",
+    "alt": "A tree with long roots spreading over sandy ground."
+   },
+   {
+    "p": "water",
+    "kind": "animal",
+    "name": "A deer's mouth, drinking",
+    "img": "images/nc/20-01-pr-drink.jpg",
+    "alt": "A deer and her fawn at the edge of a river."
+   },
+   {
+    "p": "air",
+    "kind": "plant",
+    "name": "A leaf",
+    "img": "images/nc/17-01-zoom-leaf.jpg",
+    "alt": "A green leaf up close."
+   },
+   {
+    "p": "air",
+    "kind": "animal",
+    "name": "Lungs",
+    "img": "images/nc/19-02-zoom-lungs.jpg",
+    "alt": "A cast of real human lungs, showing the branching air tubes."
+   },
+   {
+    "p": "signal",
+    "kind": "plant",
+    "name": "A bright flower",
+    "img": "images/nc/20-01-pr-flower.jpg",
+    "alt": "A large white hibiscus flower."
+   },
+   {
+    "p": "signal",
+    "kind": "animal",
+    "name": "A cardinal's red feathers",
+    "img": "images/nc/20-01-pr-cardinal.jpg",
+    "alt": "A bright red male northern cardinal on a branch."
+   }
+  ],
+  "jobs": {
+   "support": "Hold the body up",
+   "sharp": "Keep hungry animals away",
+   "cover": "A tough outside cover",
+   "water": "Take in water",
+   "air": "Trade gases with the air",
+   "signal": "Send a signal others can see"
+  },
+  "jobLines": {
+   "support": "Wood in the stem, bone in the skeleton. Both hold the body up against gravity.",
+   "sharp": "Prickles and quills both say: do not bite me.",
+   "cover": "Bark and shell both cover soft parts underneath.",
+   "water": "Roots soak water up from the soil. A deer drinks with its mouth.",
+   "air": "Leaves take in carbon dioxide through tiny openings. Lungs take in oxygen.",
+   "signal": "A flower signals to insects and birds. Bright feathers signal to other cardinals."
+  },
+  "triesLabel": "Turns: {n}",
+  "foundLabel": "{n} of 6 pairs",
+  "win": "All 6 pairs! A plant and an animal can solve the same problem with very different structures.",
+  "credit": "Photos: longleaf pine, Aaron Liston (CC BY 4.0); deer skeleton, Marco Vinci (CC BY-SA 3.0); rose prickles, Rosser1954 (CC BY-SA 4.0); porcupine, Charles J. Sharp (CC BY-SA 4.0); oak bark, Kurt Kaiser (CC0); Florida box turtle, Distinguished Reflections (CC BY 2.0); tree roots, PinchyCC (CC BY 4.0); mule deer and fawn, Grand Canyon National Park (public domain); young willow leaves, Callum1234 (public domain); lungs cast, Tiia Monto (CC BY-SA 3.0); white hibiscus, Jim Evans (CC BY-SA 4.0); northern cardinal, Judy Gallagher (CC BY 2.0)."
+ },
+ "clue": {
+  "kicker": "Part 3 game · Read the bones",
+  "title": "Clue by clue",
+  "intro": "Fossil hunters often find only a skull. Can you tell how an animal lived from its structures? The fewer clues you need, the more stars you get.",
+  "job": [
+   "Read the first clue and look at the picture.",
+   "Guess how the animal lived, or tap Next clue.",
+   "Solve both skulls."
+  ],
+  "skulls": [
+   {
+    "img": "images/nc/20-01-skull-smilodon.jpg",
+    "alt": "A large fossil skull with two very long, curved, blade-like top teeth.",
+    "wins": [
+     [
+      0.66,
+      0.72,
+      0.16
+     ],
+     [
+      0.55,
+      0.55,
+      0.42
+     ]
+    ],
+    "clues": [
+     "Two top teeth, each nearly 18 cm long, shaped like curved blades.",
+     "Eye sockets that face forward, like a cat's. Eyes that face forward help an animal judge distance.",
+     "The whole skull is as big as a lion's. This animal weighed about as much as a tiger."
+    ],
+    "opts": [
+     {
+      "t": "A hunter that caught big animals and ate meat",
+      "ok": true
+     },
+     {
+      "t": "A plant-eater that chewed tough grass",
+      "hint": "Flat teeth grind plants. Are these teeth flat?"
+     },
+     {
+      "t": "A fish-eater that dove into deep water",
+      "hint": "Nothing here is built for swimming. Look at the teeth again."
+     }
+    ],
+    "reveal": "This is Smilodon, a saber-toothed cat. Its fossils have been found in Florida. It died out about 10,000 years ago.",
+    "credit": "Smilodon skull, American Museum of Natural History: photo by Bloopityboop (CC BY-SA 4.0)."
+   },
+   {
+    "img": "images/nc/20-01-skull-beaver.jpg",
+    "alt": "A skull with big orange front teeth shaped like chisels and flat, ridged back teeth.",
+    "wins": [
+     [
+      0.88,
+      0.75,
+      0.15
+     ],
+     [
+      0.6,
+      0.55,
+      0.42
+     ]
+    ],
+    "clues": [
+     "Four big front teeth with bright orange fronts, shaped like chisels.",
+     "Flat, ridged back teeth, good for grinding.",
+     "A skull about 13 cm long, from an animal that spends much of its life in ponds and streams."
+    ],
+    "opts": [
+     {
+      "t": "A gnawer that chews wood and eats plants",
+      "ok": true
+     },
+     {
+      "t": "A hunter that bites and tears meat",
+      "hint": "A hunter needs long, pointed teeth. Look at the flat back teeth."
+     },
+     {
+      "t": "A sipper that drinks nectar from flowers",
+      "hint": "Nectar drinkers need long, thin mouths. These teeth are made for something hard."
+     }
+    ],
+    "reveal": "This is a beaver. Its orange front teeth have iron in them, which makes them extra hard, and they keep growing all its life, so chewing wood never wears them away.",
+    "credit": "Beaver skull, Ohio State University Museum of Zoology: photo by James St. John (CC BY 2.0)."
+   }
+  ],
+  "nextLabel": "🔎 Next clue",
+  "clueLabel": "Clue {n} of 3",
+  "starsLabel": "Stars: {n}",
+  "nextSkull": "Next skull →",
+  "againLabel": "↺ Hide the skulls and start again",
+  "win": "Both skulls solved! Teeth and eyes tell a story about how an animal lived, even millions of years later."
+ },
+ "bench": {
+  "cardTitle": "Put Structures to the Test",
+  "intro": "Now test your Warm-Up guess, then solve five structure case files.",
+  "kicker": "Part 4 game · Test your Warm-Up guess",
+  "title": "Roll the tube",
+  "job": [
+   "Slide to roll the same material into a wider tube.",
+   "Tap Load it to stack weights until it bends.",
+   "Test the solid rod and the widest tube."
+  ],
+  "rLabel": "How wide",
+  "solidLabel": "solid rod",
+  "tubeLabel": "hollow tube, {x} times as wide",
+  "loadLabel": "⬇ Load it",
+  "againLabel": "↺ Take the weights off and test again",
+  "heldLabel": "It held {n} weights, then bent.",
+  "same": "Same material, same weight: the purple ring always has the same area as the solid circle.",
+  "model": "A model: the numbers come from the math engineers use for bending, rounded to whole weights.",
+  "photos": [
+   {
+    "img": "images/nc/20-01-zoom-bone.jpg",
+    "cap": "A real leg bone, cut across: a hollow tube."
+   },
+   {
+    "img": "images/nc/20-01-hollow-stem.jpg",
+    "cap": "A real angelica stem, cut across: a hollow tube."
+   },
+   {
+    "img": "images/nc/20-01-galileo-tubes.jpg",
+    "cap": "Galileo's drawing, 1638: the tube and the rod."
+   }
+  ],
+  "photoCredit": "Photos: thigh bone, MAKY.OREL (CC0); angelica stem, MariahKRogers (CC0); Galileo's drawing (public domain).",
+  "need": "Test the solid rod and a tube at least 2 times as wide.",
+  "win": "The hollow tube held 3 to 4 times as many weights, with the same amount of material. Hollow can be stronger than solid.",
+  "compareTitle": "Your Warm-Up guess vs. the test",
+  "rows": [
+   "Solid rod",
+   "Hollow tube"
+  ],
+  "noData": "(not tested yet)",
+  "notSaved": "(not saved)"
+ },
+ "cases": {
+  "kicker": "Part 4 · Case files",
+  "title": "Structure detective",
+  "intro": "Each case file shows a real structure. Read the clue, look at the photo, and pick its job.",
+  "files": [
+   {
+    "name": "Duck: webbed feet",
+    "img": "images/nc/20-01-cf-duck.jpg",
+    "alt": "A female mallard walking on snow with orange webbed feet.",
+    "clue": "Skin stretched between its toes.",
+    "opts": [
+     "Paddles through water",
+     "Grabs and holds food",
+     "Keeps the duck warm"
+    ],
+    "ok": 0,
+    "why": "Webbed feet push a lot of water with each kick, so a duck can swim to find food and get away from danger."
+   },
+   {
+    "name": "Rose: prickles",
+    "img": "images/nc/20-01-cf-rose.jpg",
+    "alt": "A green rose stem with two sharp, dark, hooked prickles.",
+    "clue": "Sharp points along its stem.",
+    "opts": [
+     "Soaks up water",
+     "Keeps animals from eating it",
+     "Makes food from sunlight"
+    ],
+    "ok": 1,
+    "why": "An animal that bites a prickly stem gets hurt, so it leaves the rose alone. The rose keeps its leaves and flowers."
+   },
+   {
+    "name": "Owl: big eyes",
+    "img": "images/nc/20-01-cf-owl.jpg",
+    "alt": "A barred owl in a tree, with large dark eyes that face forward.",
+    "clue": "Huge eyes that face forward.",
+    "opts": [
+     "Scares away other owls",
+     "Keeps dust out",
+     "Sees in dim light and judges distance"
+    ],
+    "ok": 2,
+    "why": "Big eyes let in more light, so an owl can hunt at dusk and at night. Eyes that face forward help it judge how far away a mouse is."
+   },
+   {
+    "name": "Maple: winged seeds",
+    "img": "images/nc/20-01-cf-maple.jpg",
+    "alt": "Young red maple seeds, each with a thin, flat wing.",
+    "clue": "Seeds with thin wings.",
+    "opts": [
+     "Spin and drift away from the parent tree",
+     "Protect the tree from insects",
+     "Store water for winter"
+    ],
+    "ok": 0,
+    "why": "The wing makes the seed spin like a helicopter and fall slowly, so the wind can carry it to a new place with more room and light."
+   },
+   {
+    "name": "Box turtle: shell",
+    "img": "images/nc/20-01-turtle.jpg",
+    "alt": "A Florida box turtle with a high, hard, patterned shell.",
+    "clue": "A hard, curved shell.",
+    "opts": [
+     "Helps it run fast",
+     "Protects its soft body",
+     "Catches food"
+    ],
+    "ok": 1,
+    "why": "A box turtle can pull in its head and legs and close its shell like a box, so most predators cannot bite it."
+   }
+  ],
+  "doneLabel": "{n} of 5 case files solved",
+  "credit": "Photos: mallard, Mara Koenig, U.S. Fish and Wildlife Service (public domain); rose prickles, Alex Abair (CC BY 4.0); barred owl, Courtney Celley, U.S. Fish and Wildlife Service (public domain); red maple seeds, Sam Droege, USGS (public domain); Florida box turtle, Distinguished Reflections (CC BY 2.0).",
+  "twist": {
+   "head": "A duck did not grow webbed feet because it needed them.",
+   "line": "Ducklings hatch with webbed feet, because their parents had them. No plant or animal decides to grow a structure.",
+   "chain": "Over a very long time, the ones whose structures fit their home best survived and had more young. Next week: what happens when a home changes?"
+  }
+ },
+ "wonder": {
+  "footage": {
+   "after": ".nc-mp",
+   "title": "Ducklings on the move",
+   "src": "assets/video/20-01-ducklings.mp4",
+   "poster": "images/nc/20-01-ducklings-poster.jpg",
+   "intro": "These mallard ducklings are very young. Ducklings leave the nest and follow their mother to the water soon after they hatch, and they can swim right away.",
+   "look": [
+    "Look at the ducklings' feet as they walk. Can you see the webs between the toes?",
+    "Compare the mother's feet with the ducklings' feet.",
+    "Why would a duckling need webbed feet from its very first day?"
+   ],
+   "credit": "Video: “Mallard hen and ducklings, Wethersfield Cove” (2024), Paul Danese (CC BY-SA 4.0), via Wikimedia Commons. Cut and muted for this lesson."
+  },
+  "data": {
+   "host": ".nc-tb",
+   "after": ".nc-cf-wow",
+   "title": "How much of an animal is bone?",
+   "step": 5,
+   "bars": [
+    {
+     "name": "Mouse",
+     "v": 4.3,
+     "color": "#d4a017",
+     "full": "House mouse (about 20 grams)"
+    },
+    {
+     "name": "Rabbit",
+     "v": 6.5,
+     "color": "#e8590c",
+     "full": "Rabbit (about 2 kg)"
+    },
+    {
+     "name": "Deer",
+     "v": 8.8,
+     "color": "#c0392b",
+     "full": "White-tailed deer (about 60 kg)"
+    },
+    {
+     "name": "Horse",
+     "v": 10.7,
+     "color": "#7b1c14",
+     "full": "Horse (about 500 kg)"
+    },
+    {
+     "name": "Elephant",
+     "v": 13.1,
+     "color": "#0E1C42",
+     "full": "Elephant (about 5,000 kg)"
+    }
+   ],
+   "unit": "out of every 100 kg of body is skeleton",
+   "ylabel": "Skeleton, kg out of every 100 kg of body",
+   "intro": "Scientists weighed the skeletons of many mammals, from tiny shrews to big animals, and found a pattern. Each bar shows how many kilograms of skeleton there are in every 100 kilograms of body, for an animal of that size.",
+   "job": [
+    "Drag across the bars to read each number.",
+    "Compare the mouse with the elephant."
+   ],
+   "ask": "What does the data show?",
+   "opts": [
+    {
+     "t": "The bigger the animal, the more of its body is skeleton",
+     "ok": true
+    },
+    {
+     "t": "Every animal is about the same amount of bone",
+     "hint": "Compare 4.3 for the mouse with 13.1 for the elephant. Are those close?"
+    },
+    {
+     "t": "Small animals are mostly bone",
+     "hint": "Read the mouse bar. Is 4.3 out of 100 most of its body?"
+    }
+   ],
+   "win": "Right. A mouse is only about 4 kg of bone in every 100 kg, but an elephant is about 13. Bigger animals need extra bone to hold up their weight, just as Galileo said.",
+   "alt": "A bar graph of skeleton weight for every 100 kg of body: mouse 4.3, rabbit 6.5, deer 8.8, horse 10.7, elephant 13.1.",
+   "credit": "Data: values from the best-fit line for mammals in Prange, Anderson and Rahn, “Scaling of Skeletal Mass to Body Mass in Birds and Mammals,” The American Naturalist 113 (1979): 103–122 (skeleton mass = 0.061 × body mass^1.09, in kg), worked out for each animal's typical body mass."
+  },
+  "cabinet": {
+   "title": "A dinosaur's thigh bone",
+   "model": "assets/models/20-01-hadrosaur-femur.glb",
+   "viewer": "assets/sparkle/vendor/model-viewer-umd.min.js",
+   "alt": "A 3D scan of a heavy, brown fossil thigh bone from a duck-billed dinosaur.",
+   "text": "This is a real fossil thigh bone from a hadrosaur, a plant-eating, duck-billed dinosaur. It was found in Honduras in 1971, in rock about 95 million years old. A thigh bone holds up the back half of the body. Spin it, and look at its knobby ends and long, strong shaft. You can even see where cracks in the fossil were glued back together.",
+   "credit": "3D model: Hadrosauridae femur, USNM PAL181339, Department of Paleobiology, National Museum of Natural History, Smithsonian (CC0)."
+  }
+ },
+ "assignment": {
+  "hidePartA": true,
+  "hideQ": [
+   "partb-3"
+  ],
+  "renumber": {
+   "partb-1": "1",
+   "partb-2": "2"
+  },
+  "keep": [
+   "partb-1",
+   "partb-2"
+  ],
+  "hide": [
+   ".revise-block"
+  ]
+ },
+ "nextPage": {
+  "title": "Part C · Write the next page",
+  "intro": "Galileo's giant bone is the first half of page 20. Now add yours.",
+  "boxes": [
+   {
+    "id": "nc-p1",
+    "label": "My same-job pair card",
+    "prompt": "Pick one plant and one animal that solve the same survival problem in different ways. Name the job and each structure. Explain how each shape fits the job.",
+    "min": 20
+   },
+   {
+    "id": "nc-p3",
+    "label": "Galileo's giant",
+    "prompt": "Explain why a giant animal would need bones that are much thicker, not just longer. Use one number from Grow the giant.",
+    "min": 15
+   }
+  ]
+ },
+ "chain": [
+  {
+   "page": 17,
+   "who": "1648 · Van Helmont",
+   "what": "Where does a tree come from?"
+  },
+  {
+   "page": 17,
+   "who": "1772 · Priestley",
+   "what": "Can a plant fix the air?"
+  },
+  {
+   "page": 18,
+   "who": "1779 · Ingenhousz",
+   "what": "Does a plant need light?"
+  },
+  {
+   "page": 18,
+   "who": "1927 · Elton",
+   "what": "How do we draw the path of energy?"
+  },
+  {
+   "page": 19,
+   "who": "1628 · Harvey",
+   "what": "What does the heart do?"
+  },
+  {
+   "page": 19,
+   "who": "1628 · Harvey, Ch. 9",
+   "what": "Where does all that blood go?"
+  },
+  {
+   "page": 20,
+   "who": "1638 · Galileo",
+   "what": "Why does a giant need fat bones?",
+   "you": true
+  },
+  {
+   "page": 21,
+   "who": "Next week",
+   "what": "How do living things respond when their home changes?"
+  }
+ ],
+ "planner": {
+  "title": "Plan before you write",
+  "intro": "Tap two or more pieces of evidence to add them to your Evidence box. Then write your claim and reasoning in your own words.",
+  "cards": [
+   "A pine's woody stem and a deer's skeleton both hold the body up, but one is made of wood and the other of bone.",
+   "A rose's prickles and a porcupine's quills both have sharp points that keep hungry animals away.",
+   "In Grow the giant, a bone 3 times longer had to be about 5 times thicker to hold the bigger, heavier body.",
+   "In Roll the tube, a hollow tube held 3 to 4 times as many weights as a solid rod made of the same amount of material.",
+   "Bird bones and many plant stems are hollow tubes: light, but hard to bend.",
+   "A duck's webbed feet push water like paddles, and ducklings hatch with them."
+  ]
+ },
+ "checklist": [
+  "Warm-Up: your two weight guesses and at least 2 sentences of reasons.",
+  "Part B: questions 1 and 2, in complete sentences.",
+  "Part C: your notebook page (both boxes).",
+  "C-E-R: a claim, at least two structures as evidence, and your reasoning."
+ ],
+ "camera": {
+  "missions": [
+   "Your weight guesses (Warm-Up)",
+   "Your giant's bone that holds (Part 1)",
+   "All 6 memory pairs (Part 2)",
+   "A skull you solved (Part 3)",
+   "Your tube test and case files (Part 4)"
+  ]
+ }
+}

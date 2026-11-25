@@ -1184,3 +1184,90 @@ details.nc-why { margin: 10px 0 0; } details.nc-why summary { cursor: pointer; f
 .nc-cg-ghost { position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%, -50%); background: #0E1C42; color: #fff; border-radius: 999px; padding: 8px 14px; font: 900 14px 'Nunito', sans-serif; box-shadow: 0 6px 16px rgba(0,0,0,.3); }
 @media (max-width: 480px) { .nc-cg-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .nc-cg-slot { grid-column: 1 / -1; grid-row: 2; } .nc-cg-box .nc-pk-imgs img { width: 28px; height: 28px; } }
 @media (prefers-reduced-motion: reduce) { .nc-bt-heart.go img, .nc-bt-heart.go .nc-bt-ring, .nc-lb-tap.hit, .nc-cg-row.flash { animation: none; } }
+
+/* ───────────── 20.01: Stack the weights, Grow the giant, Memory pairs, Clue by clue, Roll the tube, case files ───────────── */
+.nc-sw-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 10px 0 6px; }
+.nc-sw-item { background: #fff; border: 1.5px solid #E2D6C8; border-radius: 12px; padding: 10px 10px 12px; text-align: center; }
+.nc-sw-name { font: 900 15px 'Nunito', sans-serif; color: #0E1C42; }
+.nc-sw-note { font-size: 13px; color: #7a6a58; margin-bottom: 4px; }
+.nc-sw-svg, .nc-tb-svg { width: 100%; height: auto; display: block; }
+.nc-sw-step { display: flex; align-items: center; justify-content: center; gap: 12px; }
+.nc-sw-step .nc-cup-edit { margin-top: 0; min-width: 44px; min-height: 40px; font-size: 18px; }
+.nc-sw-n { font: 900 26px 'Nunito', sans-serif; color: #0E1C42; min-width: 36px; }
+.nc-sw-u { font-size: 12.5px; color: #7a6a58; }
+@media (max-width: 520px) { .nc-sw-row { grid-template-columns: minmax(0, 1fr); } }
+
+.nc-gt-sizes { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.nc-gt-sizes .nc-opt { flex: 1 1 120px; text-align: center; }
+.nc-gt-sizes .nc-opt.ok::after { content: ' ✓'; color: #1a6b35; }
+.nc-gt-stage { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 12px; align-items: center; background: linear-gradient(#f4f8fb, #eef2e6); border-radius: 12px; padding: 10px; }
+.nc-gt-animal { text-align: center; min-height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
+.nc-gt-animal img { width: 56%; max-width: 100%; border-radius: 8px; transition: width .5s ease; box-shadow: 0 3px 10px rgba(0,0,0,.18); }
+.nc-gt-lab { font: 800 13px 'Nunito', sans-serif; color: #0E1C42; margin-top: 6px; }
+.nc-gt-bone { width: 100%; height: auto; display: block; }
+.nc-gt-state { text-align: center; font: 900 15px 'Nunito', sans-serif; margin-top: 2px; }
+.nc-gt-state.nc-gt-ok { color: #1a6b35; } .nc-gt-state.nc-gt-bend { color: #a8650a; } .nc-gt-state.nc-gt-snap { color: #b03020; }
+.nc-gt-sl { display: block; font: 800 14px 'Nunito', sans-serif; color: #0E1C42; margin: 12px 0 4px; }
+.nc-gt-sl input { display: block; width: 100%; margin-top: 6px; accent-color: #0E1C42; min-height: 30px; }
+.nc-gt-meter { position: relative; height: 12px; background: #efe7da; border-radius: 999px; overflow: hidden; margin: 6px 0 10px; }
+.nc-gt-meter i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; transition: width .25s; }
+.nc-gt-meter i.nc-gt-ok { background: #34B76F; } .nc-gt-meter i.nc-gt-bend { background: #e2a23a; } .nc-gt-meter i.nc-gt-snap { background: #c0392b; }
+.nc-gt-mark { position: absolute; top: -2px; bottom: -2px; width: 3px; background: #0E1C42; }
+.nc-gt-gal img { width: 100%; max-width: 520px; display: block; margin: 0 auto 6px; border-radius: 6px; }
+@media (max-width: 560px) { .nc-gt-stage { grid-template-columns: minmax(0, 1fr); } }
+
+.nc-mp-score { display: flex; justify-content: space-between; font: 800 13.5px 'Nunito', sans-serif; color: #0E1C42; margin: 8px 0; }
+.nc-mp-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.nc-mp-card { position: relative; aspect-ratio: 3 / 4; border: 0; padding: 0; background: none; cursor: pointer; perspective: 800px; }
+.nc-mp-in { position: absolute; inset: 0; transition: transform .45s; transform-style: preserve-3d; }
+.nc-mp-card.open .nc-mp-in { transform: rotateY(180deg); }
+.nc-mp-back, .nc-mp-face { position: absolute; inset: 0; border-radius: 10px; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; }
+.nc-mp-back { background: repeating-linear-gradient(0deg, #fbf6ea 0 17px, #cfe0ef 17px 18px), #fbf6ea; border: 2px solid #c8b896; display: flex; align-items: center; justify-content: center; font: 900 34px 'Cormorant Garamond', Georgia, serif; color: #0E1C42; box-shadow: inset 6px 0 0 #e8a0a0; }
+.nc-mp-face { transform: rotateY(180deg); background: #fff; border: 2px solid #0E1C42; display: flex; flex-direction: column; }
+.nc-mp-face img { width: 100%; flex: 1 1 auto; min-height: 0; object-fit: cover; display: block; }
+.nc-mp-face b { font: 800 12px 'Nunito', sans-serif; color: #0E1C42; padding: 4px 4px 0; line-height: 1.2; }
+.nc-mp-face small { font: 700 10.5px 'Nunito', sans-serif; color: #7a6a58; padding: 0 4px 5px; }
+.nc-mp-card.got .nc-mp-face { border-color: #34B76F; box-shadow: 0 0 0 2px rgba(52,183,111,.35); }
+.nc-mp-card:disabled { cursor: default; }
+.nc-mp-jobs { display: grid; gap: 6px; margin-top: 10px; }
+.nc-mp-job { background: #eaf7ef; border-radius: 8px; padding: 7px 10px; font-size: 14px; color: #2B1D12; }
+.nc-mp-job b { color: #1a6b35; margin-right: 4px; }
+@media (max-width: 560px) { .nc-mp-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (prefers-reduced-motion: reduce) { .nc-mp-in, .nc-gt-animal img, .nc-gt-meter i { transition: none; } }
+
+.nc-cl-tabs { display: flex; gap: 6px; margin: 8px 0; }
+.nc-cl-tabs .nc-opt { flex: 1; text-align: center; }
+.nc-cl-tabs .nc-opt.ok::after { content: ' ✓'; color: #1a6b35; }
+.nc-cl-pic { position: relative; border-radius: 10px; overflow: hidden; background: #222; aspect-ratio: 4 / 3; }
+.nc-cl-pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.nc-cl-blur { filter: blur(16px) brightness(.55); transform: scale(1.08); }
+.nc-cl-clues { margin: 10px 0 4px 20px; padding: 0; font-size: 14.5px; line-height: 1.5; color: #2B1D12; }
+.nc-cl-clues li { margin-bottom: 4px; }
+.nc-cl-k { font: 900 11px 'Nunito', sans-serif; letter-spacing: 1px; text-transform: uppercase; color: #7a5a2c; margin-right: 4px; }
+.nc-cl-stars { font-size: 22px; color: #e0a800; margin-top: 8px; }
+.nc-cl-stars span { font: 800 13px 'Nunito', sans-serif; color: #0E1C42; }
+
+.nc-tb-stage { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 12px; align-items: center; background: #fff; border: 1.5px solid #E2D6C8; border-radius: 12px; padding: 10px; margin-top: 8px; }
+.nc-tb-x svg { width: 110px; height: 110px; display: block; margin: 0 auto; }
+.nc-tb-xl { text-align: center; font: 800 12px 'Nunito', sans-serif; color: #0E1C42; }
+.nc-tb-same { font-size: 13.5px; color: #5A4D3E; }
+.nc-tb-log table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 14px; }
+.nc-tb-log th, .nc-tb-log td { border-top: 1px solid #f0e8dc; padding: 6px; text-align: left; }
+.nc-tb-log td { font-weight: 900; color: #0E1C42; }
+.nc-tb-photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+.nc-tb-photos figure { margin: 0; }
+.nc-tb-photos img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; display: block; background: #fff; }
+.nc-tb-photos figcaption { font-size: 12.5px; color: #5A4D3E; line-height: 1.35; margin-top: 4px; }
+@media (max-width: 560px) { .nc-tb-stage { grid-template-columns: minmax(0, 1fr); } .nc-tb-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.nc-cf-score { font: 800 13.5px 'Nunito', sans-serif; color: #0E1C42; margin: 6px 0 8px; }
+.nc-cf-grid { display: grid; gap: 10px; }
+.nc-cf-file { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 12px; background: #fff; border: 1.5px solid #E2D6C8; border-radius: 12px; padding: 10px; }
+.nc-cf-file.ok { border-color: #9fd9b5; }
+.nc-cf-file img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; display: block; }
+.nc-cf-body b { font: 900 15px 'Nunito', sans-serif; color: #0E1C42; }
+.nc-cf-clue { font-size: 14px; color: #5A4D3E; margin: 2px 0 6px; }
+.nc-cf-opts { display: grid; gap: 5px; }
+.nc-cf-opts .nc-opt { padding: 8px 10px; font-size: 14px; }
+@media (max-width: 480px) { .nc-cf-file { grid-template-columns: minmax(0, 1fr); } .nc-cf-file img { aspect-ratio: 16 / 9; } }
+.nc-tb-photos figure:last-child img { object-fit: contain; }
