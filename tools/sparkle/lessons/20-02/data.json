@@ -1,0 +1,1191 @@
+{
+ "onestep": true,
+ "lesson": "20.02",
+ "prefix": "g5sci-20-2",
+ "page": 20,
+ "part": 2,
+ "pages": 30,
+ "title": "Investigation: Structure and Function Comparison",
+ "audio": "assets/audio/keeper/",
+ "h2c": "assets/sparkle/vendor/html2canvas.min.js",
+ "tabs": {
+  "hide": [
+   "explore"
+  ],
+  "redirect": {
+   "explore": "lesson"
+  },
+  "labels": {
+   "vocab": "🌅 Warm-Up",
+   "lesson": "📖 The Lesson",
+   "quiz": "🧠 Self-Check",
+   "assignment": "✍️ Assignment"
+  }
+ },
+ "leanHide": [
+  "#tab-lesson .diagram-wrap",
+  "#tab-vocab .callout-tip"
+ ],
+ "leanHideText": [
+  "Key Concept"
+ ],
+ "opener": {
+  "kicker": "The Notebook Chain · Page 20",
+  "title": "Investigation: Structure and Function Comparison",
+  "question": "Why do birds have so many different beak shapes? Can a beak's shape decide what a bird is able to eat?",
+  "zoom": 6,
+  "step": 5.6,
+  "alt": "An opening film that zooms in from Earth seen from space, to the Galápagos Islands, to the tiny island of Daphne Major, to a ground finch on dry ground, to a close-up of a finch's thick beak, and finally to the hard, spiny fruits finches crack open.",
+  "frames": [
+   {
+    "img": "images/nc/20-02-zoom-earth.jpg",
+    "w": 1920,
+    "h": 1920,
+    "fx": 0.56,
+    "fy": 0.62,
+    "label": "Earth, seen from a NASA camera far out in space",
+    "scale": "about 12,700 km across",
+    "line": "Every bird on Earth eats with the same kind of tool: its beak."
+   },
+   {
+    "img": "images/nc/20-02-zoom-galapagos.jpg",
+    "w": 1800,
+    "h": 1400,
+    "fx": 0.48,
+    "fy": 0.38,
+    "label": "The Galápagos Islands, seen by a NASA satellite",
+    "scale": "the islands sit on the equator, about 900 km west of South America",
+    "line": "Far out in the Pacific Ocean lie the Galápagos Islands."
+   },
+   {
+    "img": "images/nc/20-02-zoom-daphne.jpg",
+    "w": 2048,
+    "h": 1536,
+    "fx": 0.62,
+    "fy": 0.5,
+    "label": "Daphne Major, a tiny Galápagos island",
+    "scale": "less than 1 km across",
+    "line": "Scientists have studied the finches on this tiny island every year since 1973."
+   },
+   {
+    "img": "images/nc/20-02-zoom-finch.jpg",
+    "w": 1920,
+    "h": 1280,
+    "fx": 0.38,
+    "fy": 0.55,
+    "label": "A medium ground finch hunting for seeds",
+    "scale": "the bird is about 12 cm long",
+    "line": "Finches hop over the dry ground, looking for seeds."
+   },
+   {
+    "img": "images/nc/20-02-zoom-head.jpg",
+    "w": 1920,
+    "h": 1277,
+    "fx": 0.27,
+    "fy": 0.32,
+    "label": "A large ground finch, up close",
+    "scale": "its beak is about 2 cm deep",
+    "line": "A ground finch's beak is short, deep and strong, like a nutcracker."
+   },
+   {
+    "img": "images/nc/20-02-zoom-seed.jpg",
+    "w": 1920,
+    "h": 1440,
+    "fx": 0.5,
+    "fy": 0.5,
+    "label": "Tribulus, a Galápagos plant, with its green fruits",
+    "scale": "each fruit is about 1 cm across",
+    "line": "When they dry, these fruits turn hard and spiny. Only a deep beak can crack them."
+   }
+  ],
+  "credits": [
+   [
+    "Earth from DSCOVR's EPIC camera, 6 July 2015",
+    "NASA",
+    "Public domain",
+    "https://commons.wikimedia.org/wiki/File:Earth_as_seen_on_July_6,_2015_from_a_distance_of_one_million_miles_by_DSCOVR%27s_EPIC_scientific_camera.jpg"
+   ],
+   [
+    "Galápagos Islands (MODIS, 26 March 2018)",
+    "Jeff Schmaltz, MODIS Land Rapid Response Team, NASA GSFC",
+    "Public domain",
+    "https://commons.wikimedia.org/wiki/File:Galapagos_Islands_(MODIS_2018-03-26).jpg"
+   ],
+   [
+    "Daphne Major",
+    "Mike Weston",
+    "CC BY 2.0",
+    "https://commons.wikimedia.org/wiki/File:Daphne_Major.jpg"
+   ],
+   [
+    "Medium ground finch on Floreana Island",
+    "Andrew Katsis",
+    "CC BY 4.0",
+    "https://commons.wikimedia.org/wiki/File:Medium_ground_finch_on_Floreana_Island_in_the_Gal%C3%A1pagos_Islands.jpg"
+   ],
+   [
+    "Large ground finch",
+    "Peter Wilton",
+    "CC BY 2.0",
+    "https://commons.wikimedia.org/wiki/File:Large_ground_finch_(4229035966).jpg"
+   ],
+   [
+    "Tribulus cistoides fruit",
+    "Jjargoud",
+    "CC BY-SA 4.0",
+    "https://commons.wikimedia.org/wiki/File:Tribulus_cistoides_fruit.jpg"
+   ]
+  ]
+ },
+ "keeper": {
+  "name": "Listen",
+  "role": "",
+  "clips": {
+   "k-warmup": {
+    "text": "Four birds, four foods, but the foods are in the wrong spots. Swap them until each food sits under the beak built to eat it. Then pick which tool you think will win with beans, and which will win with rice. Tap Save my guess, and write why.",
+    "dur": 17.4,
+    "cues": [
+     {
+      "at": "Four birds",
+      "sel": ".nc-mn-beak",
+      "fx": "glow",
+      "all": true
+     },
+     {
+      "at": "Swap them",
+      "sel": ".nc-mn-food",
+      "fx": "point",
+      "all": true
+     },
+     {
+      "at": "pick which tool",
+      "sel": ".nc-mn-tools",
+      "fx": "glow",
+      "all": true
+     },
+     {
+      "at": "Save my guess",
+      "sel": ".nc-mn-save",
+      "fx": "pop"
+     },
+     {
+      "at": "write why",
+      "sel": "#pred-1",
+      "fx": "point"
+     }
+    ]
+   },
+   "k-words": {
+    "text": "Beak. Structure. Function. Fair test. Data. Environment.",
+    "dur": 6.53,
+    "cues": [
+     {
+      "at": "Beak",
+      "sel": ".nc-wl-st",
+      "fx": "pop",
+      "i": 0,
+      "scroll": false
+     },
+     {
+      "at": "Structure",
+      "sel": ".nc-wl-st",
+      "fx": "pop",
+      "i": 1,
+      "scroll": false
+     },
+     {
+      "at": "Function",
+      "sel": ".nc-wl-st",
+      "fx": "pop",
+      "i": 2,
+      "scroll": false
+     },
+     {
+      "at": "Fair test",
+      "sel": ".nc-wl-st",
+      "fx": "pop",
+      "i": 3,
+      "scroll": false
+     },
+     {
+      "at": "Data",
+      "sel": ".nc-wl-st",
+      "fx": "pop",
+      "i": 4,
+      "scroll": false
+     },
+     {
+      "at": "Environment",
+      "sel": ".nc-wl-st",
+      "fx": "pop",
+      "i": 5,
+      "scroll": false
+     }
+    ]
+   },
+   "k-part1": {
+    "text": "In eighteen forty-five, Charles Darwin printed this page about the finches he saw on the Galápagos Islands. Tap each yellow line to read it in plain English. Then slide the caliper jaws, and measure each beak.",
+    "dur": 14.76,
+    "cues": [
+     {
+      "at": "Charles Darwin",
+      "sel": ".nc-src-paper",
+      "fx": "glow"
+     },
+     {
+      "at": "yellow line",
+      "sel": ".nc-src-hl",
+      "fx": "pop"
+     },
+     {
+      "at": "caliper jaws",
+      "sel": ".nc-cp-stage",
+      "fx": "glow"
+     },
+     {
+      "at": "measure each beak",
+      "sel": ".nc-cp-tabs",
+      "fx": "point"
+     }
+    ]
+   },
+   "k-quiz": {
+    "text": "Three quick questions, just for you. They are not graded. Tap an answer and read the note under it. Think about what job each structure does.",
+    "dur": 10.11,
+    "cues": [
+     {
+      "at": "Tap an answer",
+      "sel": "#tab-quiz .quiz-opt",
+      "fx": "point"
+     }
+    ]
+   },
+   "k-assign": {
+    "text": "Now write your half of page twenty. Answer the two Part B questions. In Part C, make your beak data card. Then tap evidence cards in the planner to build your C-E-R about how beak shapes help birds survive.",
+    "dur": 16.2,
+    "cues": [
+     {
+      "at": "Part B",
+      "sel": "#partb-1",
+      "fx": "point"
+     },
+     {
+      "at": "Part C",
+      "sel": "#nc-p1",
+      "fx": "point"
+     },
+     {
+      "at": "planner",
+      "sel": ".nc-plan",
+      "fx": "glow"
+     }
+    ]
+   }
+  }
+ },
+ "menu": {
+  "title": "Swap the menu",
+  "intro": "Here are four real beaks and four real foods. The foods are in the wrong spots.",
+  "job": [
+   "Tap a food, then tap another food to swap them.",
+   "Or drag one food onto another.",
+   "Put each food under the beak built to eat it, then tap Check my menu."
+  ],
+  "beaks": [
+   {
+    "name": "Large ground finch",
+    "img": "images/nc/20-02-wu-finch.jpg",
+    "alt": "A brown-gray finch on a rock, with a short, thick, cone-shaped beak.",
+    "food": {
+     "name": "Hard seeds",
+     "img": "images/nc/20-02-wu-seeds.jpg"
+    },
+    "hint": "A short, thick beak is strong, like a nutcracker. Which food has to be cracked?",
+    "why": "A thick beak cracks hard seeds."
+   },
+   {
+    "name": "Great blue heron",
+    "img": "images/nc/20-02-wu-heron.jpg",
+    "alt": "The head of a gray heron with a long, sharp, pointed yellow beak.",
+    "food": {
+     "name": "Small fish",
+     "img": "images/nc/20-02-wu-fish.jpg"
+    },
+    "hint": "A long, sharp beak works like a spear. Which food swims?",
+    "why": "A long, sharp beak grabs fish in the water."
+   },
+   {
+    "name": "Red-tailed hawk",
+    "img": "images/nc/20-02-wu-hawk.jpg",
+    "alt": "The head of a brown hawk with a short, hooked, sharp beak.",
+    "food": {
+     "name": "Rats and mice",
+     "img": "images/nc/20-02-wu-rat.jpg"
+    },
+    "hint": "A hooked beak tears meat. Which food is a small animal?",
+    "why": "A hooked beak tears meat."
+   },
+   {
+    "name": "Ruby-throated hummingbird",
+    "img": "images/nc/20-02-wu-hummer.jpg",
+    "alt": "A tiny green hummingbird hovering by purple flowers, with a long, thin beak.",
+    "food": {
+     "name": "Flower nectar",
+     "img": "images/nc/20-02-wu-flower.jpg"
+    },
+    "hint": "A long, thin beak works like a straw. Which food is a sweet liquid hidden in a flower?",
+    "why": "A long, thin beak sips nectar from deep in a flower."
+   }
+  ],
+  "checkLabel": "✓ Check my menu",
+  "resetLabel": "↺ Mix up the menu again",
+  "someRight": "{n} of 4 are in the right spot.",
+  "win": "Every beak has its food. The shape of the beak matches the job it does.",
+  "credit": "Photos: large ground finch, Lip Kee (CC BY-SA 2.0); heron, Hans Hillewaert (CC BY-SA 3.0); hawk, Rhododendrites (CC BY-SA 4.0); hummingbird, jeffreyw (CC BY 2.0); Tribulus, David Eickhoff (CC BY 2.0); mosquitofish, Smithsonian Environmental Research Center (CC BY 2.0); cotton rat, Andrew Durso (CC BY 4.0); firebush flowers, Ks.mini (CC BY-SA 3.0).",
+  "pickTitle": "Now predict the beak test",
+  "pickIntro": "In Part 4, a spoon, tweezers and a clothespin will act like beaks. Each one gets 30 seconds to move beans, then rice. Which tool will move the most of each food?",
+  "foods": [
+   {
+    "k": "beans",
+    "name": "Beans"
+   },
+   {
+    "k": "rice",
+    "name": "Rice"
+   }
+  ],
+  "tools": [
+   {
+    "k": "spoon",
+    "name": "Spoon"
+   },
+   {
+    "k": "tweezers",
+    "name": "Tweezers"
+   },
+   {
+    "k": "clothespin",
+    "name": "Clothespin"
+   }
+  ],
+  "model": "Tool pictures are models.",
+  "notYet": "Pick a tool for beans and a tool for rice, then save.",
+  "saved": "🔒 Saved: {g}. Part 4 tests it.",
+  "lockedNote": "🔒 Your guess: {g}. Part 4 shows your data next to it.",
+  "reasonPrompt": "Why do you think so? Write at least 2 sentences. What about each tool's shape makes it good or bad for each food?",
+  "placeholder": "I think the ___ will win with beans because… The ___ will win with rice because…"
+ },
+ "wordlens": {
+  "intro": "Tap a word to see what it means.",
+  "words": [
+   {
+    "w": "beak",
+    "icon": "🐦",
+    "def": "The hard mouth part of a bird. Its shape decides what foods the bird can eat."
+   },
+   {
+    "w": "structure",
+    "icon": "🏗️",
+    "def": "A body part of a living thing, like a beak, a root, or a shell."
+   },
+   {
+    "w": "function",
+    "icon": "⚙️",
+    "def": "The job a structure does. A beak's function is to get food."
+   },
+   {
+    "w": "fair test",
+    "icon": "⚖️",
+    "def": "A test where you change only one thing and keep everything else the same."
+   },
+   {
+    "w": "data",
+    "icon": "📊",
+    "def": "Numbers and facts you collect during a test. Data helps you compare results."
+   },
+   {
+    "w": "environment",
+    "icon": "🏞️",
+    "def": "The place where an organism lives, including its food, water, and weather."
+   }
+  ]
+ },
+ "source": {
+  "kicker": "Part 1 · A real book from 1845",
+  "title": "Darwin's finches",
+  "tag": "Real source from 1845",
+  "alt": "Two printed pages in English from Darwin's 1845 book. The left page, page 379, has a drawing of four finch heads with beaks from very thick to very thin. The right page, page 380, is all text.",
+  "intro": "In 1835, a 26-year-old scientist named Charles Darwin visited the Galápagos Islands on a ship called the Beagle. He collected birds, including many finches. Ten years later, in 1845, he printed these two pages in his book Journal of Researches.",
+  "img": "images/nc/20-02-darwin.jpg",
+  "w": 1628,
+  "h": 1300,
+  "job": [
+   "Tap each yellow line to read it in plain English.",
+   "Then find the two lines in the hunts."
+  ],
+  "lines": [
+   {
+    "y": [
+     232,
+     318
+    ],
+    "x": [
+     28,
+     725
+    ],
+    "en": "The other land birds are a very unusual group of finches. They are related to each other by the shape of their beaks, their short tails, their bodies and their feathers. There are thirteen kinds."
+   },
+   {
+    "y": [
+     486,
+     542
+    ],
+    "x": [
+     28,
+     725
+    ],
+    "en": "Most of these finches gather in flocks and feed on the dry, bare ground of the lowlands."
+   },
+   {
+    "y": [
+     600,
+     657
+    ],
+    "x": [
+     28,
+     725
+    ],
+    "tag": "steps",
+    "en": "The strangest fact is that the beak sizes change in perfect steps, from a beak as big as a hawfinch's to one as small as a chaffinch's."
+   },
+   {
+    "y": [
+     675,
+     1122
+    ],
+    "x": [
+     60,
+     700
+    ],
+    "en": "Darwin's drawing: four finch heads. Number 1 has the biggest, deepest beak. Numbers 3 and 4 have small, thin beaks."
+   },
+   {
+    "y": [
+     1130,
+     1172
+    ],
+    "x": [
+     120,
+     680
+    ],
+    "en": "Their names. Today we call them: 1, the large ground finch. 2, the medium ground finch. 3, the small tree finch. 4, the warbler finch."
+   },
+   {
+    "y": [
+     100,
+     232
+    ],
+    "x": [
+     898,
+     1600
+    ],
+    "en": "The biggest beak is in Fig. 1 and the smallest in Fig. 3. But in between, there is not just one kind with a medium beak, like Fig. 2. There are at least six kinds, with beaks that change in tiny steps."
+   },
+   {
+    "y": [
+     232,
+     302
+    ],
+    "x": [
+     898,
+     1600
+    ],
+    "en": "The warbler finch's thin beak is shown in Fig. 4. The cactus finch's beak is a bit like a starling's. Another group has a beak shaped a little like a parrot's."
+   },
+   {
+    "y": [
+     302,
+     442
+    ],
+    "x": [
+     898,
+     1600
+    ],
+    "tag": "ends",
+    "en": "Seeing these step-by-step beaks in one small group of closely related birds, you might really imagine this: long ago, when very few birds lived on these islands, one kind of bird arrived, and it was changed over time for different jobs."
+   }
+  ],
+  "asks": [
+   {
+    "q": "Hunt 1: Find the line where Darwin says the beak sizes change in perfect steps.",
+    "tag": "steps",
+    "yes": "Yes! From big to small, in tiny steps. That is why you will measure them next.",
+    "no": "Not that one. Look at the left page, just above the drawing."
+   },
+   {
+    "q": "Hunt 2: Find the line where Darwin wonders if one kind of bird was changed for different jobs.",
+    "tag": "ends",
+    "yes": "Yes! Darwin wondered if one kind of finch arrived long ago and its beaks changed to fit different foods. That idea grew into his famous theory.",
+    "no": "Not quite. Look at the right page, about a third of the way down."
+   }
+  ],
+  "credit": "Source: Charles Darwin, Journal of Researches into the Natural History and Geology of the Countries Visited during the Voyage of H.M.S. Beagle, 2nd edition (London: John Murray, 1845), pages 379 and 380, scan from the Wellcome Collection via the Internet Archive (public domain). Plain-English version written for this lesson."
+ },
+ "caliper": {
+  "kicker": "Part 1 game · Measure Darwin's finches",
+  "title": "Caliper check",
+  "intro": "Scientists who study Darwin's finches today measure each beak with a tool called a caliper. Its two jaws close on the beak, and its scale shows how deep the beak is. Try it on Darwin's real drawing.",
+  "job": [
+   "Drag the top jaw to the top of the beak, where it meets the feathers.",
+   "Drag the bottom jaw to the bottom of the beak.",
+   "Tap Read the caliper. Measure all four finches."
+  ],
+  "img": "images/nc/20-02-finches.jpg",
+  "w": 1800,
+  "h": 1380,
+  "alt": "Darwin's 1845 drawing of four finch heads, with a model caliper beside the beak you are measuring.",
+  "pxPerUnit": 16,
+  "step": 4,
+  "tol": 0.18,
+  "minTol": 9,
+  "heads": [
+   {
+    "label": "Finch 1",
+    "name": "large ground finch",
+    "x": 300,
+    "top": 192,
+    "bot": 522,
+    "start": 70,
+    "arm": 120,
+    "view": [
+     0,
+     60,
+     900,
+     562
+    ]
+   },
+   {
+    "label": "Finch 2",
+    "name": "medium ground finch",
+    "x": 1100,
+    "top": 170,
+    "bot": 425,
+    "start": 60,
+    "arm": 110,
+    "view": [
+     820,
+     100,
+     900,
+     562
+    ]
+   },
+   {
+    "label": "Finch 3",
+    "name": "small tree finch",
+    "x": 200,
+    "top": 878,
+    "bot": 944,
+    "start": 45,
+    "arm": 90,
+    "view": [
+     40,
+     720,
+     640,
+     400
+    ]
+   },
+   {
+    "label": "Finch 4",
+    "name": "warbler finch",
+    "x": 1000,
+    "top": 795,
+    "bot": 830,
+    "start": 40,
+    "arm": 90,
+    "view": [
+     880,
+     690,
+     640,
+     400
+    ]
+   }
+  ],
+  "topLabel": "Top jaw",
+  "botLabel": "Bottom jaw",
+  "readLabel": "📏 Read the caliper",
+  "okLine": "{f}: the beak is {n} units deep.",
+  "hints": {
+   "topHigh": "The top jaw is floating above the beak. Move it down until it just touches the top of the beak.",
+   "topLow": "The top jaw is pressing into the beak. Move it up to the top edge of the beak.",
+   "botLow": "The bottom jaw is below the beak. Move it up until it touches the bottom edge.",
+   "botHigh": "The bottom jaw is inside the beak. Move it down to the bottom edge."
+  },
+  "colFinch": "Finch",
+  "colDepth": "Beak depth (caliper units)",
+  "ask": "Look at your four readings. What pattern did Darwin notice?",
+  "opts": [
+   {
+    "t": "The beaks change in steps, from very deep seed-crackers to thin insect-pickers",
+    "ok": true
+   },
+   {
+    "t": "All four beaks are about the same depth",
+    "hint": "Compare your biggest reading with your smallest. Are they close?"
+   },
+   {
+    "t": "The finches with thin beaks crack the biggest seeds",
+    "hint": "Think about a nutcracker and a pair of tweezers. Which one cracks hard things?"
+   }
+  ],
+  "win": "Right. Darwin called it a perfect gradation: big steps down, from the deep beak of Finch 1 to the thin beak of Finch 4. Each beak fits a different food.",
+  "againLabel": "↺ Open the caliper and measure again",
+  "credit": "Drawing: Darwin, Journal of Researches (1845), page 379 (public domain). The caliper is a model; its units measure the drawing, not the real birds."
+ },
+ "shadow": {
+  "kicker": "Part 2 game · Beaks are tools",
+  "title": "Shadow match",
+  "intro": "Six real birds, six kitchen and workshop tools. Each beak works like one of these tools.",
+  "job": [
+   "Pick a tool, then tap the bird whose beak works like it.",
+   "Or drag the tool onto the bird.",
+   "Match all six."
+  ],
+  "tools": [
+   {
+    "k": "nutcracker",
+    "name": "Nutcracker"
+   },
+   {
+    "k": "straw",
+    "name": "Straw"
+   },
+   {
+    "k": "spear",
+    "name": "Spear"
+   },
+   {
+    "k": "hook",
+    "name": "Hook"
+   },
+   {
+    "k": "strainer",
+    "name": "Strainer"
+   },
+   {
+    "k": "chisel",
+    "name": "Chisel"
+   }
+  ],
+  "birds": [
+   {
+    "name": "Northern cardinal",
+    "img": "images/nc/20-02-sm-cardinal.jpg",
+    "alt": "A bright red cardinal with a short, thick, cone-shaped orange beak.",
+    "tool": "nutcracker",
+    "meal": "Eats: seeds it cracks open",
+    "why": "Nutcracker! A cardinal's thick beak cracks seeds, like the ground finches on Darwin's page.",
+    "hint": "Look for a short, thick, strong beak."
+   },
+   {
+    "name": "Sword-billed hummingbird",
+    "img": "images/nc/20-02-sm-sword.jpg",
+    "alt": "A green hummingbird perched on a branch, with a beak even longer than its body.",
+    "tool": "straw",
+    "meal": "Eats: nectar from very long flowers",
+    "why": "Straw! This hummingbird's beak is longer than the rest of its body, so it reaches nectar no other bird can.",
+    "hint": "Look for the longest, thinnest beak."
+   },
+   {
+    "name": "Great blue heron",
+    "img": "images/nc/20-02-sm-heron.jpg",
+    "alt": "A heron's head with a long, sharp, dagger-shaped yellow beak, by the sea in Florida.",
+    "tool": "spear",
+    "meal": "Eats: fish and frogs",
+    "why": "Spear! A heron stands still, then strikes fast with its sharp beak to grab a fish.",
+    "hint": "Look for a long, sharp beak like a dagger."
+   },
+   {
+    "name": "Osprey",
+    "img": "images/nc/20-02-sm-osprey.jpg",
+    "alt": "An osprey's head with a black, sharply hooked beak and a yellow eye.",
+    "tool": "hook",
+    "meal": "Eats: fish it tears into bites",
+    "why": "Hook! An osprey's hooked beak tears meat into bites it can swallow.",
+    "hint": "Look for a beak that curves down to a sharp point."
+   },
+   {
+    "name": "Northern shoveler",
+    "img": "images/nc/20-02-sm-shoveler.jpg",
+    "alt": "A duck with a green head and a very wide, flat, spoon-shaped bill, standing in shallow water.",
+    "tool": "strainer",
+    "meal": "Eats: tiny animals and seeds strained from water",
+    "why": "Strainer! A shoveler's wide bill has comb-like edges that strain tiny food out of muddy water.",
+    "hint": "Look for a wide, flat bill used in water."
+   },
+   {
+    "name": "Pileated woodpecker",
+    "img": "images/nc/20-02-sm-woodpecker.jpg",
+    "alt": "A black-and-white woodpecker with a red crest, clinging to a tree trunk, with a straight, pointed beak.",
+    "tool": "chisel",
+    "meal": "Eats: insects hidden in wood",
+    "why": "Chisel! A woodpecker hammers its strong, pointed beak into wood to reach insects inside.",
+    "hint": "Look for a bird on a tree trunk with a strong, straight beak."
+   }
+  ],
+  "picked": "{t} picked. Now tap the bird whose beak works like it.",
+  "pickFirst": "Pick a tool first, or drag one onto a bird.",
+  "miss": "Not the {t}.",
+  "win": "Six beaks, six tools. A beak's shape tells you its job.",
+  "againLabel": "↺ Take the tools back and match again",
+  "model": "Tool pictures are models.",
+  "credit": "Photos: cardinal, U.S. Fish and Wildlife Service (public domain); sword-billed hummingbird, Charles J. Sharp (CC BY-SA 4.0); heron at St. Pete Beach, Grendelkhan (CC BY-SA 4.0); osprey, Simon Carrasco (CC BY 2.0); shoveler, Charles J. Sharp (CC BY-SA 4.0); woodpecker, Cephas (CC BY-SA 4.0).",
+  "plant": {
+   "kicker": "Part 2 · A plant structure that fits a beak",
+   "title": "Flowers have matching structures too",
+   "photos": [
+    {
+     "img": "images/nc/20-02-pl-honeysuckle.jpg",
+     "alt": "Coral-pink trumpet honeysuckle flowers, each a long, narrow tube.",
+     "cap": "Trumpet honeysuckle: each flower is a long, narrow tube."
+    },
+    {
+     "img": "images/nc/20-02-pl-hummer.jpg",
+     "alt": "A ruby-throated hummingbird hovering with its long beak in a red flower.",
+     "cap": "A ruby-throated hummingbird drinking from a tube-shaped flower."
+    }
+   ],
+   "text": "Trumpet honeysuckle grows wild in Florida. It keeps its nectar at the bottom of a long, narrow tube. A hummingbird's long, thin beak reaches the nectar. While it drinks, pollen rubs onto its head, and it carries that pollen to the next flower. The plant's tube and the bird's beak fit together.",
+   "ask": "How does the flower's long tube help the plant?",
+   "opts": [
+    {
+     "t": "Birds must push in close to reach the nectar, so pollen rubs off on them",
+     "ok": true
+    },
+    {
+     "t": "The tube keeps hummingbirds away from the flower",
+     "hint": "Look at the second photo. Is the hummingbird kept away?"
+    },
+    {
+     "t": "The tube makes the plant grow taller",
+     "hint": "The tube is part of the flower. What visits the flower?"
+    }
+   ],
+   "win": "Right. The flower's structure (a long tube) and the bird's structure (a long beak) help each other: the bird gets food, and the plant gets its pollen moved.",
+   "credit": "Photos: trumpet honeysuckle, Paul VanDerWerf (CC BY 2.0); hummingbird, Linda Tanner (CC BY 2.0)."
+  }
+ },
+ "flaw": {
+  "kicker": "Part 3 game · Is it a fair test?",
+  "title": "Spot the flaw",
+  "intro": "Four students wrote plans for the beak test. Three plans have one thing that makes the test unfair. One plan is fair.",
+  "job": [
+   "Read each plan.",
+   "Tap the part that makes the test unfair.",
+   "If nothing is wrong, tap This test is fair."
+  ],
+  "plans": [
+   {
+    "who": "Maya's plan",
+    "parts": [
+     "I will give the spoon 60 seconds",
+     "and the tweezers 30 seconds.",
+     "I will use one hand.",
+     "I will start with 40 beans each time."
+    ],
+    "flaw": 0,
+    "why": "Right. The spoon gets twice as much time, so it would move more beans even if it were a worse beak. Every tool needs the same time.",
+    "fine": {
+     "1": "30 seconds is fine by itself. Compare it with the time the spoon gets.",
+     "2": "One hand is fair, as long as every tool uses one hand.",
+     "3": "Starting with the same 40 beans each time is fair."
+    }
+   },
+   {
+    "who": "Jordan's plan",
+    "parts": [
+     "I will give every tool 30 seconds.",
+     "I will use two hands with the spoon",
+     "and one hand with the clothespin.",
+     "I will start with 40 beans each time."
+    ],
+    "flaw": 1,
+    "why": "Right. Two hands is a big help. A bird has only one beak, so every tool gets one hand.",
+    "fine": {
+     "0": "The same 30 seconds for every tool is fair.",
+     "2": "One hand is right. Is that true for every tool?",
+     "3": "The same 40 beans each time is fair."
+    }
+   },
+   {
+    "who": "Ava's plan",
+    "parts": [
+     "I will give every tool 30 seconds",
+     "and use one hand.",
+     "The spoon gets a pile of 40 beans,",
+     "but the clothespin gets only 10."
+    ],
+    "flaw": 3,
+    "why": "Right. With only 10 beans, the clothespin could never move more than 10. Every tool needs the same pile.",
+    "fine": {
+     "0": "The same time is fair.",
+     "1": "One hand is fair.",
+     "2": "40 beans is fine. Does every tool get 40?"
+    }
+   },
+   {
+    "who": "Leo's plan",
+    "parts": [
+     "I will give every tool 30 seconds,",
+     "use one hand,",
+     "and start with 40 beans each time."
+    ],
+    "flaw": -1,
+    "why": "Right. Leo changes only one thing, the tool. Everything else stays the same. That is a fair test.",
+    "fine": {
+     "0": "That part is fair.",
+     "1": "That part is fair too.",
+     "2": "That part is fair. Is anything in Leo's plan unfair?"
+    }
+   }
+  ],
+  "fairLabel": "✓ This test is fair",
+  "notFair": "Look again. Something in this plan changes besides the tool.",
+  "fineDefault": "That part is fair. Look for the part that changes besides the tool.",
+  "scoreLabel": "{n} of 4 plans judged",
+  "win": "In a fair test, you change only one thing (the tool) and keep everything else the same: the time, the hands, and the pile of food.",
+  "againLabel": "↺ Read the plans again"
+ },
+ "beaklab": {
+  "cardTitle": "Run the Beak Test",
+  "icon": "🔬",
+  "cardIntro": "Now test your Warm-Up guess. Your tools are the beaks. The beans and rice are the food.",
+  "kicker": "Part 4 · The beak test",
+  "title": "Three tools. Two foods. One fair test.",
+  "intro": "You will run six trials: each tool with beans, then each tool with rice. Every trial gets 30 seconds, one hand, and the same pile of food.",
+  "job": [
+   "Choose real tools or the on-screen test.",
+   "Run all six trials and fill in the table.",
+   "Read your graph and compare it with your guess."
+  ],
+  "safety": "Don't eat any of the test food, and keep small beans away from little brothers and sisters.",
+  "realLabel": "🥄 I have a spoon, tweezers, and a clothespin",
+  "screenLabel": "💻 Use the on-screen test",
+  "realSteps": "Put a small pile of dry beans on one plate and a small pile of rice on another. Put an empty bowl next to each. Pick one tool, use one hand, tap Start, and move as much food as you can into the bowl. When the timer stops, count what is in the bowl and type the number in the table. Put the food back and repeat for every tool and food.",
+  "timerLabel": "▶ Start 30 seconds",
+  "timerStop": "■ Stop the timer",
+  "timeUp": "Time!",
+  "seconds": 30,
+  "screenSteps": "Pick a tool and a food, then tap Start the trial. Tap the plate to grab food with the tool, then tap the bowl to drop it. Your count goes into the table when time runs out.",
+  "pickTool": "Tool:",
+  "pickFood": "Food:",
+  "plateAlt": "A model of a plate of food and an empty blue bowl. Tap the plate to grab, tap the bowl to drop.",
+  "plateLabel": "the plate (tap to grab)",
+  "bowlLabel": "bowl",
+  "holding": "Holding {n}. Tap the bowl to drop.",
+  "dropFirst": "Drop what you are holding in the bowl first.",
+  "slipLine": "Oops, it slipped off! Try again.",
+  "goLabel": "▶ Start the trial",
+  "goingLabel": "Trial running…",
+  "againTrial": "↺ Run this trial again",
+  "trialDone": "Time! The {t} moved {n}. It is in your table.",
+  "screenModel": "A model: the beans, rice, plate and bowl are drawings, and each tool grabs the way a real one usually does.",
+  "screen": {
+   "gap": 800,
+   "beans": {
+    "n": 60,
+    "spoon": {
+     "min": 1,
+     "max": 3,
+     "slip": 0.15
+    },
+    "tweezers": {
+     "min": 1,
+     "max": 1,
+     "slip": 0.35
+    },
+    "clothespin": {
+     "min": 1,
+     "max": 2,
+     "slip": 0.2
+    }
+   },
+   "rice": {
+    "n": 150,
+    "spoon": {
+     "min": 1,
+     "max": 3,
+     "slip": 0.45
+    },
+    "tweezers": {
+     "min": 2,
+     "max": 3,
+     "slip": 0.1
+    },
+    "clothespin": {
+     "min": 1,
+     "max": 2,
+     "slip": 0.4
+    }
+   }
+  },
+  "tools": [
+   {
+    "k": "spoon",
+    "name": "Spoon"
+   },
+   {
+    "k": "tweezers",
+    "name": "Tweezers"
+   },
+   {
+    "k": "clothespin",
+    "name": "Clothespin"
+   }
+  ],
+  "foods": [
+   {
+    "k": "beans",
+    "name": "Beans",
+    "col": "Beans in 30 seconds",
+    "unit": "beans",
+    "max": 200,
+    "color": "#8d3b2a"
+   },
+   {
+    "k": "rice",
+    "name": "Rice",
+    "col": "Rice grains in 30 seconds",
+    "unit": "grains of rice",
+    "max": 500,
+    "color": "#d4a017"
+   }
+  ],
+  "tableTitle": "📋 My beak test data",
+  "colTool": "Beak tool",
+  "badNum": "Type a whole number from 0 to {max}, like 12.",
+  "graphTitle": "📊 My graph (it draws itself)",
+  "graphAlt": "A bar graph of your data: for each tool, one bar for beans and one bar for rice.",
+  "yLabel": "How many moved in 30 seconds",
+  "compareTitle": "Your Warm-Up guess vs. your data",
+  "colPred": "You predicted",
+  "colData": "Your data says",
+  "notSaved": "(not saved)",
+  "tieLabel": "a tie",
+  "ask": "A friend says: \"The spoon is the best beak, because it picked up the most.\" What should a scientist check first?",
+  "opts": [
+   {
+    "t": "Which tool won each food, because a beak can be great for one food and poor for another",
+    "ok": true
+   },
+   {
+    "t": "Which tool is the shiniest",
+    "hint": "Does shine help a beak get food? Look at your data instead."
+   },
+   {
+    "t": "Nothing. The tool that moved the most beans is best at everything",
+    "hint": "Look at the rice column. Does the same tool always win?"
+   }
+  ],
+  "win": "Right. A scientist compares the tools one food at a time. The best tool for beans may not be the best tool for rice.",
+  "twist": {
+   "head": "There is no best beak. There is only the best beak for a food.",
+   "line": "Each food column can have its own winner. A shape that works well for one food can work poorly for another.",
+   "chain": "That is why Darwin's finches have different beaks: each beak fits the food that kind of finch eats."
+  },
+  "againLabel": "↺ Clear my table and test again"
+ },
+ "wonder": {
+  "footage": {
+   "after": ".nc-pl",
+   "title": "A heron goes fishing",
+   "src": "assets/video/20-02-heron.mp4",
+   "poster": "images/nc/20-02-heron-poster.jpg",
+   "intro": "This great blue heron is standing still in a pond, watching the water. Watch what its beak does.",
+   "look": [
+    "How long does the heron wait before it strikes?",
+    "Watch the beak at the end. What is in it?",
+    "Why is a long, sharp beak a good tool for this job?"
+   ],
+   "credit": "Video: “Great Blue Heron Catching Fish at Colonel Samuel Smith Park”, Lucastphotography (CC BY 4.0), via Wikimedia Commons. Cut, cropped and muted for this lesson; the underwater part is sped up."
+  },
+  "data": {
+   "host": ".nc-bl",
+   "after": ".nc-bl-wow",
+   "title": "Finch beaks before and after a drought",
+   "cats": [
+    "Under 9 mm",
+    "9 to 10 mm",
+    "10 to 11 mm",
+    "11 mm or more"
+   ],
+   "catLabel": "Beak depth {c}",
+   "groups": [
+    {
+     "name": "Before the drought (1976)",
+     "values": [
+      22,
+      41,
+      30.5,
+      6.5
+     ],
+     "color": "#7d8a99"
+    },
+    {
+     "name": "After the drought (1978)",
+     "values": [
+      9,
+      29,
+      42.5,
+      19
+     ],
+     "color": "#d4772c"
+    }
+   ],
+   "unit": "out of every 100 birds",
+   "step": 10,
+   "ylabel": "Birds out of every 100",
+   "intro": "On Daphne Major in 1977, almost no rain fell, and most small seeds ran out. Only big, hard seeds were left. Scientists Peter and Rosemary Grant measured the beaks of medium ground finches before the drought (751 birds in 1976) and after it (89 birds in 1978). Each bar shows how many birds out of every 100 had a beak of that depth.",
+   "job": [
+    "Drag across the bars to read each group.",
+    "Compare the gray bars (before) with the orange bars (after)."
+   ],
+   "ask": "What changed after the drought?",
+   "opts": [
+    {
+     "t": "More of the finches had deep beaks",
+     "ok": true
+    },
+    {
+     "t": "More of the finches had thin beaks",
+     "hint": "Read the Under 9 mm group. Did it go up or down?"
+    },
+    {
+     "t": "Nothing changed",
+     "hint": "Compare 6.5 with 19 in the 11 mm or more group."
+    }
+   ],
+   "win": "Right. Before the drought, only about 7 birds out of 100 had beaks 11 mm or deeper. After it, about 19 out of 100 did. Finches with deeper beaks could crack the hard seeds that were left, so more of them survived.",
+   "alt": "A grouped bar graph of beak depth in medium ground finches. Under 9 mm: 22 before, 9 after. 9 to 10 mm: 41 before, 29 after. 10 to 11 mm: 30.5 before, 42.5 after. 11 mm or more: 6.5 before, 19 after (birds out of every 100).",
+   "credit": "Data: beak depths of 751 medium ground finches caught on Daphne Major in 1976 and 89 caught in 1978, from Peter and Rosemary Grant's study (Grant, Ecology and Evolution of Darwin's Finches, Princeton University Press, 1986), as shared in the Sleuth3 data set ex0218 (Ramsey and Schafer). Downloaded 25 Nov 2026; percentages worked out for this lesson."
+  },
+  "cabinet": {
+   "title": "Archaeopteryx: an early bird with teeth",
+   "model": "assets/models/20-02-archaeopteryx.glb",
+   "viewer": "assets/sparkle/vendor/model-viewer-umd.min.js",
+   "alt": "A 3D scan of a flat slab of stone with the skeleton of an early bird pressed into it, with its wings spread and long, bony tail.",
+   "text": "This is a 3D scan of a famous fossil found in Germany, called Archaeopteryx. It lived about 150 million years ago. Its jaws had small teeth, not a beak! It also had claws on its wings and a long, bony tail. Birds' beaks came later. Spin it, and find the wings and the tail.",
+   "credit": "3D model: Archaeopteryx siemensii, USNM PAL 509743, Department of Paleobiology, National Museum of Natural History, Smithsonian (CC0)."
+  }
+ },
+ "assignment": {
+  "hidePartA": true,
+  "hideQ": [
+   "partb-2"
+  ],
+  "renumber": {
+   "partb-1": "1",
+   "partb-3": "2"
+  },
+  "keep": [
+   "partb-1",
+   "partb-3"
+  ],
+  "hide": [
+   ".revise-block"
+  ]
+ },
+ "nextPage": {
+  "title": "Part C · Write the next page",
+  "intro": "Darwin's finches are the second half of page 20. Now add yours.",
+  "boxes": [
+   {
+    "id": "nc-p1",
+    "label": "My beak data card",
+    "prompt": "Write your six numbers from Part 4. Name the best tool for beans and the best tool for rice. Was your Warm-Up guess right?",
+    "min": 20
+   },
+   {
+    "id": "nc-p3",
+    "label": "Darwin's finches",
+    "prompt": "Pick two of Darwin's finches. Describe each beak and the food it is built for. Use one reading from your caliper.",
+    "min": 15
+   }
+  ]
+ },
+ "chain": [
+  {
+   "page": 17,
+   "who": "1648 · Van Helmont",
+   "what": "Where does a tree come from?"
+  },
+  {
+   "page": 17,
+   "who": "1772 · Priestley",
+   "what": "Can a plant fix the air?"
+  },
+  {
+   "page": 18,
+   "who": "1779 · Ingenhousz",
+   "what": "Does a plant need light?"
+  },
+  {
+   "page": 18,
+   "who": "1927 · Elton",
+   "what": "How do we draw the path of energy?"
+  },
+  {
+   "page": 19,
+   "who": "1628 · Harvey",
+   "what": "What does the heart do?"
+  },
+  {
+   "page": 19,
+   "who": "1628 · Harvey, Ch. 9",
+   "what": "Where does all that blood go?"
+  },
+  {
+   "page": 20,
+   "who": "1638 · Galileo",
+   "what": "Why does a giant need fat bones?"
+  },
+  {
+   "page": 20,
+   "who": "1845 · Darwin",
+   "what": "Why do finches have different beaks?",
+   "you": true
+  },
+  {
+   "page": 21,
+   "who": "Next week",
+   "what": "How do living things respond when their home changes?"
+  }
+ ],
+ "planner": {
+  "title": "Plan before you write",
+  "intro": "Tap two or more pieces of evidence to add them to your Evidence box. Then write your claim and reasoning in your own words.",
+  "cards": [
+   "In my beak test, the tool that moved the most beans was not always the tool that moved the most rice.",
+   "A thick beak, like a nutcracker, cracks hard seeds. A long, thin beak, like a straw, sips nectar from deep flowers.",
+   "Darwin's drawing shows finch beaks that change in steps, from very deep seed-crackers to thin insect-pickers.",
+   "A heron's long, sharp beak works like a spear to grab fish in shallow water.",
+   "After the 1977 drought on Daphne Major, more of the medium ground finches had deep beaks that could crack the hard seeds that were left.",
+   "Trumpet honeysuckle's long flower tube fits a hummingbird's long beak, so the bird gets nectar and moves the flower's pollen."
+  ]
+ },
+ "checklist": [
+  "Warm-Up: your food menu, your two tool guesses, and at least 2 sentences of reasons.",
+  "Part 4: all six trials in your data table.",
+  "Part B: questions 1 and 2, in complete sentences.",
+  "Part C: your notebook page (both boxes).",
+  "C-E-R: a claim, numbers from at least two trials plus one real bird, and your reasoning."
+ ],
+ "camera": {
+  "missions": [
+   "Your food menu and tool guesses (Warm-Up)",
+   "Your caliper readings (Part 1)",
+   "All six shadow matches (Part 2)",
+   "The four test plans you judged (Part 3)",
+   "Your data table and graph (Part 4)"
+  ]
+ }
+}

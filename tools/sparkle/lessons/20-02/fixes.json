@@ -1,0 +1,98 @@
+[
+ {
+  "kind": "label",
+  "why": "Standards label (standing approval): the planning table lists CPALMS SC.5.L.14.2, SC.5.N.1.1 for 20.02. TEKS (Texas) removed; the header now matches the footer.",
+  "find": "<div class=\"info-value\">SC.5.L.14.2, SC.5.N.1.1 · TEKS 5.13(A)</div>",
+  "replace": "<div class=\"info-value\">SC.5.L.14.2, SC.5.N.1.1</div>"
+ },
+ {
+  "kind": "fix",
+  "why": "Part order (Bethany picked Darwin's page for Part 1): the Galápagos card moves to the top of The Lesson. Step 1 of 2: take it out.",
+  "find": "      <!-- Section 3 -->\n      <div class=\"card theme-earth\" style=\"margin-bottom:18px;\">\n        <div class=\"card-head\">\n          <div class=\"card-head-icon\">✏️</div>\n          <div>\n            <div class=\"card-head-label\">Section 3</div>\n            <div class=\"card-head-title\">Beaks Match Their Environment</div>\n          </div>\n        </div>\n        <div class=\"card-body\">\n          <p>Birds in different places eat different foods, so they have different beaks. On the Galápagos Islands, scientists found finches with very different beak shapes. Each shape matched the seeds or insects on that bird's island.</p>\n          <p><strong>Real-World Connection:</strong> Engineers copy nature too. The nose of a Japanese bullet train was shaped like a kingfisher's beak, which made the train quieter going into tunnels.</p>\n        </div>\n      </div>\n\n",
+  "replace": ""
+ },
+ {
+  "kind": "fix",
+  "why": "Part order, step 2 of 2: the Galápagos card goes in as Part 1. Fact fix (Bethany ticked Housekeeping): several finch kinds live on the same island and eat different foods, so the beak matches the food, not the island.",
+  "find": "      <!-- Section 1 -->\n",
+  "replace": "      <!-- Part 1 (was Section 3) -->\n      <div class=\"card theme-earth\" style=\"margin-bottom:18px;\">\n        <div class=\"card-head\">\n          <div class=\"card-head-icon\">📜</div>\n          <div>\n            <div class=\"card-head-label\">Part 1</div>\n            <div class=\"card-head-title\">Darwin's Finches</div>\n          </div>\n        </div>\n        <div class=\"card-body\">\n          <p>Birds in different places eat different foods, so they have different beaks. On the Galápagos Islands, scientists found finches with very different beak shapes. Each beak shape matched the food that kind of finch eats, from big, hard seeds to tiny insects.</p>\n          <p><strong>Real-World Connection:</strong> Engineers copy nature too. The nose of a Japanese bullet train was shaped like a kingfisher's beak, which made the train quieter going into tunnels.</p>\n        </div>\n      </div>\n\n      <!-- Section 1 -->\n"
+ },
+ {
+  "kind": "fix",
+  "why": "Sections become Parts (Bethany ticked Housekeeping): Beaks Are Tools is now Part 2.",
+  "find": "<div class=\"card-head-label\">Section 1</div>",
+  "replace": "<div class=\"card-head-label\">Part 2</div>"
+ },
+ {
+  "kind": "fix",
+  "why": "Sections become Parts: Why a Table Helps is now Part 3.",
+  "find": "<div class=\"card-head-label\">Section 2</div>",
+  "replace": "<div class=\"card-head-label\">Part 3</div>"
+ },
+ {
+  "kind": "fix",
+  "why": "Point to where the test happens now (the Investigate tab is hidden; the test is Part 4).",
+  "find": "<p>Today you'll test tools that act like beaks. A table keeps your counts organized so you can compare them.</p>",
+  "replace": "<p>In Part 4 you'll test tools that act like beaks. A table keeps your counts organized so you can compare them.</p>"
+ },
+ {
+  "kind": "fix",
+  "why": "Lesson header leftover (Before You Investigate): The Lesson now holds Darwin, three games and the Part 4 test.",
+  "find": "<div class=\"act-title\">📖 Before You Investigate</div>",
+  "replace": "<div class=\"act-title\">📖 Darwin's Finches and the Beak Test</div>"
+ },
+ {
+  "kind": "fix",
+  "why": "The Lesson now includes the beak test (was 8 min + a separate 25-min tab).",
+  "find": "<div class=\"act-time\" style=\"background:#D4772C;\">⏱ 8 min</div>",
+  "replace": "<div class=\"act-time\" style=\"background:#D4772C;\">⏱ 30 min</div>"
+ },
+ {
+  "kind": "fix",
+  "why": "Self-Check rewritten (Bethany ticked \"Self-Check is off topic\" and approved the wording): the old gills, eagle-claw and oak-root questions did not test this lesson, and two had wrong facts.",
+  "find": "      <div class=\"quiz-q\" data-answer=\"c\">\n        <div class=\"quiz-q-text\">Why do fish have GILLS instead of lungs?</div>\n        <div class=\"quiz-options\">\n          <div class=\"quiz-opt\" data-val=\"a\" onclick=\"checkQuiz(this)\"><span class=\"opt-letter\">A</span>Gills look prettier</div>\n          <div class=\"quiz-opt\" data-val=\"b\" onclick=\"checkQuiz(this)\"><span class=\"opt-letter\">B</span>Fish don't need oxygen</div>\n          <div class=\"quiz-opt\" data-val=\"c\" onclick=\"checkQuiz(this)\"><span class=\"opt-letter\">C</span>Gills pull oxygen out of WATER. Fish live in water — lungs wouldn't work there.</div>\n        </div>\n        <div class=\"quiz-feedback fb-correct\">✅ Correct! Gills are designed for pulling oxygen out of water. Lungs only work with air. The fish's structure matches its environment.</div>\n        <div class=\"quiz-feedback fb-wrong\">❌ Not quite. Fish absolutely need oxygen — they just get it differently than us. What's special about WHERE fish live?</div>\n      </div>\n",
+  "replace": "      <div class=\"quiz-q\" data-answer=\"b\">\n        <div class=\"quiz-q-text\">A bird has a short, thick, cone-shaped beak. Which food is that beak built for?</div>\n        <div class=\"quiz-options\">\n          <div class=\"quiz-opt\" data-val=\"a\" onclick=\"checkQuiz(this)\"><span class=\"opt-letter\">A</span>Nectar deep inside long flowers</div>\n          <div class=\"quiz-opt\" data-val=\"b\" onclick=\"checkQuiz(this)\"><span class=\"opt-letter\">B</span>Hard seeds that must be cracked open</div>\n          <div class=\"quiz-opt\" data-val=\"c\" onclick=\"checkQuiz(this)\"><span class=\"opt-letter\">C</span>Fish in shallow water</div>\n        </div>\n        <div class=\"quiz-feedback fb-correct\">✅ Correct! A short, thick beak works like a nutcracker. It is strong enough to crack hard seeds, like the ground finches in Darwin's drawing.</div>\n        <div class=\"quiz-feedback fb-wrong\">❌ Not quite. Long, thin beaks reach nectar, and long, pointed beaks spear fish. What job does a short, thick beak do best?</div>\n      </div>\n"
+ },
+ {
+  "kind": "fix",
+  "why": "Self-Check rewritten (Bethany ticked \"Self-Check is off topic\" and approved the wording): the old gills, eagle-claw and oak-root questions did not test this lesson, and two had wrong facts.",
+  "find": "      <div class=\"quiz-q\" data-answer=\"b\">\n        <div class=\"quiz-q-text\">An eagle has very sharp, hooked CLAWS. What is the function?</div>\n        <div class=\"quiz-options\">\n          <div class=\"quiz-opt\" data-val=\"a\" onclick=\"checkQuiz(this)\"><span class=\"opt-letter\">A</span>For decoration</div>\n          <div class=\"quiz-opt\" data-val=\"b\" onclick=\"checkQuiz(this)\"><span class=\"opt-letter\">B</span>To grip and carry prey while flying</div>\n          <div class=\"quiz-opt\" data-val=\"c\" onclick=\"checkQuiz(this)\"><span class=\"opt-letter\">C</span>To help the eagle climb trees</div>\n        </div>\n        <div class=\"quiz-feedback fb-correct\">✅ Correct! Eagles catch fish, rabbits, and other animals — often in mid-air or by swooping down. Their sharp hooked talons grab and hold tight. Structure matches function.</div>\n        <div class=\"quiz-feedback fb-wrong\">❌ Not quite. Eagles don't climb trees much — they fly. And animals don't evolve structures just for decoration. What does an eagle actually DO with its feet?</div>\n      </div>\n",
+  "replace": "      <div class=\"quiz-q\" data-answer=\"a\">\n        <div class=\"quiz-q-text\">Sam gives the tweezers 30 seconds but gives the spoon 60 seconds. Why is this NOT a fair test?</div>\n        <div class=\"quiz-options\">\n          <div class=\"quiz-opt\" data-val=\"a\" onclick=\"checkQuiz(this)\"><span class=\"opt-letter\">A</span>Sam changed two things, the tool and the time, so the results can't be compared</div>\n          <div class=\"quiz-opt\" data-val=\"b\" onclick=\"checkQuiz(this)\"><span class=\"opt-letter\">B</span>Sam should have tested rice instead of beans</div>\n          <div class=\"quiz-opt\" data-val=\"c\" onclick=\"checkQuiz(this)\"><span class=\"opt-letter\">C</span>Tweezers are always slower than spoons</div>\n        </div>\n        <div class=\"quiz-feedback fb-correct\">✅ Correct! In a fair test you change only one thing. If the time changes too, you can't tell whether the tool or the extra time made the difference.</div>\n        <div class=\"quiz-feedback fb-wrong\">❌ Not quite. The food and the tools are fine. Look at the time. Did every tool get the same amount?</div>\n      </div>\n"
+ },
+ {
+  "kind": "fix",
+  "why": "Self-Check rewritten (Bethany ticked \"Self-Check is off topic\" and approved the wording): the old gills, eagle-claw and oak-root questions did not test this lesson, and two had wrong facts.",
+  "find": "      <div class=\"quiz-q\" data-answer=\"a\">\n        <div class=\"quiz-q-text\">An oak tree has very DEEP ROOTS. Why is this structure important?</div>\n        <div class=\"quiz-options\">\n          <div class=\"quiz-opt\" data-val=\"a\" onclick=\"checkQuiz(this)\"><span class=\"opt-letter\">A</span>Deep roots anchor a tall tree against wind, and reach water far down in the soil</div>\n          <div class=\"quiz-opt\" data-val=\"b\" onclick=\"checkQuiz(this)\"><span class=\"opt-letter\">B</span>Deep roots help the tree walk to new locations</div>\n          <div class=\"quiz-opt\" data-val=\"c\" onclick=\"checkQuiz(this)\"><span class=\"opt-letter\">C</span>Deep roots make the tree taller</div>\n        </div>\n        <div class=\"quiz-feedback fb-correct\">✅ Correct! An oak tree can grow 80 feet tall. To stand up to wind without falling over, it needs roots that go far down to hold it steady. Roots also reach deep for water.</div>\n        <div class=\"quiz-feedback fb-wrong\">❌ Not quite. Trees don't walk. And the height of a tree comes from its growing trunk, not its roots. What problem do TALL trees face that short ones don't?</div>\n      </div>\n",
+  "replace": "      <div class=\"quiz-q\" data-answer=\"b\">\n        <div class=\"quiz-q-text\">A test shows: spoon moved 24 beans and 9 grains of rice. Tweezers moved 6 beans and 15 grains of rice. Which claim fits this data?</div>\n        <div class=\"quiz-options\">\n          <div class=\"quiz-opt\" data-val=\"a\" onclick=\"checkQuiz(this)\"><span class=\"opt-letter\">A</span>The spoon is the best beak for every food</div>\n          <div class=\"quiz-opt\" data-val=\"b\" onclick=\"checkQuiz(this)\"><span class=\"opt-letter\">B</span>The best tool depends on the food</div>\n          <div class=\"quiz-opt\" data-val=\"c\" onclick=\"checkQuiz(this)\"><span class=\"opt-letter\">C</span>The tweezers moved the most beans</div>\n        </div>\n        <div class=\"quiz-feedback fb-correct\">✅ Correct! The spoon won with beans (24 to 6), but the tweezers won with rice (15 to 9). A shape that works well for one food can work poorly for another.</div>\n        <div class=\"quiz-feedback fb-wrong\">❌ Not quite. Compare the two tools one food at a time. Which tool won with beans? Which won with rice?</div>\n      </div>\n"
+ },
+ {
+  "kind": "fix",
+  "why": "\"No starter\" reads like a note to the builder (Housekeeping).",
+  "find": "📋 Answer the question in one clear sentence. No starter.",
+  "replace": "📋 Answer the question in one clear sentence."
+ },
+ {
+  "kind": "fix",
+  "why": "\"No starter\" reads like a note to the builder (Housekeeping).",
+  "find": "📋 Use numbers from at least two trials AND one real bird example. No starter.",
+  "replace": "📋 Use numbers from at least two trials AND one real bird example."
+ },
+ {
+  "kind": "fix",
+  "why": "\"No starter\" reads like a note to the builder (Housekeeping).",
+  "find": "📋 Explain why each beak shape fits its food and environment. No starter.",
+  "replace": "📋 Explain why each beak shape fits its food and environment."
+ },
+ {
+  "kind": "fix",
+  "why": "What to Turn In: no photo of a paper table or graph now (the table and graph are on the page and go into Gathered Answers).",
+  "find": "When you've finished, copy your gathered answers into Canvas — and add a photo of your data table and bar graph. Use this checklist before you submit.",
+  "replace": "When you've finished, copy your gathered answers into Canvas. Use this checklist before you submit."
+ },
+ {
+  "kind": "fix",
+  "why": "The Investigate tab is hidden, but its old \"Generate This\" image note is removed too (Housekeeping).",
+  "find": "        <div class=\"image-suggestion\" style=\"display:none;\">\n          <div class=\"image-suggestion-icon\">🖼️</div>\n          <div class=\"image-suggestion-label\">Suggested Image — Generate This</div>\n          <div class=\"image-suggestion-desc\">\n            Scientific illustration of four finch heads with different beak shapes, from thick seed-cracking beaks to thin insect-catching beaks.\n          </div>\n          <div class=\"image-suggestion-file\">Save as: images/20-02-darwins-finches.jpg</div>\n        </div>\n",
+  "replace": ""
+ }
+]

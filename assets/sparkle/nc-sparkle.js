@@ -1633,7 +1633,43 @@
     // 2. Real data (Part 4, after the twist)
     if (Wd.data) {
       var R = Wd.data, h4 = $(R.host || '.nc-tl');
-      if (h4 && R.bars) {
+      if (h4 && R.groups) {
+        // grouped bars: one group per category (R.cats), one bar per series (R.groups: [{name, values, color}]); tap or drag to read
+        var gb = wonderBox('📈', 'Real data', R.title, 3), GW = 600, GH = 250, GL = 50, GB = 34, GT = 16, gmx = 0;
+        R.groups.forEach(function (q) { q.values.forEach(function (v) { gmx = Math.max(gmx, v); }); });
+        var gst = R.step || 10, gtop = Math.ceil(gmx / gst) * gst, gslot = (GW - GL - 10) / R.cats.length, gbw = gslot * 0.34, gticks = '', gbars = '';
+        for (var gv2 = 0; gv2 <= gtop; gv2 += gst) { var gy = GH - GB - gv2 / gtop * (GH - GB - GT); gticks += '<line x1="' + GL + '" y1="' + gy.toFixed(1) + '" x2="' + (GW - 10) + '" y2="' + gy.toFixed(1) + '" stroke="#f0e8dc"/><text x="' + (GL - 6) + '" y="' + (gy + 3).toFixed(1) + '" font-size="10" fill="#7a6a58" text-anchor="end">' + gv2 + '</text>'; }
+        R.cats.forEach(function (c, i) {
+          R.groups.forEach(function (q, k) { var x = GL + i * gslot + gslot * 0.14 + k * (gbw + 4), h = Math.max(1.5, q.values[i] / gtop * (GH - GB - GT)); gbars += '<rect class="nc-bar" data-i="' + i + '" x="' + x.toFixed(1) + '" y="' + (GH - GB - h).toFixed(1) + '" width="' + gbw.toFixed(1) + '" height="' + h.toFixed(1) + '" rx="3" fill="' + q.color + '"/>'; });
+          gbars += '<text x="' + (GL + i * gslot + gslot / 2).toFixed(1) + '" y="' + (GH - GB + 16) + '" font-size="11" font-weight="700" fill="#2B1D12" text-anchor="middle">' + esc(c) + '</text>';
+        });
+        gb.querySelector('.nc-wx-body').innerHTML = '<p class="nc-p">' + esc(R.intro) + '</p>' + job(R.job) +
+          '<div class="nc-dt-key">' + R.groups.map(function (q) { return '<span><i style="background:' + q.color + '"></i>' + esc(q.name) + '</span>'; }).join('') + '</div>' +
+          '<div class="nc-dt-read" aria-live="polite">Drag across the bars, or tap one.</div>' +
+          '<svg class="nc-dt nc-bars" viewBox="0 0 ' + GW + ' ' + GH + '" role="img" aria-label="' + esc(R.alt) + '">' + gticks + gbars +
+            '<text x="' + GL + '" y="10" font-size="9.5" fill="#7a6a58">' + esc(R.ylabel) + '</text>' +
+            '<rect class="nc-dt-hit" x="' + GL + '" y="0" width="' + (GW - GL - 10) + '" height="' + GH + '" fill="transparent"/></svg>' +
+          '<div class="nc-q">' + esc(R.ask) + '</div><div class="nc-opts">' + R.opts.map(function (o, i) { return '<button type="button" class="nc-opt" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div><div class="nc-fb" aria-live="polite"></div>' +
+          '<p class="nc-credit">' + esc(R.credit) + '</p>';
+        var gwow = $(R.after || '.nc-wow'); after(gwow || h4, gb);
+        var gsvg = gb.querySelector('.nc-bars'), grd = gb.querySelector('.nc-dt-read');
+        function grpAt(e) {
+          var r = gsvg.getBoundingClientRect(), t = e.touches ? e.touches[0] : e, x = (t.clientX - r.left) * GW / r.width;
+          var i = Math.max(0, Math.min(R.cats.length - 1, Math.floor((x - GL) / gslot)));
+          $$('.nc-bar', gb).forEach(function (el) { el.classList.toggle('on', +el.dataset.i === i); });
+          grd.innerHTML = '<b>' + esc(R.catLabel ? R.catLabel.replace('{c}', R.cats[i]) : R.cats[i]) + ':</b> ' + R.groups.map(function (q) { return esc(q.name) + ' ' + q.values[i] + ' ' + esc(R.unit); }).join(' · ');
+        }
+        var ghit = gb.querySelector('.nc-dt-hit');
+        ['mousemove', 'touchmove', 'touchstart', 'click'].forEach(function (ev) { ghit.addEventListener(ev, function (e) { if (ev.indexOf('touch') === 0) e.preventDefault(); grpAt(e); }, { passive: false }); });
+        var gfb = gb.querySelector('.nc-fb');
+        $$('.nc-opt', gb).forEach(function (bt) {
+          bt.addEventListener('click', function () {
+            var o = R.opts[+bt.dataset.i];
+            if (o.ok) { bt.classList.add('ok'); gfb.innerHTML = '✅ ' + esc(R.win); store.dataDone = 1; save(); ping(); }
+            else { bt.classList.add('no'); setTimeout(function () { bt.classList.remove('no'); }, 700); gfb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(o.hint) + '</span>'; ping(true); }
+          });
+        });
+      } else if (h4 && R.bars) {
         // a bar graph: one bar per group (R.bars: [{name, v, color}]); drag or tap a bar to read it
         var bb = wonderBox('📈', 'Real data', R.title, 3), BW = 600, BH = 240, BL = 56, BB = 46, BT = 16, mx = Math.max.apply(null, R.bars.map(function (q) { return q.v; }));
         var slotW = (BW - BL - 10) / R.bars.length, bw = slotW * 0.62, stp = R.step || 5000, top = Math.ceil(mx / stp) * stp, ticks = '';
@@ -3937,6 +3973,515 @@
     draw();
   }
 
+  /* ───────────── 20.02 shared: shaded model drawings of the three beak tools ───────────── */
+  function toolSVG(k, cls) {
+    var u = 'nc-tl' + (++beamN), s = '<svg class="' + (cls || 'nc-tool-svg') + '" viewBox="0 0 120 60" aria-hidden="true"><defs>' +
+      '<linearGradient id="' + u + 'm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6f8"/><stop offset=".45" stop-color="#b9c0c8"/><stop offset="1" stop-color="#6d7680"/></linearGradient>' +
+      '<linearGradient id="' + u + 'w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6c08a"/><stop offset=".5" stop-color="#c08a4c"/><stop offset="1" stop-color="#8a5a2a"/></linearGradient></defs>';
+    if (k === 'spoon') s += '<rect x="6" y="27" width="64" height="7" rx="3.5" fill="url(#' + u + 'm)" stroke="#5c646d" stroke-width=".8"/><ellipse cx="92" cy="30.5" rx="23" ry="15" fill="url(#' + u + 'm)" stroke="#5c646d" stroke-width=".9"/><ellipse cx="94" cy="29" rx="15" ry="9" fill="#8d959e" opacity=".55"/><path d="M78 24 q10 -6 24 -2" stroke="#fff" stroke-width="2" fill="none" opacity=".8"/>';
+    else if (k === 'tweezers') s += '<path d="M8 28 L112 22 L112 25 L10 31 Z" fill="url(#' + u + 'm)" stroke="#5c646d" stroke-width=".8"/><path d="M8 32 L112 37 L112 40 L10 35 Z" fill="url(#' + u + 'm)" stroke="#5c646d" stroke-width=".8"/><rect x="2" y="27" width="10" height="9" rx="2" fill="#7d858e"/><path d="M40 26.5 L60 25.5" stroke="#fff" stroke-width="1" opacity=".8"/>';
+    else s += '<rect x="6" y="18" width="78" height="11" rx="3" fill="url(#' + u + 'w)" stroke="#7a4f22" stroke-width=".8"/><rect x="6" y="32" width="78" height="11" rx="3" fill="url(#' + u + 'w)" stroke="#7a4f22" stroke-width=".8"/><path d="M84 20 L114 26 L114 28 L84 28 Z M84 41 L114 34 L114 32 L84 32 Z" fill="url(#' + u + 'w)" stroke="#7a4f22" stroke-width=".8"/><circle cx="46" cy="30.5" r="7" fill="none" stroke="url(#' + u + 'm)" stroke-width="3.2"/><path d="M14 22 H70 M14 36 H70" stroke="#f3d9ad" stroke-width="1.2" opacity=".8"/>';
+    return s + '</svg>';
+  }
+
+  /* ───────────── 20.02 Warm-Up: Swap the menu (put each food under its beak), then predict the tool winners ───────────── */
+  function buildMenu() {
+    var M = D.menu; if (!M) return;
+    var pred = $('#pred-1'); if (!pred) throw new Error('pred-1 missing');
+    var host = pred.closest('.response-q') || pred.parentNode;
+    var card = host.closest('.activity-card') || host.parentNode;
+    $$('.callout, .socratic-q', card).forEach(hide);
+    store.mn = store.mn || {}; var S = store.mn; S.guess = S.guess || {};
+    var n = M.beaks.length;
+    function derange() { var a; do { a = M.beaks.map(function (b, i) { return i; }); for (var i = n - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } } while (a.some(function (v, i) { return v === i; })); return a; }
+    if (!S.order || S.order.length !== n) { S.order = derange(); save(); }
+    var g = mk('div', 'nc-g nc-mn');
+    g.innerHTML = '<div class="nc-g-k">Warm-Up game</div><h4 class="nc-g-t">' + esc(M.title) + '</h4><p class="nc-p">' + esc(M.intro) + '</p>' + job(M.job) +
+      '<div class="nc-mn-grid">' + M.beaks.map(function (b, i) {
+        return '<div class="nc-mn-col" data-i="' + i + '"><figure class="nc-mn-beak"><img src="' + esc(b.img) + '" alt="' + esc(b.alt) + '" draggable="false"><figcaption>' + esc(b.name) + '</figcaption></figure>' +
+          '<button type="button" class="nc-mn-food" data-slot="' + i + '"></button><div class="nc-mn-tick" aria-live="polite"></div></div>';
+      }).join('') + '</div>' +
+      '<div class="nc-rw-ctl"><button type="button" class="nc-btn nc-mn-check">' + esc(M.checkLabel) + '</button><button type="button" class="nc-cup-edit nc-mn-reset">' + esc(M.resetLabel) + '</button></div>' +
+      '<div class="nc-fb nc-mn-fb" aria-live="polite"></div>' +
+      '<p class="nc-credit">' + esc(M.credit) + '</p>' +
+      '<div class="nc-mn-pick"><h5>' + esc(M.pickTitle) + '</h5><p class="nc-p">' + esc(M.pickIntro) + '</p>' +
+        M.foods.map(function (f) {
+          return '<div class="nc-mn-row" data-f="' + f.k + '"><b>' + esc(f.name) + '</b><div class="nc-mn-tools" role="group" aria-label="' + esc(f.name) + '">' + M.tools.map(function (t) {
+            return '<button type="button" class="nc-opt nc-mn-t" data-f="' + f.k + '" data-t="' + t.k + '">' + toolSVG(t.k, 'nc-mn-tsvg') + '<span>' + esc(t.name) + '</span></button>';
+          }).join('') + '</div></div>';
+        }).join('') +
+        '<p class="nc-credit">' + esc(M.model) + '</p>' +
+        '<div class="nc-rw-ctl"><button type="button" class="nc-btn nc-mn-save" disabled>🔒 Save my guess</button><button type="button" class="nc-cup-edit nc-mn-edit" hidden>✎ Change my guess</button></div>' +
+        '<div class="nc-fb nc-mn-hint" aria-live="polite"></div><div class="nc-bet-seal nc-mn-seal" hidden></div></div>' +
+      '<label class="nc-np-l" for="pred-1" style="margin-top:12px">' + esc(M.reasonPrompt) + '</label>';
+    before(host, g);
+    pred.placeholder = M.placeholder;
+    var sel = null, fb = g.querySelector('.nc-mn-fb');
+    function toolName(k) { var t = M.tools.filter(function (x) { return x.k === k; })[0]; return t ? t.name : k; }
+    PRED_LINE = function () { return ['--- WARM-UP: MY PREDICTION ---', S.saved ? M.foods.map(function (f) { return 'Best tool for ' + f.name.toLowerCase() + ': ' + toolName(S.guess[f.k]); }).join(' · ') : '(not saved yet)']; };
+    function food(i) { return M.beaks[S.order[i]].food; }
+    function drawMenu() {
+      $$('.nc-mn-food', g).forEach(function (b) {
+        var i = +b.dataset.slot, f = food(i), ok = !!S.matched;
+        b.innerHTML = '<img src="' + esc(f.img) + '" alt="" draggable="false"><span>' + esc(f.name) + '</span>';
+        b.setAttribute('aria-label', 'Food under the ' + M.beaks[i].name + ': ' + f.name + (ok ? '' : '. Tap to pick it, then tap another food to swap.'));
+        b.classList.toggle('sel', sel === i); b.disabled = ok;
+        b.closest('.nc-mn-col').classList.toggle('ok', ok);
+        b.closest('.nc-mn-col').querySelector('.nc-mn-tick').innerHTML = ok ? '✅ ' + esc(M.beaks[i].why) : '';
+      });
+      g.querySelector('.nc-mn-check').hidden = !!S.matched;
+      if (S.matched) fb.innerHTML = '✅ ' + esc(M.win);
+    }
+    function swap(a, b) { if (a === b) return; var t = S.order[a]; S.order[a] = S.order[b]; S.order[b] = t; save(); fb.innerHTML = ''; ping(); }
+    $$('.nc-mn-food', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (S.matched || b._dragged) { b._dragged = 0; return; }
+        var i = +b.dataset.slot;
+        if (sel === null) sel = i; else { swap(sel, i); sel = null; }
+        drawMenu();
+      });
+      // drag one food onto another to swap them
+      b.addEventListener('pointerdown', function (e) {
+        if (S.matched) return; var from = +b.dataset.slot, ghost = null, sx = e.clientX, sy = e.clientY, moved = false;
+        function mv(ev) {
+          if (!moved && Math.abs(ev.clientX - sx) + Math.abs(ev.clientY - sy) < 8) return;
+          if (!moved) { moved = true; ghost = b.cloneNode(true); ghost.className = 'nc-mn-food nc-mn-ghost'; document.body.appendChild(ghost); }
+          ghost.style.left = (ev.clientX - 45) + 'px'; ghost.style.top = (ev.clientY - 40) + 'px';
+        }
+        function up(ev) {
+          window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up);
+          if (!moved) return; ghost.remove(); b._dragged = 1;
+          var over = document.elementFromPoint(ev.clientX, ev.clientY), t = over && over.closest('.nc-mn-food');
+          if (t && g.contains(t)) { swap(from, +t.dataset.slot); sel = null; drawMenu(); }
+        }
+        window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up);
+      });
+    });
+    g.querySelector('.nc-mn-check').addEventListener('click', function () {
+      var wrong = []; for (var i = 0; i < n; i++) if (S.order[i] !== i) wrong.push(i);
+      if (!wrong.length) { S.matched = 1; save(); ping(); bind({ menu: 1 }); note('🍽️ Every beak has its food.'); drawMenu(); drawPick(); return; }
+      ping(true);
+      var right = n - wrong.length;
+      fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(M.someRight.replace('{n}', right)) + ' ' + esc(M.beaks[wrong[0]].hint) + '</span>';
+      $$('.nc-mn-col', g).forEach(function (c) { var i = +c.dataset.i; c.classList.toggle('nc-mn-off', wrong.indexOf(i) > -1); setTimeout(function () { c.classList.remove('nc-mn-off'); }, 1400); });
+    });
+    g.querySelector('.nc-mn-reset').addEventListener('click', function () { S.order = derange(); S.matched = 0; save(); sel = null; fb.innerHTML = ''; drawMenu(); });
+    var saveB = g.querySelector('.nc-mn-save'), editB = g.querySelector('.nc-mn-edit'), seal = g.querySelector('.nc-mn-seal'), hint = g.querySelector('.nc-mn-hint');
+    function has() { return M.foods.every(function (f) { return !!S.guess[f.k]; }); }
+    function drawPick() {
+      var saved = !!S.saved, locked = !!S.revealed;
+      $$('.nc-mn-t', g).forEach(function (b) { b.classList.toggle('sel', S.guess[b.dataset.f] === b.dataset.t); b.disabled = saved; });
+      saveB.disabled = !has(); saveB.hidden = saved; editB.hidden = !saved || locked;
+      hint.textContent = saved || has() ? '' : M.notYet;
+      seal.hidden = !saved;
+      var line = M.foods.map(function (f) { return f.name + ': ' + toolName(S.guess[f.k]); }).join(' · ');
+      seal.textContent = !saved ? '' : (locked ? M.lockedNote : M.saved).replace('{g}', line);
+      g.classList.toggle('nc-done', saved && !!S.matched);
+      refresh();
+    }
+    $$('.nc-mn-t', g).forEach(function (b) { b.addEventListener('click', function () { if (S.saved) return; S.guess[b.dataset.f] = b.dataset.t; save(); drawPick(); }); });
+    saveB.addEventListener('click', function () { if (!has()) return; S.saved = 1; save(); ping(); bind({ prediction: S.guess }); drawPick(); });
+    editB.addEventListener('click', function () { if (S.revealed) return; S.saved = 0; save(); drawPick(); });
+    document.addEventListener('nc:mn', drawPick);
+    drawMenu(); drawPick();
+    putKeeper('k-warmup', g.querySelector('.nc-job'), 'after');
+  }
+
+  /* ───────────── 20.02 Part 1 game: Caliper (measure Darwin's four beaks on his real 1845 drawing) ───────────── */
+  function buildCaliper() {
+    var C = D.caliper; if (!C) return;
+    var src = $('.nc-src'); if (!src) throw new Error('caliper needs the source');
+    store.cp = store.cp || {}; var S = store.cp; S.r = S.r || {}; S.j = S.j || {};
+    var g = mk('div', 'nc-g nc-cp'), cur = 0;
+    g.innerHTML = gameHead(C.kicker, C.title) + '<p class="nc-p">' + esc(C.intro) + '</p>' + job(C.job) +
+      '<div class="nc-cp-tabs" role="group" aria-label="Finches">' + C.heads.map(function (h, i) { return '<button type="button" class="nc-opt nc-cp-tab" data-i="' + i + '">' + esc(h.label) + '</button>'; }).join('') + '</div>' +
+      '<div class="nc-cp-stage"><svg class="nc-cp-svg" role="img" aria-label="' + esc(C.alt) + '"></svg></div>' +
+      '<div class="nc-cp-ctl"><span>' + esc(C.topLabel) + '</span><button type="button" class="nc-cup-edit nc-cp-b" data-w="t" data-d="-1" aria-label="Move the top jaw up">▲</button><button type="button" class="nc-cup-edit nc-cp-b" data-w="t" data-d="1" aria-label="Move the top jaw down">▼</button>' +
+        '<span>' + esc(C.botLabel) + '</span><button type="button" class="nc-cup-edit nc-cp-b" data-w="b" data-d="-1" aria-label="Move the bottom jaw up">▲</button><button type="button" class="nc-cup-edit nc-cp-b" data-w="b" data-d="1" aria-label="Move the bottom jaw down">▼</button></div>' +
+      '<div class="nc-rw-ctl"><button type="button" class="nc-btn nc-cp-read">' + esc(C.readLabel) + '</button></div>' +
+      '<div class="nc-fb nc-cp-fb" aria-live="polite"></div>' +
+      '<div class="nc-cp-table"></div>' +
+      '<div class="nc-cp-ask" hidden><div class="nc-q">' + esc(C.ask) + '</div><div class="nc-opts">' + C.opts.map(function (o, i) { return '<button type="button" class="nc-opt nc-cp-o" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div><div class="nc-fb nc-cp-afb" aria-live="polite"></div></div>' +
+      '<button type="button" class="nc-cup-edit nc-cp-reset">' + esc(C.againLabel) + '</button>' +
+      '<p class="nc-credit">' + esc(C.credit) + '</p>';
+    after(src, g);
+    var svg = g.querySelector('.nc-cp-svg'), fb = g.querySelector('.nc-cp-fb');
+    function H() { return C.heads[cur]; }
+    function jaws() { var h = H(), j = S.j[cur]; if (!j) { j = S.j[cur] = { t: h.top - h.start, b: h.bot + h.start }; } return j; }
+    function units(h) { return Math.round((h.bot - h.top) / C.pxPerUnit); }
+    function draw() {
+      var h = H(), j = jaws(), vb = h.view, done = S.r[cur] != null;
+      svg.setAttribute('viewBox', vb.join(' '));
+      var x = h.x, armL = x - h.arm, beamX = x + 26, w = vb[2];
+      var jaw = function (y, top) {
+        return '<g class="nc-cp-jaw" data-w="' + (top ? 't' : 'b') + '"><rect x="' + armL + '" y="' + (y - (top ? 10 : 0)) + '" width="' + (beamX - armL) + '" height="10" rx="2" fill="url(#nc-cp-st)" stroke="#4f5862" stroke-width="1.2"/>' +
+          '<rect x="' + (armL - 4) + '" y="' + (y - 18) + '" width="' + (beamX - armL + 60) + '" height="36" fill="transparent" class="nc-cp-hit" style="cursor:ns-resize"/></g>';
+      };
+      var ticks = ''; for (var t = 0; t <= 26; t++) { var ty = j.t + t * C.pxPerUnit; if (ty > j.b + 1) break; ticks += '<line x1="' + beamX + '" y1="' + ty + '" x2="' + (beamX + (t % 5 ? 8 : 16)) + '" y2="' + ty + '" stroke="#2c3440" stroke-width="1.4"/>'; }
+      svg.innerHTML = '<defs><linearGradient id="nc-cp-st" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6f8"/><stop offset=".5" stop-color="#aeb6bf"/><stop offset="1" stop-color="#6d7680"/></linearGradient>' +
+        '<linearGradient id="nc-cp-bm" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#dfe3e8"/><stop offset="1" stop-color="#8f98a2"/></linearGradient></defs>' +
+        '<image href="' + esc(C.img) + '" x="0" y="0" width="' + C.w + '" height="' + C.h + '"/>' +
+        '<rect x="' + beamX + '" y="' + (j.t - 40) + '" width="22" height="' + (j.b - j.t + 80) + '" rx="3" fill="url(#nc-cp-bm)" stroke="#4f5862" stroke-width="1.2"/>' + ticks +
+        jaw(j.t, true) + jaw(j.b, false) +
+        (done ? '<rect x="' + (beamX + 30) + '" y="' + ((j.t + j.b) / 2 - 22) + '" width="128" height="44" rx="8" fill="#0E1C42"/><text x="' + (beamX + 94) + '" y="' + ((j.t + j.b) / 2 + 8) + '" fill="#fff" font-size="26" font-weight="900" text-anchor="middle" font-family="Nunito,sans-serif">' + S.r[cur] + ' units</text>' : '');
+      $$('.nc-cp-tab', g).forEach(function (b) { var i = +b.dataset.i; b.classList.toggle('sel', i === cur); b.classList.toggle('ok', S.r[i] != null); });
+      g.querySelector('.nc-cp-read').disabled = done; g.querySelector('.nc-cp-read').textContent = done ? '✓ Measured' : C.readLabel;
+      var all = C.heads.every(function (hh, i) { return S.r[i] != null; });
+      var rows = C.heads.map(function (hh, i) { return { i: i, v: S.r[i] }; }).filter(function (r) { return r.v != null; }).sort(function (a, b) { return b.v - a.v; });
+      g.querySelector('.nc-cp-table').innerHTML = rows.length ? '<table><thead><tr><th>' + esc(C.colFinch) + '</th><th>' + esc(C.colDepth) + '</th></tr></thead><tbody>' + rows.map(function (r) { return '<tr><th>' + esc(C.heads[r.i].label) + ' · ' + esc(C.heads[r.i].name) + '</th><td><span class="nc-cp-bar" style="width:' + (r.v * 5) + 'px"></span> ' + r.v + '</td></tr>'; }).join('') + '</tbody></table>' : '';
+      g.querySelector('.nc-cp-ask').hidden = !all;
+      if (S.answered) { $$('.nc-cp-o', g).forEach(function (b) { b.classList.toggle('ok', !!C.opts[+b.dataset.i].ok); }); g.querySelector('.nc-cp-afb').innerHTML = '✅ ' + esc(C.win); }
+      g.classList.toggle('nc-done', !!S.answered);
+      bindDrag(); refresh();
+    }
+    function setJaw(w, y) {
+      if (S.r[cur] != null) return; var h = H(), j = jaws(), lo = h.view[1] + 10, hi = h.view[1] + h.view[3] - 10;
+      if (w === 't') j.t = clamp(y, lo, j.b - 8); else j.b = clamp(y, j.t + 8, hi);
+      save(); draw();
+    }
+    function bindDrag() {
+      $$('.nc-cp-hit', svg).forEach(function (hit) {
+        var w = hit.parentNode.dataset.w;
+        hit.addEventListener('pointerdown', function (e) {
+          e.preventDefault(); fb.innerHTML = '';
+          function y(ev) { var p = svg.createSVGPoint(); p.x = ev.clientX; p.y = ev.clientY; return p.matrixTransform(svg.getScreenCTM().inverse()).y; }
+          function mv(ev) { ev.preventDefault(); setJaw(w, y(ev)); }
+          function up() { window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up); }
+          window.addEventListener('pointermove', mv, { passive: false }); window.addEventListener('pointerup', up);
+        });
+      });
+    }
+    $$('.nc-cp-b', g).forEach(function (b) { b.addEventListener('click', function () { var j = jaws(); setJaw(b.dataset.w, j[b.dataset.w] + (+b.dataset.d) * C.step); }); });
+    $$('.nc-cp-tab', g).forEach(function (b) { b.addEventListener('click', function () { cur = +b.dataset.i; fb.innerHTML = ''; draw(); }); });
+    g.querySelector('.nc-cp-read').addEventListener('click', function () {
+      var h = H(), j = jaws(), tol = Math.max(C.minTol, (h.bot - h.top) * C.tol);
+      var dt = j.t - h.top, db = j.b - h.bot;
+      if (Math.abs(dt) <= tol && Math.abs(db) <= tol) {
+        j.t = h.top; j.b = h.bot; S.r[cur] = units(h); save(); ping();
+        fb.innerHTML = '✅ ' + esc(C.okLine.replace('{n}', S.r[cur]).replace('{f}', h.label));
+        var next = C.heads.map(function (x, i) { return i; }).filter(function (i) { return S.r[i] == null; })[0];
+        if (next != null) setTimeout(function () { cur = next; draw(); }, RM ? 0 : 900);
+        else bind({ caliper: S.r });
+      } else {
+        ping(true);
+        var msg = Math.abs(dt) > tol ? (dt < 0 ? C.hints.topHigh : C.hints.topLow) : (db > 0 ? C.hints.botLow : C.hints.botHigh);
+        fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(msg) + '</span>';
+      }
+      draw();
+    });
+    $$('.nc-cp-o', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var o = C.opts[+b.dataset.i];
+        if (o.ok) { S.answered = 1; save(); ping(); draw(); note('📏 Part 1 done: you measured Darwin\'s four beaks.'); }
+        else { ping(true); b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 700); g.querySelector('.nc-cp-afb').innerHTML = '<span class="nc-ask-no">🤔 ' + esc(o.hint) + '</span>'; }
+      });
+    });
+    g.querySelector('.nc-cp-reset').addEventListener('click', function () { store.cp = S = { r: {}, j: {} }; save(); cur = 0; fb.innerHTML = ''; g.querySelector('.nc-cp-afb').innerHTML = ''; $$('.nc-cp-o', g).forEach(function (b) { b.classList.remove('ok'); }); draw(); });
+    EXTRA_LINES.push(function () { return ['--- PART 1: MY CALIPER READINGS ---', C.heads.map(function (h, i) { return h.label + ' (' + h.name + '): ' + (S.r[i] != null ? S.r[i] + ' units' : 'not measured'); }).join(' · ')]; });
+    draw();
+  }
+
+  /* ───────────── 20.02 Part 2 game: Shadow match (drag a kitchen tool onto the beak it matches) + a plant that fits a beak ───────────── */
+  function shTool(k) {
+    var u = 'nc-sh' + (++beamN), d = '<defs><linearGradient id="' + u + 'm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6f8"/><stop offset=".5" stop-color="#aab2bb"/><stop offset="1" stop-color="#626b75"/></linearGradient>' +
+      '<linearGradient id="' + u + 'w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e3b97f"/><stop offset=".55" stop-color="#b98146"/><stop offset="1" stop-color="#7f5227"/></linearGradient>' +
+      '<linearGradient id="' + u + 'r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a80"/><stop offset="1" stop-color="#c62828"/></linearGradient></defs>', m = 'url(#' + u + 'm)', w = 'url(#' + u + 'w)', s = '';
+    if (k === 'nutcracker') s = '<path d="M14 20 L96 12 L98 18 L18 26 Z" fill="' + m + '" stroke="#4f5862"/><path d="M14 40 L96 48 L98 42 L18 34 Z" fill="' + m + '" stroke="#4f5862"/><circle cx="16" cy="30" r="9" fill="' + m + '" stroke="#4f5862"/><circle cx="16" cy="30" r="3" fill="#4f5862"/><ellipse cx="40" cy="30" rx="9" ry="7" fill="' + w + '" stroke="#6b4420"/>';
+    else if (k === 'straw') s = '<rect x="6" y="26" width="104" height="9" rx="4.5" fill="#f7f7f7" stroke="#9aa3ad"/><path d="M14 26 l6 9 M28 26 l6 9 M42 26 l6 9 M56 26 l6 9 M70 26 l6 9 M84 26 l6 9 M98 26 l6 9" stroke="url(#' + u + 'r)" stroke-width="4"/>';
+    else if (k === 'spear') s = '<rect x="6" y="28" width="80" height="5" rx="2.5" fill="' + w + '" stroke="#6b4420" stroke-width=".7"/><path d="M84 23 L116 30.5 L84 38 L90 30.5 Z" fill="' + m + '" stroke="#4f5862"/>';
+    else if (k === 'hook') s = '<rect x="8" y="10" width="50" height="7" rx="3.5" fill="' + w + '" stroke="#6b4420" stroke-width=".7"/><path d="M58 13.5 H86 Q108 14 106 34 Q104 50 88 48 Q80 46 82 38" fill="none" stroke="' + m + '" stroke-width="6" stroke-linecap="round"/><path d="M82 38 l-4 -6 l8 1 Z" fill="#626b75"/>';
+    else if (k === 'strainer') s = '<rect x="4" y="27" width="48" height="6" rx="3" fill="' + m + '" stroke="#4f5862"/><circle cx="82" cy="30" r="24" fill="#dfe4ea" stroke="#4f5862" stroke-width="2"/><path d="M64 22 H100 M60 30 H104 M64 38 H100 M74 10 V50 M82 7 V53 M90 10 V50" stroke="#8a939d" stroke-width="1.3"/>';
+    else s = '<rect x="6" y="22" width="44" height="16" rx="5" fill="' + w + '" stroke="#6b4420"/><rect x="50" y="25" width="10" height="10" fill="#8a939d"/><path d="M60 24 L108 26 L114 30 L108 34 L60 36 Z" fill="' + m + '" stroke="#4f5862"/>';
+    return '<svg class="nc-sh-svg" viewBox="0 0 120 60" aria-hidden="true">' + d + s + '</svg>';
+  }
+  function buildShadow() {
+    var H = D.shadow; if (!H) return;
+    var p2 = $$('#tab-lesson .card-head-label').filter(function (e) { return /Part 2/.test(e.textContent); })[0];
+    var body = p2 && p2.closest('.card').querySelector('.card-body'); if (!body) throw new Error('Part 2 card missing');
+    store.sh = store.sh || {}; var S = store.sh; S.ok = S.ok || {};
+    var g = mk('div', 'nc-g nc-sh'), pick = null;
+    g.innerHTML = gameHead(H.kicker, H.title) + '<p class="nc-p">' + esc(H.intro) + '</p>' + job(H.job) +
+      '<div class="nc-sh-tray" role="group" aria-label="Tools"></div>' +
+      '<div class="nc-sh-grid">' + H.birds.map(function (b, i) {
+        return '<button type="button" class="nc-sh-bird" data-i="' + i + '"><img src="' + esc(b.img) + '" alt="' + esc(b.alt) + '" draggable="false" loading="lazy"><span class="nc-sh-drop"></span><b>' + esc(b.name) + '</b><span class="nc-sh-meal"></span></button>';
+      }).join('') + '</div>' +
+      '<div class="nc-fb nc-sh-fb" aria-live="polite"></div>' +
+      '<button type="button" class="nc-cup-edit nc-sh-reset">' + esc(H.againLabel) + '</button>' +
+      '<p class="nc-credit">' + esc(H.model) + ' ' + esc(H.credit) + '</p>';
+    body.appendChild(g);
+    var P = H.plant, pl = null;
+    if (P) {
+      pl = mk('div', 'nc-g nc-pl');
+      pl.innerHTML = gameHead(P.kicker, P.title) + '<div class="nc-pl-pics">' + P.photos.map(function (p) { return '<figure><img src="' + esc(p.img) + '" alt="' + esc(p.alt) + '" loading="lazy"><figcaption>' + esc(p.cap) + '</figcaption></figure>'; }).join('') + '</div>' +
+        '<p class="nc-p">' + esc(P.text) + '</p><div class="nc-q">' + esc(P.ask) + '</div><div class="nc-opts">' + P.opts.map(function (o, i) { return '<button type="button" class="nc-opt nc-pl-o" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div><div class="nc-fb nc-pl-fb" aria-live="polite"></div><p class="nc-credit">' + esc(P.credit) + '</p>';
+      after(g, pl);
+      $$('.nc-pl-o', pl).forEach(function (b) {
+        b.addEventListener('click', function () {
+          var o = P.opts[+b.dataset.i];
+          if (o.ok) { S.plant = 1; save(); ping(); drawPlant(); }
+          else { ping(true); b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 700); pl.querySelector('.nc-pl-fb').innerHTML = '<span class="nc-ask-no">🤔 ' + esc(o.hint) + '</span>'; }
+        });
+      });
+    }
+    function drawPlant() { if (!pl) return; if (S.plant) { $$('.nc-pl-o', pl).forEach(function (b) { b.classList.toggle('ok', !!P.opts[+b.dataset.i].ok); }); pl.querySelector('.nc-pl-fb').innerHTML = '✅ ' + esc(P.win); } pl.classList.toggle('nc-done', !!S.plant); }
+    var tray = g.querySelector('.nc-sh-tray'), fb = g.querySelector('.nc-sh-fb');
+    function toolOf(k) { return H.tools.filter(function (t) { return t.k === k; })[0]; }
+    function draw() {
+      tray.innerHTML = H.tools.map(function (t) {
+        var used = Object.keys(S.ok).some(function (i) { return H.birds[i].tool === t.k; });
+        return '<button type="button" class="nc-sh-tool' + (pick === t.k ? ' sel' : '') + (used ? ' used' : '') + '" data-k="' + t.k + '"' + (used ? ' disabled' : '') + '>' + shTool(t.k) + '<span>' + esc(t.name) + (used ? ' ✓' : '') + '</span></button>';
+      }).join('');
+      $$('.nc-sh-bird', g).forEach(function (b) {
+        var i = +b.dataset.i, B = H.birds[i], ok = !!S.ok[i];
+        b.classList.toggle('ok', ok); b.disabled = ok;
+        b.querySelector('.nc-sh-drop').innerHTML = ok ? shTool(B.tool) : '?';
+        b.querySelector('.nc-sh-meal').textContent = ok ? B.meal : '';
+        b.setAttribute('aria-label', B.name + (ok ? ': ' + toolOf(B.tool).name + '. ' + B.meal : ': tap here after you pick a tool'));
+      });
+      var n = Object.keys(S.ok).length, all = n >= H.birds.length;
+      if (all) fb.innerHTML = '✅ ' + esc(H.win);
+      g.classList.toggle('nc-done', all);
+      bindTools(); drawPlant(); refresh();
+    }
+    function tryMatch(k, i) {
+      var B = H.birds[i]; if (S.ok[i]) return;
+      if (B.tool === k) { S.ok[i] = 1; save(); ping(); pick = null; fb.innerHTML = '✅ ' + esc(B.why); if (Object.keys(S.ok).length === H.birds.length) { bind({ shadow: 1 }); note('🔧 Part 2 done: six beaks, six tools.'); } }
+      else { ping(true); fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(H.miss.replace('{t}', toolOf(k).name.toLowerCase())) + ' ' + esc(B.hint) + '</span>'; var el = $('.nc-sh-bird[data-i="' + i + '"]', g); el.classList.add('no'); setTimeout(function () { el.classList.remove('no'); }, 700); }
+      draw();
+    }
+    function bindTools() {
+      $$('.nc-sh-tool', g).forEach(function (t) {
+        t.addEventListener('click', function () { if (t._dragged) { t._dragged = 0; return; } pick = pick === t.dataset.k ? null : t.dataset.k; fb.innerHTML = pick ? esc(H.picked.replace('{t}', toolOf(pick).name)) : ''; draw(); });
+        t.addEventListener('pointerdown', function (e) {
+          var k = t.dataset.k, ghost = null, sx = e.clientX, sy = e.clientY, moved = false;
+          function mv(ev) {
+            if (!moved && Math.abs(ev.clientX - sx) + Math.abs(ev.clientY - sy) < 8) return;
+            if (!moved) { moved = true; ghost = mk('div', 'nc-sh-ghost', shTool(k)); document.body.appendChild(ghost); }
+            ghost.style.left = (ev.clientX - 50) + 'px'; ghost.style.top = (ev.clientY - 25) + 'px';
+            $$('.nc-sh-bird', g).forEach(function (b) { b.classList.remove('hover'); }); var o = document.elementFromPoint(ev.clientX, ev.clientY), hb = o && o.closest('.nc-sh-bird'); if (hb) hb.classList.add('hover');
+          }
+          function up(ev) {
+            window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up);
+            if (!moved) return; ghost.remove(); t._dragged = 1; $$('.nc-sh-bird', g).forEach(function (b) { b.classList.remove('hover'); });
+            var o = document.elementFromPoint(ev.clientX, ev.clientY), b = o && o.closest('.nc-sh-bird');
+            if (b && g.contains(b)) tryMatch(k, +b.dataset.i);
+          }
+          window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up);
+        });
+      });
+    }
+    $$('.nc-sh-bird', g).forEach(function (b) { b.addEventListener('click', function () { if (!pick) { fb.innerHTML = '<span class="nc-ask-no">' + esc(H.pickFirst) + '</span>'; return; } tryMatch(pick, +b.dataset.i); }); });
+    g.querySelector('.nc-sh-reset').addEventListener('click', function () { S.ok = {}; save(); pick = null; fb.innerHTML = ''; draw(); });
+    EXTRA_LINES.push(function () { return ['--- PART 2: SHADOW MATCH ---', Object.keys(S.ok).length + ' of ' + H.birds.length + ' beaks matched to a tool']; });
+    draw();
+  }
+
+  /* ───────────── 20.02 Part 3 game: Spot the flaw (tap the part of each test plan that breaks the fair test) ───────────── */
+  function buildFlaw() {
+    var F = D.flaw; if (!F) return;
+    var p3 = $$('#tab-lesson .card-head-label').filter(function (e) { return /Part 3/.test(e.textContent); })[0];
+    var body = p3 && p3.closest('.card').querySelector('.card-body'); if (!body) throw new Error('Part 3 card missing');
+    store.fw = store.fw || {}; var S = store.fw; S.ok = S.ok || {};
+    var g = mk('div', 'nc-g nc-fw');
+    g.innerHTML = gameHead(F.kicker, F.title) + '<p class="nc-p">' + esc(F.intro) + '</p>' + job(F.job) +
+      '<div class="nc-fw-grid">' + F.plans.map(function (p, i) {
+        return '<div class="nc-fw-plan" data-i="' + i + '"><div class="nc-fw-who">📓 ' + esc(p.who) + '</div><p class="nc-fw-text">' + p.parts.map(function (t, j) { return '<button type="button" class="nc-fw-part" data-j="' + j + '">' + esc(t) + '</button>'; }).join(' ') + '</p>' +
+          '<button type="button" class="nc-cup-edit nc-fw-fair">' + esc(F.fairLabel) + '</button><div class="nc-fb nc-fw-fb" aria-live="polite"></div></div>';
+      }).join('') + '</div>' +
+      '<div class="nc-fw-score"></div>' +
+      '<button type="button" class="nc-cup-edit nc-fw-reset">' + esc(F.againLabel) + '</button>';
+    body.appendChild(g);
+    function draw() {
+      $$('.nc-fw-plan', g).forEach(function (el) {
+        var i = +el.dataset.i, p = F.plans[i], ok = !!S.ok[i];
+        el.classList.toggle('ok', ok);
+        $$('.nc-fw-part', el).forEach(function (b) { b.disabled = ok; b.classList.toggle('flaw', ok && +b.dataset.j === p.flaw); });
+        el.querySelector('.nc-fw-fair').disabled = ok;
+        if (ok) el.querySelector('.nc-fw-fb').innerHTML = '✅ ' + esc(p.why);
+      });
+      var n = Object.keys(S.ok).length, all = n >= F.plans.length;
+      g.querySelector('.nc-fw-score').innerHTML = all ? '✅ ' + esc(F.win) : esc(F.scoreLabel.replace('{n}', n));
+      g.classList.toggle('nc-done', all);
+      refresh();
+    }
+    function judge(el, j) {
+      var i = +el.dataset.i, p = F.plans[i], fbx = el.querySelector('.nc-fw-fb');
+      if (j === p.flaw) { S.ok[i] = 1; save(); ping(); if (Object.keys(S.ok).length === F.plans.length) { bind({ flaw: 1 }); note('⚖️ Part 3 done: you can spot an unfair test.'); } draw(); return; }
+      ping(true);
+      fbx.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(j === -1 ? F.notFair : (p.fine && p.fine[j] ? p.fine[j] : F.fineDefault)) + '</span>';
+    }
+    $$('.nc-fw-plan', g).forEach(function (el) {
+      $$('.nc-fw-part', el).forEach(function (b) { b.addEventListener('click', function () { judge(el, +b.dataset.j); }); });
+      el.querySelector('.nc-fw-fair').addEventListener('click', function () { judge(el, -1); });
+    });
+    g.querySelector('.nc-fw-reset').addEventListener('click', function () { S.ok = {}; save(); $$('.nc-fw-fb', g).forEach(function (e) { e.innerHTML = ''; }); draw(); });
+    EXTRA_LINES.push(function () { return ['--- PART 3: SPOT THE FLAW ---', Object.keys(S.ok).length + ' of ' + F.plans.length + ' test plans judged']; });
+    draw();
+  }
+
+  /* ───────────── 20.02 Part 4: the beak-tools test (real tools with a timer, or an on-screen plate), a self-drawing graph, prediction vs data, the twist ───────────── */
+  function buildBeakLab() {
+    var L = D.beaklab; if (!L) return;
+    var act = $('#tab-lesson .act-body'); if (!act) throw new Error('lesson body missing');
+    var sec4 = mk('div', 'nc-part4');
+    sec4.innerHTML = '<div class="card theme-sky nc-p4card"><div class="card-head"><div class="card-head-icon">' + esc(L.icon || '🔬') + '</div><div><div class="card-head-label">Part 4</div><div class="card-head-title">' + esc(L.cardTitle) + '</div></div></div><div class="card-body"><p>' + esc(L.cardIntro) + '</p><div class="nc-g nc-bl"></div></div></div>';
+    act.appendChild(sec4);
+    var g = sec4.querySelector('.nc-bl');
+    store.bl = store.bl || {}; var S = store.bl; S.d = S.d || {}; if (!S.mode) S.mode = 'real';
+    var T = L.tools, F = L.foods;
+    g.innerHTML = gameHead(L.kicker, L.title) + '<p class="nc-p">' + esc(L.intro) + '</p>' + job(L.job) +
+      '<div class="nc-bl-safe">🌱 ' + esc(L.safety) + '</div>' +
+      '<div class="nc-bl-modes" role="group" aria-label="How will you test?"><button type="button" class="nc-opt nc-bl-mode" data-m="real">' + esc(L.realLabel) + '</button><button type="button" class="nc-opt nc-bl-mode" data-m="screen">' + esc(L.screenLabel) + '</button></div>' +
+      '<div class="nc-bl-real"><p class="nc-p">' + esc(L.realSteps) + '</p><div class="nc-bl-timer"><div class="nc-bl-clock" aria-live="polite">0:30</div><button type="button" class="nc-btn nc-bl-start">' + esc(L.timerLabel) + '</button><button type="button" class="nc-cup-edit nc-bl-stop" hidden>' + esc(L.timerStop) + '</button></div></div>' +
+      '<div class="nc-bl-screen" hidden><p class="nc-p">' + esc(L.screenSteps) + '</p>' +
+        '<div class="nc-bl-pick"><span>' + esc(L.pickTool) + '</span>' + T.map(function (t) { return '<button type="button" class="nc-opt nc-bl-pt" data-t="' + t.k + '">' + toolSVG(t.k, 'nc-mn-tsvg') + '<span>' + esc(t.name) + '</span></button>'; }).join('') + '</div>' +
+        '<div class="nc-bl-pick"><span>' + esc(L.pickFood) + '</span>' + F.map(function (f) { return '<button type="button" class="nc-opt nc-bl-pf" data-f="' + f.k + '">' + esc(f.name) + '</button>'; }).join('') + '</div>' +
+        '<div class="nc-bl-table-top"><svg class="nc-bl-plate" viewBox="0 0 600 300" role="img" aria-label="' + esc(L.plateAlt) + '"></svg><div class="nc-bl-hud"><div class="nc-bl-sclock">0:30</div><button type="button" class="nc-btn nc-bl-go">' + esc(L.goLabel) + '</button><div class="nc-fb nc-bl-sfb" aria-live="polite"></div></div></div>' +
+        '<p class="nc-credit">' + esc(L.screenModel) + '</p></div>' +
+      '<h5 class="nc-bl-h">' + esc(L.tableTitle) + '</h5>' +
+      '<table class="nc-bl-tab"><thead><tr><th>' + esc(L.colTool) + '</th>' + F.map(function (f) { return '<th>' + esc(f.col) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+        T.map(function (t) { return '<tr><th>' + toolSVG(t.k, 'nc-bl-tsvg') + ' ' + esc(t.name) + '</th>' + F.map(function (f) { return '<td><input type="text" inputmode="numeric" autocomplete="off" class="nc-bl-in" data-t="' + t.k + '" data-f="' + f.k + '" aria-label="' + esc(t.name + ', ' + f.name) + '"></td>'; }).join('') + '</tr>'; }).join('') +
+      '</tbody></table>' +
+      '<div class="nc-fb nc-bl-fb" aria-live="polite"></div>' +
+      '<div class="nc-bl-graph" hidden><h5 class="nc-bl-h">' + esc(L.graphTitle) + '</h5><div class="nc-bl-key">' + F.map(function (f) { return '<span><i style="background:' + f.color + '"></i>' + esc(f.name) + '</span>'; }).join('') + '</div><svg class="nc-bl-svg" viewBox="0 0 600 260" role="img" aria-label="' + esc(L.graphAlt) + '"></svg></div>' +
+      '<div class="nc-reveal nc-bl-cmp" hidden><h5>' + esc(L.compareTitle) + '</h5><div class="nc-mt-rows nc-bl-rows"></div></div>' +
+      '<div class="nc-bl-ask" hidden><div class="nc-q">' + esc(L.ask) + '</div><div class="nc-opts">' + L.opts.map(function (o, i) { return '<button type="button" class="nc-opt nc-bl-o" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div><div class="nc-fb nc-bl-afb" aria-live="polite"></div></div>' +
+      '<div class="nc-wow nc-bl-wow" hidden><div class="nc-wow-k">The twist</div><blockquote class="nc-wow-q">' + esc(L.twist.head) + '</blockquote><p class="nc-wow-nums">' + esc(L.twist.line) + '</p><p class="nc-wow-chain">' + esc(L.twist.chain) + '</p></div>' +
+      '<button type="button" class="nc-cup-edit nc-bl-reset">' + esc(L.againLabel) + '</button>';
+    var fb = g.querySelector('.nc-bl-fb');
+    function tName(k) { return T.filter(function (t) { return t.k === k; })[0].name; }
+    function val(t, f) { var r = S.d[t] && S.d[t][f]; return r == null || r === '' ? null : +r; }
+    function full() { return T.every(function (t) { return F.every(function (f) { return val(t.k, f.k) != null; }); }); }
+    function winner(f) { var best = null, bv = -1, tie = false; T.forEach(function (t) { var v = val(t.k, f); if (v > bv) { bv = v; best = t.k; tie = false; } else if (v === bv) tie = true; }); return tie ? null : best; }
+    function drawGraph() {
+      var mx = 1; T.forEach(function (t) { F.forEach(function (f) { mx = Math.max(mx, val(t.k, f.k) || 0); }); });
+      var top = Math.ceil(mx / 10) * 10 || 10, W = 600, Hh = 260, Lm = 44, B = 40, Tp = 14, slot = (W - Lm - 10) / T.length, bw = slot * 0.3, s = '';
+      for (var v = 0; v <= top; v += top / 5) { var y = Hh - B - v / top * (Hh - B - Tp); s += '<line x1="' + Lm + '" y1="' + y.toFixed(1) + '" x2="' + (W - 10) + '" y2="' + y.toFixed(1) + '" stroke="#f0e8dc"/><text x="' + (Lm - 6) + '" y="' + (y + 3).toFixed(1) + '" font-size="11" fill="#7a6a58" text-anchor="end">' + Math.round(v) + '</text>'; }
+      T.forEach(function (t, i) {
+        F.forEach(function (f, k) {
+          var x = Lm + i * slot + slot * 0.18 + k * (bw + 4), v = val(t.k, f.k) || 0, h = Math.max(1.5, v / top * (Hh - B - Tp));
+          s += '<rect x="' + x.toFixed(1) + '" y="' + (Hh - B - h).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + h.toFixed(1) + '" rx="3" fill="' + f.color + '"/><text x="' + (x + bw / 2).toFixed(1) + '" y="' + (Hh - B - h - 4).toFixed(1) + '" font-size="11" font-weight="800" fill="#2B1D12" text-anchor="middle">' + v + '</text>';
+        });
+        s += '<text x="' + (Lm + i * slot + slot / 2).toFixed(1) + '" y="' + (Hh - B + 18) + '" font-size="12.5" font-weight="800" fill="#2B1D12" text-anchor="middle">' + esc(t.name) + '</text>';
+      });
+      s += '<text x="' + Lm + '" y="10" font-size="10" fill="#7a6a58">' + esc(L.yLabel) + '</text>';
+      g.querySelector('.nc-bl-svg').innerHTML = s;
+    }
+    function drawAll() {
+      $$('.nc-bl-mode', g).forEach(function (b) { b.classList.toggle('sel', b.dataset.m === S.mode); });
+      g.querySelector('.nc-bl-real').hidden = S.mode !== 'real'; g.querySelector('.nc-bl-screen').hidden = S.mode !== 'screen';
+      $$('.nc-bl-in', g).forEach(function (inp) { var v = val(inp.dataset.t, inp.dataset.f); if (document.activeElement !== inp) inp.value = v == null ? '' : v; inp.readOnly = S.mode === 'screen'; inp.closest('td').classList.toggle('nc-bl-done', v != null); });
+      var ok = full();
+      g.querySelector('.nc-bl-graph').hidden = !ok;
+      if (ok) drawGraph();
+      g.querySelector('.nc-bl-cmp').hidden = !ok;
+      if (ok) {
+        var mn = store.mn || {}, guess = mn.guess || {};
+        g.querySelector('.nc-bl-rows').innerHTML = '<div class="nc-mt-r nc-mt-rh"><span></span><span>' + esc(L.colPred) + '</span><span>' + esc(L.colData) + '</span></div>' + F.map(function (f) {
+          var w = winner(f.k); return '<div class="nc-mt-r"><b>' + esc(f.name) + '</b><span>' + esc(mn.saved && guess[f.k] ? tName(guess[f.k]) : L.notSaved) + '</span><span class="nc-mt-ev">' + esc(w ? tName(w) : L.tieLabel) + '</span></div>';
+        }).join('');
+        if (!S.bound) {
+          S.bound = 1; save(); bind({ beakData: S.d });
+          if (mn.saved && !mn.revealed) { mn.revealed = 1; store.mn = mn; save(); document.dispatchEvent(new Event('nc:mn')); }
+          note('📊 Your data table is full. Your graph drew itself.');
+        }
+      }
+      g.querySelector('.nc-bl-ask').hidden = !ok;
+      g.querySelector('.nc-bl-wow').hidden = !S.answered;
+      if (S.answered) { $$('.nc-bl-o', g).forEach(function (b) { b.classList.toggle('ok', !!L.opts[+b.dataset.i].ok); }); g.querySelector('.nc-bl-afb').innerHTML = '✅ ' + esc(L.win); }
+      g.classList.toggle('nc-done', !!S.answered);
+      drawPickSel(); refresh();
+    }
+    $$('.nc-bl-mode', g).forEach(function (b) { b.addEventListener('click', function () { stopAll(); S.mode = b.dataset.m; save(); drawAll(); }); });
+    $$('.nc-bl-in', g).forEach(function (inp) {
+      inp.addEventListener('input', function () {
+        var t = inp.dataset.t, f = inp.dataset.f, fd = F.filter(function (x) { return x.k === f; })[0], raw = inp.value.trim();
+        S.d[t] = S.d[t] || {};
+        if (raw === '') { delete S.d[t][f]; fb.innerHTML = ''; }
+        else if (!/^\d+$/.test(raw) || +raw > fd.max) { fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(L.badNum.replace('{max}', fd.max)) + '</span>'; return; }
+        else { S.d[t][f] = +raw; fb.innerHTML = ''; }
+        save(); drawAll();
+      });
+    });
+    // real test: a 30-second timer (the end makes one short sound)
+    var timer = null, left = 0, clock = g.querySelector('.nc-bl-clock'), startB = g.querySelector('.nc-bl-start'), stopB = g.querySelector('.nc-bl-stop');
+    function fmt(s) { return '0:' + (s < 10 ? '0' : '') + s; }
+    function stopTimer() { if (timer) { clearInterval(timer); timer = null; } startB.hidden = false; stopB.hidden = true; }
+    startB.addEventListener('click', function () {
+      left = L.seconds; clock.textContent = fmt(left); startB.hidden = true; stopB.hidden = false; clock.classList.remove('nc-bl-end');
+      timer = setInterval(function () { left--; clock.textContent = fmt(Math.max(0, left)); if (left <= 0) { stopTimer(); clock.textContent = L.timeUp; clock.classList.add('nc-bl-end'); ping(); } }, 1000);
+    });
+    stopB.addEventListener('click', function () { stopTimer(); clock.textContent = fmt(L.seconds); });
+    // on-screen test: tap the plate to grab with the tool, tap the bowl to drop. Each tool grabs differently (a model)
+    var plate = g.querySelector('.nc-bl-plate'), sclock = g.querySelector('.nc-bl-sclock'), goB = g.querySelector('.nc-bl-go'), sfb = g.querySelector('.nc-bl-sfb');
+    var run = null, held = 0, moved = 0, pieces = [], sel = { t: null, f: null }, lastGrab = 0;
+    function drawPickSel() {
+      $$('.nc-bl-pt', g).forEach(function (b) { b.classList.toggle('sel', sel.t === b.dataset.t); b.disabled = !!run; });
+      $$('.nc-bl-pf', g).forEach(function (b) { b.classList.toggle('sel', sel.f === b.dataset.f); b.disabled = !!run; });
+      goB.disabled = !!run || !sel.t || !sel.f;
+      goB.textContent = run ? L.goingLabel : (sel.t && sel.f && val(sel.t, sel.f) != null ? L.againTrial : L.goLabel);
+    }
+    function seed(f) {
+      var n = f === 'beans' ? L.screen.beans.n : L.screen.rice.n; pieces = [];
+      for (var i = 0; i < n; i++) { var a = Math.random() * Math.PI * 2, r = Math.sqrt(Math.random()) * 105; pieces.push({ x: 175 + Math.cos(a) * r * 1.25, y: 150 + Math.sin(a) * r * 0.85, a: Math.random() * 180, on: 1 }); }
+    }
+    function drawPlate() {
+      var f = sel.f || 'beans', s = '<defs><radialGradient id="nc-bl-pg" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#ffffff"/><stop offset=".8" stop-color="#ece6dc"/><stop offset="1" stop-color="#cfc6b8"/></radialGradient>' +
+        '<radialGradient id="nc-bl-bn" cx=".35" cy=".35" r=".8"><stop offset="0" stop-color="#b9614a"/><stop offset=".6" stop-color="#7a2e22"/><stop offset="1" stop-color="#4a1a14"/></radialGradient>' +
+        '<linearGradient id="nc-bl-rc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d9d3c4"/></linearGradient>' +
+        '<radialGradient id="nc-bl-bw" cx=".5" cy=".35" r=".75"><stop offset="0" stop-color="#5d8fc6"/><stop offset="1" stop-color="#244c7a"/></radialGradient></defs>' +
+        '<rect width="600" height="300" fill="#e9dcc6"/><ellipse cx="178" cy="156" rx="160" ry="118" fill="#bfb4a4"/><ellipse cx="175" cy="150" rx="158" ry="115" fill="url(#nc-bl-pg)" stroke="#b8ad9e"/><ellipse cx="175" cy="150" rx="118" ry="84" fill="none" stroke="#e0d8ca" stroke-width="2"/>' +
+        '<g class="nc-bl-bowl" style="cursor:pointer"><ellipse cx="482" cy="168" rx="92" ry="60" fill="url(#nc-bl-bw)" stroke="#1b3a5f" stroke-width="2"/><ellipse cx="482" cy="156" rx="76" ry="40" fill="#1f416a"/><text x="482" y="245" text-anchor="middle" font-size="15" font-weight="800" fill="#2B1D12">' + esc(L.bowlLabel) + ' · ' + moved + '</text></g>';
+      pieces.forEach(function (p) { if (!p.on) return; s += f === 'beans' ? '<ellipse cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" rx="9" ry="6" transform="rotate(' + p.a.toFixed(0) + ' ' + p.x.toFixed(1) + ' ' + p.y.toFixed(1) + ')" fill="url(#nc-bl-bn)"/>' : '<ellipse cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" rx="4" ry="1.6" transform="rotate(' + p.a.toFixed(0) + ' ' + p.x.toFixed(1) + ' ' + p.y.toFixed(1) + ')" fill="url(#nc-bl-rc)" stroke="#bdb3a0" stroke-width=".4"/>'; });
+      if (held) s += '<text x="300" y="30" text-anchor="middle" font-size="16" font-weight="900" fill="#0E1C42">' + esc(L.holding.replace('{n}', held)) + '</text>';
+      plate.innerHTML = s + '<text x="175" y="292" text-anchor="middle" font-size="12" fill="#7a6a58">' + esc(L.plateLabel) + '</text>';
+    }
+    function grab() {
+      if (!run || held) { if (run && held) sfb.innerHTML = '<span class="nc-ask-no">' + esc(L.dropFirst) + '</span>'; return; }
+      var now = Date.now(); if (now - lastGrab < (L.screen.gap || 0)) return; lastGrab = now; // a beak takes time to move: no superhuman tapping
+      var M = L.screen[sel.f][sel.t], left2 = pieces.filter(function (p) { return p.on; });
+      if (!left2.length) return;
+      if (Math.random() < M.slip) { sfb.innerHTML = '<span class="nc-ask-no">' + esc(L.slipLine) + '</span>'; return; }
+      var n = Math.min(left2.length, M.min + Math.floor(Math.random() * (M.max - M.min + 1)));
+      for (var i = 0; i < n; i++) left2[i].on = 0;
+      held = n; sfb.textContent = ''; drawPlate();
+    }
+    function drop() { if (!run || !held) return; moved += held; held = 0; drawPlate(); }
+    plate.addEventListener('click', function (e) {
+      var o = e.target; if (o.closest && o.closest('.nc-bl-bowl')) drop(); else grab();
+    });
+    function stopAll() { stopTimer(); if (run) { clearInterval(run); run = null; } }
+    goB.addEventListener('click', function () {
+      if (!sel.t || !sel.f || run) return;
+      seed(sel.f); held = 0; moved = 0; var t0 = L.seconds; sclock.textContent = fmt(t0); sfb.textContent = '';
+      run = setInterval(function () {
+        t0--; sclock.textContent = fmt(Math.max(0, t0));
+        if (t0 <= 0) {
+          clearInterval(run); run = null; held = 0;
+          S.d[sel.t] = S.d[sel.t] || {}; S.d[sel.t][sel.f] = moved; save(); ping();
+          sfb.innerHTML = '✅ ' + esc(L.trialDone.replace('{n}', moved).replace('{t}', tName(sel.t)));
+          drawPlate(); drawAll();
+        }
+      }, 1000);
+      drawPlate(); drawPickSel();
+    });
+    $$('.nc-bl-pt', g).forEach(function (b) { b.addEventListener('click', function () { sel.t = b.dataset.t; drawPickSel(); }); });
+    $$('.nc-bl-pf', g).forEach(function (b) { b.addEventListener('click', function () { sel.f = b.dataset.f; seed(sel.f); held = 0; moved = 0; drawPlate(); drawPickSel(); }); });
+    $$('.nc-bl-o', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var o = L.opts[+b.dataset.i];
+        if (o.ok) { S.answered = 1; save(); ping(); drawAll(); note('🐦 Part 4 done: the best beak depends on the food.'); }
+        else { ping(true); b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 700); g.querySelector('.nc-bl-afb').innerHTML = '<span class="nc-ask-no">🤔 ' + esc(o.hint) + '</span>'; }
+      });
+    });
+    g.querySelector('.nc-bl-reset').addEventListener('click', function () { stopAll(); store.bl = S = { d: {}, mode: S.mode }; save(); fb.innerHTML = ''; sfb.textContent = ''; g.querySelector('.nc-bl-afb').innerHTML = ''; $$('.nc-bl-o', g).forEach(function (b) { b.classList.remove('ok'); }); moved = 0; held = 0; seed(sel.f || 'beans'); drawPlate(); drawAll(); });
+    EXTRA_LINES.push(function () {
+      if (!full()) return ['--- PART 4: MY BEAK TEST DATA ---', '(table not finished yet)'];
+      return ['--- PART 4: MY BEAK TEST DATA (' + (S.mode === 'real' ? 'real tools' : 'on-screen test') + ', ' + L.seconds + ' seconds each) ---', T.map(function (t) { return t.name + ': ' + F.map(function (f) { return val(t.k, f.k) + ' ' + f.unit; }).join(', '); }).join(' · ') + ' · Best for ' + F.map(function (f) { var w = winner(f.k); return f.name.toLowerCase() + ': ' + (w ? tName(w) : L.tieLabel); }).join('; best for ')];
+    });
+    seed('beans'); drawPlate(); drawAll();
+  }
+
   function boot() {
     guard('lean', buildLean);
     guard('tabs', buildTabs);
@@ -3979,6 +4524,11 @@
     guard('cargo', buildCargo);
     guard('bench', buildBench);
     guard('cases', buildCases);
+    guard('menu', buildMenu);
+    guard('caliper', buildCaliper);
+    guard('shadow', buildShadow);
+    guard('flaw', buildFlaw);
+    guard('beaklab', buildBeakLab);
     guard('assignment', buildAssignment);
     guard('quizcard', function () { var q = $('#tab-quiz'); if (q) putKeeper('k-quiz', q, 'prepend'); });
     guard('wonder', buildWonder);
