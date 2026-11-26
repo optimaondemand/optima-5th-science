@@ -1,0 +1,26 @@
+{
+ "voice": "Gdj2QBsAjgQnu3rwg2ZN",
+ "model": "eleven_v4",
+ "clips": {
+  "k-warmup": {
+   "text": "One winter night in eighteen ninety-eight, a storm knocked one hundred thirty-six sparrows out of the sky. Slide the handle to guess how many woke up. Then tap the one thing you think decided it, save your guess, and write why below.",
+   "dur": 17.01
+  },
+  "k-part1": {
+   "text": "This is the real lecture, printed in eighteen ninety-nine. A scientist named Bumpus measured every single bird from that storm. Tap each yellow line to read it in plain English, then find the two hunt lines.",
+   "dur": 14.84
+  },
+  "k-quiz": {
+   "text": "Three quick questions, just for you. They are not graded. Tap an answer and read the note under it. Think about the three ways organisms can respond.",
+   "dur": 10.68
+  },
+  "k-assign": {
+   "text": "Now write your half of page twenty-one. Answer the two Part B questions. In Part C, make your survivor evidence card. Then tap evidence cards in the planner and build your C-E-R about how a species gets through change.",
+   "dur": 16.27
+  },
+  "k-words": {
+   "text": "Environment. Change. Survive. Variation. Migrate. Adaptation.",
+   "dur": 7.47
+  }
+ }
+}

@@ -1367,3 +1367,79 @@ details.nc-why { margin: 10px 0 0; } details.nc-why summary { cursor: pointer; f
 .nc-bl-key i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
 .nc-bl-svg { width: 100%; height: auto; display: block; background: #fff; border: 1px solid #eadfcf; border-radius: 10px; }
 @media (max-width: 640px) { .nc-bl-table-top { grid-template-columns: minmax(0, 1fr); } .nc-bl-modes { grid-template-columns: minmax(0, 1fr); } }
+
+/* ═══════════ 21.01: survivor tray, run the winter, three winters, drain the pond ═══════════ */
+.nc-tr-fig { margin: 10px 0; }
+.nc-tr-fig img { width: 100%; max-height: 300px; object-fit: cover; border-radius: 12px; border: 1.5px solid #D9CDBE; display: block; }
+.nc-tr-stage { background: #f6f1e8; border: 1.5px solid #E8DDD2; border-radius: 12px; padding: 12px 14px; margin: 10px 0; }
+.nc-tr-ll { font: 800 14px 'Nunito', sans-serif; color: #2B1D12; display: block; margin-bottom: 4px; }
+.nc-tr-slider { width: 100%; accent-color: #0E1C42; height: 28px; }
+.nc-tr-read { font: 800 16px 'Nunito', sans-serif; color: #0E1C42; margin: 4px 0 8px; }
+.nc-tr-tray { width: 100%; height: auto; background: #fff; border: 1.5px solid #E8DDD2; border-radius: 10px; }
+.nc-tr-bird ellipse, .nc-tr-bird circle, .nc-tr-bird path { fill: #ddd2c2; transition: fill 0.15s; }
+.nc-tr-bird.on ellipse, .nc-tr-bird.on circle, .nc-tr-bird.on path { fill: #8a6f4d; }
+.nc-tr-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media (max-width: 560px) { .nc-tr-facts { grid-template-columns: 1fr; } }
+
+.nc-wn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 12px; margin: 12px 0; }
+.nc-wn-card { background: #fff; border: 1.5px solid #D9CDBE; border-radius: 14px; padding: 10px; display: flex; flex-direction: column; gap: 7px; }
+.nc-wn-card.ok { border-color: #34B76F; background: #f4fbf6; }
+.nc-wn-img { width: 100%; height: 130px; object-fit: cover; border-radius: 10px; }
+.nc-wn-name { font: 800 15.5px 'Nunito', sans-serif; color: #0E1C42; }
+.nc-wn-clue { font: 600 13.5px/1.5 'Nunito', sans-serif; color: #5A4D3E; margin: 0; }
+.nc-wn-ch { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+.nc-wn-c { padding: 7px 9px; font-size: 13px; flex: 1 1 auto; text-align: center; }
+.nc-wn-pop { animation: nc-wn-pop 0.5s; }
+@keyframes nc-wn-pop { 0% { transform: scale(1); } 40% { transform: scale(1.03); } 100% { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .nc-wn-pop { animation: none; } }
+
+.nc-bd-hist { display: flex; flex-direction: column; gap: 4px; margin: 10px 0 2px; }
+.nc-bd-gen { background: #f6f1e8; border: 1.5px solid #E8DDD2; border-radius: 10px; padding: 4px 10px; }
+.nc-bd-gen b { font: 800 12px 'Nunito', sans-serif; color: #7a6a58; }
+.nc-bd-genrow, .nc-bd-row { display: flex; align-items: flex-end; gap: 2px; flex-wrap: nowrap; overflow-x: auto; }
+.nc-bd-row { background: #fff; border: 1.5px solid #D9CDBE; border-radius: 12px; padding: 8px 10px 4px; margin: 6px 0; }
+.nc-bd-slot { flex: 1 0 9%; min-width: 34px; text-align: center; opacity: 0.45; }
+.nc-bd-slot.in { opacity: 1; }
+.nc-bd-slot.sm { min-width: 22px; }
+.nc-bd-slot i { display: block; font: 700 10.5px 'Nunito', sans-serif; color: #7a6a58; font-style: normal; }
+.nc-bd-slot.sm i { display: none; }
+.nc-bd-bird { width: 100%; height: auto; display: block; }
+.nc-bd-body { fill: #a9906d; stroke: #6d5636; stroke-width: 1.4; }
+.nc-bd-head { fill: #8a6f4d; stroke: #6d5636; stroke-width: 1.2; }
+.nc-bd-beak { fill: #4a3a24; }
+.nc-bd-wing { fill: #7d6342; }
+.nc-bd-tail { fill: #6d5636; }
+.nc-bd-slot.in .nc-bd-body { stroke: #1a7a43; stroke-width: 2.2; }
+.nc-bd-track { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 8px 0; }
+@media (max-width: 560px) { .nc-bd-track { grid-template-columns: 1fr; } }
+.nc-bd-l { font: 800 13px 'Nunito', sans-serif; color: #2B1D12; }
+.nc-bd-l input { width: 100%; accent-color: #0E1C42; height: 26px; }
+.nc-bd-read { font: 800 15px 'Nunito', sans-serif; color: #0E1C42; margin: 4px 0 8px; }
+
+.nc-dn-stage { position: relative; border-radius: 14px; overflow: hidden; border: 1.5px solid #D9CDBE; margin: 10px 0 6px; }
+.nc-dn-pond, .nc-dn-mud { width: 100%; display: block; height: 300px; object-fit: cover; }
+.nc-dn-mud { position: absolute; inset: 0; opacity: 0; transition: opacity 0.3s; }
+.nc-dn-water { position: absolute; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(60,140,200,0.15), rgba(35,95,160,0.75)); transition: height 0.2s, opacity 0.3s; pointer-events: none; }
+.nc-dn-chips { position: absolute; inset: auto 8px 8px 8px; display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.nc-dn-chip { background: rgba(255,255,255,0.92); border: 1.5px solid #D9CDBE; border-radius: 999px; padding: 3px 10px 3px 4px; display: inline-flex; align-items: center; gap: 6px; font: 800 12.5px 'Nunito', sans-serif; color: #2B1D12; cursor: default; }
+.nc-dn-chip img { width: 28px; height: 28px; object-fit: cover; border-radius: 50%; }
+.nc-dn-chip.acted { border-color: #0E1C42; background: #fff; }
+.nc-dn-chip.pop { animation: nc-wn-pop 0.5s; }
+.nc-dn-ll { font: 800 14px 'Nunito', sans-serif; color: #2B1D12; }
+.nc-dn-slider { width: 100%; accent-color: #1E6FA8; height: 30px; }
+.nc-dn-log { display: flex; flex-direction: column; gap: 10px; margin: 10px 0; }
+.nc-dn-ev { display: flex; gap: 10px; background: #fff; border: 1.5px solid #D9CDBE; border-radius: 12px; padding: 10px; }
+.nc-dn-ev.ok { border-color: #34B76F; background: #f4fbf6; }
+.nc-dn-ev > img { width: 64px; height: 64px; object-fit: cover; border-radius: 10px; flex-shrink: 0; }
+.nc-dn-ev > div { flex: 1; }
+.nc-dn-act { font: 700 14px/1.5 'Nunito', sans-serif; color: #2B1D12; margin: 0 0 6px; }
+.nc-dn-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.nc-dn-t { padding: 6px 9px; font-size: 13px; }
+.nc-dn-h { font: 800 15px 'Nunito', sans-serif; color: #0E1C42; margin: 12px 0 6px; }
+.nc-dn-tab { width: 100%; border-collapse: collapse; font: 600 13.5px 'Nunito', sans-serif; color: #2B1D12; }
+.nc-dn-tab th, .nc-dn-tab td { border: 1.5px solid #E8DDD2; padding: 6px 8px; text-align: left; vertical-align: top; }
+.nc-dn-tab thead th { background: #f6f1e8; }
+.nc-dn-rain { margin: 12px 0; }
+.nc-dn-claim { background: #FFF7EE; border: 2px solid #F0DCC4; border-radius: 12px; padding: 12px 14px; font: 700 14.5px/1.6 'Nunito', sans-serif; color: #2B1D12; margin: 12px 0; }
+
+@media (max-width: 560px) { .nc-bd-slot { min-width: 0; flex: 1 1 0; } .nc-bd-slot i { font-size: 8.5px; } .nc-bd-row { overflow-x: visible; padding: 6px 4px 3px; } }

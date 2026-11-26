@@ -4482,6 +4482,346 @@
     seed('beans'); drawPlate(); drawAll();
   }
 
+  /* ═════════════ 21.01 modules (Nov 2026): the survivor tray, run the winter, three winters, drain the pond ═════════════ */
+
+  /* ───────────── Warm-Up: the survivor tray (a prediction) ───────────── */
+  function buildTray() {
+    var W = D.tray; if (!W) return;
+    var pred = $('#pred-1'); if (!pred) throw new Error('pred-1 missing');
+    var host = pred.closest('.response-q') || pred.parentNode;
+    var card = host.closest('.activity-card') || host.parentNode;
+    $$('.callout, .socratic-q', card).forEach(hide);
+    store.tr = store.tr || {}; var S = store.tr;
+    var TOT = W.total || 136, COLS = 17, ROWS = Math.ceil(TOT / COLS), CW = 26, CH = 30;
+    var dots = '';
+    for (var i = 0; i < TOT; i++) {
+      var cx = 16 + (i % COLS) * CW, cy = 18 + Math.floor(i / COLS) * CH;
+      dots += '<g class="nc-tr-bird" data-i="' + i + '" transform="translate(' + cx + ' ' + cy + ')"><ellipse cx="0" cy="3" rx="7.5" ry="5.6"/><circle cx="5.4" cy="-3.4" r="3.4"/><path d="M-7 3 L-12 0 L-7 6 Z"/></g>';
+    }
+    var g = mk('div', 'nc-g nc-tr');
+    g.innerHTML = '<div class="nc-g-k">Warm-Up game</div><h4 class="nc-g-t">' + esc(W.title) + '</h4><p class="nc-p">' + esc(W.intro) + '</p>' + job(W.job) +
+      '<figure class="nc-tr-fig"><img src="' + esc(W.photo) + '" alt="' + esc(W.photoAlt) + '" loading="lazy"><figcaption class="nc-credit">' + esc(W.photoCap) + '</figcaption></figure>' +
+      '<div class="nc-tr-stage">' +
+        '<label class="nc-tr-ll" for="nc-tr-range">' + esc(W.sliderLabel) + '</label>' +
+        '<input type="range" id="nc-tr-range" class="nc-tr-slider" min="0" max="' + TOT + '" step="1" value="' + (S.n != null ? S.n : Math.round(TOT / 2)) + '">' +
+        '<div class="nc-tr-read" aria-live="polite"></div>' +
+        '<svg class="nc-tr-tray" viewBox="0 0 ' + (COLS * CW + 16) + ' ' + (ROWS * CH + 16) + '" role="img" aria-label="' + esc(W.trayAlt) + '">' + dots + '</svg>' +
+      '</div>' +
+      '<div class="nc-q">' + esc(W.factQ) + '</div>' +
+      '<div class="nc-opts nc-tr-facts">' + W.facts.map(function (f) { return '<button type="button" class="nc-opt nc-tr-f" data-k="' + f.k + '">' + f.icon + ' ' + esc(f.label) + '</button>'; }).join('') + '</div>' +
+      '<div class="nc-rw-ctl"><button type="button" class="nc-btn nc-tr-save" disabled>' + esc(W.saveLabel) + '</button><button type="button" class="nc-cup-edit nc-tr-edit" hidden>' + esc(W.editLabel) + '</button></div>' +
+      '<div class="nc-bet-seal nc-tr-seal" hidden></div>' +
+      '<label class="nc-np-l" for="pred-1" style="margin-top:12px">' + esc(W.reasonPrompt) + '</label>';
+    before(host, g);
+    pred.placeholder = W.placeholder || '';
+    var range = g.querySelector('.nc-tr-slider'), read = g.querySelector('.nc-tr-read'), saveB = g.querySelector('.nc-tr-save'), editB = g.querySelector('.nc-tr-edit'), seal = g.querySelector('.nc-tr-seal');
+    function fName(k) { var f = W.facts.filter(function (x) { return x.k === k; })[0]; return f ? f.label : '(not picked)'; }
+    PRED_LINE = function () {
+      if (!S.saved) return ['--- WARM-UP: MY PREDICTION ---', 'My guess: (not saved yet)'];
+      return ['--- WARM-UP: MY PREDICTION ---', 'My guess: ' + S.n + ' of ' + TOT + ' sparrows wake up · what decided it: ' + fName(S.f)];
+    };
+    function draw() {
+      var n = S.n != null ? S.n : +range.value, saved = !!S.saved, locked = !!S.revealed;
+      read.textContent = W.wake.replace('{n}', n) + ' · ' + W.lost.replace('{m}', TOT - n);
+      $$('.nc-tr-bird', g).forEach(function (b) { b.classList.toggle('on', +b.dataset.i < n); });
+      $$('.nc-tr-f', g).forEach(function (b) { b.classList.toggle('sel', b.dataset.k === S.f); b.disabled = saved; });
+      range.disabled = saved;
+      saveB.hidden = saved; saveB.disabled = !(S.touched && S.f);
+      editB.hidden = !saved || locked;
+      seal.hidden = !saved;
+      if (saved) seal.textContent = W.saved.replace('{n}', S.n).replace('{f}', fName(S.f));
+      if (!saved && !S.f) saveB.title = W.notYet;
+      g.classList.toggle('nc-done', saved);
+      refresh();
+    }
+    range.addEventListener('input', function () { S.n = +range.value; S.touched = 1; save(); draw(); });
+    $$('.nc-tr-f', g).forEach(function (b) { b.addEventListener('click', function () { S.f = b.dataset.k; S.touched = 1; if (S.n == null) S.n = +range.value; save(); draw(); }); });
+    saveB.addEventListener('click', function () { if (S.n == null) S.n = +range.value; S.saved = 1; save(); ping(); bind({ stormGuess: { birds: S.n, factor: S.f } }); draw(); });
+    editB.addEventListener('click', function () { S.saved = 0; save(); draw(); });
+    document.addEventListener('nc:tr', draw);
+    draw();
+  }
+
+  /* ───────────── Part 2: run the winter (a response switchboard) ───────────── */
+  function buildWinter() {
+    var W = D.winter; if (!W) return;
+    var p2 = $$('#tab-lesson .card-head-label').filter(function (e) { return /Part 2/.test(e.textContent); })[0];
+    var body = p2 && p2.closest('.card').querySelector('.card-body'); if (!body) throw new Error('Part 2 card missing');
+    store.wn = store.wn || {}; var S = store.wn; S.pick = S.pick || {}; S.okd = S.okd || {};
+    var g = mk('div', 'nc-g nc-wn');
+    g.innerHTML = gameHead(W.kicker, W.title) + '<p class="nc-p">' + esc(W.intro) + '</p>' + job(W.job) +
+      '<div class="nc-wn-grid">' + W.cards.map(function (c, i) {
+        return '<div class="nc-wn-card" data-i="' + i + '">' +
+          '<img class="nc-wn-img" src="' + esc(c.img) + '" alt="' + esc(c.alt) + '" loading="lazy">' +
+          '<div class="nc-wn-name">' + esc(c.name) + '</div>' +
+          '<p class="nc-wn-clue">' + esc(c.clue) + '</p>' +
+          '<div class="nc-wn-ch" role="group" aria-label="' + esc(c.name) + ': pick a response">' + W.choices.map(function (ch) {
+            return '<button type="button" class="nc-opt nc-wn-c" data-k="' + ch.k + '">' + ch.icon + ' ' + esc(ch.label) + '</button>';
+          }).join('') + '</div>' +
+          '<div class="nc-fb nc-wn-fb" aria-live="polite"></div></div>';
+      }).join('') + '</div>' +
+      '<div class="nc-rw-ctl"><button type="button" class="nc-btn nc-wn-run" disabled>' + esc(W.runLabel) + '</button><button type="button" class="nc-cup-edit nc-wn-reset">' + esc(W.againLabel) + '</button></div>' +
+      '<div class="nc-fb nc-wn-score" aria-live="polite"></div>' +
+      '<p class="nc-credit">' + esc(W.credit) + '</p>';
+    body.appendChild(g);
+    var runB = g.querySelector('.nc-wn-run'), scoreEl = g.querySelector('.nc-wn-score');
+    function allPicked() { return W.cards.every(function (c, i) { return S.pick[i]; }); }
+    function allRight() { return W.cards.every(function (c, i) { return S.okd[i]; }); }
+    function chName(k) { var c = W.choices.filter(function (x) { return x.k === k; })[0]; return c ? c.label : k; }
+    function draw() {
+      $$('.nc-wn-card', g).forEach(function (el) {
+        var i = +el.dataset.i, c = W.cards[i], ok = !!S.okd[i];
+        el.classList.toggle('ok', ok);
+        $$('.nc-wn-c', el).forEach(function (b) {
+          b.classList.toggle('sel', S.pick[i] === b.dataset.k);
+          b.classList.toggle('ok', ok && b.dataset.k === c.ans);
+          b.disabled = ok;
+        });
+        var fb = el.querySelector('.nc-wn-fb');
+        if (ok) fb.innerHTML = '✅ ' + esc(c.why);
+        else if (S.ran && S.pick[i]) fb.innerHTML = '<span class="nc-ask-no">🤔 ' + esc(c.hint) + '</span>';
+      });
+      runB.disabled = !allPicked() || allRight();
+      runB.textContent = S.ran ? '❄️ ' + esc0(W.runLabel).replace('Run the winter', 'Run the winter again') : W.runLabel;
+      if (!allPicked() && !S.ran) scoreEl.textContent = W.pickAll;
+      else if (allRight()) { scoreEl.innerHTML = '✅ ' + esc(W.win) + (S.first != null ? ' <b>(' + W.score.replace('{n}', S.first) + ')</b>' : ''); }
+      else if (S.ran) scoreEl.textContent = W.score.replace('{n}', Object.keys(S.okd).length);
+      g.classList.toggle('nc-done', allRight());
+      refresh();
+    }
+    function esc0(s) { return String(s); }
+    function run() {
+      var right = 0;
+      W.cards.forEach(function (c, i) { if (S.pick[i] === c.ans) { S.okd[i] = 1; right++; } });
+      if (S.first == null) S.first = right;
+      S.ran = 1; save();
+      if (allRight()) { ping(); bind({ winter: { firstRun: S.first } }); note('❄️ Part 2 done: six organisms, three responses.'); }
+      else ping(true);
+      var cardsEls = $$('.nc-wn-card', g), k = 0;
+      (RM ? cardsEls : cardsEls).forEach(function (el, i) {
+        if (RM) return;
+        el.classList.remove('nc-wn-pop'); void el.offsetWidth;
+        setTimeout(function () { el.classList.add('nc-wn-pop'); }, i * 160);
+      });
+      draw();
+    }
+    $$('.nc-wn-card', g).forEach(function (el) {
+      $$('.nc-wn-c', el).forEach(function (b) {
+        b.addEventListener('click', function () { var i = +el.dataset.i; S.pick[i] = b.dataset.k; save(); draw(); });
+      });
+    });
+    runB.addEventListener('click', run);
+    g.querySelector('.nc-wn-reset').addEventListener('click', function () { S.pick = {}; S.okd = {}; S.ran = 0; S.first = null; save(); $$('.nc-wn-fb', g).forEach(function (e) { e.innerHTML = ''; }); draw(); });
+    EXTRA_LINES.push(function () {
+      var done = allRight();
+      return ['--- PART 2: RUN THE WINTER ---', done ? W.cards.map(function (c) { return c.name + ': ' + chName(c.ans); }).join(' · ') + (S.first != null ? ' (first run: ' + S.first + ' of ' + W.cards.length + ' right)' : '') : '(not finished yet)'];
+    });
+    draw();
+  }
+
+  /* ───────────── Part 3: three winters (range handles + generations) ───────────── */
+  function birdSVG(gr, lo, hi, sel) {
+    var t = (gr - lo) / (hi - lo), s = 0.62 + t * 0.58;
+    return '<svg class="nc-bd-bird' + (sel ? ' on' : '') + '" viewBox="0 0 64 56" aria-hidden="true"><g transform="translate(32 ' + (50 - 20 * s) + ') scale(' + s.toFixed(3) + ')">' +
+      '<path d="M-22 2 Q-20 -14 -2 -15 Q16 -16 20 -4 Q28 -6 30 -12 Q31 -4 25 0 Q22 12 4 14 L6 20 M-2 14 L-2 20 M-22 2 Q-30 6 -34 2 Q-28 0 -22 2" fill="none"/>' +
+      '<path class="nc-bd-body" d="M-22 2 Q-20 -14 -2 -15 Q14 -15.5 19 -5 Q23 4 12 11 Q0 16 -12 11 Q-21 8 -22 2 Z"/>' +
+      '<circle class="nc-bd-head" cx="14" cy="-10" r="8"/><circle cx="16.5" cy="-11.5" r="1.4" fill="#2B1D12"/>' +
+      '<path class="nc-bd-beak" d="M21.5 -10.5 L28 -9 L21.5 -7.5 Z"/>' +
+      '<path class="nc-bd-wing" d="M-14 -4 Q-2 -10 8 -3 Q-2 4 -14 -4 Z"/>' +
+      '<path class="nc-bd-tail" d="M-21 1 L-33 -4 L-30 4 Z"/></g></svg>';
+  }
+  function buildBand() {
+    var W = D.band; if (!W) return;
+    var p3 = $$('#tab-lesson .card-head-label').filter(function (e) { return /Part 3/.test(e.textContent); })[0];
+    var body = p3 && p3.closest('.card').querySelector('.card-body'); if (!body) throw new Error('Part 3 card missing');
+    store.bd = store.bd || {}; var S = store.bd;
+    var LO = W.gramsMin, HI = W.gramsMax;
+    if (!S.gens) { S.gens = [[23, 24, 25, 25.5, 26, 26.5, 27, 28, 29.5, 31]]; S.lo = 24; S.hi = 27; }
+    var g = mk('div', 'nc-g nc-bd');
+    g.innerHTML = gameHead(W.kicker, W.title) + '<p class="nc-p">' + esc(W.intro) + '</p>' + job(W.job) +
+      '<div class="nc-bd-hist"></div>' +
+      '<div class="nc-bd-row" aria-hidden="true"></div>' +
+      '<div class="nc-bd-track">' +
+        '<label class="nc-bd-l">' + esc(W.handleLo) + '<input type="range" class="nc-bd-lo" min="' + LO + '" max="' + HI + '" step="0.5"></label>' +
+        '<label class="nc-bd-l">' + esc(W.handleHi) + '<input type="range" class="nc-bd-hi" min="' + LO + '" max="' + HI + '" step="0.5"></label>' +
+      '</div>' +
+      '<div class="nc-bd-read" aria-live="polite"></div>' +
+      '<div class="nc-rw-ctl"><button type="button" class="nc-btn nc-bd-next">' + esc(W.nextLabel) + '</button><button type="button" class="nc-cup-edit nc-bd-reset">' + esc(W.resetLabel) + '</button></div>' +
+      '<div class="nc-bd-ask" hidden><div class="nc-q">' + esc(W.ask) + '</div><div class="nc-opts">' + W.opts.map(function (o, i) { return '<button type="button" class="nc-opt nc-bd-o" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div><div class="nc-fb nc-bd-afb" aria-live="polite"></div></div>' +
+      '<div class="nc-wow nc-bd-wow" hidden><div class="nc-wow-k">Remember this</div><p class="nc-wow-nums">' + esc(W.mis) + '</p></div>' +
+      '<p class="nc-credit">' + esc(W.model) + '</p>';
+    body.appendChild(g);
+    var loR = g.querySelector('.nc-bd-lo'), hiR = g.querySelector('.nc-bd-hi'), read = g.querySelector('.nc-bd-read'), nextB = g.querySelector('.nc-bd-next'), hist = g.querySelector('.nc-bd-hist'), row = g.querySelector('.nc-bd-row'), askEl = g.querySelector('.nc-bd-ask');
+    loR.value = S.lo; hiR.value = S.hi;
+    function cur() { return S.gens[S.gens.length - 1]; }
+    function inBand(v) { return v >= S.lo && v <= S.hi; }
+    function survivors() { return cur().filter(inBand); }
+    function rowHTML(gen, small, band) {
+      return gen.map(function (v) { return '<span class="nc-bd-slot' + (small ? ' sm' : '') + (band && inBand(v) ? ' in' : '') + '">' + birdSVG(v, LO, HI, band && inBand(v)) + '<i>' + v.toFixed(1).replace(/\.0$/, '') + ' g</i></span>'; }).join('');
+    }
+    function draw() {
+      var done3 = S.gens.length >= 4;
+      hist.innerHTML = S.gens.slice(0, -1).map(function (gen, gi) {
+        return '<div class="nc-bd-gen"><b>' + esc(W.genLabel.replace('{g}', gi + 1)) + '</b><div class="nc-bd-genrow">' + gen.map(function (v) { return '<span class="nc-bd-slot sm">' + birdSVG(v, LO, HI, false) + '</span>'; }).join('') + '</div></div>';
+      }).join('');
+      row.innerHTML = rowHTML(cur(), false, !done3);
+      var n = survivors().length;
+      read.textContent = done3 ? W.endLine : W.bandLine.replace('{a}', S.lo).replace('{b}', S.hi).replace('{n}', n);
+      loR.disabled = hiR.disabled = done3;
+      nextB.hidden = done3;
+      nextB.disabled = n < 2;
+      nextB.title = n < 2 ? W.needSome : '';
+      askEl.hidden = !done3;
+      if (S.answered) {
+        $$('.nc-bd-o', g).forEach(function (b) { b.classList.toggle('ok', !!W.opts[+b.dataset.i].ok); b.disabled = true; });
+        g.querySelector('.nc-bd-afb').innerHTML = '✅ ' + esc(W.win);
+      }
+      g.querySelector('.nc-bd-wow').hidden = !S.answered;
+      g.classList.toggle('nc-done', !!S.answered);
+      refresh();
+    }
+    function slide() {
+      S.lo = Math.min(+loR.value, +hiR.value); S.hi = Math.max(+loR.value, +hiR.value); save(); draw();
+    }
+    loR.addEventListener('input', slide); hiR.addEventListener('input', slide);
+    nextB.addEventListener('click', function () {
+      var sv = survivors(); if (sv.length < 2) { ping(true); return; }
+      var kids = [];
+      for (var i = 0; i < 10; i++) {
+        var p = sv[Math.floor(Math.random() * sv.length)];
+        var v = Math.round((p + (Math.random() * 1.4 - 0.7)) * 2) / 2;
+        kids.push(Math.max(22, Math.min(32, v)));
+      }
+      kids.sort(function (a, b) { return a - b; });
+      S.gens.push(kids); save(); ping();
+      if (S.gens.length >= 4) note('🪶 ' + W.chicksLine.replace('{n}', sv.length) + ' Three winters are done.');
+      draw();
+    });
+    g.querySelector('.nc-bd-reset').addEventListener('click', function () { delete S.gens; S.answered = 0; store.bd = { lo: 24, hi: 27, gens: [[23, 24, 25, 25.5, 26, 26.5, 27, 28, 29.5, 31]] }; S = store.bd; loR.value = S.lo; hiR.value = S.hi; save(); g.querySelector('.nc-bd-afb').innerHTML = ''; $$('.nc-bd-o', g).forEach(function (b) { b.disabled = false; b.classList.remove('ok'); }); draw(); });
+    $$('.nc-bd-o', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var o = W.opts[+b.dataset.i];
+        if (o.ok) { S.answered = 1; save(); ping(); bind({ winters: { survivors: S.lo + '-' + S.hi + ' g' } }); draw(); }
+        else { ping(true); b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 700); g.querySelector('.nc-bd-afb').innerHTML = '<span class="nc-ask-no">🤔 ' + esc(o.hint) + '</span>'; }
+      });
+    });
+    EXTRA_LINES.push(function () {
+      return ['--- PART 3: THREE WINTERS ---', S.gens.length >= 4 ? 'My storm spared ' + S.lo + ' to ' + S.hi + ' grams. After three winters the flock ran ' + cur()[0].toFixed(1) + ' to ' + cur()[9].toFixed(1) + ' grams.' + (S.answered ? ' No single bird changed; the mix changed.' : '') : '(not finished yet)'];
+    });
+    draw();
+  }
+
+  /* ───────────── Part 4: drain the pond ───────────── */
+  function buildDrain() {
+    var L = D.drain; if (!L) return;
+    var act = $('#tab-lesson .act-body'); if (!act) throw new Error('lesson body missing');
+    store.dn = store.dn || {}; var S = store.dn; S.tags = S.tags || {}; S.acted = S.acted || {}; if (S.lvl == null) S.lvl = 100;
+    var sec4 = mk('div', 'nc-part4');
+    sec4.innerHTML = '<div class="card theme-sky nc-p4card"><div class="card-head"><div class="card-head-icon">' + esc(L.icon) + '</div><div><div class="card-head-label">Part 4</div><div class="card-head-title">' + esc(L.cardTitle) + '</div></div></div><div class="card-body"><p>' + esc(L.cardIntro) + '</p><div class="nc-g nc-dn"></div></div></div>';
+    act.appendChild(sec4);
+    var g = sec4.querySelector('.nc-dn');
+    g.innerHTML = gameHead(L.kicker, L.title) + '<p class="nc-p">' + esc(L.intro) + '</p>' + job(L.job) +
+      '<div class="nc-dn-stage"><img class="nc-dn-pond" src="' + esc(L.pond) + '" alt="' + esc(L.pondAlt) + '"><img class="nc-dn-mud" src="' + esc(L.mud) + '" alt="' + esc(L.mudAlt) + '">' +
+        '<div class="nc-dn-water" aria-hidden="true"></div>' +
+        '<div class="nc-dn-chips">' + L.orgs.map(function (o, i) { return '<button type="button" class="nc-dn-chip" data-i="' + i + '" aria-label="' + esc(o.name) + '"><img src="' + esc(o.img) + '" alt="' + esc(o.alt) + '" loading="lazy"><b>' + esc(o.name) + '</b></button>'; }).join('') + '</div>' +
+      '</div>' +
+      '<label class="nc-dn-ll" for="nc-dn-range">' + esc(L.levelLabel) + ': <b class="nc-dn-pc"></b></label>' +
+      '<input type="range" id="nc-dn-range" class="nc-dn-slider" min="0" max="100" step="1" value="' + S.lvl + '">' +
+      '<p class="nc-credit">' + esc(L.stageModel) + '</p>' +
+      '<div class="nc-dn-log"></div>' +
+      '<h5 class="nc-dn-h">📋 The drying pond</h5>' +
+      '<table class="nc-dn-tab"><thead><tr><th>' + esc(L.colOrg) + '</th><th>' + esc(L.colDid) + '</th><th>' + esc(L.colTag) + '</th></tr></thead><tbody>' +
+        L.orgs.map(function (o, i) { return '<tr data-i="' + i + '"><th>' + esc(o.name) + '</th><td class="nc-dn-did"></td><td class="nc-dn-tg"></td></tr>'; }).join('') +
+      '</tbody></table>' +
+      '<div class="nc-fb nc-dn-fb" aria-live="polite">' + esc(L.tagFirst) + '</div>' +
+      '<div class="nc-dn-rain" hidden><button type="button" class="nc-btn nc-dn-rainb">' + esc(L.rainLabel) + '</button>' +
+        '<div class="nc-dn-rq" hidden><div class="nc-q">' + esc(L.rainQ) + '</div><div class="nc-opts">' + L.rainOpts.map(function (o, i) { return '<button type="button" class="nc-opt nc-dn-ro" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div><div class="nc-fb nc-dn-rfb" aria-live="polite"></div></div>' +
+      '</div>' +
+      '<div class="nc-dn-var" hidden><div class="nc-q">' + esc(L.varQ) + '</div><div class="nc-opts">' + L.varOpts.map(function (o, i) { return '<button type="button" class="nc-opt nc-dn-vo" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div><div class="nc-fb nc-dn-vfb" aria-live="polite"></div></div>' +
+      '<div class="nc-dn-claim" hidden>' + esc(L.claimLine) + '</div>' +
+      '<div class="nc-reveal nc-dn-cmp" hidden><h5>' + esc(L.reveal.title) + '</h5><div class="nc-mt-rows nc-dn-rows"></div></div>' +
+      '<div class="nc-wow nc-dn-wow" hidden><div class="nc-wow-k">The twist</div><blockquote class="nc-wow-q">' + esc(L.twist.head) + '</blockquote><p class="nc-wow-nums">' + esc(L.twist.line) + '</p><p class="nc-wow-chain">' + esc(L.twist.chain) + '</p></div>' +
+      '<p class="nc-credit">' + esc(L.credit) + '</p>';
+    var range = g.querySelector('.nc-dn-slider'), pc = g.querySelector('.nc-dn-pc'), water = g.querySelector('.nc-dn-water'), mudImg = g.querySelector('.nc-dn-mud'), logEl = g.querySelector('.nc-dn-log'), fb = g.querySelector('.nc-dn-fb');
+    function tName(k) { var t = L.tags.filter(function (x) { return x.k === k; })[0]; return t ? t.label : k; }
+    function allTagged() { return L.orgs.every(function (o, i) { return S.tags[i] === o.ans; }); }
+    function logRow(i) {
+      var o = L.orgs[i], done = S.tags[i] === o.ans;
+      return '<div class="nc-dn-ev' + (done ? ' ok' : '') + '" data-i="' + i + '"><img src="' + esc(o.img) + '" alt="" loading="lazy"><div><p class="nc-dn-act">' + esc(o.act) + '</p>' +
+        '<div class="nc-dn-tags" role="group" aria-label="Tag the ' + esc(o.name) + '">' + L.tags.map(function (t) { return '<button type="button" class="nc-opt nc-dn-t" data-k="' + t.k + '"' + (done ? ' disabled' : '') + (done && t.k === o.ans ? ' class="nc-opt nc-dn-t ok"' : '') + '>' + t.icon + ' ' + esc(t.label) + '</button>'; }).join('') + '</div>' +
+        '<div class="nc-fb nc-dn-efb">' + (done ? '✅ ' + esc(o.why) : '') + '</div></div></div>';
+    }
+    function draw() {
+      pc.textContent = S.lvl + '%';
+      water.style.height = (S.lvl * 0.5) + '%';
+      water.style.opacity = S.lvl > 2 ? 0.55 : 0;
+      mudImg.style.opacity = Math.pow(1 - S.lvl / 100, 1.6);
+      $$('.nc-dn-chip', g).forEach(function (b) { var i = +b.dataset.i; b.classList.toggle('acted', !!S.acted[i]); });
+      var open = Object.keys(S.acted).map(Number).sort(function (a, b) { return a - b; });
+      logEl.innerHTML = open.map(logRow).join('');
+      $$('.nc-dn-ev', logEl).forEach(function (ev) {
+        var i = +ev.dataset.i, o = L.orgs[i];
+        $$('.nc-dn-t', ev).forEach(function (b) {
+          if (S.tags[i] === o.ans) { b.disabled = true; b.classList.toggle('ok', b.dataset.k === o.ans); return; }
+          b.addEventListener('click', function () {
+            if (b.dataset.k === o.ans) { S.tags[i] = o.ans; save(); ping(); if (allTagged()) { bind({ pond: 1 }); note('📋 Your pond table is full.'); } draw(); }
+            else { ping(true); ev.querySelector('.nc-dn-efb').innerHTML = '<span class="nc-ask-no">🤔 ' + esc(o.hint) + '</span>'; }
+          });
+        });
+      });
+      L.orgs.forEach(function (o, i) {
+        var tr = g.querySelector('.nc-dn-tab tr[data-i="' + i + '"]');
+        tr.querySelector('.nc-dn-did').textContent = S.acted[i] ? (o.did || o.act) : '…';
+        tr.querySelector('.nc-dn-tg').textContent = S.tags[i] === o.ans ? '✅ ' + tName(o.ans) : '';
+      });
+      var full = allTagged();
+      if (full) fb.textContent = '';
+      g.querySelector('.nc-dn-rain').hidden = !full;
+      g.querySelector('.nc-dn-rq').hidden = !S.rain;
+      if (S.rainA != null) { $$('.nc-dn-ro', g).forEach(function (b) { b.disabled = true; b.classList.toggle('ok', !!L.rainOpts[+b.dataset.i].ok); }); g.querySelector('.nc-dn-rfb').innerHTML = '✅ ' + esc(L.rainOpts.filter(function (o) { return o.ok; })[0].t); }
+      g.querySelector('.nc-dn-var').hidden = !(S.rainA != null);
+      if (S.varA) { $$('.nc-dn-vo', g).forEach(function (b) { b.disabled = true; b.classList.toggle('ok', !!L.varOpts[+b.dataset.i].ok); }); g.querySelector('.nc-dn-vfb').innerHTML = '✅ ' + esc(L.varWin); }
+      g.querySelector('.nc-dn-claim').hidden = !S.varA;
+      var cmp = g.querySelector('.nc-dn-cmp'); cmp.hidden = !S.varA;
+      if (S.varA) {
+        var tr2 = store.tr || {}, R = L.reveal;
+        g.querySelector('.nc-dn-rows').innerHTML = '<div class="nc-mt-r nc-mt-rh"><span></span><span>' + esc(R.colPred) + '</span><span>' + esc(R.colData) + '</span></div>' +
+          '<div class="nc-mt-r"><b>Survivors</b><span>' + esc(tr2.saved ? R.birdsLine.replace('{n}', tr2.n) : R.notSaved) + '</span><span class="nc-mt-ev">' + esc(R.realBirds) + '</span></div>' +
+          '<div class="nc-mt-r"><b>What decided it</b><span>' + esc(tr2.saved && tr2.f ? (R.factNames[tr2.f] || tr2.f) : R.notSaved) + '</span><span class="nc-mt-ev">' + esc(R.realFact) + '</span></div>';
+        if (!tr2.revealed) { tr2.revealed = 1; store.tr = tr2; save(); document.dispatchEvent(new Event('nc:tr')); }
+      }
+      g.querySelector('.nc-dn-wow').hidden = !S.varA;
+      g.classList.toggle('nc-done', !!S.varA);
+      refresh();
+    }
+    range.addEventListener('input', function () {
+      S.lvl = +range.value;
+      L.orgs.forEach(function (o, i) { if (S.lvl <= o.at && !S.acted[i]) { S.acted[i] = 1; if (!RM) { var ch = g.querySelector('.nc-dn-chip[data-i="' + i + '"]'); if (ch) { ch.classList.remove('pop'); void ch.offsetWidth; ch.classList.add('pop'); } } } });
+      save(); draw();
+    });
+    g.querySelector('.nc-dn-rainb').addEventListener('click', function () { S.rain = 1; save(); ping(); draw(); });
+    $$('.nc-dn-ro', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var o = L.rainOpts[+b.dataset.i];
+        if (o.ok) { S.rainA = +b.dataset.i; save(); ping(); draw(); }
+        else { ping(true); b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 700); g.querySelector('.nc-dn-rfb').innerHTML = '<span class="nc-ask-no">🤔 ' + esc(o.hint) + '</span>'; }
+      });
+    });
+    $$('.nc-dn-vo', g).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var o = L.varOpts[+b.dataset.i];
+        if (o.ok) { S.varA = 1; save(); ping(); bind({ pondDone: 1 }); note('🌧️ Part 4 done: your table, the rain, and the twist.'); draw(); }
+        else { ping(true); b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 700); g.querySelector('.nc-dn-vfb').innerHTML = '<span class="nc-ask-no">🤔 ' + esc(o.hint) + '</span>'; }
+      });
+    });
+    EXTRA_LINES.push(function () {
+      if (!allTagged()) return ['--- PART 4: THE DRYING POND ---', '(table not finished yet)'];
+      return ['--- PART 4: THE DRYING POND ---', L.orgs.map(function (o) { return o.name + ': ' + tName(o.ans); }).join(' · ') + (S.varA ? ' · Deeper-digging frogs last longer: variation.' : '')];
+    });
+    draw();
+  }
+
+
   function boot() {
     guard('lean', buildLean);
     guard('tabs', buildTabs);
@@ -4529,6 +4869,10 @@
     guard('shadow', buildShadow);
     guard('flaw', buildFlaw);
     guard('beaklab', buildBeakLab);
+    guard('tray', buildTray);
+    guard('winter', buildWinter);
+    guard('band', buildBand);
+    guard('drain', buildDrain);
     guard('assignment', buildAssignment);
     guard('quizcard', function () { var q = $('#tab-quiz'); if (q) putKeeper('k-quiz', q, 'prepend'); });
     guard('wonder', buildWonder);
